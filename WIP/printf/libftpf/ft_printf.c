@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 19:17:53 by echung            #+#    #+#             */
-/*   Updated: 2021/03/15 02:21:51 by echung           ###   ########.fr       */
+/*   Updated: 2021/03/15 17:28:15 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,59 @@ void parse_specifier(char c, va_list ap, t_flag flag)
 		printf("specifier: others\n");
 }
 
+void parse_flag_zero(const char **format, t_flag *flag)
+{
+	flag->zero = 1;
+	(*format)++;
+}
+
+void parse_flag_minus(const char **format, t_flag *flag)
+{
+	flag->minus = 1;
+	(*format)++;
+}
+
+void parse_flag_width(const char **format, t_flag *flag)
+{
+	flag->width = ft_atoi(*format);
+	*format = *format + intlen(flag->width, 10);
+}
+
+void parse_flag_asterisk(const char **format, t_flag *flag, va_list ap)
+{
+	int ast_value;
+
+	ast_value = va_arg(ap, int);
+	if (ast_value < 0)
+	{
+		ast_value = ast_value * -1;
+		flag->minus = 1;
+	}
+	flag->width = ast_value;
+	(*format)++;
+}
+
+void parse_flag_precision(const char **format, t_flag *flag, va_list ap)
+{
+	int ast_value;
+
+	flag->dot = 1;
+	(*format)++;
+	if ('1' <= **format && **format <= '9')
+	{
+		flag->precision = ft_atoi(*format);
+		*format = *format + intlen(flag->precision, 10);
+	}
+	else if (**format == '*')
+	{
+		ast_value = va_arg(ap, int);
+		if (ast_value < 0)
+			flag->dot = 0;
+		flag->precision = ast_value;
+		(*format)++;
+	}
+}
+
 void parse(const char **format, va_list ap)
 {
 	t_flag	flag;
@@ -165,58 +218,15 @@ void parse(const char **format, va_list ap)
 		if (**format == '\0')
 			break ;
 		else if (**format == '0')
-		{
-			flag.zero = 1;
-			(*format)++;
-			continue ;
-		}
+			parse_flag_zero(format, &flag);
 		else if (**format == '-')
-		{
-			flag.minus = 1;
-			(*format)++;
-			continue ;
-		}
+			parse_flag_minus(format, &flag);
 		else if ('1' <= **format && **format <= '9')
-		{
-			flag.width = ft_atoi(*format);
-			*format = *format + intlen(flag.width, 10);
-			continue ;
-		}
+			parse_flag_width(format, &flag);
 		else if (**format == '*')
-		{
-			int ast_value_w;
-			ast_value_w = va_arg(ap, int);
-			if (ast_value_w < 0)
-			{
-				ast_value_w = ast_value_w * -1;
-				flag.minus = 1;
-			}
-			flag.width = ast_value_w;
-			(*format)++;
-			continue ;
-		}
+			parse_flag_asterisk(format, &flag, ap);
 		else if (**format == '.')
-		{
-			flag.dot = 1;
-			(*format)++;
-			if ('1' <= **format && **format <= '9')
-			{
-				flag.precision = ft_atoi(*format);
-				*format = *format + intlen(flag.precision, 10);
-				continue ;
-			}
-			else if (**format == '*')
-			{
-				int ast_value_p;
-				ast_value_p = va_arg(ap, int);
-				if (ast_value_p < 0)
-					flag.dot = 0;
-				flag.precision = ast_value_p;
-				(*format)++;
-				continue ;
-			}
-
-		}
+			parse_flag_precision(format, &flag, ap);
 		else
 			(*format)++;
 	}
@@ -232,13 +242,9 @@ int	ft_printf(const char *format, ...)
 	while (*format != '\0')
 	{
 		if (*format == '%')
-		{
 			parse(&format, ap);
-		}
 		else
-		{
 			my_write(1, format, 1);
-		}
 		format++;
 	}
 	va_end(ap);
