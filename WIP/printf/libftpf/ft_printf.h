@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 19:59:36 by echung            #+#    #+#             */
-/*   Updated: 2021/03/15 02:22:04 by echung           ###   ########.fr       */
+/*   Updated: 2021/03/17 20:25:17 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 
 typedef struct		s_flag
 {
+	char			type;
 	int				zero;
 	int				minus;
 	int				dot;
@@ -37,6 +38,8 @@ typedef struct		s_content
 	int				back_margin;
 	int				intlen;
 }					t_content;
+
+int retlen;
 
 int					ft_atoi(const char *str);
 void				*ft_memcpy(void *dst, const void *src, size_t n);
@@ -56,8 +59,8 @@ int					intlen(unsigned int num, int base);
 void				my_write(int fildes, const void *buf, size_t nbyte);
 void				print_result(t_content content, char type);
 int					max(int a, int b);
-void				ycha(t_flag flag, t_content content, unsigned int digit, char c);
-void				parse_specifier(char c, va_list ap, t_flag flag);
+void				ycha(t_flag *flag, t_content content, unsigned int digit);
+void				parse_specifier(va_list ap, t_flag flag);
 void				parse(const char **format, va_list ap);
 int					ft_printf(const char *format, ...);
 

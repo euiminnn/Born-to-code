@@ -6,13 +6,13 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 19:17:53 by echung            #+#    #+#             */
-/*   Updated: 2021/03/15 17:28:15 by echung           ###   ########.fr       */
+/*   Updated: 2021/03/17 20:36:42 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int retlen;
+//int retlen;
 
 int	intlen(unsigned int num, int base)
 {
@@ -69,142 +69,44 @@ int max(int a, int b)
 		return (a);
 	return (b);
 }
-void ycha(t_flag flag, t_content content, unsigned int digit, char c)
+void ycha(t_flag *flag, t_content content, unsigned int digit)
 {
-	if (flag.dot) //zero 계산
-		content.zero = max(flag.precision - content.intlen, 0);
-	else if (flag.zero && !(flag.minus))
-		content.zero = max(flag.width - content.intlen - content.sign, 0);
-	if (flag.minus) //margin 계산
-		content.back_margin = max(flag.width - content.zero - content.intlen - content.sign, 0);
+	if (flag->dot) //zero 계산
+		content.zero = max(flag->precision - content.intlen, 0);
+	else if (flag->zero && !(flag->minus))
+		content.zero = max(flag->width - content.intlen - content.sign, 0);
+	if (flag->minus) //margin 계산
+		content.back_margin = max(flag->width - content.zero - content.intlen - content.sign, 0);
 	else
-		content.front_margin = max(flag.width - content.zero - content.intlen - content.sign, 0);
+		content.front_margin = max(flag->width - content.zero - content.intlen - content.sign, 0);
 	content.value = (unsigned int)digit;
-	print_result(content, c);
+	print_result(content, flag->type);
 }
-void parse_specifier(char c, va_list ap, t_flag flag)
+
+void parse_specifier(va_list ap, t_flag flag)
 {
 	t_content	content;
 	ft_memset(&content, 0, sizeof(content));
 
-	if (c == '%')
+	if (flag.type == '%')
+		parse_spec_pc();
+	else if (flag.type == 'c')
+		parse_spec_c(ap);
+	else if (flag.type == 's')
+		parse_spec_s(ap);
+	else if (flag.type == 'p')
+		parse_spec_p(ap, &flag, &content);
+	else if (flag.type == 'd' || flag.type == 'i')
 	{
-		ft_putchar_fd('%', 1);
+		parse_spec_d(ap, &flag, &content);
 	}
-	else if (c == 'c')
+	else if (flag.type == 'u' || flag.type == 'x' || flag.type == 'X')
 	{
-		int chr;
-		chr = va_arg(ap, int);
-		//char 말고 int로 처리
-		ft_putchar_fd(chr, 1);
-	}
-	else if (c == 's')
-	{
-		char *str;
-		str = va_arg(ap, char*);
-		while (*str)
-		{
-			my_write(1, str, 1);
-			str++;
-		}
-	}
-	else if (c == 'p')
-	{
-		unsigned int digit;
-		unsigned int pointer;
-		pointer = (unsigned int)va_arg(ap, void *);
-		digit = pointer;
-		ycha(flag, content, digit, c);
-	}
-	else if (c == 'd' || c == 'i')
-	{
-		int digit;
-		digit = va_arg(ap, int);
-		if (digit < 0)
-		{
-			content.sign = 1;
-			digit *= -1;
-		}
-		if (flag.dot == 1 && flag.precision == 0 && digit == 0)
-		{
-			c = 'e';
-			flag.width++;
-		}
-		content.intlen = intlen(digit, 10);
-		ycha(flag, content, digit, c);
-	}
-	else if (c == 'u' || c == 'x' || c == 'X')
-	{
-		unsigned int digit;
-		digit = va_arg(ap, unsigned int);
-		if (flag.dot == 1 && flag.precision == 0 && digit == 0)
-		{
-			c = 'e';
-			flag.width++;
-		}
-		if (c == 'u')
-			content.intlen = intlen(digit, 10);
-		else
-			content.intlen = intlen(digit, 16);
-		ycha(flag, content, digit, c);
+		parse_spec_u(ap, &flag, &content);
 	}
 	else
 		printf("specifier: others\n");
 }
-
-void parse_flag_zero(const char **format, t_flag *flag)
-{
-	flag->zero = 1;
-	(*format)++;
-}
-
-void parse_flag_minus(const char **format, t_flag *flag)
-{
-	flag->minus = 1;
-	(*format)++;
-}
-
-void parse_flag_width(const char **format, t_flag *flag)
-{
-	flag->width = ft_atoi(*format);
-	*format = *format + intlen(flag->width, 10);
-}
-
-void parse_flag_asterisk(const char **format, t_flag *flag, va_list ap)
-{
-	int ast_value;
-
-	ast_value = va_arg(ap, int);
-	if (ast_value < 0)
-	{
-		ast_value = ast_value * -1;
-		flag->minus = 1;
-	}
-	flag->width = ast_value;
-	(*format)++;
-}
-
-void parse_flag_precision(const char **format, t_flag *flag, va_list ap)
-{
-	int ast_value;
-
-	flag->dot = 1;
-	(*format)++;
-	if ('1' <= **format && **format <= '9')
-	{
-		flag->precision = ft_atoi(*format);
-		*format = *format + intlen(flag->precision, 10);
-	}
-	else if (**format == '*')
-	{
-		ast_value = va_arg(ap, int);
-		if (ast_value < 0)
-			flag->dot = 0;
-		flag->precision = ast_value;
-		(*format)++;
-	}
-}
-
 void parse(const char **format, va_list ap)
 {
 	t_flag	flag;
@@ -231,7 +133,10 @@ void parse(const char **format, va_list ap)
 			(*format)++;
 	}
 	if (ft_strchr(charset, **format))
-		parse_specifier(**format, ap, flag);
+	{
+		flag.type = **format;
+		parse_specifier(ap, flag);
+	}
 }
 
 int	ft_printf(const char *format, ...)
