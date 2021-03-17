@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 19:17:53 by echung            #+#    #+#             */
-/*   Updated: 2021/03/18 00:36:34 by echung           ###   ########.fr       */
+/*   Updated: 2021/03/18 01:24:20 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,7 +201,9 @@ int main(void)
 	printf("{myret: %d}\n", myret);
 	printf("\n");
 */	
-
+	printf("printf: %d %d %d %d %d\n", 1, 2, 3, 4, 5);
+	ft_printf("ft_printf: %d %d %d %d %d\n", 1, 2, 3, 4, 5);
+/*
 	ret = printf("org 5.0d: %5.0d\n", 0);
 	printf("{ret: %d}\n", ret);
 	myret = ft_printf("_my 5.0d: %5.0d\n", 0);
@@ -219,7 +221,7 @@ int main(void)
 	myret = ft_printf("_my *.*d: %*.*d\n", 7, 5, 12345);
 	printf("{myret: %d}\n", myret);
 	printf("\n");
-
+*/
 /*
 	ret = printf("org i: %i\n", i);
 	printf("{ret: %d}\n", ret);
