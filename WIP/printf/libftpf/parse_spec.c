@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 20:35:37 by echung            #+#    #+#             */
-/*   Updated: 2021/03/18 01:25:44 by echung           ###   ########.fr       */
+/*   Updated: 2021/03/18 02:39:49 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,8 @@ void parse_spec_p(va_list ap, t_flag *flag, t_content *content)
 
 void parse_spec_d(va_list ap, t_flag *flag, t_content *content)
 {
-	int digit;
+	long digit;
 	digit = va_arg(ap, int);
-//	printf("[[[%d]]]\n", digit);
 	if (digit < 0)
 	{
 		content->sign = 1;
