@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 19:59:36 by echung            #+#    #+#             */
-/*   Updated: 2021/03/17 20:25:17 by echung           ###   ########.fr       */
+/*   Updated: 2021/03/18 00:25:27 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,25 @@ void				ft_putnbr_fd_lx(unsigned int n, int fd);
 
 int					intlen(unsigned int num, int base);
 void				my_write(int fildes, const void *buf, size_t nbyte);
-void				print_result(t_content content, char type);
+void				print_result(t_content *content, char type);
 int					max(int a, int b);
-void				ycha(t_flag *flag, t_content content, unsigned int digit);
+void				set_content(t_flag *flag, t_content *content, unsigned int digit);
 void				parse_specifier(va_list ap, t_flag flag);
 void				parse(const char **format, va_list ap);
+
+void	parse_flag_zero(const char **format, t_flag *flag);
+void	parse_flag_minus(const char **format, t_flag *flag);
+void	parse_flag_width(const char **format, t_flag *flag);
+void	parse_flag_asterisk(const char **format, t_flag *flag, va_list ap);
+void	parse_flag_precision(const char **format, t_flag *flag, va_list ap);
+
+void parse_spec_pc(void);
+void parse_spec_c(va_list ap);
+void parse_spec_s(va_list ap);
+void parse_spec_p(va_list ap, t_flag *flag, t_content *content);
+void parse_spec_d(va_list ap, t_flag *flag, t_content *content);
+void parse_spec_u(va_list ap, t_flag *flag, t_content *content);
+
 int					ft_printf(const char *format, ...);
 
 #endif

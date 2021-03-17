@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 20:35:37 by echung            #+#    #+#             */
-/*   Updated: 2021/03/17 20:36:21 by echung           ###   ########.fr       */
+/*   Updated: 2021/03/18 00:36:25 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,14 @@ void parse_spec_p(va_list ap, t_flag *flag, t_content *content)
 	unsigned int pointer;
 	pointer = (unsigned int)va_arg(ap, void *);
 	digit = pointer;
-	ycha(&flag, content, digit);
+	set_content(flag, content, digit);
 }
 
 void parse_spec_d(va_list ap, t_flag *flag, t_content *content)
 {
 	int digit;
 	digit = va_arg(ap, int);
+	printf("[[[%d]]]\n", digit);
 	if (digit < 0)
 	{
 		content->sign = 1;
@@ -58,7 +59,7 @@ void parse_spec_d(va_list ap, t_flag *flag, t_content *content)
 		flag->width++;
 	}
 	content->intlen = intlen(digit, 10);
-	ycha(&flag, content, digit);
+	set_content(flag, content, digit);
 }
 
 void parse_spec_u(va_list ap, t_flag *flag, t_content *content)
@@ -74,5 +75,5 @@ void parse_spec_u(va_list ap, t_flag *flag, t_content *content)
 		content->intlen = intlen(digit, 10);
 	else
 		content->intlen = intlen(digit, 16);
-	ycha(&flag, content, digit);
+	set_content(flag, content, digit);
 }

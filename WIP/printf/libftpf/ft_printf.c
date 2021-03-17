@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 19:17:53 by echung            #+#    #+#             */
-/*   Updated: 2021/03/17 20:36:42 by echung           ###   ########.fr       */
+/*   Updated: 2021/03/18 00:36:34 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,32 +34,34 @@ void my_write(int fildes, const void *buf, size_t nbyte)
 	}
 }
 
-void print_result(t_content content, char type)
+void print_result(t_content *content, char type)
 {
-	while (content.front_margin)
+	while (content->front_margin)
 	{
 		ft_putchar_fd(' ', 1);
-		content.front_margin--;
+		content->front_margin--;
 	}
-	if (content.sign)
+	if (content->sign)
 		ft_putchar_fd('-', 1);
-	while (content.zero)
+	while (content->zero)
 	{
 		ft_putchar_fd('0', 1);
-		content.zero--;
+		content->zero--;
 	}
 	if (type == 'p')
-		ft_putnbr_fd_p(content.value, 1);
+		ft_putnbr_fd_p(content->value, 1);
 	else if (type == 'd' || type == 'i' || type == 'u')
-		ft_putnbr_fd_u(content.value, 1);
+	{
+		ft_putnbr_fd_u(content->value, 1);
+	}
 	else if (type == 'x')
-		ft_putnbr_fd_sx(content.value, 1);
+		ft_putnbr_fd_sx(content->value, 1);
 	else if (type == 'X')
-		ft_putnbr_fd_lx(content.value, 1);
-	while (content.back_margin)
+		ft_putnbr_fd_lx(content->value, 1);
+	while (content->back_margin)
 	{
 		ft_putchar_fd(' ', 1);
-		content.back_margin--;
+		content->back_margin--;
 	}
 }
 
@@ -69,17 +71,17 @@ int max(int a, int b)
 		return (a);
 	return (b);
 }
-void ycha(t_flag *flag, t_content content, unsigned int digit)
+void set_content(t_flag *flag, t_content *content, unsigned int digit)
 {
 	if (flag->dot) //zero 계산
-		content.zero = max(flag->precision - content.intlen, 0);
+		content->zero = max(flag->precision - content->intlen, 0);
 	else if (flag->zero && !(flag->minus))
-		content.zero = max(flag->width - content.intlen - content.sign, 0);
+		content->zero = max(flag->width - content->intlen - content->sign, 0);
 	if (flag->minus) //margin 계산
-		content.back_margin = max(flag->width - content.zero - content.intlen - content.sign, 0);
+		content->back_margin = max(flag->width - content->zero - content->intlen - content->sign, 0);
 	else
-		content.front_margin = max(flag->width - content.zero - content.intlen - content.sign, 0);
-	content.value = (unsigned int)digit;
+		content->front_margin = max(flag->width - content->zero - content->intlen - content->sign, 0);
+	content->value = (unsigned int)digit;
 	print_result(content, flag->type);
 }
 
@@ -97,13 +99,9 @@ void parse_specifier(va_list ap, t_flag flag)
 	else if (flag.type == 'p')
 		parse_spec_p(ap, &flag, &content);
 	else if (flag.type == 'd' || flag.type == 'i')
-	{
 		parse_spec_d(ap, &flag, &content);
-	}
 	else if (flag.type == 'u' || flag.type == 'x' || flag.type == 'X')
-	{
 		parse_spec_u(ap, &flag, &content);
-	}
 	else
 		printf("specifier: others\n");
 }
