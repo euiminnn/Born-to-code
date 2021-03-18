@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 19:17:53 by echung            #+#    #+#             */
-/*   Updated: 2021/03/18 01:24:20 by echung           ###   ########.fr       */
+/*   Updated: 2021/03/18 22:21:38 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,23 @@ void print_result(t_content *content, char type)
 		ft_putchar_fd('0', 1);
 		content->zero--;
 	}
-	if (type == 'p')
-		ft_putnbr_fd_p(content->value, 1);
+	if (type == 'c' || type == '%')
+		my_write(1, (char *)(content->value), 1);
+	else if (type == 's')
+		my_write(1, (char *)(content->value), content->intlen);
+	else if (type == 'p')
+		ft_putnbr_fd_p(*(unsigned int *)(content->value), 1);
 	else if (type == 'd' || type == 'i' || type == 'u')
-	{
-		ft_putnbr_fd_u(content->value, 1);
-	}
+		ft_putnbr_fd_u(*(unsigned int *)content->value, 1);
 	else if (type == 'x')
-		ft_putnbr_fd_sx(content->value, 1);
+		ft_putnbr_fd_sx(*(unsigned int *)content->value, 1);
 	else if (type == 'X')
-		ft_putnbr_fd_lx(content->value, 1);
+		ft_putnbr_fd_lx(*(unsigned int *)content->value, 1);
+	else if (type == 'z')
+	{
+		my_write(1, "0x", 2);
+	}
+
 	while (content->back_margin)
 	{
 		ft_putchar_fd(' ', 1);
@@ -71,7 +78,7 @@ int max(int a, int b)
 		return (a);
 	return (b);
 }
-void set_content(t_flag *flag, t_content *content, unsigned int digit)
+void set_content(t_flag *flag, t_content *content, void *value)
 {
 	if (flag->dot) //zero 계산
 		content->zero = max(flag->precision - content->intlen, 0);
@@ -81,21 +88,21 @@ void set_content(t_flag *flag, t_content *content, unsigned int digit)
 		content->back_margin = max(flag->width - content->zero - content->intlen - content->sign, 0);
 	else
 		content->front_margin = max(flag->width - content->zero - content->intlen - content->sign, 0);
-	content->value = (unsigned int)digit;
+	content->value = value;
 	print_result(content, flag->type);
 }
 
-void parse_specifier(va_list ap, t_flag flag)
+void parse_specifier(va_list *ap, t_flag flag)
 {
 	t_content	content;
 	ft_memset(&content, 0, sizeof(content));
 
 	if (flag.type == '%')
-		parse_spec_pc();
+		parse_spec_c(ap, &flag, &content);
 	else if (flag.type == 'c')
-		parse_spec_c(ap);
+		parse_spec_c(ap, &flag, &content);
 	else if (flag.type == 's')
-		parse_spec_s(ap);
+		parse_spec_s(ap, &flag, &content);
 	else if (flag.type == 'p')
 		parse_spec_p(ap, &flag, &content);
 	else if (flag.type == 'd' || flag.type == 'i')
@@ -103,9 +110,9 @@ void parse_specifier(va_list ap, t_flag flag)
 	else if (flag.type == 'u' || flag.type == 'x' || flag.type == 'X')
 		parse_spec_u(ap, &flag, &content);
 	else
-		printf("specifier: others\n");
+		printf("parse_specifier ???\n");
 }
-void parse(const char **format, va_list ap)
+void parse(const char **format, va_list *ap)
 {
 	t_flag	flag;
 	char charset[10];
@@ -113,7 +120,7 @@ void parse(const char **format, va_list ap)
 	ft_memset(&flag, 0, sizeof(flag));
 	ft_memcpy(charset, "%cspdiuxX", 10);
 	(*format)++; // %뒤부터 읽어야 함
-	while (!ft_strchr(charset, **format))
+	while (ft_strchr("-0*.123456789", **format))
 	{
 		if (**format == '\0')
 			break ;
@@ -130,7 +137,7 @@ void parse(const char **format, va_list ap)
 		else
 			(*format)++;
 	}
-	if (ft_strchr(charset, **format))
+	if (**format && ft_strchr(charset, **format) > 0)
 	{
 		flag.type = **format;
 		parse_specifier(ap, flag);
@@ -145,7 +152,7 @@ int	ft_printf(const char *format, ...)
 	while (*format != '\0')
 	{
 		if (*format == '%')
-			parse(&format, ap);
+			parse(&format, &ap);
 		else
 			my_write(1, format, 1);
 		format++;
@@ -153,7 +160,7 @@ int	ft_printf(const char *format, ...)
 	va_end(ap);
 	return (retlen);
 }
-
+/*
 int main(void)
 {
 	char c;
@@ -176,11 +183,11 @@ int main(void)
 	x = 0xfF1;
 	X = 0xfF1;
 
-/*
-	ret = printf("org percent: %%\n");
-	printf("{ret: %d}\n", ret);
-	myret = ft_printf("_my percent: %%\n");
-	printf("{myret: %d}\n", myret);
+
+	ret = printf("org percent: %");
+	printf("\n{ret: %d}\n", ret);
+	myret = ft_printf("_my percent: %");
+	printf("\n{myret: %d}\n", myret);
 	printf("\n");
 	
 	ret = printf("org c: %c\n", c);
@@ -200,10 +207,7 @@ int main(void)
 	myret = ft_printf("_my p: %p\n", p);
 	printf("{myret: %d}\n", myret);
 	printf("\n");
-*/	
-	printf("printf: %d %d %d %d %d\n", 1, 2, 3, 4, 5);
-	ft_printf("ft_printf: %d %d %d %d %d\n", 1, 2, 3, 4, 5);
-/*
+	
 	ret = printf("org 5.0d: %5.0d\n", 0);
 	printf("{ret: %d}\n", ret);
 	myret = ft_printf("_my 5.0d: %5.0d\n", 0);
@@ -221,8 +225,7 @@ int main(void)
 	myret = ft_printf("_my *.*d: %*.*d\n", 7, 5, 12345);
 	printf("{myret: %d}\n", myret);
 	printf("\n");
-*/
-/*
+
 	ret = printf("org i: %i\n", i);
 	printf("{ret: %d}\n", ret);
 	myret = ft_printf("_my i: %i\n", i);
@@ -246,7 +249,7 @@ int main(void)
 	myret = ft_printf("_my X: %X\n", X);
 	printf("{myret: %d}\n", myret);
 	printf("\n");
-*/
 
 	return (0);
 }
+*/
