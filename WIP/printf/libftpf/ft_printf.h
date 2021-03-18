@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 19:59:36 by echung            #+#    #+#             */
-/*   Updated: 2021/03/18 21:09:13 by echung           ###   ########.fr       */
+/*   Updated: 2021/03/19 02:51:50 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,12 @@ typedef struct		s_flag
 	int				dot;
 	int				width;
 	int				precision;
+	int				precision_zero;
 }					t_flag;
 
 typedef struct		s_content
 {
+	int				prefix;
 	int				sign;
 	int				zero;
 	void			*value;

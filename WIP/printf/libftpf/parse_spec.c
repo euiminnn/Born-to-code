@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 20:35:37 by echung            #+#    #+#             */
-/*   Updated: 2021/03/18 21:27:50 by echung           ###   ########.fr       */
+/*   Updated: 2021/03/19 03:40:52 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void parse_spec_s(va_list *ap, t_flag *flag, t_content *content)
 	content->intlen = ft_strlen(str);
 	if (flag->dot && flag->precision < content->intlen)
 		content->intlen = flag->precision;
+	if (flag->dot && flag)
 	flag->dot = 0;
 	set_content(flag, content, str);
 }
@@ -40,10 +41,12 @@ void parse_spec_p(va_list *ap, t_flag *flag, t_content *content)
 {
 	unsigned int pointer;
 	pointer = (unsigned int)va_arg(*ap, void *);
+	content->prefix = 2;
 	if (flag->dot == 1 && flag->precision == 0 && pointer == 0)
 	{
-		flag->type = 'z';
+		flag->type = 'e';
 		flag->width++;
+		content->prefix = 2;
 	}
 	content->intlen = intlen(pointer, 16);
 	set_content(flag, content, &pointer);

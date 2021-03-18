@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 19:17:53 by echung            #+#    #+#             */
-/*   Updated: 2021/03/18 22:21:38 by echung           ###   ########.fr       */
+/*   Updated: 2021/03/19 03:41:05 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ void print_result(t_content *content, char type)
 	}
 	if (content->sign)
 		ft_putchar_fd('-', 1);
+	if (content->prefix)
+		my_write(1, "0x", 2);
 	while (content->zero)
 	{
 		ft_putchar_fd('0', 1);
@@ -60,10 +62,6 @@ void print_result(t_content *content, char type)
 		ft_putnbr_fd_sx(*(unsigned int *)content->value, 1);
 	else if (type == 'X')
 		ft_putnbr_fd_lx(*(unsigned int *)content->value, 1);
-	else if (type == 'z')
-	{
-		my_write(1, "0x", 2);
-	}
 
 	while (content->back_margin)
 	{
@@ -85,9 +83,9 @@ void set_content(t_flag *flag, t_content *content, void *value)
 	else if (flag->zero && !(flag->minus))
 		content->zero = max(flag->width - content->intlen - content->sign, 0);
 	if (flag->minus) //margin 계산
-		content->back_margin = max(flag->width - content->zero - content->intlen - content->sign, 0);
+		content->back_margin = max(flag->width - content->zero - content->intlen - content->sign - content->prefix, 0);
 	else
-		content->front_margin = max(flag->width - content->zero - content->intlen - content->sign, 0);
+		content->front_margin = max(flag->width - content->zero - content->intlen - content->sign - content->prefix, 0);
 	content->value = value;
 	print_result(content, flag->type);
 }
@@ -196,9 +194,9 @@ int main(void)
 	printf("{myret: %d}\n", myret);
 	printf("\n");
 	
-	ret = printf("org s: %s\n", s);
+	ret = printf("org .05s: %.05s\n", s);
 	printf("{ret: %d}\n", ret);
-	myret = ft_printf("_my s: %s\n", s);
+	myret = ft_printf("_my .05s: %.05s\n", s);
 	printf("{myret: %d}\n", myret);
 	printf("\n");
 	
@@ -214,9 +212,9 @@ int main(void)
 	printf("{myret: %d}\n", myret);
 	printf("\n");
 
-	ret = printf("org .*d: %.*3d\n", 2, 1);
+	ret = printf("org d: %d %d %d %d\n", 1, 2, 3, 4);
 	printf("{ret: %d}\n", ret);
-	myret = ft_printf("_my .*d: %.*3d\n", 2, 1);
+	myret = ft_printf("_my d: %d %d %d %d\n", 1, 2, 3, 4);
 	printf("{myret: %d}\n", myret);
 	printf("\n");
 
@@ -249,7 +247,6 @@ int main(void)
 	myret = ft_printf("_my X: %X\n", X);
 	printf("{myret: %d}\n", myret);
 	printf("\n");
-
 	return (0);
 }
 */

@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 19:07:10 by echung            #+#    #+#             */
-/*   Updated: 2021/03/18 20:24:48 by echung           ###   ########.fr       */
+/*   Updated: 2021/03/19 02:48:13 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,11 @@ void	parse_flag_precision(const char **format, t_flag *flag, va_list *ap)
 
 	flag->dot = 1;
 	(*format)++;
+	if (**format == '0')
+	{
+		flag->precision_zero = 1;
+		(*format)++;
+	}
 	if ('1' <= **format && **format <= '9')
 	{
 		flag->precision = ft_atoi(*format);
