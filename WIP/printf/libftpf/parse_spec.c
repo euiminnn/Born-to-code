@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 20:35:37 by echung            #+#    #+#             */
-/*   Updated: 2021/03/19 03:40:52 by echung           ###   ########.fr       */
+/*   Updated: 2021/03/19 04:09:37 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void parse_spec_p(va_list *ap, t_flag *flag, t_content *content)
 	if (flag->dot == 1 && flag->precision == 0 && pointer == 0)
 	{
 		flag->type = 'e';
-		flag->width++;
+		flag->width++;	//??
 		content->prefix = 2;
 	}
 	content->intlen = intlen(pointer, 16);

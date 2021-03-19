@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 19:17:53 by echung            #+#    #+#             */
-/*   Updated: 2021/03/19 03:41:05 by echung           ###   ########.fr       */
+/*   Updated: 2021/03/19 11:54:41 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,9 @@ void print_result(t_content *content, char type)
 	else if (type == 's')
 		my_write(1, (char *)(content->value), content->intlen);
 	else if (type == 'p')
+	{
 		ft_putnbr_fd_p(*(unsigned int *)(content->value), 1);
+	}
 	else if (type == 'd' || type == 'i' || type == 'u')
 		ft_putnbr_fd_u(*(unsigned int *)content->value, 1);
 	else if (type == 'x')
@@ -158,7 +160,7 @@ int	ft_printf(const char *format, ...)
 	va_end(ap);
 	return (retlen);
 }
-/*
+
 int main(void)
 {
 	char c;
@@ -181,7 +183,7 @@ int main(void)
 	x = 0xfF1;
 	X = 0xfF1;
 
-
+/*
 	ret = printf("org percent: %");
 	printf("\n{ret: %d}\n", ret);
 	myret = ft_printf("_my percent: %");
@@ -199,25 +201,25 @@ int main(void)
 	myret = ft_printf("_my .05s: %.05s\n", s);
 	printf("{myret: %d}\n", myret);
 	printf("\n");
-	
-	ret = printf("org p: %p\n", p);
+*/
+	ret = printf("org p: %p\n", s);
 	printf("{ret: %d}\n", ret);
-	myret = ft_printf("_my p: %p\n", p);
+	myret = ft_printf("_my p: %p\n", s);
 	printf("{myret: %d}\n", myret);
 	printf("\n");
 	
-	ret = printf("org 5.0d: %5.0d\n", 0);
+	ret = printf("org .5p: %.5p\n", s);
 	printf("{ret: %d}\n", ret);
-	myret = ft_printf("_my 5.0d: %5.0d\n", 0);
+	myret = ft_printf("_my .5p: %.5p\n", s);
 	printf("{myret: %d}\n", myret);
 	printf("\n");
 
-	ret = printf("org d: %d %d %d %d\n", 1, 2, 3, 4);
+	ret = printf("org p: %p %p %p %p\n", &c, s, &d, &i);
 	printf("{ret: %d}\n", ret);
-	myret = ft_printf("_my d: %d %d %d %d\n", 1, 2, 3, 4);
+	myret = ft_printf("_my p: %p %p %p %p\n", &c, s, &d, &i);
 	printf("{myret: %d}\n", myret);
 	printf("\n");
-
+/*	
 	ret = printf("org *.*d: %*.*d\n", 7, 5, 12345);
 	printf("{ret: %d}\n", ret);
 	myret = ft_printf("_my *.*d: %*.*d\n", 7, 5, 12345);
@@ -247,6 +249,8 @@ int main(void)
 	myret = ft_printf("_my X: %X\n", X);
 	printf("{myret: %d}\n", myret);
 	printf("\n");
+*/
 	return (0);
 }
-*/
+
+
