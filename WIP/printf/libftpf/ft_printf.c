@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 19:17:53 by echung            #+#    #+#             */
-/*   Updated: 2021/03/19 11:54:41 by echung           ###   ########.fr       */
+/*   Updated: 2021/03/19 12:15:41 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,7 @@ void print_result(t_content *content, char type)
 	else if (type == 's')
 		my_write(1, (char *)(content->value), content->intlen);
 	else if (type == 'p')
-	{
 		ft_putnbr_fd_p(*(unsigned int *)(content->value), 1);
-	}
 	else if (type == 'd' || type == 'i' || type == 'u')
 		ft_putnbr_fd_u(*(unsigned int *)content->value, 1);
 	else if (type == 'x')

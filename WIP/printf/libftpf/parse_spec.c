@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 20:35:37 by echung            #+#    #+#             */
-/*   Updated: 2021/03/19 04:09:37 by echung           ###   ########.fr       */
+/*   Updated: 2021/03/19 12:09:38 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void parse_spec_s(va_list *ap, t_flag *flag, t_content *content)
 }
 void parse_spec_p(va_list *ap, t_flag *flag, t_content *content)
 {
-	unsigned int pointer;
-	pointer = (unsigned int)va_arg(*ap, void *);
+	unsigned long pointer;
+	pointer = (unsigned long)va_arg(*ap, void *);
 	content->prefix = 2;
 	if (flag->dot == 1 && flag->precision == 0 && pointer == 0)
 	{
