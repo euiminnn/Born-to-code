@@ -71,9 +71,10 @@ static void	parse(const char **format, va_list *ap)
 			(*format)++;
 	}
 	if (ft_strchr(charset, **format) && (flag.type = **format))
+	{
 		parse_specifier(ap, flag);
-	else
-		(*format)--;
+		(*format)++;
+	}
 }
 
 int			ft_printf(const char *format, ...)
@@ -87,8 +88,10 @@ int			ft_printf(const char *format, ...)
 		if (*format == '%')
 			parse(&format, &ap);
 		else
+		{
 			my_write(1, format, 1);
-		format++;
+			format++;
+		}
 	}
 	va_end(ap);
 	return (g_ret);
