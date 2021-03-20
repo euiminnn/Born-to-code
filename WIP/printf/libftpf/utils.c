@@ -1,31 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/21 20:23:02 by echung            #+#    #+#             */
-/*   Updated: 2021/03/14 01:54:45 by echung           ###   ########.fr       */
+/*   Created: 2021/03/20 20:18:34 by echung            #+#    #+#             */
+/*   Updated: 2021/03/20 20:55:17 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	*ft_memset(void *b, int c, size_t len)
+int		get_len(unsigned long value, int base)
 {
-	unsigned char	*b_org;
-	unsigned char	*b_mod;
-	unsigned char	c_mod;
+	int	len;
 
-	b_org = b;
-	b_mod = b;
-	c_mod = c;
-	while (len > 0)
+	len = 1;
+	while ((value /= base) > 0)
+		len++;
+	return (len);
+}
+
+void	my_write(int fildes, const void *buf, size_t nbyte)
+{
+	while (nbyte > 0)
 	{
-		*b_mod = c_mod;
-		b_mod++;
-		len--;
+		write(fildes, buf, 1);
+		g_ret++;
+		buf++;
+		nbyte--;
 	}
-	return (b_org);
+}
+
+int		max(int a, int b)
+{
+	if (a > b)
+		return (a);
+	return (b);
 }

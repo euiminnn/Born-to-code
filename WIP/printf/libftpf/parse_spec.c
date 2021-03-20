@@ -6,15 +6,16 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 20:35:37 by echung            #+#    #+#             */
-/*   Updated: 2021/03/20 19:34:27 by echung           ###   ########.fr       */
+/*   Updated: 2021/03/20 20:00:47 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void parse_spec_c(va_list *ap, t_flag *flag, t_content *content)
+void	parse_spec_c(va_list *ap, t_flag *flag, t_content *content)
 {
-	char chr;
+	char	chr;
+
 	if (flag->type == '%')
 		chr = '%';
 	else
@@ -24,37 +25,41 @@ void parse_spec_c(va_list *ap, t_flag *flag, t_content *content)
 	set_content(flag, content, &chr);
 }
 
-void parse_spec_s(va_list *ap, t_flag *flag, t_content *content)
+void	parse_spec_s(va_list *ap, t_flag *flag, t_content *content)
 {
-	char *str;
-	str = va_arg(*ap, char*);
+	char	*str;
+
+	str = va_arg(*ap, char *);
 	if (str == 0)
 		str = "(null)";
 	content->intlen = ft_strlen(str);
 	if (flag->dot && flag->precision < content->intlen)
 		content->intlen = flag->precision;
 	if (flag->dot && flag)
-	flag->dot = 0;
+		flag->dot = 0;
 	set_content(flag, content, str);
 }
-void parse_spec_p(va_list *ap, t_flag *flag, t_content *content)
+
+void	parse_spec_p(va_list *ap, t_flag *flag, t_content *content)
 {
-	unsigned long pointer;
+	unsigned long	pointer;
+
 	pointer = (unsigned long)va_arg(*ap, void *);
 	content->prefix = 2;
 	if (flag->dot == 1 && flag->precision == 0 && pointer == 0)
 	{
 		flag->type = 'e';
-		flag->width++;	//??
+		flag->width++;
 		content->prefix = 2;
 	}
 	content->intlen = get_len(pointer, 16);
 	set_content(flag, content, &pointer);
 }
 
-void parse_spec_d(va_list *ap, t_flag *flag, t_content *content)
+void	parse_spec_d(va_list *ap, t_flag *flag, t_content *content)
 {
-	long digit;
+	long	digit;
+
 	digit = va_arg(*ap, int);
 	if (digit < 0)
 	{
@@ -70,9 +75,10 @@ void parse_spec_d(va_list *ap, t_flag *flag, t_content *content)
 	set_content(flag, content, &digit);
 }
 
-void parse_spec_u(va_list *ap, t_flag *flag, t_content *content)
+void	parse_spec_u(va_list *ap, t_flag *flag, t_content *content)
 {
-	unsigned int digit;
+	unsigned int	digit;
+
 	digit = va_arg(*ap, unsigned int);
 	if (flag->dot == 1 && flag->precision == 0 && digit == 0)
 	{
