@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 19:59:36 by echung            #+#    #+#             */
-/*   Updated: 2021/03/20 21:19:03 by echung           ###   ########.fr       */
+/*   Updated: 2021/03/21 00:59:30 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct	s_content
 	int				prefix;
 	int				sign;
 	int				zero;
-	void			*value;
+	long			value;
 	int				front_margin;
 	int				back_margin;
 	int				intlen;
@@ -59,12 +59,7 @@ int				get_len(unsigned long value, int base);
 void			my_write(int fildes, const void *buf, size_t nbyte);
 int				max(int a, int b);
 
-void			print_value(t_content *content, char type);
 void			print_else(t_content *content, char type);
-
-void			set_content(t_flag *flag, t_content *content, void *value);
-void			parse_specifier(va_list *ap, t_flag flag);
-void			parse(const char **format, va_list *ap);
 
 void			parse_flag_zero(const char **format, t_flag *flag);
 void			parse_flag_minus(const char **format, t_flag *flag);

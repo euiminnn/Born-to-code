@@ -6,13 +6,13 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 19:17:53 by echung            #+#    #+#             */
-/*   Updated: 2021/03/20 22:31:02 by echung           ###   ########.fr       */
+/*   Updated: 2021/03/21 00:48:36 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	set_content(t_flag *flag, t_content *content, void *value)
+static void	set_content(t_flag *flag, t_content *content)
 {
 	if (flag->dot)
 		content->zero = max(flag->precision - content->intlen, 0);
@@ -24,11 +24,10 @@ void	set_content(t_flag *flag, t_content *content, void *value)
 	else
 		content->front_margin = max(flag->width - content->zero
 				- content->intlen - content->sign - content->prefix, 0);
-	content->value = value;
 	print_else(content, flag->type);
 }
 
-void	parse_specifier(va_list *ap, t_flag flag)
+static void	parse_specifier(va_list *ap, t_flag flag)
 {
 	t_content	content;
 
@@ -45,9 +44,10 @@ void	parse_specifier(va_list *ap, t_flag flag)
 		parse_spec_d(ap, &flag, &content);
 	else if (flag.type == 'u' || flag.type == 'x' || flag.type == 'X')
 		parse_spec_u(ap, &flag, &content);
+	set_content(&flag, &content);
 }
 
-void	parse(const char **format, va_list *ap)
+static void	parse(const char **format, va_list *ap)
 {
 	t_flag	flag;
 	char	charset[10];
@@ -76,7 +76,7 @@ void	parse(const char **format, va_list *ap)
 		(*format)--;
 }
 
-int		ft_printf(const char *format, ...)
+int			ft_printf(const char *format, ...)
 {
 	va_list	ap;
 

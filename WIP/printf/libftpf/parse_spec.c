@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 20:35:37 by echung            #+#    #+#             */
-/*   Updated: 2021/03/20 20:00:47 by echung           ###   ########.fr       */
+/*   Updated: 2021/03/21 01:01:17 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	parse_spec_c(va_list *ap, t_flag *flag, t_content *content)
 		chr = va_arg(*ap, int);
 	flag->dot = 0;
 	content->intlen = 1;
-	set_content(flag, content, &chr);
+	content->value = chr;
 }
 
 void	parse_spec_s(va_list *ap, t_flag *flag, t_content *content)
@@ -37,7 +37,7 @@ void	parse_spec_s(va_list *ap, t_flag *flag, t_content *content)
 		content->intlen = flag->precision;
 	if (flag->dot && flag)
 		flag->dot = 0;
-	set_content(flag, content, str);
+	content->value = (long)str;
 }
 
 void	parse_spec_p(va_list *ap, t_flag *flag, t_content *content)
@@ -53,7 +53,7 @@ void	parse_spec_p(va_list *ap, t_flag *flag, t_content *content)
 		content->prefix = 2;
 	}
 	content->intlen = get_len(pointer, 16);
-	set_content(flag, content, &pointer);
+	content->value = pointer;
 }
 
 void	parse_spec_d(va_list *ap, t_flag *flag, t_content *content)
@@ -72,7 +72,7 @@ void	parse_spec_d(va_list *ap, t_flag *flag, t_content *content)
 		flag->width++;
 	}
 	content->intlen = get_len(digit, 10);
-	set_content(flag, content, &digit);
+	content->value = digit;
 }
 
 void	parse_spec_u(va_list *ap, t_flag *flag, t_content *content)
@@ -89,5 +89,5 @@ void	parse_spec_u(va_list *ap, t_flag *flag, t_content *content)
 		content->intlen = get_len(digit, 10);
 	else
 		content->intlen = get_len(digit, 16);
-	set_content(flag, content, &digit);
+	content->value = digit;
 }
