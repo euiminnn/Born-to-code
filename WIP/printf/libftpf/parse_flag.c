@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 19:07:10 by echung            #+#    #+#             */
-/*   Updated: 2021/03/19 02:48:13 by echung           ###   ########.fr       */
+/*   Updated: 2021/03/20 19:34:35 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	parse_flag_minus(const char **format, t_flag *flag)
 void	parse_flag_width(const char **format, t_flag *flag)
 {
 	flag->width = ft_atoi(*format);
-	*format = *format + intlen(flag->width, 10);
+	*format = *format + get_len(flag->width, 10);
 }
 
 void	parse_flag_asterisk(const char **format, t_flag *flag, va_list *ap)
@@ -35,7 +35,6 @@ void	parse_flag_asterisk(const char **format, t_flag *flag, va_list *ap)
 	int	ast_value;
 
 	ast_value = va_arg(*ap, int);
-//	printf("{{{%d}}}", ast_value);
 	if (ast_value < 0)
 	{
 		ast_value = ast_value * -1;
@@ -59,7 +58,7 @@ void	parse_flag_precision(const char **format, t_flag *flag, va_list *ap)
 	if ('1' <= **format && **format <= '9')
 	{
 		flag->precision = ft_atoi(*format);
-		*format = *format + intlen(flag->precision, 10);
+		*format = *format + get_len(flag->precision, 10);
 	}
 	else if (**format == '*')
 	{

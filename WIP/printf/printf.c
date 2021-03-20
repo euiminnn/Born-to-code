@@ -5,7 +5,7 @@ int main(void)
 	char *str;
 	str = "this is string";
 	printf("percent: %%\n");
-	printf("c: %c\n", 'a');
+	printf(".p: %.p\n", ptr);
 	printf("s: %s\n", str);
 	printf("p: %p\n", ptr);
 	printf("d: %d\n", 123);

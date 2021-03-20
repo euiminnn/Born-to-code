@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 19:59:36 by echung            #+#    #+#             */
-/*   Updated: 2021/03/19 02:51:50 by echung           ###   ########.fr       */
+/*   Updated: 2021/03/20 19:39:30 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 # define FT_LIBFT_H
 
 # include <stdarg.h>
-# include <stdio.h>
-//# include <strings.h>
 # include <unistd.h>
 
 typedef struct		s_flag
@@ -41,7 +39,7 @@ typedef struct		s_content
 	int				intlen;
 }					t_content;
 
-int retlen;
+int ret;
 
 int					ft_atoi(const char *str);
 void				*ft_memcpy(void *dst, const void *src, size_t n);
@@ -53,13 +51,15 @@ char				*ft_strchr(const char *s, int c);
 void				ft_putchar_fd(char c, int fd);
 void				ft_putnbr_fd(int n, int fd);
 void				ft_putnbr_fd_u(unsigned int n, int fd);
-void				ft_putnbr_fd_p(unsigned int n, int fd);
+void				ft_putnbr_fd_p(unsigned long n, int fd);
 void				ft_putnbr_fd_sx(unsigned int n, int fd);
 void				ft_putnbr_fd_lx(unsigned int n, int fd);
 
-int					intlen(unsigned int num, int base);
+int					get_len(unsigned long value, int base);
 void				my_write(int fildes, const void *buf, size_t nbyte);
-void				print_result(t_content *content, char type);
+
+void				print_value(t_content *content, char type);
+void				print_else(t_content *content, char type);
 int					max(int a, int b);
 void				set_content(t_flag *flag, t_content *content, void *value);
 void				parse_specifier(va_list *ap, t_flag flag);
