@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 19:17:53 by echung            #+#    #+#             */
-/*   Updated: 2021/03/20 22:11:11 by echung           ###   ########.fr       */
+/*   Updated: 2021/03/20 22:23:49 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ void	parse(const char **format, va_list *ap)
 	}
 	if (ft_strchr(charset, **format) && (flag.type = **format))
 		parse_specifier(ap, flag);
+	else
+		(*format)--;
 }
 
 int		ft_printf(const char *format, ...)
@@ -82,15 +84,10 @@ int		ft_printf(const char *format, ...)
 	while (*format != '\0')
 	{
 		if (*format == '%')
-		{
 			parse(&format, &ap);
-			format++;
-		}
 		else
-		{
 			my_write(1, format, 1);
-			format++;
-		}
+		format++;
 	}
 	va_end(ap);
 	return (g_ret);
