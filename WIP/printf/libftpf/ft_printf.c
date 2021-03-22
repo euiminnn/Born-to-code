@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 19:17:53 by echung            #+#    #+#             */
-/*   Updated: 2021/03/22 17:33:09 by echung           ###   ########.fr       */
+/*   Updated: 2021/03/22 17:43:41 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,10 @@ static void	parse(const char **format, va_list *ap)
 			break ;
 	}
 	if (ft_strchr("%cspdiuxX", **format) && (flag.type = **format))
+	{
 		parse_specifier(ap, flag);
-	else
-		(*format)--;
+		(*format)++;
+	}
 }
 
 int			ft_printf(const char *format, ...)
@@ -85,8 +86,10 @@ int			ft_printf(const char *format, ...)
 		if (*format == '%')
 			parse(&format, &ap);
 		else
+		{
 			my_write(1, format, 1);
-		format++;
+			format++;
+		}
 	}
 	va_end(ap);
 	return (g_ret);
