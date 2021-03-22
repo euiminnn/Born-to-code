@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 20:10:05 by echung            #+#    #+#             */
-/*   Updated: 2021/03/22 16:57:03 by echung           ###   ########.fr       */
+/*   Updated: 2021/03/22 22:10:59 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	print_content_value(t_content *content, char type)
 	if (type == 'c' || type == '%')
 		my_write(1, &content->value, 1);
 	else if (type == 's')
-		my_write(1, (char *)content->value, content->intlen);
+		my_write(1, (char *)content->value, content->value_len);
 	else if (type == 'p')
 		ft_putnbr_fd_p((unsigned long)content->value, 1);
 	else if (type == 'd' || type == 'i' || type == 'u')

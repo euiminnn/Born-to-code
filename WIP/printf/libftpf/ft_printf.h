@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 19:59:36 by echung            #+#    #+#             */
-/*   Updated: 2021/03/22 16:54:53 by echung           ###   ########.fr       */
+/*   Updated: 2021/03/22 22:06:49 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct	s_content
 	long			value;
 	int				front_margin;
 	int				back_margin;
-	int				intlen;
+	int				value_len;
 }				t_content;
 
 int				ft_atoi(const char *str);

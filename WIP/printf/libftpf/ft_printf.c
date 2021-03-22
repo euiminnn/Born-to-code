@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 19:17:53 by echung            #+#    #+#             */
-/*   Updated: 2021/03/22 20:09:56 by echung           ###   ########.fr       */
+/*   Updated: 2021/03/22 22:07:34 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,16 @@
 static void	set_content(t_flag *flag, t_content *content)
 {
 	if (flag->dot)
-		content->zero = max(flag->precision - content->intlen, 0);
+		content->zero = max(flag->precision - content->value_len, 0);
 	else if (flag->zero && !(flag->minus))
-		content->zero = max(flag->width - content->intlen - content->sign, 0);
+		content->zero = max(flag->width - content->value_len
+				- content->sign, 0);
 	if (flag->minus)
 		content->back_margin = max(flag->width - content->zero
-				- content->intlen - content->sign - content->prefix, 0);
+				- content->value_len - content->sign - content->prefix, 0);
 	else
 		content->front_margin = max(flag->width - content->zero
-				- content->intlen - content->sign - content->prefix, 0);
+				- content->value_len - content->sign - content->prefix, 0);
 	print_content_frame(content, flag->type);
 }
 
@@ -65,8 +66,8 @@ static void	parse(const char **format, va_list *ap)
 			parse_flag_asterisk(format, &flag, ap);
 		else if (**format == '.')
 			parse_flag_precision(format, &flag, ap);
-//		else
-//			break ;
+		else
+			break ;
 	}
 	if (ft_strchr("%cspdiuxX", **format) && (flag.type = **format))
 	{
