@@ -6,7 +6,7 @@
 #    By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/15 22:13:22 by echung            #+#    #+#              #
-#    Updated: 2021/03/20 20:19:50 by echung           ###   ########.fr        #
+#    Updated: 2021/03/22 16:55:26 by echung           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ SRCS	= utils.c \
 		  ft_putnbr_fd.c \
 		  parse_flag.c \
 		  parse_spec.c \
-		  print_result.c \
+		  print_content.c \
 		  ft_printf.c
 
 OBJS	= $(SRCS:%.c=%.o)

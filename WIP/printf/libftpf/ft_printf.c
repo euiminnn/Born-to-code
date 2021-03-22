@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 19:17:53 by echung            #+#    #+#             */
-/*   Updated: 2021/03/21 00:48:36 by echung           ###   ########.fr       */
+/*   Updated: 2021/03/22 17:33:09 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	set_content(t_flag *flag, t_content *content)
 	else
 		content->front_margin = max(flag->width - content->zero
 				- content->intlen - content->sign - content->prefix, 0);
-	print_else(content, flag->type);
+	print_content_frame(content, flag->type);
 }
 
 static void	parse_specifier(va_list *ap, t_flag flag)
@@ -50,12 +50,10 @@ static void	parse_specifier(va_list *ap, t_flag flag)
 static void	parse(const char **format, va_list *ap)
 {
 	t_flag	flag;
-	char	charset[10];
 
 	ft_memset(&flag, 0, sizeof(flag));
-	ft_memcpy(charset, "%cspdiuxX", 10);
 	(*format)++;
-	while (**format && ft_strchr("-0*.123456789", **format))
+	while (**format)
 	{
 		if (**format == '0')
 			parse_flag_zero(format, &flag);
@@ -68,9 +66,9 @@ static void	parse(const char **format, va_list *ap)
 		else if (**format == '.')
 			parse_flag_precision(format, &flag, ap);
 		else
-			(*format)++;
+			break ;
 	}
-	if (ft_strchr(charset, **format) && (flag.type = **format))
+	if (ft_strchr("%cspdiuxX", **format) && (flag.type = **format))
 		parse_specifier(ap, flag);
 	else
 		(*format)--;

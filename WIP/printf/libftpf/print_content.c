@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_result.c                                     :+:      :+:    :+:   */
+/*   print_content.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 20:10:05 by echung            #+#    #+#             */
-/*   Updated: 2021/03/21 01:08:12 by echung           ###   ########.fr       */
+/*   Updated: 2021/03/22 16:57:03 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void	print_value(t_content *content, char type)
+static void	print_content_value(t_content *content, char type)
 {
 	if (type == 'c' || type == '%')
 		my_write(1, &content->value, 1);
@@ -28,7 +28,7 @@ static void	print_value(t_content *content, char type)
 		ft_putnbr_fd_lx((unsigned int)content->value, 1);
 }
 
-void		print_else(t_content *content, char type)
+void		print_content_frame(t_content *content, char type)
 {
 	while (content->front_margin)
 	{
@@ -44,7 +44,7 @@ void		print_else(t_content *content, char type)
 		ft_putchar_fd('0', 1);
 		content->zero--;
 	}
-	print_value(content, type);
+	print_content_value(content, type);
 	while (content->back_margin)
 	{
 		ft_putchar_fd(' ', 1);
