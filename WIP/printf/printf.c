@@ -7,7 +7,7 @@ int main(void)
 	printf("percent: %%\n");
 	printf(".p: %.p\n", ptr);
 	printf("s: %s\n", str);
-	printf("p: %p\n", ptr);
+	printf("55p: %55p\n", ptr);
 	printf("d: %d\n", 123);
 	printf("i: %i\n", -20);
 	printf("u: %u\n", 10);

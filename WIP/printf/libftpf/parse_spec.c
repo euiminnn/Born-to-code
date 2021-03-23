@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 20:35:37 by echung            #+#    #+#             */
-/*   Updated: 2021/03/22 22:10:20 by echung           ###   ########.fr       */
+/*   Updated: 2021/03/24 03:44:55 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	parse_spec_c(va_list *ap, t_flag *flag, t_content *content)
 	else
 		chr = va_arg(*ap, int);
 	flag->dot = 0;
-	content->value_len = 1;
+	content->value_len = 1;			//왜 get_len(chr, 10) 하면 안되지?
 	content->value = chr;
 }
 
@@ -35,7 +35,7 @@ void	parse_spec_s(va_list *ap, t_flag *flag, t_content *content)
 	content->value_len = ft_strlen(str);
 	if (flag->dot && flag->precision < content->value_len)
 		content->value_len = flag->precision;
-	if (flag->dot && flag)
+	if (flag->dot && flag)			//flag는 뭐지...
 		flag->dot = 0;
 	content->value = (long)str;
 }
@@ -49,8 +49,8 @@ void	parse_spec_p(va_list *ap, t_flag *flag, t_content *content)
 	if (flag->dot == 1 && flag->precision == 0 && pointer == 0)
 	{
 		flag->type = 'e';
-		flag->width++;
-		content->prefix = 2;
+		flag->width++;			//	?? 어차피 e는 출력 안하는데 width가 왜..? 아니네 width 먼저출력하지 type 보기전에
+		//content->prefix = 2;	//	없어도 되는거 아닌가
 	}
 	content->value_len = get_len(pointer, 16);
 	content->value = pointer;
