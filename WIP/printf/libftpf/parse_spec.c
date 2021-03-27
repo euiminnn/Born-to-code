@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 20:35:37 by echung            #+#    #+#             */
-/*   Updated: 2021/03/24 21:28:41 by echung           ###   ########.fr       */
+/*   Updated: 2021/03/27 16:51:03 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	parse_spec_c(va_list *ap, t_flag *flag, t_content *content)
 	else
 		chr = va_arg(*ap, int);
 	flag->dot = 0;
-	content->value_len = 1;			//왜 get_len(chr, 10) 하면 안되지?
+	content->value_len = 1;
 	content->value = chr;
 }
 
@@ -35,8 +35,7 @@ void	parse_spec_s(va_list *ap, t_flag *flag, t_content *content)
 	content->value_len = ft_strlen(str);
 	if (flag->dot && flag->precision < content->value_len)
 		content->value_len = flag->precision;
-	if (flag->dot)
-		flag->dot = 0;
+	flag->dot = 0;
 	content->value = (long)str;
 }
 
