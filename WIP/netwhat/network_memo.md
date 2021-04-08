@@ -1,14 +1,5 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    network_memo.md                                    :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/04/08 23:39:11 by echung            #+#    #+#              #
-#    Updated: 2021/04/08 23:55:08 by echung           ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+# network_memo.md
+By: echung <echung@student.42seoul.kr>
 
 ` this memo is for the subject "NETWHAT" `
 
