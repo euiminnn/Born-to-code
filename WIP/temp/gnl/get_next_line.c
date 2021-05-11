@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 20:26:15 by echung            #+#    #+#             */
-/*   Updated: 2021/02/12 23:47:13 by echung           ###   ########.fr       */
+/*   Updated: 2021/05/11 23:50:58 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,24 @@ int	get_next_line(int fd, char **line)
 	}
 	*line = ft_strdup("");
 	return (0);
+}
+
+#include <stdio.h>
+#include <fcntl.h>
+
+int    main(int ac, char **av)
+{
+    char* line;
+    int    check;
+    int    fd;
+	
+    fd = open("test.txt", O_RDONLY);
+    while ((check = get_next_line(fd, &line)) > 0)
+    {
+        printf("%s\n", line);
+        free(line);
+    }
+    printf("%s\n", line);
+    free(line);
+    return (0);
 }
