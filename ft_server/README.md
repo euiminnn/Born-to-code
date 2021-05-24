@@ -1,18 +1,30 @@
 `docker run -it -p 80:80 -p 443:443 debian:buster`
 
 `apt-get update`
-apt-get upgrade
-apt-get -y install nginx
-service nginx start
-service nginx status
-apt-get -y install curl
-curl localhost
-apt-get -y install openssl vim
-openssl req -newkey rsa:4096 -days 365 -nodes -x509 -subj "/C=KR/ST=Seoul/L=Seoul/O=42Seoul/OU=Lee/CN=localhost" -keyout localhost.dev.key -out localhost.dev.crt
-mv localhost.dev.crt etc/ssl/certs/
-mv localhost.dev.key etc/ssl/private/
-chmod 600 etc/ssl/certs/localhost.dev.crt etc/ssl/private/localhost.dev.key <!--위치 cd / 인지 확인-->
-vim etc/nginx/sites-available/default <!--한 후 set nu-->
+
+`apt-get upgrade`
+
+`apt-get -y install nginx`
+
+`service nginx start`
+
+`service nginx status`
+
+`apt-get -y install curl`
+
+`curl localhost`
+
+`apt-get -y install openssl vim`
+
+`openssl req -newkey rsa:4096 -days 365 -nodes -x509 -subj "/C=KR/ST=Seoul/L=Seoul/O=42Seoul/OU=Lee/CN=localhost" -keyout localhost.dev.key -out localhost.dev.crt`
+
+`mv localhost.dev.crt etc/ssl/certs/`
+
+`mv localhost.dev.key etc/ssl/private/`
+
+`chmod 600 etc/ssl/certs/localhost.dev.crt etc/ssl/private/localhost.dev.key` <!--위치 cd / 인지 확인-->
+
+`vim etc/nginx/sites-available/default` <!--한 후 set nu-->
 <!--40번째 줄에 추가하기-->
 ```
 	listen 443;
@@ -21,17 +33,23 @@ vim etc/nginx/sites-available/default <!--한 후 set nu-->
 	ssl_certificate /etc/ssl/certs/localhost.dev.crt;
 	ssl_certificate_key /etc/ssl/private/localhost.dev.key;
 ```
-service nginx reload <!--한 후 https://localhost 들어가서 NET::ERR_CERT_INVALID 누르고 thisisunsafe 입력-->
+`service nginx reload` <!--한 후 https://localhost 들어가서 NET::ERR_CERT_INVALID 누르고 thisisunsafe 입력-->
 
 
 
-apt-get -y install php-fpm
-vim /etc/nginx/sites-available/default <!-- :set nu -->
+`apt-get -y install php-fpm`
+
+`vim /etc/nginx/sites-available/default` <!-- :set nu -->
+
 주석 해제 <!--63, 66, 69, -->
+
 index.php 추가 <!-- 50번 째 줄-->
-service php7.3-fpm start
-service php7.3-fpm status
-vim /var/www/html/phpinfo.php
+
+`service php7.3-fpm start`
+
+`service php7.3-fpm status`
+
+`vim /var/www/html/phpinfo.php`
 ```
 <?php phpinfo(); ?>
 ```
