@@ -1,5 +1,6 @@
 `docker run -it -p 80:80 -p 443:443 debian:buster`
-apt-get update
+
+`apt-get update`
 apt-get upgrade
 apt-get -y install nginx
 service nginx start
