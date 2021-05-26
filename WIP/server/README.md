@@ -24,8 +24,8 @@
 
 `chmod 600 etc/ssl/certs/localhost.dev.crt etc/ssl/private/localhost.dev.key` 위치 cd / 인지 확인
 
-`vim etc/nginx/sites-available/default` <!--한 후 set nu-->
-<!--40번째 줄에 추가하기-->
+`vim etc/nginx/sites-available/default` 한 후 set nu
+40번째 줄에 추가하기
 ```
 	listen 443;
 
@@ -33,17 +33,17 @@
 	ssl_certificate /etc/ssl/certs/localhost.dev.crt;
 	ssl_certificate_key /etc/ssl/private/localhost.dev.key;
 ```
-`service nginx reload` <!--한 후 https://localhost 들어가서 NET::ERR_CERT_INVALID 누르고 thisisunsafe 입력-->
+`service nginx reload` 한 후 https://localhost 들어가서 NET::ERR_CERT_INVALID 누르고 thisisunsafe 입력
 
 
 
 `apt-get -y install php-fpm`
 
-`vim /etc/nginx/sites-available/default` <!-- :set nu -->
+`vim /etc/nginx/sites-available/default` :set nu
 
-주석 해제 <!--63, 66, 69, -->
+주석 해제(63, 66, 69번째 줄)
 
-index.php 추가 <!-- 50번 째 줄-->
+index.php 추가(50번째 줄)
 
 `service php7.3-fpm start`
 
