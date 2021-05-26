@@ -1,4 +1,4 @@
-# FROM debian:buster
+<!--FROM debian:buster
 
 # RUN apt-get update
 # RUN apt-get upgrade
@@ -13,4 +13,4 @@
 
 # EXPOSE 80 443
 
-# CMD bash ./tmp/setting.sh
+# CMD bash ./tmp/run.sh-->
