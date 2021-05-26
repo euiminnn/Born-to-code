@@ -22,7 +22,7 @@
 
 `mv localhost.dev.key etc/ssl/private/`
 
-`chmod 600 etc/ssl/certs/localhost.dev.crt etc/ssl/private/localhost.dev.key` <!--위치 cd / 인지 확인-->
+`chmod 600 etc/ssl/certs/localhost.dev.crt etc/ssl/private/localhost.dev.key` 위치 cd / 인지 확인
 
 `vim etc/nginx/sites-available/default` <!--한 후 set nu-->
 <!--40번째 줄에 추가하기-->
@@ -53,66 +53,85 @@ index.php 추가 <!-- 50번 째 줄-->
 ```
 <?php phpinfo(); ?>
 ```
-service nginx reload
-https://localhost/phpinfo.php
-rm -rf /var/www/html/phpinfo.php
+`service nginx reload`
+
+https://localhost/phpinfo.php 들어가서 확인
+
+`rm -rf /var/www/html/phpinfo.php`
 
 
-apt-get -y install mariadb-server php-mysql
+`apt-get -y install mariadb-server php-mysql`
 
-apt-get install -y wget
-wget https://files.phpmyadmin.net/phpMyAdmin/5.0.2/phpMyAdmin-5.0.2-all-languages.tar.gz
-tar -xvf phpMyAdmin-5.0.2-all-languages.tar.gz
-mv phpMyAdmin-5.0.2-all-languages phpmyadmin
-mv phpmyadmin /var/www/html/
+`apt-get install -y wget`
 
-cp -rp var/www/html/phpmyadmin/config.sample.inc.php var/www/html/phpmyadmin/config.inc.php
-vim var/www/html/phpmyadmin/config.inc.php
-<!-- blowfish 암호(2번링크) 생성해서 18번째 줄에 붙여넣기-->
+`wget https://files.phpmyadmin.net/phpMyAdmin/5.0.2/phpMyAdmin-5.0.2-all-languages.tar.gz`
 
-service nginx reload
-service mysql start
-service php7.3-fpm restart
+`tar -xvf phpMyAdmin-5.0.2-all-languages.tar.gz`
 
-mysql < var/www/html/phpmyadmin/sql/create_tables.sql -u root --skip-password
+`mv phpMyAdmin-5.0.2-all-languages phpmyadmin`
 
-mysqladmin -u root -p password <!-- 엔터, 패스워드, 패스워드 확인-->
+`mv phpmyadmin /var/www/html/`
 
-mysql <!--하면 MariaDB로 들어가짐-->
-show databases;
-CREATE DATABASE IF NOT EXISTS wordpress;
-show databases;
-exit
+`cp -rp var/www/html/phpmyadmin/config.sample.inc.php var/www/html/phpmyadmin/config.inc.php`
 
-wget https://wordpress.org/latest.tar.gz
-tar -xvf latest.tar.gz
-mv wordpress/ var/www/html/
-chown -R www-data:www-data /var/www/html/wordpress
+`vim var/www/html/phpmyadmin/config.inc.php`
 
-cp var/www/html/wordpress/wp-config-sample.php var/www/html/wordpress/wp-config.php
-vim var/www/html/wordpress/wp-config.php <!-- 한 후 :set nu -->
-<!--23, 26, 29, 32, 35, 38 번째 줄 확인-->
+blowfish 암호(2번링크) 생성해서 18번째 줄에 붙여넣기
+
+`service nginx reload`
+
+`service mysql start`
+
+`service php7.3-fpm restart`
+
+`mysql < var/www/html/phpmyadmin/sql/create_tables.sql -u root --skip-password`
+
+`mysqladmin -u root -p password` 엔터, 패스워드, 패스워드 확인
+
+mysql 하면 MariaDB로 들어가짐
+
+`show databases;`
+
+`CREATE DATABASE IF NOT EXISTS wordpress;`
+
+`show databases;`
+
+`exit`
+
+`wget https://wordpress.org/latest.tar.gz`
+
+`tar -xvf latest.tar.gz`
+
+`mv wordpress/ var/www/html/`
+
+`chown -R www-data:www-data /var/www/html/wordpress`
+
+
+`cp var/www/html/wordpress/wp-config-sample.php var/www/html/wordpress/wp-config.php`
+
+`vim var/www/html/wordpress/wp-config.php` 한 후 :set nu
+23, 26, 29, 32, 35, 38 번째 줄 확인
 내용 수정
 
-service nginx reload
+`service nginx reload`
 
-vim etc/nginx/sites-available/default
-<!--50번 째 줄에서 삭제 or  cd /var/www/html에 있는 파일 자체 삭제-->
+`vim etc/nginx/sites-available/default`
+50번 째 줄에서 삭제 or  cd /var/www/html에 있는 파일 자체 삭제
 ```
 index.nginx-debian.html # vi index.nginx-debian.html
 ```
-<!--57번 째 줄에 추가-->
+57번 째 줄에 추가
 ```
 autoindex on;
 ```
-service nginx restart
-https://localhost <!--들어가면 index page 나옴 -->
+`service nginx restart`
+https://localhost 들어가면 index page 나옴
 
 
-vim /etc/nginx/sites-available/default
-<!-- 25번째 줄에 추가, port 80과 443에 대해 분리해야 함-->
+`vim /etc/nginx/sites-available/default`
+25번째 줄에 추가, port 80과 443에 대해 분리해야 함
 ```
 return 301 https://$host$request_uri;
 ```
-service nginx restart
+`service nginx restart`
 https://localhost <!--들어가면 index page 나옴 -->
