@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 22:59:07 by echung            #+#    #+#             */
-/*   Updated: 2021/05/27 23:33:31 by echung           ###   ########.fr       */
+/*   Updated: 2021/05/27 23:36:58 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,5 @@ int	main(int argc, char **argv)
 		j++;
 	}
 	for(i = 0; i < 3; i++)
-		printf("arr[i]=%d: %c\n", i, arr[i]);
+		printf("arr[%d] = %c\n", i, arr[i]);
 }
