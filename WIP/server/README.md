@@ -1,137 +1,132 @@
-`docker run -it -p 80:80 -p 443:443 debian:buster`
+# Docker
 
-`apt-get update`
+## 도커란?
 
-`apt-get upgrade`
+어쩌고 저쩌고 가상환경 ..
 
-`apt-get -y install nginx`
+environmental disparity
 
-`service nginx start`
+## 컨테이너란?
 
-`service nginx status`
+집..
 
-`apt-get -y install curl`
+## 도커 이미지?
 
-`curl localhost`
+냉동
 
-`apt-get -y install openssl vim`
+## 도커 이미지 다운받고 실행하기
 
-`openssl req -newkey rsa:4096 -days 365 -nodes -x509 -subj "/C=KR/ST=Seoul/L=Seoul/O=42Seoul/OU=Lee/CN=localhost" -keyout localhost.dev.key -out localhost.dev.crt`
+[https://hub.docker.com/](https://hub.docker.com/)
 
-`mv localhost.dev.crt etc/ssl/certs/`
+### 1. 컴퓨터 내 도커 이미지 보기
 
-`mv localhost.dev.key etc/ssl/private/`
-
-`chmod 600 etc/ssl/certs/localhost.dev.crt etc/ssl/private/localhost.dev.key` 위치 cd / 인지 확인
-
-`vim etc/nginx/sites-available/default` 한 후 set nu
-40번째 줄에 추가하기
+```c
+docker images
 ```
-	listen 443;
 
-	ssl on;
-	ssl_certificate /etc/ssl/certs/localhost.dev.crt;
-	ssl_certificate_key /etc/ssl/private/localhost.dev.key;
+### 2. 도커 이미지 다운받아 컨테이너로 만들어 바로 실행하기(pull & create & start & attach)
+
+```c
+docker run -it {이미지명}:{태그}
 ```
-`service nginx reload` 한 후 https://localhost 들어가서 NET::ERR_CERT_INVALID 누르고 thisisunsafe 입력
 
+[옵션](https://www.notion.so/d34e208aee9741e686c360439bb3f14c)
 
+### 2-1. 도커 이미지 다운받기
 
-`apt-get -y install php-fpm`
-
-`vim /etc/nginx/sites-available/default` :set nu
-
-주석 해제(63, 66, 69번째 줄)
-
-index.php 추가(50번째 줄)
-
-`service php7.3-fpm start`
-
-`service php7.3-fpm status`
-
-`vim /var/www/html/phpinfo.php`
+```c
+docker pull {이미지명}:{태그}
 ```
-<?php phpinfo(); ?>
+
+### 2-2. 이미지 해동해서 컨테이너 생성하기
+
+```c
+docker create {옵션} {이미지명}:{태그}
 ```
-`service nginx reload`
 
-https://localhost/phpinfo.php 들어가서 확인
+### 2-3. 컨테이너 시작하기(이미지에 CMD로 지정해놓은 작업 시키기)
 
-`rm -rf /var/www/html/phpinfo.php`
-
-
-`apt-get -y install mariadb-server php-mysql`
-
-`apt-get install -y wget`
-
-`wget https://files.phpmyadmin.net/phpMyAdmin/5.0.2/phpMyAdmin-5.0.2-all-languages.tar.gz`
-
-`tar -xvf phpMyAdmin-5.0.2-all-languages.tar.gz`
-
-`mv phpMyAdmin-5.0.2-all-languages phpmyadmin`
-
-`mv phpmyadmin /var/www/html/`
-
-`cp -rp var/www/html/phpmyadmin/config.sample.inc.php var/www/html/phpmyadmin/config.inc.php`
-
-`vim var/www/html/phpmyadmin/config.inc.php`
-
-blowfish 암호(2번링크) 생성해서 18번째 줄에 붙여넣기
-
-`service nginx reload`
-
-`service mysql start`
-
-`service php7.3-fpm restart`
-
-`mysql < var/www/html/phpmyadmin/sql/create_tables.sql -u root --skip-password`
-
-`mysqladmin -u root -p password` 엔터, 패스워드, 패스워드 확인
-
-mysql 하면 MariaDB로 들어가짐
-
-`show databases;`
-
-`CREATE DATABASE IF NOT EXISTS wordpress;`
-
-`show databases;`
-
-`exit`
-
-`wget https://wordpress.org/latest.tar.gz`
-
-`tar -xvf latest.tar.gz`
-
-`mv wordpress/ var/www/html/`
-
-`chown -R www-data:www-data /var/www/html/wordpress`
-
-
-`cp var/www/html/wordpress/wp-config-sample.php var/www/html/wordpress/wp-config.php`
-
-`vim var/www/html/wordpress/wp-config.php` 한 후 :set nu
-23, 26, 29, 32, 35, 38 번째 줄 확인
-내용 수정
-
-`service nginx reload`
-
-`vim etc/nginx/sites-available/default`
-50번 째 줄에서 삭제 or  cd /var/www/html에 있는 파일 자체 삭제
+```c
+docker start {컨테이너 id 또는 이름}
 ```
-index.nginx-debian.html # vi index.nginx-debian.html
-```
-57번 째 줄에 추가
-```
-autoindex on;
-```
-`service nginx restart`
-https://localhost 들어가면 index page 나옴
 
+### 2-4. 컨테이너로 들어가기(컨테이너 내 CLI 이용하기)
 
-`vim /etc/nginx/sites-available/default`
-25번째 줄에 추가, port 80과 443에 대해 분리해야 함
+```c
+docker attach {컨테이너 id 또는 이름}
 ```
-return 301 https://$host$request_uri;
+
+## 컨테이너 보기
+
+### 작업중인 컨테이너만 보기
+
+```c
+docker ps
 ```
-`service nginx restart`
-https://localhost <!--들어가면 index page 나옴 -->
+
+### 전부 다 보기
+
+```c
+docker ps -a
+```
+
+### 컨테이너 삭제하기
+
+```c
+docker rm {name or id}
+```
+
+### 이미지 삭제하기
+
+```c
+docker rmi {name or id}
+```
+
+### 강제로 이미지&컨테이너 삭제하기
+
+- 이미지 삭제 전 컨테이너를 먼저 삭제해야하나, -f 옵션 사용
+
+```c
+docker rmi -f {name or id}
+```
+
+## 도커파일
+
+- 공식 이미지 수정해서 튜닝버전 만들기 위한 설계도
+
+![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/1c4fc715-4bb8-4fc7-8eb0-c57bfbd2b563/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/1c4fc715-4bb8-4fc7-8eb0-c57bfbd2b563/Untitled.png)
+
+### RUN & COPY
+
+- 이미지 생성 과정에서 실행되는 명령어
+
+### CMD & VOLUME
+
+- 컨테이너 실행시 실행되는 명령어
+
+### 도커파일로 이미지 만들기
+
+```c
+docker build -t {만들어질 이미지 이름} .
+
+// 마지막 . 은 Dockerfile로의 상대주소
+// file명이 Dockerfile이라면 따로 명시할 필요 없음
+```
+
+![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/9785f38e-3446-496f-9c5e-4448578039d0/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/9785f38e-3446-496f-9c5e-4448578039d0/Untitled.png)
+
+→ 이런식으로 도커파일에 적힌 내용 실행함
+
+### 컨테이너 생성과 실행
+
+```c
+docker run --name {만들어질 컨테이너 이름} -v $(pwd):/home/node/app -p 8080:8080 {실행할 이미지 이름}
+```
+
+-v $(pwd):/home/node/app : 내 컴퓨터의 현위치(pwd)에 있는 파일들을 컨테이너의 /home/node/app에 복사
+
+(얄코 예시)
+
+![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/718df894-8036-42bb-84de-36fd425706e9/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/718df894-8036-42bb-84de-36fd425706e9/Untitled.png)
+
+![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/a45c9754-fb27-497a-b5f4-c7144bca844e/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/a45c9754-fb27-497a-b5f4-c7144bca844e/Untitled.png)
