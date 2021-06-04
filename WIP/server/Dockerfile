@@ -6,14 +6,14 @@
 #    By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/26 21:22:33 by echung            #+#    #+#              #
-#    Updated: 2021/05/26 21:22:37 by echung           ###   ########.fr        #
+#    Updated: 2021/06/03 18:10:12 by echung           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 FROM  debian:buster
 
-RUN apt-get update
-RUN apt-get upgrade
+RUN apt-get -y update
+RUN apt-get -y upgrade
 
 RUN apt-get -y install nginx
 RUN apt-get -y install openssl
