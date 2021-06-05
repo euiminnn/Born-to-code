@@ -8,15 +8,16 @@ environmental disparity
 
 ## 컨테이너란?
 
-집..
+집에 여러 컨테이너 거주 가능.. 수도랑 전기 공유
 
 ## 도커 이미지?
 
-냉동
+환경 세팅해서 고대로 냉동
 
 ## 도커 이미지 다운받고 실행하기
 
 [https://hub.docker.com/](https://hub.docker.com/)
+
 
 ### 1. 컴퓨터 내 도커 이미지 보기
 
@@ -30,7 +31,18 @@ docker images
 docker run -it {이미지명}:{태그}
 ```
 
-[옵션](https://www.notion.so/d34e208aee9741e686c360439bb3f14c)
+---
+옵션 | 설명
+---
+-it | 컨테이너로 들어갔을 때 bash로 CLI 입출력을 사용할 수 있도록 해 줍니다.
+---
+--name | 컨테이너 이름붙이기(수동)
+---
+-v | 컨테이너와 내 컴퓨터의 특정 폴더 공유(v for volume)
+---
+-d | 뒤에서 알아서 돌아가라(난 터미널 그대로 사용할거임)
+---
+
 
 ### 2-1. 도커 이미지 다운받기
 
@@ -94,7 +106,8 @@ docker rmi -f {name or id}
 
 - 공식 이미지 수정해서 튜닝버전 만들기 위한 설계도
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/1c4fc715-4bb8-4fc7-8eb0-c57bfbd2b563/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/1c4fc715-4bb8-4fc7-8eb0-c57bfbd2b563/Untitled.png)
+<p align = "center"><img src = "https://github.com/euiminnn/image-upload/blob/master/docker%20file.png" width = "600"></p>
+
 
 ### RUN & COPY
 
@@ -113,7 +126,8 @@ docker build -t {만들어질 이미지 이름} .
 // file명이 Dockerfile이라면 따로 명시할 필요 없음
 ```
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/9785f38e-3446-496f-9c5e-4448578039d0/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/9785f38e-3446-496f-9c5e-4448578039d0/Untitled.png)
+
+<p align = "center"><img src = "https://github.com/euiminnn/image-upload/blob/master/docker%20build.png" width = "600"></p>
 
 → 이런식으로 도커파일에 적힌 내용 실행함
 
@@ -127,6 +141,5 @@ docker run --name {만들어질 컨테이너 이름} -v $(pwd):/home/node/app -p
 
 (얄코 예시)
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/718df894-8036-42bb-84de-36fd425706e9/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/718df894-8036-42bb-84de-36fd425706e9/Untitled.png)
+<p align = "center"><img src = "https://github.com/euiminnn/image-upload/blob/master/container%20execute.png" width = "600"></p>
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/a45c9754-fb27-497a-b5f4-c7144bca844e/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/a45c9754-fb27-497a-b5f4-c7144bca844e/Untitled.png)
