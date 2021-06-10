@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 22:59:07 by echung            #+#    #+#             */
-/*   Updated: 2021/06/09 19:15:07 by echung           ###   ########.fr       */
+/*   Updated: 2021/06/10 21:00:47 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,13 @@ struct	s_list
 };
 
 typedef struct s_list	t_list;
+
+t_list*	swap(t_list *a, t_list *b, char *cmd)
+{
+	int temp;
+
+	ft_printf("%s", cmd);
+}
 
 t_list*	get_new_node(char data)
 {
@@ -91,20 +98,26 @@ void	print_list(t_list *node)
 
 int	main(int argc, char **argv)
 {
-	t_list	*start;
+	t_list	*a;
+	t_list	*b;
 	int	i;
 
-	start = NULL;
+	a = NULL;
+	b = NULL;
 
 	printf("argc = %d", argc);
 
 	i = 1;
 	while (i < argc)
 	{
-		push(&start, *argv[i]);
+		push(&a, *argv[i]);
 		i++;
 	}
-	head_and_tail(start);
+	head_and_tail(a);
+	head_and_tail(b);
 	//printf("\nstart = ");
 	//print_list(start);
+
+
+	swap(a, b, "sa");
 }
