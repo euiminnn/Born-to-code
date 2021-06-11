@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 22:59:07 by echung            #+#    #+#             */
-/*   Updated: 2021/06/10 21:00:47 by echung           ###   ########.fr       */
+/*   Updated: 2021/06/11 14:28:53 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,26 @@ struct	s_list
 
 typedef struct s_list	t_list;
 
-t_list*	swap(t_list *a, t_list *b, char *cmd)
+t_list*	swap(t_list **stack, char *cmd)
 {
-	int temp;
+	t_list *x;
+	t_list *y;
+
+	x = *stack;
+	y = *stack-> next;
+
+	t_list *temp;
+	//next swap
+	temp = x->next;
+	x->next = y->next;
+	y->next = temp;
+	//prev swap
+	temp = x->prev;
+	x->prev = y->prev;
+	y->prev = temp;
+
+	*stack = y;
+
 
 	ft_printf("%s", cmd);
 }
@@ -119,5 +136,5 @@ int	main(int argc, char **argv)
 	//print_list(start);
 
 
-	swap(a, b, "sa");
+	swap(a, "sa");
 }
