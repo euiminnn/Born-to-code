@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   push__swap.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 22:59:07 by echung            #+#    #+#             */
-/*   Updated: 2021/06/11 21:27:32 by echung           ###   ########.fr       */
+/*   Updated: 2021/06/11 16:42:27 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,26 @@ struct	s_list
 
 typedef struct s_list	t_list;
 
-void	push_to_b(t_list **a, t_list **b, char *cmd) //pb: push a from b
+void	swap(t_list **head, char *cmd)
 {
-	(*a) = (*a)->next;
+	t_list *x;
+	t_list *y;
+	t_list *temp_n;
+	t_list *temp_p;
+
+	x = *head;
+	y = (*head) -> next;
+
+	temp_n = y->next;
+	temp_p = y->prev;
+
+	x->prev = temp_p;
+	y->prev = x->prev;
+	x->next = temp_n;
+	y->next = x->next;
+
+
+	*head = y;
 
 	printf("%s\n", cmd);
 }
@@ -124,37 +141,21 @@ int	main(int argc, char **argv)
 		i++;
 	}
 	head_and_tail(a);
-	head_and_tail(b);
-	printf("before push\n");
+	//head_and_tail(b);
+	printf("before swap stack A:\n");
 	//print_list(a);
-	printf("Stack A\n");
-	printf("%c\n", a->data);
-	printf("%c\n", a->next->data);
+	//printf("%c\n", a->data);
+	//printf("%c\n", a->next->data);
 	//printf("%c\n", a->next->next->data);
 	//printf("%c\n", a->next->next->next->data);
-
-	printf("Stack B\n");
-	printf("%c\n", b->data);
-	printf("%c\n", b->next->data);
-	printf("%c\n", b->next->next->data);
-	printf("%c\n", b->next->next->next->data);
-
-	printf("after push\n");
-	printf("Stack A\n");
-	push_to_b(&a, &b, "pb");
-	printf("%c\n", a->data);
-	printf("%c\n", a->next->data);
-	//printf("%c\n", a->next->next->data);
 	//printf("%c\n", a->next->next->next->data);
 
-	printf("Stack B\n");
-	printf("%c\n", b->data);
-	printf("%c\n", b->next->data);
-	printf("%c\n", b->next->next->data);
-	printf("%c\n", b->next->next->next->data);
-
-	//printf("prev a =%c", a->prev->data);
-	//printf("now a =%c", a->data);
-	//printf("next a =%c", a->next->data);
-	//print_list(a);
+	printf("after swap stack A:\n");
+	swap(&a, "sa");
+	print_list(a);
+	//printf("%c\n", a->data);
+	//printf("%c\n", a->next->data);
+	//printf("%c\n", a->next->next->data);
+	//printf("%c\n", a->next->next->next->data);
+	//printf("%c\n", a->next->next->next->data);
 }
