@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 22:59:07 by echung            #+#    #+#             */
-/*   Updated: 2021/06/11 21:27:32 by echung           ###   ########.fr       */
+/*   Updated: 2021/06/12 06:01:31 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,146 +15,139 @@
 #include <stdlib.h>
 
 
-struct	s_list
+struct	s_node
 {
-	int				data;
-	struct s_list	*prev;
-	struct s_list	*next;
+	char			data;
+	struct s_node	*prev;
+	struct s_node	*next;
 };
 
-typedef struct s_list	t_list;
+typedef struct s_node	t_node;
 
-void	push_to_b(t_list **a, t_list **b, char *cmd) //pb: push a from b
+typedef struct s_stack
 {
-	(*a) = (*a)->next;
+    int             size;
+    t_node          *top;
+}t_stack;
 
-	printf("%s\n", cmd);
+t_stack*    stack_init(void)
+{
+    t_stack *stack;
+    stack = (t_stack*)malloc(sizeof(t_stack));
+    stack->top = NULL;
+    stack->size = 0;
+    return stack;
 }
 
-t_list*	get_new_node(char data)
+t_node*	node_init(char data)
 {
-	t_list	*new_node;
+	t_node	*new_node;
 
-	new_node = (t_list *)malloc(sizeof(t_list));
+	new_node = (t_node *)malloc(sizeof(t_node));
 	new_node -> data = data;
 	new_node -> prev = NULL;
 	new_node -> next = NULL;
 	return new_node;
 }
 
-void	head_and_tail(t_list *node)
+
+char    pop(t_stack *stack)
 {
-	t_list	*head;
-	t_list	*tail;
+    t_node *curr_top;
+    t_node *new_top;
 
-	head = node;
-	while (node -> next != NULL)
-	{
-		node = node -> next;
-	}
-	tail = node;
+    curr_top = stack->top;
 
-	printf("\n");
-	printf("head = %c\n", head->data);
-	printf("tail = %c\n", tail->data);
-	head -> prev = tail;
-	tail -> next = head;
+    if (curr_top == NULL)
+        return ('e');
+    else
+    {
+        new_top = curr_top->prev;
+        new_top->next = NULL;
+        stack->top = new_top;
+    }
+    stack->size--;
+	return(curr_top->data);
+    //free(curr_top->data);????????????????????
+    //free(curr_top);???????????????????
 }
 
-void	push(t_list **head, char new_data)
+void	put(t_stack *stack, char new_data)
+
 {
-	t_list	*new_node;
+	t_node	*new_node;
+	t_node	*old_top;
 
-	new_node = get_new_node(new_data);
+	new_node = node_init(new_data);
 
-	if (*head == NULL)
+	if (stack->top == NULL)
 	{
-		*head = new_node;
+		stack->top = new_node;
 		return ;
 	}
-	(*head) -> prev = new_node;
-	new_node -> next = (*head);
-	(*head) = new_node;
+	else
+	{
+		old_top = stack->top;
+		old_top->next= new_node;
+		new_node->prev = old_top;
+		stack->top = new_node;
+	}
+	stack->size++;
 }
 
-
-void	print_list(t_list *node)
+void    push(t_stack *from, t_stack *to)
 {
-	while (node != NULL)
-	{
-		printf("%c\n", node -> data);
-		sleep(1);
-		node = node -> next;
-	}
+	t_stack *temp;
+	char popdata;
 
-	/*
-	while (node ->next != NULL)
-	{
-		printf("%c\n", node -> data);
-		node = node -> next;
-	}
-	printf("%c\n", node -> data);
-	*/
-
-	/*
-	printf("\nreverse = ");
-	while (node != NULL)
-	{
-		printf("%c ", node -> data);
-		node = node -> prev;
-	}
-	*/
+	popdata = pop(from);
+	put(to, popdata);
 }
-
 int	main(int argc, char **argv)
 {
-	t_list	*a;
-	t_list	*b;
+	t_stack* a;
+	t_stack* b;
+
+    a = stack_init();
+    b = stack_init();
 	int	i;
 
-	a = NULL;
-	b = NULL;
-
-	printf("argc = %d\n", argc);
+	printf("argc = %d\n\n", argc);
 
 	i = 1;
 	while (i < argc)
 	{
-		push(&a, *argv[i]);
+		put(a, *argv[i]);
 		i++;
 	}
-	head_and_tail(a);
-	head_and_tail(b);
-	printf("before push\n");
-	//print_list(a);
-	printf("Stack A\n");
-	printf("%c\n", a->data);
-	printf("%c\n", a->next->data);
-	//printf("%c\n", a->next->next->data);
-	//printf("%c\n", a->next->next->next->data);
 
-	printf("Stack B\n");
-	printf("%c\n", b->data);
-	printf("%c\n", b->next->data);
-	printf("%c\n", b->next->next->data);
-	printf("%c\n", b->next->next->next->data);
+	printf("Stack A:\n");
+	printf("%c\n", a->top->data);
+	printf("%c\n", a->top->prev->data);
+	printf("%c\n", a->top->prev->prev->data);
+	printf("%c\n", a->top->prev->prev->prev->data);
+	printf("%c\n", a->top->prev->prev->prev->prev->data);
+	printf("%c\n", a->top->prev->prev->prev->prev->prev->data);
+	printf("%c\n", a->top->prev->prev->prev->prev->prev->prev->data);
+	printf("Stack B:\n");
+	printf("%s\n", b->top);
+	/*
+	printf("%c\n", b->top->prev->data);
+	printf("%c\n", b->top->prev->prev->data);
+	*/
 
-	printf("after push\n");
-	printf("Stack A\n");
-	push_to_b(&a, &b, "pb");
-	printf("%c\n", a->data);
-	printf("%c\n", a->next->data);
-	//printf("%c\n", a->next->next->data);
-	//printf("%c\n", a->next->next->next->data);
-
-	printf("Stack B\n");
-	printf("%c\n", b->data);
-	printf("%c\n", b->next->data);
-	printf("%c\n", b->next->next->data);
-	printf("%c\n", b->next->next->next->data);
-
-	//printf("prev a =%c", a->prev->data);
-	//printf("now a =%c", a->data);
-	//printf("next a =%c", a->next->data);
-	//print_list(a);
+	printf("\n<push A to B>\n");
+	push(a, b);
+	printf("Stack A:\n");
+	printf("%c\n", a->top->data);
+	printf("%c\n", a->top->prev->data);
+	printf("%c\n", a->top->prev->prev->data);
+	printf("%c\n", a->top->prev->prev->prev->data);
+	printf("%c\n", a->top->prev->prev->prev->prev->data);
+	printf("%c\n", a->top->prev->prev->prev->prev->prev->data);
+	printf("%c\n", a->top->prev->prev->prev->prev->prev->prev);
+	printf("Stack B:\n");
+	printf("%c\n", b->top->data);
+	//printf("%c\n", b->top->prev->data);
+	//printf("%c\n", b->top->prev->prev->data);
 }

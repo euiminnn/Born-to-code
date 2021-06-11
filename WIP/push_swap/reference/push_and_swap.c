@@ -25,33 +25,34 @@ t_stack*    stack_init(void)
     return stack;
 }
 
-t_node*    node_init(char *str)
+t_node*    node_init(char new_data)
 {
-    t_node *newnode = (t_node*)malloc(sizeof(t_node));
-    newnode->data = (char*)malloc(strlen(str)+1);
-    strcpy(newnode->data, str);
-    newnode->next = NULL;
-    newnode->prev = NULL;
-    return newnode;
+    t_node *new_node;
+	new_node = (t_node*)malloc(sizeof(t_node));
+    new_node->data = (char*)malloc(strlen(&new_data)+1);
+    strcpy(new_node->data, &new_data);
+    new_node->next = NULL;
+    new_node->prev = NULL;
+    return new_node;
 }
 
-void    push(t_stack *list, char *str)
+void    push(t_stack *list, char new_data)
 {
-    t_node* newnode;
-    t_node* oldtop;
+    t_node* new_node;
+    t_node* old_top;
 
-    newnode = node_init(str);
+    new_node = node_init(new_data);
 
     if (list->top == NULL)
     {
-        list->top = newnode;
+        list->top = new_node;
     }
     else
     {
-        oldtop = list->top;
-        oldtop->next = newnode;
-        newnode->prev = oldtop;
-        list->top = newnode;
+        old_top = list->top;
+        old_top->next = new_node;
+        new_node->prev = old_top;
+        list->top = new_node;
     }
     list->size++;
 }
@@ -82,30 +83,30 @@ int main(void) {
     stack = stack_init();
     
     printf("<Push 1>\n");
-    push(stack, "1");
+    push(stack, 1);
     printf("top : %s\n\n", stack->top->data);
 ;
     
     printf("<Push 2, 3, 4>\n");
-    push(stack, "2");
-    push(stack, "3");
-    push(stack, "4");
+    push(stack, '2');
+    push(stack, '3');
+    push(stack, '4');
     printf("top : %s\n\n", stack->top->data);   
     printf("Stack A\n");
-	printf("%s\n", stack->top->data);
-	printf("%s\n", stack->top->prev->data);
-	printf("%s\n", stack->top->prev->prev->data);
-	printf("%s\n", stack->top->prev->prev->prev->data);
+	printf("%c\n", stack->top->data);
+	printf("%c\n", stack->top->prev->data);
+	printf("%c\n", stack->top->prev->prev->data);
+	printf("%c\n", stack->top->prev->prev->prev->data);
     printf("\n");
 
     printf("<Pop>\n");
     pop(stack);
     printf("top : %s\n\n", stack->top->data);
     printf("Stack A\n");
-	printf("%s\n", stack->top->data);
-	printf("%s\n", stack->top->prev->data);
-	printf("%s\n", stack->top->prev->prev->data);
-	printf("%s\n", stack->top->prev->prev->prev);
+	printf("%c\n", stack->top->data);
+	printf("%c\n", stack->top->prev->data);
+	printf("%c\n", stack->top->prev->prev->data);
+	printf("%c\n", stack->top->prev->prev->prev);
 
     printf("Pop two nodes\n");
     pop(stack);
