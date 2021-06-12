@@ -12,9 +12,10 @@
 
 NAME	= push_swap
 CFLAGS	= -Wall -Wextra -Werror -I. -c
-SRCS	= main.c \
-		  push_swap.c \
-		  swap.c
+SRCS	= push_swap.c \
+			init.c \
+			put_pop_push.c \
+			swap.c
 
 OBJS	= $(SRCS:%.c=%.o)
 
