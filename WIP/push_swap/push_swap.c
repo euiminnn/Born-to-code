@@ -39,8 +39,20 @@ int	main(int argc, char **argv)
 	printf("%c\n", a->top->prev->prev->prev->prev->prev->data);
 	printf("%c\n", a->top->prev->prev->prev->prev->prev->prev->data);
 	
-	printf("<rotate A>\n");
-	rotate(a);
+	printf("<reverse rotate A>\n");
+	rrotate(a);
+
+	printf("Stack A:\n");
+	printf("%c\n", a->top->data);
+	printf("%c\n", a->top->prev->data);
+	printf("%c\n", a->top->prev->prev->data);
+	printf("%c\n", a->top->prev->prev->prev->data);
+	printf("%c\n", a->top->prev->prev->prev->prev->data);
+	printf("%c\n", a->top->prev->prev->prev->prev->prev->data);
+	printf("%c\n", a->top->prev->prev->prev->prev->prev->prev->data);
+
+	printf("<reverse rotate A>\n");
+	rrotate(a);
 
 	printf("Stack A:\n");
 	printf("%c\n", a->top->data);

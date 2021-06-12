@@ -24,18 +24,18 @@ char    pop_bottom(t_stack *stack)
     t_node *curr_bottom;
     t_node *new_bottom;
 
-    curr_top = stack->top;
+    curr_bottom = stack->bottom;
 
-    if (curr_top == NULL)
+    if (curr_bottom == NULL)
         return ('e');
     else
     {
-        new_top = curr_top->prev;
-        new_top->next = NULL;
-        stack->top = new_top;
+        new_bottom = curr_bottom->next;
+        new_bottom->prev = NULL;
+        stack->bottom = new_bottom;
     }
     stack->size--;
-	return(curr_top->data);
+	return(curr_bottom->data);
     //free(curr_top->data);????????????????????
     //free(curr_top);???????????????????
 }
