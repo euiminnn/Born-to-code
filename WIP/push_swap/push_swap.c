@@ -29,11 +29,16 @@ int	main(int argc, char **argv)
 		put(a, *argv[i]);
 		i++;
 	}
-
+	if (argc == 4)
+	{
+		sort_three(a, b);
+	}
+	
 	printf("Stack A:\n");
 	printf("%c\n", a->top->data);
 	printf("%c\n", a->top->prev->data);
 	printf("%c\n", a->top->prev->prev->data);
+/*
 	printf("%c\n", a->top->prev->prev->prev->data);
 	printf("%c\n", a->top->prev->prev->prev->prev->data);
 	printf("%c\n", a->top->prev->prev->prev->prev->prev->data);
@@ -62,7 +67,7 @@ int	main(int argc, char **argv)
 	printf("%c\n", a->top->prev->prev->prev->prev->data);
 	printf("%c\n", a->top->prev->prev->prev->prev->prev->data);
 	printf("%c\n", a->top->prev->prev->prev->prev->prev->prev->data);
-
+*/
 	//printf("bottom of Stack A:\n");
 	//printf("%c\n", a->bottom->data);
 	/*

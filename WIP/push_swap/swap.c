@@ -6,6 +6,8 @@ void    swap(t_stack *main, t_stack *sub)
 
     push(main, sub);
     popped = pop(main);
+    printf("asdf before:\n");
     push(sub, main);
+    printf("asdf\n");
     put(main, popped);
 }

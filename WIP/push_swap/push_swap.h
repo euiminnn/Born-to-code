@@ -32,5 +32,6 @@ void        push(t_stack *from, t_stack *to);
 void        swap(t_stack *main, t_stack *sub);
 void	    rotate(t_stack *stack);
 void	    rrotate(t_stack *stack);
+void        sort_three(t_stack *a, t_stack *b);
 
 #endif

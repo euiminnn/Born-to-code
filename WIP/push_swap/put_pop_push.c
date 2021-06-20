@@ -5,15 +5,18 @@ char    pop(t_stack *stack)
     t_node *new_top;
 
     curr_top = stack->top;
+	printf("node : %c %p %p\n", stack->top->data, stack->top->prev, stack->top->next);
 
     if (curr_top == NULL)
         return ('e');
     else
     {
         new_top = curr_top->prev;
+		printf("new_top : %p\n", new_top);
         new_top->next = NULL;
         stack->top = new_top;
     }
+	printf("yeah\n");
     stack->size--;
 	return(curr_top->data);
     //free(curr_top->data);????????????????????
@@ -83,7 +86,9 @@ void    push(t_stack *from, t_stack *to)
 {
 	char	popdata;
 
+	printf("here before\n");
 	popdata = pop(from);
+	printf("here\n");
 	put(to, popdata);
 }
 
