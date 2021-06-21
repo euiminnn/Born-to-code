@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 21:39:07 by echung            #+#    #+#             */
-/*   Updated: 2021/06/21 22:33:43 by echung           ###   ########.fr       */
+/*   Updated: 2021/06/22 04:22:56 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,17 @@ void	sort_five(t_stack *a, t_stack *b)
 	char b_one;
 	char b_two;
 
+	push(a, b);
+	push(a, b);
+	
+	sort_three(a, b);
+	
 	a_big = a->top->prev->prev->data;
 	a_small = a->top->data;
-
-	push(a, b);
-	push(a, b);
 	
 	b_one = b->top->data;
 	b_two = b->top->prev->data;
 	
-	sort_three(a, b);
-
 	if (b_one > b_two)
 	{
 		if (a_big < b_one) //2->3->4, 5->1
@@ -53,12 +53,10 @@ void	sort_five(t_stack *a, t_stack *b)
 				rrotate(a);
 				push(b, a);
 				rrotate(a);
-				printf("here\n");
 			}
+			rotate(a);
+			push(b, a);
+			rrotate(a);
 		}
-	}
-	else
-	{
-
 	}
 }

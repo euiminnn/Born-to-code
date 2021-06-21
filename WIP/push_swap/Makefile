@@ -6,7 +6,7 @@
 #    By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/15 22:13:22 by echung            #+#    #+#              #
-#    Updated: 2021/06/16 18:00:17 by echung           ###   ########.fr        #
+#    Updated: 2021/06/22 04:22:11 by echung           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,9 @@ CFLAGS	= -Wall -Wextra -Werror -I.
 SRCS	= push_swap.c \
 			init.c \
 			put_pop_push.c \
-			swap.c
+			swap.c \
+			sort_three.c \
+			sort_five.c
 
 OBJS	= $(SRCS:%.c=%.o)
 
