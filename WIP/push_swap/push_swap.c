@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 22:59:07 by echung            #+#    #+#             */
-/*   Updated: 2021/06/12 06:01:31 by echung           ###   ########.fr       */
+/*   Updated: 2021/06/21 21:42:13 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,33 @@ int	main(int argc, char **argv)
 
 	printf("argc = %d\n\n", argc);
 
-	i = 1;
-	while (i < argc)
+	i = argc - 1;
+	while (i > 0)
 	{
 		put(a, *argv[i]);
-		i++;
+		i--;
 	}
+
+	print_stack("a", a);
+	print_stack("b", b);
+
 	if (argc == 4)
 	{
 		sort_three(a, b);
 	}
+
+	else if (argc == 6)
+	{
+		sort_five(a, b);
+	}
+
+	print_stack("a", a);
+	print_stack("b", b);
 	
-	printf("Stack A:\n");
-	printf("%c\n", a->top->data);
-	printf("%c\n", a->top->prev->data);
-	printf("%c\n", a->top->prev->prev->data);
+//	printf("Stack A:\n");
+//	printf("%c\n", a->top->data);
+//	printf("%c\n", a->top->prev->data);
+//	printf("%c\n", a->top->prev->prev->data);
 /*
 	printf("%c\n", a->top->prev->prev->prev->data);
 	printf("%c\n", a->top->prev->prev->prev->prev->data);

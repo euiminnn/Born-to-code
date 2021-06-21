@@ -1,26 +1,36 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   put_pop_push.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/06/21 21:34:11 by echung            #+#    #+#             */
+/*   Updated: 2021/06/21 21:34:13 by echung           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
+
 char    pop(t_stack *stack)
 {
     t_node *curr_top;
     t_node *new_top;
 
     curr_top = stack->top;
-	printf("node : %c %p %p\n", stack->top->data, stack->top->prev, stack->top->next);
-
     if (curr_top == NULL)
         return ('e');
     else
     {
         new_top = curr_top->prev;
-		printf("new_top : %p\n", new_top);
-        new_top->next = NULL;
+		/* HERE, 데이터가 1개인 경우 */
+        if (new_top)
+			new_top->next = NULL;
         stack->top = new_top;
     }
-	printf("yeah\n");
     stack->size--;
+    free(curr_top);
 	return(curr_top->data);
-    //free(curr_top->data);????????????????????
-    //free(curr_top);???????????????????
 }
 char    pop_bottom(t_stack *stack)
 {
@@ -34,13 +44,13 @@ char    pop_bottom(t_stack *stack)
     else
     {
         new_bottom = curr_bottom->next;
-        new_bottom->prev = NULL;
+        if (new_bottom)
+			new_bottom->prev = NULL;
         stack->bottom = new_bottom;
     }
     stack->size--;
+    free(curr_bottom);
 	return(curr_bottom->data);
-    //free(curr_top->data);????????????????????
-    //free(curr_top);???????????????????
 }
 
 void	put(t_stack *stack, char new_data)
@@ -86,9 +96,7 @@ void    push(t_stack *from, t_stack *to)
 {
 	char	popdata;
 
-	printf("here before\n");
 	popdata = pop(from);
-	printf("here\n");
 	put(to, popdata);
 }
 
@@ -106,4 +114,22 @@ void	rrotate(t_stack *stack)
 	
 	popped = pop_bottom(stack);
 	put(stack, popped);
+}
+
+void	print_stack(char *prefix, t_stack *stack)
+{
+	t_node *node;
+
+	node = stack->top;
+	printf("%s : ", prefix);
+	if (!node) {
+		printf("\n");
+		return ;
+	}
+	while (node->prev)
+	{
+		printf("%c -> ", node->data);
+		node = node->prev;
+	}
+	printf("%c\n", node->data);
 }
