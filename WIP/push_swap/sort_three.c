@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 21:34:26 by echung            #+#    #+#             */
-/*   Updated: 2021/06/21 21:34:28 by echung           ###   ########.fr       */
+/*   Updated: 2021/06/22 18:51:38 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,24 +20,24 @@ void    sort_three(t_stack *a, t_stack *b)
 
     if (two < one && two < three && one < three)
     {
-        swap(a, b);
+        swap(a, b, 'a');
     }
     else if (three < one && three < two && two < one)
     {
-        swap(a, b);
-        rrotate(a);
+        swap(a, b, 'a');
+        rrotate(a, 'a');
     }
     else if (two < one && two < three && three < one)
     {
-        rotate(a);
+        rotate(a, 'a');
     }
     else if (one < two && one < three && three < two)
     {
-        swap(a, b);
-        rotate(a);
+        swap(a, b, 'a');
+        rotate(a, 'a');
     }
     else if (one < two && three < two && three < one)
     {
-        rrotate(a);
+        rrotate(a, 'a');
 	}
 }

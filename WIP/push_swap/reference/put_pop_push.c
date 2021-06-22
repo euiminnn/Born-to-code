@@ -6,13 +6,13 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 21:34:11 by echung            #+#    #+#             */
-/*   Updated: 2021/06/21 21:34:13 by echung           ###   ########.fr       */
+/*   Updated: 2021/06/22 16:49:07 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-char    pop(t_stack *stack)
+int    pop(t_stack *stack)
 {
     t_node *curr_top;
     t_node *new_top;
@@ -32,7 +32,7 @@ char    pop(t_stack *stack)
     free(curr_top);
 	return(curr_top->data);
 }
-char    pop_bottom(t_stack *stack)
+int    pop_bottom(t_stack *stack)
 {
     t_node *curr_bottom;
     t_node *new_bottom;
@@ -53,7 +53,7 @@ char    pop_bottom(t_stack *stack)
 	return(curr_bottom->data);
 }
 
-void	put(t_stack *stack, char new_data)
+void	put(t_stack *stack, int new_data)
 
 {
 	t_node	*new_node;
@@ -77,7 +77,7 @@ void	put(t_stack *stack, char new_data)
 	stack->size++;
 }
 
-void	put_bottom(t_stack *stack, char new_data)
+void	put_bottom(t_stack *stack, int new_data)
 
 {
 	t_node	*new_node;
@@ -94,26 +94,29 @@ void	put_bottom(t_stack *stack, char new_data)
 
 void    push(t_stack *from, t_stack *to)
 {
-	char	popdata;
+	int		popdata;
 
 	popdata = pop(from);
 	put(to, popdata);
+	printf("pa\n");
 }
 
 void	rotate(t_stack *stack)
 {
-	char	popped;
+	int		popped;
 
 	popped = pop(stack);
 	put_bottom(stack, popped);
+	printf("ra\n");
 }
 
 void	rrotate(t_stack *stack)
 {
-	char	popped;
+	int		popped;
 	
 	popped = pop_bottom(stack);
 	put(stack, popped);
+	printf("rra\n");
 }
 
 void	print_stack(char *prefix, t_stack *stack)

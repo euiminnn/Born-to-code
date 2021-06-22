@@ -1,24 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap.c                                             :+:      :+:    :+:   */
+/*   print_stack.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/21 21:34:44 by echung            #+#    #+#             */
-/*   Updated: 2021/06/22 18:52:30 by echung           ###   ########.fr       */
+/*   Created: 2021/06/22 18:09:15 by echung            #+#    #+#             */
+/*   Updated: 2021/06/22 22:01:06 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void    swap(t_stack *main, t_stack *sub, char ab)
+void	print_stack(char *prefix, t_stack *stack)
 {
-    char    popped;
+	t_node *node;
 
-    push(main, sub, ab);
-    popped = pop(main, ab);
-    push(sub, main, ab);
-    put(main, popped);
-	printf("s%c\n", ab);
+	node = stack->top;
+	printf("%s : ", prefix);
+	if (!node)
+	{
+		printf("\n");
+		return ;
+	}
+	while (node->prev)
+	{
+		printf("%d -> ", node->data);
+		node = node->prev;
+	}
+	printf("%d\n", node->data);
 }

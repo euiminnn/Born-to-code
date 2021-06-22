@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 21:34:37 by echung            #+#    #+#             */
-/*   Updated: 2021/06/21 21:40:18 by echung           ###   ########.fr       */
+/*   Updated: 2021/06/22 22:06:04 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 struct	s_node
 {
-	char			data;
+	int				data;
 	struct s_node	*prev;
 	struct s_node	*next;
 };
@@ -35,17 +35,19 @@ typedef struct s_stack
 }t_stack;
 
 t_stack*    stack_init(void);
-t_node*	    node_init(char data);
-char        pop(t_stack *stack);
-char	    pop_bottom(t_stack *stack);
-void	    put(t_stack *stack, char new_data);
-void	    put_bottom(t_stack *stack, char new_data);
-void        push(t_stack *from, t_stack *to);
-void        swap(t_stack *main, t_stack *sub);
-void	    rotate(t_stack *stack);
-void	    rrotate(t_stack *stack);
+t_node*	    node_init(int data);
+int	        pop(t_stack *stack, char ab);
+int		    pop_bottom(t_stack *stack);
+void	    put(t_stack *stack, int new_data);
+void	    put_bottom(t_stack *stack, int new_data);
+void        push(t_stack *from, t_stack *to, char ab);
+void        swap(t_stack *main, t_stack *sub, char ab);
+void	    rotate(t_stack *stack, char ab);
+void	    rrotate(t_stack *stack, char ab);
 void        sort_three(t_stack *a, t_stack *b);
 void        sort_five(t_stack *a, t_stack *b);
 void		print_stack(char *prefix, t_stack *stack);
+
+void		stack_to_array(t_stack *stack);
 
 #endif

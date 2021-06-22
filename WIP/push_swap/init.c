@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/06/22 16:40:13 by echung            #+#    #+#             */
+/*   Updated: 2021/06/22 16:40:20 by echung           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 t_stack*    stack_init(void)
@@ -10,7 +22,7 @@ t_stack*    stack_init(void)
     return stack;
 }
 
-t_node*	node_init(char data)
+t_node*	node_init(int data)
 {
 	t_node	*new_node;
 

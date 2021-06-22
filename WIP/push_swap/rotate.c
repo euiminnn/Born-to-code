@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap.c                                             :+:      :+:    :+:   */
+/*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/21 21:34:44 by echung            #+#    #+#             */
-/*   Updated: 2021/06/22 18:52:30 by echung           ###   ########.fr       */
+/*   Created: 2021/06/22 18:06:22 by echung            #+#    #+#             */
+/*   Updated: 2021/06/22 18:49:03 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void    swap(t_stack *main, t_stack *sub, char ab)
+void	rotate(t_stack *stack, char ab)
 {
-    char    popped;
+	int		popped;
 
-    push(main, sub, ab);
-    popped = pop(main, ab);
-    push(sub, main, ab);
-    put(main, popped);
-	printf("s%c\n", ab);
+	popped = pop(stack, ab);
+	put_bottom(stack, popped);
+	printf("r%c\n", ab);
+}
+
+void	rrotate(t_stack *stack, char ab)
+{
+	int		popped;
+
+	popped = pop_bottom(stack);
+	put(stack, popped);
+	printf("rr%c\n", ab);
 }
