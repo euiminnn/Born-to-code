@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 16:45:11 by echung            #+#    #+#             */
-/*   Updated: 2021/06/25 02:03:27 by echung           ###   ########.fr       */
+/*   Updated: 2021/06/25 02:41:34 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,11 @@ void	b_to_a(t_stack *a, t_stack *b, int len)
 	int	count_ra;
 
 	pivot = get_pivot(b, len);
+	printf("[b_to_a] pivots are: %d, %d\n", pivot[0], pivot[1]);
 	count_rb = 0;
 	count_pa = 0;
 	count_ra = 0;
-	//printf("[b_to_a] pivots are: %d %d\n", pivot[0], pivot[1]);
+	printf("[b_to_a] pivots are: %d %d\n", pivot[0], pivot[1]);
 	if (len < 3)
 	{
 		sort_three(b, a, 'b');
@@ -93,12 +94,22 @@ void	a_to_b(t_stack *a, t_stack *b, int len)
 	count_ra = 0;
 	count_pb = 0;
 	count_rb = 0;
-
+/* ERROR HERE
 	if (len < 3)
 	{
-		sort_three(a, b, 'a');
+		if (len == 3)
+		{
+			printf("error here?\n");
+			sort_three(a, b, 'a');
+			printf("error here!!!!\n");
+		}
+		else if (len == 2 && a -> top -> data > a -> top -> prev -> data)
+		{
+			swap(a, b, 'a');
+		}
 		return ;
 	}
+*/
 	while (len)
 	{
 		if (a -> top -> data >= pivot[1])
