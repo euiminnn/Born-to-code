@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 18:06:22 by echung            #+#    #+#             */
-/*   Updated: 2021/06/24 17:33:17 by echung           ###   ########.fr       */
+/*   Updated: 2021/06/24 18:18:09 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	rrotate(t_stack *stack, char ab)
 	put(stack, popped);
 	printf("rr%c\n", ab);
 }
-void	rrrotate(t_stack *main, t_stack *main)
+void	rrrotate(t_stack *main, t_stack *sub)
 {
 	int		popped;
 

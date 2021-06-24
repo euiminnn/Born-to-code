@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 18:06:52 by echung            #+#    #+#             */
-/*   Updated: 2021/06/22 22:10:36 by echung           ###   ########.fr       */
+/*   Updated: 2021/06/24 23:02:00 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,19 @@ void	put_bottom(t_stack *stack, int new_data)
 	t_node	*old_bottom;
 
 	new_node = node_init(new_data);
-
-	old_bottom = stack->bottom;
-	old_bottom->prev= new_node;
-	new_node->next = old_bottom;
-	stack->bottom = new_node;
+	if (stack->bottom == NULL)
+	{
+		stack->top = new_node;
+		stack->bottom = new_node;
+		printf("bottom\n");
+	}
+	else
+	{
+		old_bottom = stack->bottom;
+		old_bottom->prev= new_node;
+		new_node->next = old_bottom;
+		stack->bottom = new_node;
+	}
 	stack->size++;
 }
 
@@ -54,7 +62,7 @@ void    push(t_stack *from, t_stack *to, char ab)
 {
 	int		popdata;
 
-	popdata = pop(from, ab);
+	popdata = pop(from);
 	put(to, popdata);
 	printf("p%c\n", ab);
 }
