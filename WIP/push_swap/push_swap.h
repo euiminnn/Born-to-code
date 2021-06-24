@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 21:34:37 by echung            #+#    #+#             */
-/*   Updated: 2021/06/24 03:54:07 by echung           ###   ########.fr       */
+/*   Updated: 2021/06/24 17:32:58 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct s_stack
 
 t_stack*    stack_init(void);
 t_node*	    node_init(int data);
-int	        pop(t_stack *stack, char ab);
+int	        pop(t_stack *stack);
 int		    pop_bottom(t_stack *stack);
 void	    put(t_stack *stack, int new_data);
 void	    put_bottom(t_stack *stack, int new_data);
@@ -49,5 +49,7 @@ void		print_stack(char *prefix, t_stack *stack);
 int*		stack_to_array(t_stack *stack);
 int*		get_pivot(t_stack *stack);
 int			ft_atoi(char *str);
+void		make_chunk(t_stack *main, t_stack *sub);
+void		quick_sort(int *data, int up, int down);
 
 #endif

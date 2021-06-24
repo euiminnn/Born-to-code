@@ -6,13 +6,13 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 18:07:20 by echung            #+#    #+#             */
-/*   Updated: 2021/06/22 18:47:58 by echung           ###   ########.fr       */
+/*   Updated: 2021/06/24 17:32:52 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int    pop(t_stack *stack, char ab)
+int    pop(t_stack *stack)
 {
     t_node *curr_top;
     t_node *new_top;
@@ -32,8 +32,6 @@ int    pop(t_stack *stack, char ab)
         stack->top = new_top;
     }
     stack->size--;
-
-	printf("p%c\n", ab);
 
     free(curr_top);
 	return(curr_top->data);
