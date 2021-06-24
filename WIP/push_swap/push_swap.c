@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 22:59:07 by echung            #+#    #+#             */
-/*   Updated: 2021/06/24 23:05:47 by echung           ###   ########.fr       */
+/*   Updated: 2021/06/24 23:18:51 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,11 @@ int	main(int argc, char **argv)
 	print_stack("first make chunk result", a);
 	print_stack("first make chunk result", b);
 
-	make_chunk(a, b, 3, 'a');
+	make_chunk(a, b, a->size, 'a');
+	print_stack("second make chunk result", a);
+	print_stack("second make chunk result", b);
+
+	make_chunk(b, a, 2, 'b');
 	print_stack("second make chunk result", a);
 	print_stack("second make chunk result", b);
 }
