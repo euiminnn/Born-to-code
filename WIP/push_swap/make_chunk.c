@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 16:45:11 by echung            #+#    #+#             */
-/*   Updated: 2021/06/24 22:52:49 by echung           ###   ########.fr       */
+/*   Updated: 2021/06/25 02:03:27 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,53 +20,117 @@ int		min(int a, int b)
 		return (b);
 }
 
-void	make_chunk(t_stack *main, t_stack *sub, int len, char ab)
+void	b_to_a(t_stack *a, t_stack *b, int len)
+{
+	int	*pivot;
+	int	count_rb;
+	int	count_pa;
+	int	count_ra;
+
+	pivot = get_pivot(b, len);
+	count_rb = 0;
+	count_pa = 0;
+	count_ra = 0;
+	//printf("[b_to_a] pivots are: %d %d\n", pivot[0], pivot[1]);
+	if (len < 3)
+	{
+		sort_three(b, a, 'b');
+		while (len)
+			push(b, a, 'a');
+		return ;
+	}
+	while (len)
+	{
+		if (b->top->data < pivot[0])
+		{
+			rotate(b, 'b');
+			count_rb++;
+		}
+		else
+		{
+			push(b, a, 'a');
+			count_pa++;
+			if (b->top->data >= pivot[1])
+			{
+				rotate(a, 'a');
+				count_ra++;
+			}
+		}
+	}
+	a_to_b(a, b, count_pa - count_ra);
+
+	int c_min = min(count_ra, count_rb);
+	
+	while (c_min)
+	{
+		rrrotate(a, b);
+		c_min--;
+	}
+	if (count_ra > count_rb)
+		rotate(a, 'a');
+	else if (count_ra < count_rb)
+		rotate(b, 'b');
+	a_to_b(a, b, count_rb);
+	b_to_a(a, b, count_ra);
+
+}
+
+void	a_to_b(t_stack *a, t_stack *b, int len)
 {
 	int *pivot;
-	int	size;
-	int	count_main;
-	int	count_sub;
-	char sub_ab;
-
+	int	count_ra;
+	int	count_pb;
+	int	count_rb;
+/*
 	if (ab == 'a')
 		sub_ab = 'b';
 	else
 		sub_ab = 'a';
-	
-	pivot = get_pivot(main, len);
-	printf("[make_chunk] pivots are: %d, %d\n", pivot[0], pivot[1]);
+*/	
+	pivot = get_pivot(a, len);
+	printf("[a_to_b] pivots are: %d, %d\n", pivot[0], pivot[1]);
 
-	size = len;
-	count_main = 0;
-	count_sub = 0;
-	while (size)
+	count_ra = 0;
+	count_pb = 0;
+	count_rb = 0;
+
+	if (len < 3)
 	{
-		if (main -> top -> data >= pivot[1])
+		sort_three(a, b, 'a');
+		return ;
+	}
+	while (len)
+	{
+		if (a -> top -> data >= pivot[1])
 		{
-			rotate(main, ab);
-			count_main++;
+			rotate(a, 'a');
+			count_ra++;
 		}
 		else
 		{
-			push(main, sub, sub_ab);
-			if (sub -> top -> data >= pivot[0])
+			push(a, b, 'b');
+			count_pb++;
+			if (b -> top -> data >= pivot[0])
 			{
-				rotate(sub, sub_ab);
-				count_sub++;
+				rotate(b, 'b');
+				count_rb++;
 			}
 		}
-		size--;
+		len--;
 	}
-	int c_min = min(count_main, count_sub);
+	int c_min = min(count_ra, count_rb);
 	
 	while (c_min)
 	{
-		rrrotate(main, sub);
+		rrrotate(a, b);
 		c_min--;
 	}
-	if (count_main > count_sub)
-		rotate(main, ab);
-	else if (count_main < count_sub)
-		rotate(sub, sub_ab);
+	if (count_ra > count_rb)
+		rotate(a, 'a');
+	else if (count_ra < count_rb)
+		rotate(b, 'b');
+	a_to_b(a, b, count_ra);
+	b_to_a(a, b, count_rb);
+	b_to_a(a, b, count_pb - count_rb);
 	free(pivot);
 }
