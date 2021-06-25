@@ -6,16 +6,16 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 03:38:44 by echung            #+#    #+#             */
-/*   Updated: 2021/06/24 03:39:00 by echung           ###   ########.fr       */
+/*   Updated: 2021/06/25 20:48:25 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_atoi(char *str)
+long long	ft_atoi(char *str)
 {
 	int	sign;
-	int	result;
+	long long	result;
 
 	sign = 1;
 	while (*str == ' ' || (9 <= *str && *str <= 13))
@@ -34,5 +34,6 @@ int	ft_atoi(char *str)
 		result = result * 10 + (*str - '0');
 		str++;
 	}
-	return (sign * result);
+	result = sign * result;
+	return (result);
 }

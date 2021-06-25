@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 16:45:11 by echung            #+#    #+#             */
-/*   Updated: 2021/06/25 14:28:21 by echung           ###   ########.fr       */
+/*   Updated: 2021/06/25 19:31:51 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,12 @@ void	b_to_a(t_stack *a, t_stack *b, int len)
 
 	if (len < 3)
 	{
-		if (len == 2 && b -> top -> data < b -> top -> prev -> data)
+		if (len == 2)
 		{
-			swap(b, a, 'b');
+			if (b -> top -> data < b -> top -> prev -> data)
+			{
+				swap(b, a, 'b');
+			}
 			push(b, a, 'a');
 		}
 		push(b, a, 'a');
@@ -42,7 +45,7 @@ void	b_to_a(t_stack *a, t_stack *b, int len)
 	}
 
 	pivot = get_pivot(b, len);
-	printf("[b_to_a] pivots are: %d, %d\n", pivot[0], pivot[1]);
+	//printf("[b_to_a] pivots are: %d, %d\n", pivot[0], pivot[1]);
 	while (len)
 	{
 		if (b->top->data < pivot[0])
@@ -92,18 +95,14 @@ void	a_to_b(t_stack *a, t_stack *b, int len)
 
 	if (len < 3)
 	{
-		if (len == 3)
-		{
-			sort_three(a, b, 'a');
-		}
-		else if (len == 2 && a -> top -> data > a -> top -> prev -> data)
+		if (len == 2 && a -> top -> data > a -> top -> prev -> data)
 		{
 			swap(a, b, 'a');
 		}
 		return ;
 	}
 	pivot = get_pivot(a, len);
-	printf("[a_to_b] pivots are: %d, %d\n", pivot[0], pivot[1]);
+	//printf("[a_to_b] pivots are: %d, %d\n", pivot[0], pivot[1]);
 
 	while (len)
 	{

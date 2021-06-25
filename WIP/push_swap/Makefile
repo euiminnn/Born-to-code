@@ -6,7 +6,7 @@
 #    By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/15 22:13:22 by echung            #+#    #+#              #
-#    Updated: 2021/06/24 16:49:31 by echung           ###   ########.fr        #
+#    Updated: 2021/06/25 21:38:25 by echung           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,10 @@ SRCS	= push_swap.c \
 			swap.c \
 			print_stack.c \
 			ft_atoi.c \
-			get_pivot.c
+			get_pivot.c \
+			make_chunk.c \
+			quick_sort.c \
+			sort_three.c
 
 OBJS	= $(SRCS:%.c=%.o)
 

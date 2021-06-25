@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 18:06:52 by echung            #+#    #+#             */
-/*   Updated: 2021/06/24 23:02:00 by echung           ###   ########.fr       */
+/*   Updated: 2021/06/25 19:34:15 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	put_bottom(t_stack *stack, int new_data)
 	{
 		stack->top = new_node;
 		stack->bottom = new_node;
-		printf("bottom\n");
+		//printf("bottom\n");
 	}
 	else
 	{
