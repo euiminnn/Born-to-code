@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 18:09:15 by echung            #+#    #+#             */
-/*   Updated: 2021/06/22 22:01:06 by echung           ###   ########.fr       */
+/*   Updated: 2021/06/27 05:01:25 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	print_stack(char *prefix, t_stack *stack)
 {
-	t_node *node;
+	t_node	*node;
 
 	node = stack->top;
 	printf("%s : ", prefix);

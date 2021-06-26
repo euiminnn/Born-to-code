@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 03:38:44 by echung            #+#    #+#             */
-/*   Updated: 2021/06/25 20:48:25 by echung           ###   ########.fr       */
+/*   Updated: 2021/06/27 04:59:56 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 long long	ft_atoi(char *str)
 {
-	int	sign;
+	int			sign;
 	long long	result;
 
 	sign = 1;

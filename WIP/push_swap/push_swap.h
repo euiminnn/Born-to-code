@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 21:34:37 by echung            #+#    #+#             */
-/*   Updated: 2021/06/25 20:50:25 by echung           ###   ########.fr       */
+/*   Updated: 2021/06/27 04:09:22 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,7 @@ void	    rrotate(t_stack *stack, char ab);
 void	    rrrotate(t_stack *main, t_stack *sub);
 void		print_stack(char *prefix, t_stack *stack);
 
-int*		stack_to_array(t_stack *stack, int len);
-int*		get_pivot(t_stack *stack, int len);
+void		get_pivot(t_stack *stack, int len, int *pivot);
 long long	ft_atoi(char *str);
 void		a_to_b(t_stack *a, t_stack *b, int len);
 void		b_to_a(t_stack *a, t_stack *b, int len);
