@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 22:59:07 by echung            #+#    #+#             */
-/*   Updated: 2021/06/25 21:37:35 by echung           ###   ########.fr       */
+/*   Updated: 2021/06/26 21:42:13 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	main(int argc, char **argv)
 
     a = stack_init();
     b = stack_init();
-
+	
 	i = argc - 1;
 	while (i > 0)
 	{
@@ -69,6 +69,5 @@ int	main(int argc, char **argv)
 	else
 		a_to_b(a, b, a->size);
 	//printf("a_to_b result\n");
-	//print_stack("a", a);
-	//print_stack("b", b);
-}
+	print_stack("a", a);
+	print_stack("b", b); }

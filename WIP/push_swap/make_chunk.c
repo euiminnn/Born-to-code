@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 16:45:11 by echung            #+#    #+#             */
-/*   Updated: 2021/06/25 19:31:51 by echung           ###   ########.fr       */
+/*   Updated: 2021/06/26 21:22:22 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	b_to_a(t_stack *a, t_stack *b, int len)
 		{
 			push(b, a, 'a');
 			count_pa++;
-			if (b->top->data >= pivot[1])
+			if (a->top->data < pivot[1])
 			{
 				rotate(a, 'a');
 				count_ra++;
@@ -74,10 +74,18 @@ void	b_to_a(t_stack *a, t_stack *b, int len)
 		rrrotate(a, b);
 		c_min--;
 	}
-	if (count_ra > count_rb)
-		rotate(a, 'a');
-	else if (count_ra < count_rb)
-		rotate(b, 'b');
+	int i = count_ra - count_rb;
+	while (i > 0)
+	{
+		rrotate(a, 'a');
+		i--;
+	}
+	i = count_rb - count_ra;
+	while (i > 0)
+	{
+		rrotate(b, 'b');
+		i--;
+	}
 	a_to_b(a, b, count_rb);
 	b_to_a(a, b, count_ra);
 
@@ -130,10 +138,18 @@ void	a_to_b(t_stack *a, t_stack *b, int len)
 		rrrotate(a, b);
 		c_min--;
 	}
-	if (count_ra > count_rb)
-		rotate(a, 'a');
-	else if (count_ra < count_rb)
-		rotate(b, 'b');
+	int i = count_ra - count_rb;
+	while (i > 0)
+	{
+		rrotate(a, 'a');
+		i--;
+	}
+	i = count_rb - count_ra;
+	while (i > 0)
+	{
+		rrotate(b, 'b');
+		i--;
+	}
 	a_to_b(a, b, count_ra);
 	b_to_a(a, b, count_rb);
 	b_to_a(a, b, count_pb - count_rb);
