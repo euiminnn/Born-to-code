@@ -1,35 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_pivot.c                                        :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/22 21:36:48 by echung            #+#    #+#             */
-/*   Updated: 2021/06/27 05:19:14 by echung           ###   ########.fr       */
+/*   Created: 2020/12/24 16:34:44 by echung            #+#    #+#             */
+/*   Updated: 2021/06/27 06:02:19 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	get_pivot(t_stack *stack, int len, int *pivot)
+int	ft_isdigit(char *c)
 {
-	int		*arr;
-	t_node	*node;
-	int		i;
-
-	arr = (int *)malloc(sizeof(int) * len);
-	node = stack->top;
-	i = 0;
-	while (node->prev && i < len)
+	if (*c == '-')
+		c++;
+	while (*c != '\0')
 	{
-		arr[i++] = node->data;
-		node = node->prev;
+		if ('0' <= *c && *c <= '9')
+			c++;
+		else
+			return (0);
 	}
-	if (i < len)
-		arr[i] = node->data;
-	quick_sort(arr, 0, len - 1);
-	pivot[0] = arr[len / 3];
-	pivot[1] = arr[len * 2 / 3];
-	free(arr);
+	return (1);
 }

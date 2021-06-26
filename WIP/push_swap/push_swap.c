@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 22:59:07 by echung            #+#    #+#             */
-/*   Updated: 2021/06/27 05:12:33 by echung           ###   ########.fr       */
+/*   Updated: 2021/06/27 06:17:08 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,33 @@ int	check_dup(t_stack *stack, int dup)
 	node = stack->top;
 	if (!node)
 	{
-		return (0);
+		return (1);
 	}
 	while (node->prev)
 	{
 		if (dup == node->data)
-			return (1);
+			return (0);
 		node = node->prev;
 	}
 	if (dup == node->data)
+		return (0);
+	return (1);
+}
+
+int check_input_error(t_stack *stack, char *num)
+{
+	long long integer;
+
+	integer = ft_atoi(num);
+	if (!(ft_isdigit(num)))
+		return (1);
+	if (!(check_dup(stack, integer)))
+		return (1);
+	if (!(integer <= 2147483647
+		&& integer >= -2147483648))
 		return (1);
 	return (0);
 }
-
-// int check_int(t_stack *stack, int integer)
 
 int	main(int argc, char **argv)
 {
@@ -42,20 +55,11 @@ int	main(int argc, char **argv)
 
 	a = stack_init();
 	b = stack_init();
+
 	i = argc - 1;
 	while (i > 0)
 	{
-		if (!(ft_atoi(argv[i]) <= 2147483647 && ft_atoi(argv[i]) >= -2147483648))
-		{
-			write(2, "Error\n", 6);
-			return (-1);
-		}
-		i--;
-	}
-	i = argc - 1;
-	while (i > 0)
-	{
-		if (check_dup(a, ft_atoi(argv[i])))
+		if (check_input_error(a, argv[i]))
 		{
 			write(2, "Error\n", 6);
 			return (-1);
@@ -64,7 +68,9 @@ int	main(int argc, char **argv)
 		i--;
 	}
 	if (a->size == 3)
+	{
 		sort_three(a, b, 'a');
+	}
 	else
 		a_to_b(a, b, a->size);
 	// printf("a_to_b result\n");

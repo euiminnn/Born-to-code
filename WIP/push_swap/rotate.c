@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 18:06:22 by echung            #+#    #+#             */
-/*   Updated: 2021/06/27 04:55:55 by echung           ###   ########.fr       */
+/*   Updated: 2021/06/27 05:31:12 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	rotate(t_stack *stack, char ab)
 {
-	int		popped;
+	int	popped;
 
 	if (stack->size != 0)
 	{
@@ -26,7 +26,7 @@ void	rotate(t_stack *stack, char ab)
 
 void	rrotate(t_stack *stack, char ab)
 {
-	int		popped;
+	int	popped;
 
 	if (stack->size != 0)
 	{
@@ -35,11 +35,12 @@ void	rrotate(t_stack *stack, char ab)
 		printf("rr%c\n", ab);
 	}
 }
+
 void	rrrotate(t_stack *main, t_stack *sub)
 {
-	int		popped;
+	int	popped;
 
-	if (main -> size != 0 && sub -> size != 0)
+	if (main->size != 0 && sub->size != 0)
 	{
 		popped = pop_bottom(main);
 		put(main, popped);

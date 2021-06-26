@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 21:34:37 by echung            #+#    #+#             */
-/*   Updated: 2021/06/27 04:09:22 by echung           ###   ########.fr       */
+/*   Updated: 2021/06/27 05:55:30 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,6 @@ void		a_to_b(t_stack *a, t_stack *b, int len);
 void		b_to_a(t_stack *a, t_stack *b, int len);
 void		quick_sort(int *data, int up, int down);
 void		sort_three(t_stack *main, t_stack *sub, char ab);
+int			ft_isdigit(char *c);
 
 #endif

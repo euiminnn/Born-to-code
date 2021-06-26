@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 18:06:52 by echung            #+#    #+#             */
-/*   Updated: 2021/06/27 05:01:36 by echung           ###   ########.fr       */
+/*   Updated: 2021/06/27 06:16:32 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	push(t_stack *from, t_stack *to, char ab)
 	{
 		popdata = pop(from);
 		put(to, popdata);
-		printf("p%c\n", ab);
+		if (ab)
+			printf("p%c\n", ab);
 	}
 }

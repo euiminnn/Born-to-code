@@ -6,96 +6,46 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 16:49:57 by echung            #+#    #+#             */
-/*   Updated: 2021/06/27 05:02:09 by echung           ###   ########.fr       */
+/*   Updated: 2021/06/27 05:28:48 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-/*
-void	quick_sort(int *data, int up, int down)
+
+void	swap_data(int *a, int *b)
 {
-	int	i;
-	int	j;
-	int	key;
 	int	temp;
 
-	if (up < down)
-	{
-		i = up;
-		j = down + 1;
-		key = data[up];
-		while (i < j)
-		{
-			i++;
-			j--;
-			while (data[i] < key)
-			{
-				i++;
-			}
-			while (data[j] > key)
-			{
-				j--;
-			}
-			if (i < j)
-			{
-				temp = data[i];
-				data[i] = data[j];
-				data[j] = temp;
-			}
-		}
-		temp = data[up];
-		data[up] = data[j];
-		data[j] = temp;
-		quick_sort (data, up, j-1);
-		quick_sort (data, j+1, down);
-	}
-}
-*/
-
-void	swap_m(int *a, int *b)
-{
-	int	t;
-
-	t = *a;
+	temp = *a;
 	*a = *b;
-	*b = t;
+	*b = temp;
 }
 
-int		partition(int arr[], int low, int high)
+void	quick_sort(int arr[], int left, int right)
 {
-	int pivot = arr[high]; // pivot
-	int i =
-		(low -
-			1); // Index of smaller element and indicates the right position of pivot found so far
-	for (int j = low; j <= high - 1; j++)
+	int	L;
+	int	R;
+	int	pivot;
+
+	pivot = arr[(left + right) / 2];
+	L = left;
+	R = right;
+	while (L <= R)
 	{
-		// If current element is smaller than the pivot
-		if (arr[j] < pivot)
+		while (arr[L] < pivot)
+			L++;
+		while (arr[R] > pivot)
+			R--;
+		if (L <= R)
 		{
-			i++; // increment index of smaller element
-			swap_m(&arr[i], &arr[j]);
+			if (L != R)
+				swap_data(&(arr[L]), &(arr[R]));
+			L++;
+			R--;
 		}
 	}
-	swap_m(&arr[i + 1], &arr[high]);
-	return (i + 1);
-}
-
-/* The main function that implements QuickSort
-arr[] --> Array to be sorted,
-low --> Starting index,
-high --> Ending index */
-void	quick_sort(int arr[], int low, int high)
-{
-	int	pi;
-
-	if (low < high)
-	{
-		/* pi is partitioning index, arr[p] is now
-		at right place */
-		pi = partition(arr, low, high);
-		// Separately sort elements before
-		// partition and after partition
-		quick_sort(arr, low, pi - 1);
-		quick_sort(arr, pi + 1, high);
-	}
+	if (left < R)
+		quick_sort(arr, left, R);
+	if (L < right)
+		quick_sort(arr, L, right);
 }
