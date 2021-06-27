@@ -20,3 +20,7 @@ swap 함수랑 싸우다가 (ㅡㅡ) 푸시랑 팝 먼저 구현하기로 결정
 
 - push
 <p align = "center"><img src = "https://github.com/euiminnn/image-upload/blob/master/push_swap_push0612.png" width = "600"></p>
+
+### June 27
+[]split
+[]static function

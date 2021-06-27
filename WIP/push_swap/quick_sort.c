@@ -6,13 +6,13 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 16:49:57 by echung            #+#    #+#             */
-/*   Updated: 2021/06/27 05:28:48 by echung           ###   ########.fr       */
+/*   Updated: 2021/06/27 20:13:43 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	swap_data(int *a, int *b)
+static void	swap_data(int *a, int *b)
 {
 	int	temp;
 
@@ -21,31 +21,31 @@ void	swap_data(int *a, int *b)
 	*b = temp;
 }
 
-void	quick_sort(int arr[], int left, int right)
+void		quick_sort(int arr[], int up, int down)
 {
-	int	L;
-	int	R;
+	int	i;
+	int	j;
 	int	pivot;
 
-	pivot = arr[(left + right) / 2];
-	L = left;
-	R = right;
-	while (L <= R)
+	i = up;
+	j = down;
+	pivot = arr[(up + down) / 2];
+	while (i <= j)
 	{
-		while (arr[L] < pivot)
-			L++;
-		while (arr[R] > pivot)
-			R--;
-		if (L <= R)
+		while (arr[i] < pivot)
+			i++;
+		while (arr[j] > pivot)
+			j--;
+		if (i <= j)
 		{
-			if (L != R)
-				swap_data(&(arr[L]), &(arr[R]));
-			L++;
-			R--;
+			if (i != j)
+				swap_data(&(arr[i]), &(arr[j]));
+			i++;
+			j--;
 		}
 	}
-	if (left < R)
-		quick_sort(arr, left, R);
-	if (L < right)
-		quick_sort(arr, L, right);
+	if (up < j)
+		quick_sort(arr, up, j);
+	if (i < down)
+		quick_sort(arr, i, down);
 }

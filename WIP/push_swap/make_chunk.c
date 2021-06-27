@@ -6,151 +6,112 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 16:45:11 by echung            #+#    #+#             */
-/*   Updated: 2021/06/27 05:30:04 by echung           ###   ########.fr       */
+/*   Updated: 2021/06/27 18:25:22 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int		min(int a, int b)
+#define RA 0
+#define RB 1
+#define PA 2
+#define PB 3
+
+static int	last_step(t_stack *a, t_stack *b, int *count)
 {
-	if (a <= b)
-		return (a);
-	else
-		return (b);
+	int i;
+
+	i = count[RA];
+	if (count[RB] < count[RA])
+		i = count[RB];
+	while (i--)
+		rrrotate(a, b);
+	i = count[RA] - count[RB];
+	while (i-- > 0)
+		rrotate(a, 'a');
+	i = count[RB] - count[RA];
+	while (i-- > 0)
+		rrotate(b, 'b');
+	a_to_b(a, b, count[RA]);
+	b_to_a(a, b, count[RB]);
+	return (1);
 }
 
-void	b_to_a(t_stack *a, t_stack *b, int len)
+static int	b_to_a_small(t_stack *a, t_stack *b, int len)
+{
+	if (len == 0)
+		return (1);
+	if (len == 2)
+	{
+		if (b->top->data < b->top->prev->data)
+			swap(b, a, 'b');
+		push(b, a, 'a');
+	}
+	push(b, a, 'a');
+	return (1);
+}
+
+static int	a_to_b_small(t_stack *a, t_stack *b, int len)
+{
+	if (len == 2 && a->top->data > a->top->prev->data)
+		swap(a, b, 'a');
+	return (1);
+}
+
+int			b_to_a(t_stack *a, t_stack *b, int len)
 {
 	int	pivot[2];
-	int	count_rb;
-	int	count_pa;
-	int	count_ra;
-	int	c_min;
-	int	i;
+	int	count[4];
 
-	count_rb = 0;
-	count_pa = 0;
-	count_ra = 0;
+	ft_bzero(count, sizeof(int) * 4);
 	if (len < 3)
-	{
-		if (len == 0)
-			return ;
-		if (len == 2)
-		{
-			if (b->top->data < b->top->prev->data)
-			{
-				swap(b, a, 'b');
-			}
-			push(b, a, 'a');
-		}
-		push(b, a, 'a');
-		return ;
-	}
+		return (b_to_a_small(a, b, len));
 	get_pivot(b, len, pivot);
-	// printf("[b_to_a] pivots are: %d, %d\n", pivot[0], pivot[1]);
-	while (len)
+	while (len--)
 	{
 		if (b->top->data < pivot[0])
 		{
 			rotate(b, 'b');
-			count_rb++;
+			count[RB]++;
+			continue ;
 		}
-		else
+		push(b, a, 'a');
+		count[PA]++;
+		if (a->top->data < pivot[1])
 		{
-			push(b, a, 'a');
-			count_pa++;
-			if (a->top->data < pivot[1])
-			{
-				rotate(a, 'a');
-				count_ra++;
-			}
+			rotate(a, 'a');
+			count[RA]++;
 		}
-		len--;
 	}
-	a_to_b(a, b, count_pa - count_ra);
-	c_min = min(count_ra, count_rb);
-	while (c_min)
-	{
-		rrrotate(a, b);
-		c_min--;
-	}
-	i = count_ra - count_rb;
-	while (i > 0)
-	{
-		rrotate(a, 'a');
-		i--;
-	}
-	i = count_rb - count_ra;
-	while (i > 0)
-	{
-		rrotate(b, 'b');
-		i--;
-	}
-	a_to_b(a, b, count_ra);
-	b_to_a(a, b, count_rb);
+	a_to_b(a, b, count[PA] - count[RA]);
+	return (last_step(a, b, count));
 }
 
-void	a_to_b(t_stack *a, t_stack *b, int len)
+int			a_to_b(t_stack *a, t_stack *b, int len)
 {
 	int	pivot[2];
-	int	count_ra;
-	int	count_pb;
-	int	count_rb;
-	int	c_min;
-	int	i;
+	int	count[4];
 
-	count_ra = 0;
-	count_pb = 0;
-	count_rb = 0;
+	ft_bzero(count, sizeof(int) * 4);
 	if (len < 3)
-	{
-		if (len == 2 && a->top->data > a->top->prev->data)
-		{
-			swap(a, b, 'a');
-		}
-		return ;
-	}
+		return (a_to_b_small(a, b, len));
 	get_pivot(a, len, pivot);
-	// printf("[a_to_b] pivots are: %d, %d\n", pivot[0], pivot[1]);
-	while (len)
+	while (len--)
 	{
 		if (a->top->data >= pivot[1])
 		{
 			rotate(a, 'a');
-			count_ra++;
+			count[RA]++;
+			continue ;
 		}
-		else
+		push(a, b, 'b');
+		count[PB]++;
+		if (b->top->data >= pivot[0])
 		{
-			push(a, b, 'b');
-			count_pb++;
-			if (b->top->data >= pivot[0])
-			{
-				rotate(b, 'b');
-				count_rb++;
-			}
+			rotate(b, 'b');
+			count[RB]++;
 		}
-		len--;
 	}
-	c_min = min(count_ra, count_rb);
-	while (c_min)
-	{
-		rrrotate(a, b);
-		c_min--;
-	}
-	i = count_ra - count_rb;
-	while (i > 0)
-	{
-		rrotate(a, 'a');
-		i--;
-	}
-	i = count_rb - count_ra;
-	while (i > 0)
-	{
-		rrotate(b, 'b');
-		i--;
-	}
-	a_to_b(a, b, count_ra);
-	b_to_a(a, b, count_rb);
-	b_to_a(a, b, count_pb - count_rb);
+	last_step(a, b, count);
+	return (b_to_a(a, b, count[PB] - count[RB]));
 }

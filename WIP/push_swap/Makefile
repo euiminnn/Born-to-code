@@ -6,7 +6,7 @@
 #    By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/15 22:13:22 by echung            #+#    #+#              #
-#    Updated: 2021/06/27 05:55:12 by echung           ###   ########.fr        #
+#    Updated: 2021/06/27 17:32:18 by echung           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,12 +19,18 @@ SRCS	= push_swap.c \
 			rotate.c \
 			swap.c \
 			print_stack.c \
-			ft_atoi.c \
 			get_pivot.c \
 			make_chunk.c \
 			quick_sort.c \
-			sort_three.c \
-			ft_isdigit.c
+			sort_small.c \
+			utils/ft_atoi.c \
+			utils/ft_bzero.c \
+			utils/ft_isdigit.c \
+			utils/ft_memcpy.c \
+			utils/ft_memset.c \
+			utils/ft_split.c \
+			utils/ft_strlen.c \
+			utils/ft_substr.c
 
 OBJS	= $(SRCS:%.c=%.o)
 

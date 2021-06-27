@@ -6,14 +6,13 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 18:06:52 by echung            #+#    #+#             */
-/*   Updated: 2021/06/27 06:16:32 by echung           ###   ########.fr       */
+/*   Updated: 2021/06/27 15:35:42 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 void	put(t_stack *stack, int new_data)
-
 {
 	t_node	*new_node;
 	t_node	*old_top;
@@ -35,7 +34,6 @@ void	put(t_stack *stack, int new_data)
 }
 
 void	put_bottom(t_stack *stack, int new_data)
-
 {
 	t_node	*new_node;
 	t_node	*old_bottom;

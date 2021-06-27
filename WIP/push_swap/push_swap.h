@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 21:34:37 by echung            #+#    #+#             */
-/*   Updated: 2021/06/27 05:55:30 by echung           ###   ########.fr       */
+/*   Updated: 2021/06/27 20:17:20 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,25 +34,44 @@ typedef struct s_stack
     t_node          *bottom;
 }t_stack;
 
+
+void		get_pivot(t_stack *stack, int len, int *pivot);
+void		stack_to_array(t_stack *stack, int *arr, int len);
+
 t_stack*    stack_init(void);
 t_node*	    node_init(int data);
+
+int			a_to_b(t_stack *a, t_stack *b, int len);
+int			b_to_a(t_stack *a, t_stack *b, int len);
+
 int	        pop(t_stack *stack);
 int		    pop_bottom(t_stack *stack);
+
+void		print_stack(char *prefix, t_stack *stack);
+
 void	    put(t_stack *stack, int new_data);
 void	    put_bottom(t_stack *stack, int new_data);
+
+void		quick_sort(int *data, int up, int down);
+
 void        push(t_stack *from, t_stack *to, char ab);
-void        swap(t_stack *main, t_stack *sub, char ab);
+
 void	    rotate(t_stack *stack, char ab);
 void	    rrotate(t_stack *stack, char ab);
 void	    rrrotate(t_stack *main, t_stack *sub);
-void		print_stack(char *prefix, t_stack *stack);
 
-void		get_pivot(t_stack *stack, int len, int *pivot);
+void		sort_three(t_stack *main, t_stack *sub);
+void		sort_five(t_stack *main, t_stack *sub);
+
+void        swap(t_stack *main, t_stack *sub, char ab);
+
 long long	ft_atoi(char *str);
-void		a_to_b(t_stack *a, t_stack *b, int len);
-void		b_to_a(t_stack *a, t_stack *b, int len);
-void		quick_sort(int *data, int up, int down);
-void		sort_three(t_stack *main, t_stack *sub, char ab);
+void		ft_bzero(void *s, size_t n);
 int			ft_isdigit(char *c);
+void		*ft_memcpy(void *dst, const void *src, size_t n);
+void		*ft_memset(void *b, int c, size_t len);
+char		**ft_split(char const *s, char c);
+size_t		ft_strlen(const char *str);
+char		*ft_substr(char const *s, unsigned int start, size_t len);
 
 #endif

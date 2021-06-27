@@ -6,13 +6,13 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 22:59:07 by echung            #+#    #+#             */
-/*   Updated: 2021/06/27 06:17:08 by echung           ###   ########.fr       */
+/*   Updated: 2021/06/27 21:29:51 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	check_dup(t_stack *stack, int dup)
+static int	check_unique(t_stack *stack, int dup)
 {
 	t_node	*node;
 
@@ -32,48 +32,76 @@ int	check_dup(t_stack *stack, int dup)
 	return (1);
 }
 
-int check_input_error(t_stack *stack, char *num)
+static int	check_input(t_stack *stack, char *num)
 {
-	long long integer;
+	long long	integer;
 
 	integer = ft_atoi(num);
 	if (!(ft_isdigit(num)))
-		return (1);
-	if (!(check_dup(stack, integer)))
-		return (1);
-	if (!(integer <= 2147483647
-		&& integer >= -2147483648))
-		return (1);
-	return (0);
+		return (0);
+	if (!(check_unique(stack, integer)))
+		return (0);
+	if (!(integer <= 2147483647 && integer >= -2147483648))
+		return (0);
+	return (1);
 }
 
-int	main(int argc, char **argv)
+static void	free_split(char **splitted)
 {
-	t_stack	*a;
-	t_stack	*b;
-	int		i;
+	char **s;
 
-	a = stack_init();
-	b = stack_init();
+	s = splitted;
+	while (*s != 0)
+		free(*s++);
+	free(splitted);
+}
+
+static int	input(int argc, char **argv, t_stack *a)
+{
+	int		i;
+	char	**splitted;
+	char	**s;
+	int		j;
 
 	i = argc - 1;
 	while (i > 0)
 	{
-		if (check_input_error(a, argv[i]))
+		splitted = ft_split(argv[i], ' ');
+		s = splitted;
+		j = -1;
+		while (*s++ != 0)
+			j++;
+		if (j == -1)
+			return (0);
+		while (j >= 0)
 		{
-			write(2, "Error\n", 6);
-			return (-1);
+			if (!(check_input(a, splitted[j])))
+				return (0);
+			put(a, ft_atoi(splitted[j--]));
 		}
-		put(a, ft_atoi(argv[i]));
 		i--;
+		free_split(splitted);
 	}
-	if (a->size == 3)
+	return (1);
+}
+
+int			main(int argc, char **argv)
+{
+	t_stack	*a;
+	t_stack	*b;
+
+	a = stack_init();
+	b = stack_init();
+	if (input(argc, argv, a))
 	{
-		sort_three(a, b, 'a');
+		if (a->size == 3)
+			sort_three(a, b);
+		else if (a->size == 5)
+			sort_five(a, b);
+		else
+			a_to_b(a, b, a->size);
 	}
 	else
-		a_to_b(a, b, a->size);
-	// printf("a_to_b result\n");
-	//	print_stack("a", a);
-	//	print_stack("b", b);
+		write(2, "Error\n", 6);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 18:07:20 by echung            #+#    #+#             */
-/*   Updated: 2021/06/27 04:59:20 by echung           ###   ########.fr       */
+/*   Updated: 2021/06/27 15:39:33 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,13 @@ int	pop(t_stack *stack)
 
 	curr_top = stack->top;
 	new_top = curr_top->prev;
-	/* HERE, 데이터가 1개인 경우 */
 	if (new_top)
-		new_top->next = NULL; // size 1개일 때 pop하면 stack->top = NULL 됨
+		new_top->next = NULL;
 	stack->top = new_top;
 	stack->size--;
 	if (stack->size == 0)
 	{
-		stack->top = NULL; // norm 줄 수 넘으면 빼기
+		stack->top = NULL;
 		stack->bottom = NULL;
 	}
 	free(curr_top);
@@ -47,7 +46,7 @@ int	pop_bottom(t_stack *stack)
 	if (stack->size == 0)
 	{
 		stack->top = NULL;
-		stack->bottom = NULL; // norm 줄 수 넘으면 빼기
+		stack->bottom = NULL;
 	}
 	free(curr_bottom);
 	return (curr_bottom->data);
