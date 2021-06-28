@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 21:34:37 by echung            #+#    #+#             */
-/*   Updated: 2021/06/27 20:17:20 by echung           ###   ########.fr       */
+/*   Updated: 2021/06/28 16:09:04 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ int			b_to_a(t_stack *a, t_stack *b, int len);
 int	        pop(t_stack *stack);
 int		    pop_bottom(t_stack *stack);
 
-void		print_stack(char *prefix, t_stack *stack);
-
 void	    put(t_stack *stack, int new_data);
 void	    put_bottom(t_stack *stack, int new_data);
 
@@ -60,8 +58,7 @@ void	    rotate(t_stack *stack, char ab);
 void	    rrotate(t_stack *stack, char ab);
 void	    rrrotate(t_stack *main, t_stack *sub);
 
-void		sort_three(t_stack *main, t_stack *sub);
-void		sort_five(t_stack *main, t_stack *sub);
+void		sort_small(t_stack *a, t_stack *b);
 
 void        swap(t_stack *main, t_stack *sub, char ab);
 
@@ -73,5 +70,7 @@ void		*ft_memset(void *b, int c, size_t len);
 char		**ft_split(char const *s, char c);
 size_t		ft_strlen(const char *str);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
+
+void		print_stack(char *prefix, t_stack *stack);
 
 #endif

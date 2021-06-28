@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 18:06:52 by echung            #+#    #+#             */
-/*   Updated: 2021/06/27 15:35:42 by echung           ###   ########.fr       */
+/*   Updated: 2021/06/28 14:50:39 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,17 +52,4 @@ void	put_bottom(t_stack *stack, int new_data)
 		stack->bottom = new_node;
 	}
 	stack->size++;
-}
-
-void	push(t_stack *from, t_stack *to, char ab)
-{
-	int	popdata;
-
-	if (from->size != 0)
-	{
-		popdata = pop(from);
-		put(to, popdata);
-		if (ab)
-			printf("p%c\n", ab);
-	}
 }

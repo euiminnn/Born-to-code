@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 22:59:07 by echung            #+#    #+#             */
-/*   Updated: 2021/06/27 21:29:51 by echung           ###   ########.fr       */
+/*   Updated: 2021/06/28 18:59:31 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,7 @@ static int	check_unique(t_stack *stack, int dup)
 
 	node = stack->top;
 	if (!node)
-	{
 		return (1);
-	}
 	while (node->prev)
 	{
 		if (dup == node->data)
@@ -56,7 +54,7 @@ static void	free_split(char **splitted)
 	free(splitted);
 }
 
-static int	input(int argc, char **argv, t_stack *a)
+static int	parse_input(int argc, char **argv, t_stack *a)
 {
 	int		i;
 	char	**splitted;
@@ -92,12 +90,10 @@ int			main(int argc, char **argv)
 
 	a = stack_init();
 	b = stack_init();
-	if (input(argc, argv, a))
+	if (parse_input(argc, argv, a))
 	{
-		if (a->size == 3)
-			sort_three(a, b);
-		else if (a->size == 5)
-			sort_five(a, b);
+		if (a->size == 3 || a->size == 4 || a->size == 5)
+			sort_small(a, b);
 		else
 			a_to_b(a, b, a->size);
 	}

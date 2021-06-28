@@ -6,23 +6,23 @@
 #    By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/15 22:13:22 by echung            #+#    #+#              #
-#    Updated: 2021/06/27 17:32:18 by echung           ###   ########.fr        #
+#    Updated: 2021/06/28 19:03:11 by echung           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= push_swap
 CFLAGS	= -Wall -Wextra -Werror -I.
 SRCS	= push_swap.c \
-			init.c \
-			put.c \
-			pop.c \
-			rotate.c \
-			swap.c \
-			print_stack.c \
-			get_pivot.c \
-			make_chunk.c \
-			quick_sort.c \
-			sort_small.c \
+			operators/init.c \
+			operators/pop.c \
+			operators/push.c \
+			operators/put.c \
+			operators/rotate.c \
+			operators/swap.c \
+			algorithm/get_pivot.c \
+			algorithm/sort_ab.c \
+			algorithm/quick_sort.c \
+			algorithm/sort_small.c \
 			utils/ft_atoi.c \
 			utils/ft_bzero.c \
 			utils/ft_isdigit.c \

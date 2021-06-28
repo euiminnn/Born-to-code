@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   make_chunk.c                                       :+:      :+:    :+:   */
+/*   sort_ab.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 16:45:11 by echung            #+#    #+#             */
-/*   Updated: 2021/06/27 18:25:22 by echung           ###   ########.fr       */
+/*   Updated: 2021/06/28 22:18:03 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,20 @@ static int	last_step(t_stack *a, t_stack *b, int *count)
 		i = count[RB];
 	while (i--)
 		rrrotate(a, b);
+	/*
+	if (count[RA] > count[RB])
+		rrotate(a, 'a');
+	else if (count[RA] < count[RB])
+		rrotate(b, 'b');
+	*/
 	i = count[RA] - count[RB];
+	//if (!(i == 0 || i == 1 || i == -1))
+	//	printf("babo\n");
 	while (i-- > 0)
 		rrotate(a, 'a');
 	i = count[RB] - count[RA];
+	//if (!(i == 0 || i == 1 || i == -1))
+	//	printf("babo\n");
 	while (i-- > 0)
 		rrotate(b, 'b');
 	a_to_b(a, b, count[RA]);
