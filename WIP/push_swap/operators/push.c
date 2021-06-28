@@ -6,13 +6,13 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 14:49:54 by echung            #+#    #+#             */
-/*   Updated: 2021/06/28 14:50:05 by echung           ###   ########.fr       */
+/*   Updated: 2021/06/29 02:56:42 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	push(t_stack *from, t_stack *to, char ab)
+void	push(t_stack *from, t_stack *to, char ab, t_print *p)
 {
 	int	popdata;
 
@@ -20,7 +20,13 @@ void	push(t_stack *from, t_stack *to, char ab)
 	{
 		popdata = pop(from);
 		put(to, popdata);
+		if (ab == 'a')
+			pput(p, "pa");
+		else if (ab == 'b')
+			pput(p, "pb");
+		/*
 		if (ab)
 			printf("p%c\n", ab);
+		*/
 	}
 }

@@ -1,32 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_stack.c                                      :+:      :+:    :+:   */
+/*   pinit.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/22 18:09:15 by echung            #+#    #+#             */
-/*   Updated: 2021/06/27 05:01:25 by echung           ###   ########.fr       */
+/*   Created: 2021/06/29 02:36:31 by echung            #+#    #+#             */
+/*   Updated: 2021/06/29 03:16:05 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	print_stack(char *prefix, t_stack *stack)
+t_print	*print_init(void)
 {
-	t_node	*node;
+	t_print	*print;
 
-	node = stack->top;
-	printf("%s : ", prefix);
-	if (!node)
-	{
-		printf("\n");
-		return ;
-	}
-	while (node->prev)
-	{
-		printf("%d -> ", node->data);
-		node = node->prev;
-	}
-	printf("%d\n", node->data);
+	print = (t_print *)malloc(sizeof(t_print));
+	print->top = NULL;
+	print->bottom = NULL;
+	print->size = 0;
+	return (print);
+}
+
+t_pnode	*pnode_init(char *op)
+{
+	t_pnode	*new_pnode;
+
+	new_pnode = (t_pnode *)malloc(sizeof(t_pnode));
+	new_pnode->op = op;
+	new_pnode->prev = NULL;
+	new_pnode->next = NULL;
+	return (new_pnode);
 }

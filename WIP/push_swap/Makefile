@@ -6,7 +6,7 @@
 #    By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/15 22:13:22 by echung            #+#    #+#              #
-#    Updated: 2021/06/28 19:03:11 by echung           ###   ########.fr        #
+#    Updated: 2021/06/29 03:16:42 by echung           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,10 @@ SRCS	= push_swap.c \
 			utils/ft_memset.c \
 			utils/ft_split.c \
 			utils/ft_strlen.c \
-			utils/ft_substr.c
+			utils/ft_substr.c \
+			print/pinit.c \
+			print/pput.c \
+			print/print.c
 
 OBJS	= $(SRCS:%.c=%.o)
 

@@ -1,33 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap.c                                             :+:      :+:    :+:   */
+/*   pput.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/21 21:34:44 by echung            #+#    #+#             */
-/*   Updated: 2021/06/29 03:14:01 by echung           ###   ########.fr       */
+/*   Created: 2021/06/29 02:50:21 by echung            #+#    #+#             */
+/*   Updated: 2021/06/29 02:52:07 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	swap(t_stack *main, t_stack *sub, char ab, t_print *p)
+void	pput(t_print *print, char *op)
 {
-	char	popped;
+	t_pnode	*new_pnode;
+	t_pnode	*old_top;
 
-	if (main->size != 0)
+	new_pnode = pnode_init(op);
+	if (print->top == NULL)
 	{
-		push(main, sub, 0, p);
-		popped = pop(main);
-		push(sub, main, 0, p);
-		put(main, popped);
-		/*
-		printf("s%c\n", ab);
-		*/
-		if (ab == 'a')
-			pput(p, "sa");
-		else if (ab == 'b')
-			pput(p, "sb");
+		print->top = new_pnode;
+		print->bottom = new_pnode;
 	}
+	else
+	{
+		old_top = print->top;
+		old_top->next = new_pnode;
+		new_pnode->prev = old_top;
+		print->top = new_pnode;
+	}
+	print->size++;
 }

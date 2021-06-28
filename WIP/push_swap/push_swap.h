@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 21:34:37 by echung            #+#    #+#             */
-/*   Updated: 2021/06/28 16:09:04 by echung           ###   ########.fr       */
+/*   Updated: 2021/06/29 03:12:21 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,19 @@ typedef struct s_stack
     t_node          *bottom;
 }t_stack;
 
+typedef struct s_pnode
+{
+	char			*op;
+	struct s_pnode	*prev;
+	struct s_pnode	*next;
+}t_pnode;
+
+typedef struct s_print
+{
+	int				size;
+	t_pnode			*top;
+	t_pnode			*bottom;
+}t_print;
 
 void		get_pivot(t_stack *stack, int len, int *pivot);
 void		stack_to_array(t_stack *stack, int *arr, int len);
@@ -41,8 +54,8 @@ void		stack_to_array(t_stack *stack, int *arr, int len);
 t_stack*    stack_init(void);
 t_node*	    node_init(int data);
 
-int			a_to_b(t_stack *a, t_stack *b, int len);
-int			b_to_a(t_stack *a, t_stack *b, int len);
+int			a_to_b(t_stack *a, t_stack *b, int len, t_print *p);
+int			b_to_a(t_stack *a, t_stack *b, int len, t_print *p);
 
 int	        pop(t_stack *stack);
 int		    pop_bottom(t_stack *stack);
@@ -52,15 +65,15 @@ void	    put_bottom(t_stack *stack, int new_data);
 
 void		quick_sort(int *data, int up, int down);
 
-void        push(t_stack *from, t_stack *to, char ab);
+void        push(t_stack *from, t_stack *to, char ab, t_print *p);
 
-void	    rotate(t_stack *stack, char ab);
-void	    rrotate(t_stack *stack, char ab);
-void	    rrrotate(t_stack *main, t_stack *sub);
+void	    rotate(t_stack *stack, char ab, t_print *p);
+void	    rrotate(t_stack *stack, char ab, t_print *p);
+void	    rrrotate(t_stack *main, t_stack *sub, t_print *p);
 
-void		sort_small(t_stack *a, t_stack *b);
+void		sort_small(t_stack *a, t_stack *b, t_print *p);
 
-void        swap(t_stack *main, t_stack *sub, char ab);
+void        swap(t_stack *main, t_stack *sub, char ab, t_print *p);
 
 long long	ft_atoi(char *str);
 void		ft_bzero(void *s, size_t n);
@@ -71,6 +84,17 @@ char		**ft_split(char const *s, char c);
 size_t		ft_strlen(const char *str);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
 
-void		print_stack(char *prefix, t_stack *stack);
+
+
+
+
+t_print		*print_init(void);
+t_pnode		*pnode_init(char *op);
+void		pput(t_print *print, char *op);
+void		print(t_print *print);
+
+
+
+
 
 #endif

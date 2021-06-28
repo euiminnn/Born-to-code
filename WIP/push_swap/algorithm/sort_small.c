@@ -6,13 +6,13 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 21:34:26 by echung            #+#    #+#             */
-/*   Updated: 2021/06/28 16:57:34 by echung           ###   ########.fr       */
+/*   Updated: 2021/06/29 03:02:34 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	sort_three(t_stack *main, t_stack *sub)
+static void	sort_three(t_stack *main, t_stack *sub, t_print *p)
 {
 	int	one;
 	int	two;
@@ -22,26 +22,24 @@ static void	sort_three(t_stack *main, t_stack *sub)
 	two = main->top->prev->data;
 	three = main->top->prev->prev->data;
 	if (two < one && two < three && one < three)
-	{
-		swap(main, sub, 'a');
-	}
+		swap(main, sub, 'a', p);
 	else if (three < one && three < two && two < one)
 	{
-		swap(main, sub, 'a');
-		rrotate(main, 'a');
+		swap(main, sub, 'a', p);
+		rrotate(main, 'a', p);
 	}
 	else if (two < one && two < three && three < one)
-		rotate(main, 'a');
+		rotate(main, 'a', p);
 	else if (one < two && one < three && three < two)
 	{
-		swap(main, sub, 'a');
-		rotate(main, 'a');
+		swap(main, sub, 'a', p);
+		rotate(main, 'a', p);
 	}
 	else if (one < two && three < two && three < one)
-		rrotate(main, 'a');
+		rrotate(main, 'a', p);
 }
 
-static void	sort_four(t_stack *main, t_stack *sub)
+static void	sort_four(t_stack *main, t_stack *sub, t_print *p)
 {
 	int		*arr;
 	int		i;
@@ -54,17 +52,17 @@ static void	sort_four(t_stack *main, t_stack *sub)
 	{
 		node = main->top;
 		if (arr[0] == node->data)
-			push(main, sub, 'b');
+			push(main, sub, 'b', p);
 		else
-			rotate(main, 'a');
+			rotate(main, 'a', p);
 		i++;
 	}
-	sort_three(main, sub);
-	push(sub, main, 'a');
+	sort_three(main, sub, p);
+	push(sub, main, 'a', p);
 	free(arr);
 }
 
-static void	sort_five(t_stack *main, t_stack *sub)
+static void	sort_five(t_stack *main, t_stack *sub, t_print *p)
 {
 	int		*arr;
 	int		i;
@@ -77,27 +75,25 @@ static void	sort_five(t_stack *main, t_stack *sub)
 	{
 		node = main->top;
 		if (node->data == arr[0] || node->data == arr[1])
-			push(main, sub, 'b');
+			push(main, sub, 'b', p);
 		else
-			rotate(main, 'a');
+			rotate(main, 'a', p);
 		i++;
 	}
-	sort_three(main, sub);
-	push(sub, main, 'a');
-	push(sub, main, 'a');
+	sort_three(main, sub, p);
+	push(sub, main, 'a', p);
+	push(sub, main, 'a', p);
 	if (main->top->data > main->top->prev->data)
-		swap(main, sub, 'a');
+		swap(main, sub, 'a', p);
 	free(arr);
 }
 
-void	sort_small(t_stack *a, t_stack *b)
+void		sort_small(t_stack *a, t_stack *b, t_print *p)
 {
 	if (a->size == 3)
-		sort_three(a, b);
+		sort_three(a, b, p);
 	else if (a->size == 4)
-		sort_four(a, b);
+		sort_four(a, b, p);
 	else if (a->size == 5)
-		sort_five(a, b);
-	else
-		return ;
+		sort_five(a, b, p);
 }
