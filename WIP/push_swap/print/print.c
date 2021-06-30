@@ -33,39 +33,33 @@ void	print(t_print *print)
 	t_pnode	*pnode;
 
 	pnode = print->bottom;
-	if (!pnode)
+	while (print->size > 1)
 	{
-		//printf("\n");
-		return ;
-	}
-	while (pnode->next)
-	{
-		/*
-		printf("%s\n", pnode->op);
-		*/
-		//if (pnode->op == "sa" && pnode->next->op == "sb")
 		if ((strncmp(pnode->op, "sa", 2) && strncmp(pnode->next->op, "sb", 2))
 			|| (strncmp(pnode->op, "sb", 2) && strncmp(pnode->next->op, "sa", 2)))
 		{
 			printf("ss\n");
 			pnode = pnode->next;
+			(print->size)--;
 		}
 		else if ((strncmp(pnode->op, "ra", 2) && strncmp(pnode->next->op, "rb", 2))
 			|| (strncmp(pnode->op, "rb", 2) && strncmp(pnode->next->op, "ra", 2)))
 		{
 			printf("rr\n");
 			pnode = pnode->next;
+			(print->size)--;
 		}
-		/*
 		else if ((strncmp(pnode->op, "pa", 2) && strncmp(pnode->next->op, "pb", 2))
 			|| (strncmp(pnode->op, "pb", 2) && strncmp(pnode->next->op, "pa", 2)))
 		{
 			pnode = pnode->next;
+			(print->size)--;
 		}
-		*/
 		else
 			printf("%s\n", pnode->op);
 		pnode = pnode->next;
+		(print->size)--;
 	}
-	printf("%s\n", pnode->op);
+	if (print->size)
+		printf("%s\n", pnode->op);
 }
