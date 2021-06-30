@@ -6,15 +6,15 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/24 16:13:31 by echung            #+#    #+#             */
-/*   Updated: 2021/06/27 17:31:22 by echung           ###   ########.fr       */
+/*   Updated: 2021/07/01 01:10:00 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-size_t	ft_strlen(const char *str)
+int	ft_strlen(char *str)
 {
-	size_t	num;
+	int	num;
 
 	num = 0;
 	while (*str != '\0')

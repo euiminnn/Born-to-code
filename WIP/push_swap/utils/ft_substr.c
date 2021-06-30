@@ -6,16 +6,16 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 14:33:01 by echung            #+#    #+#             */
-/*   Updated: 2021/06/27 17:30:54 by echung           ###   ########.fr       */
+/*   Updated: 2021/07/01 01:11:26 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char *s, int start, int len)
 {
 	char	*sub_of_s;
-	size_t	len_org;
+	int	len_org;
 
 	sub_of_s = malloc(sizeof(char) * (len + 1));
 	if (!(s))

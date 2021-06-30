@@ -6,13 +6,13 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 18:09:15 by echung            #+#    #+#             */
-/*   Updated: 2021/06/29 03:50:15 by echung           ###   ########.fr       */
+/*   Updated: 2021/07/01 01:12:29 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int		strncmp(const char *s1, const char *s2, size_t n)
+static int	cmp_str(char *s1, char *s2, int n)
 {
 	while (*s1 != '\0' && *s2 != '\0' && n > 0)
 	{
@@ -22,44 +22,60 @@ int		strncmp(const char *s1, const char *s2, size_t n)
 		s2++;
 		n--;
 	}
-	if (n == 0)		//correct
+	if (n == 0)
 		return (1);
-	else			//error
+	else
 		return (0);
 }
 
-void	print(t_print *print)
+static int	compare_op(t_pnode *pnode, char *s1, char *s2)
 {
-	t_pnode	*pnode;
+	if ((cmp_str(pnode->op, s1, 2) && cmp_str(pnode->next->op, s2, 2)) ||
+		(cmp_str(pnode->op, s2, 2) && cmp_str(pnode->next->op, s1, 2)))
+		return (1);
+	else
+		return (0);
+}
 
-	pnode = print->bottom;
+static void	mywrite(char *str)
+{
+	if (cmp_str(str, "rrr", 3))
+		write(1, "rrr\n", 4);
+	else if (cmp_str(str, "rra", 3))
+		write(1, "rra\n", 4);
+	else if (cmp_str(str, "rrb", 3))
+		write(1, "rrb\n", 4);
+	else if (cmp_str(str, "pp", 2))
+		return ;
+	else
+	{
+		write(1, str, 2);
+		write(1, "\n", 1);
+	}
+}
+
+void		print(t_print *print)
+{
+	int	a;
+
 	while (print->size > 1)
 	{
-		if ((strncmp(pnode->op, "sa", 2) && strncmp(pnode->next->op, "sb", 2))
-			|| (strncmp(pnode->op, "sb", 2) && strncmp(pnode->next->op, "sa", 2)))
-		{
-			printf("ss\n");
-			pnode = pnode->next;
-			(print->size)--;
-		}
-		else if ((strncmp(pnode->op, "ra", 2) && strncmp(pnode->next->op, "rb", 2))
-			|| (strncmp(pnode->op, "rb", 2) && strncmp(pnode->next->op, "ra", 2)))
-		{
-			printf("rr\n");
-			pnode = pnode->next;
-			(print->size)--;
-		}
-		else if ((strncmp(pnode->op, "pa", 2) && strncmp(pnode->next->op, "pb", 2))
-			|| (strncmp(pnode->op, "pb", 2) && strncmp(pnode->next->op, "pa", 2)))
-		{
-			pnode = pnode->next;
-			(print->size)--;
-		}
+		if ((a = compare_op(print->bottom, "sa", "sb")))
+			write(1, "ss\n", 3);
+		else if ((a = compare_op(print->bottom, "ra", "rb")))
+			write(1, "rr\n", 3);
+		else if ((a = compare_op(print->bottom, "pa", "pb")))
+			mywrite("pp");
 		else
-			printf("%s\n", pnode->op);
-		pnode = pnode->next;
+			mywrite(print->bottom->op);
+		if (a)
+		{
+			print->bottom = print->bottom->next;
+			(print->size)--;
+		}
+		print->bottom = print->bottom->next;
 		(print->size)--;
 	}
 	if (print->size)
-		printf("%s\n", pnode->op);
+		mywrite(print->bottom->op);
 }

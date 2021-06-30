@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 14:49:54 by echung            #+#    #+#             */
-/*   Updated: 2021/06/29 02:56:42 by echung           ###   ########.fr       */
+/*   Updated: 2021/07/01 01:01:13 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,5 @@ void	push(t_stack *from, t_stack *to, char ab, t_print *p)
 			pput(p, "pa");
 		else if (ab == 'b')
 			pput(p, "pb");
-		/*
-		if (ab)
-			printf("p%c\n", ab);
-		*/
 	}
 }

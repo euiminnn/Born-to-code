@@ -6,15 +6,15 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 18:01:52 by echung            #+#    #+#             */
-/*   Updated: 2021/06/27 05:57:09 by echung           ###   ########.fr       */
+/*   Updated: 2021/07/01 01:09:44 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static size_t	ft_countwords(char const *s, char c)
+static int	ft_countwords(char *s, char c)
 {
-	size_t	count;
+	int	count;
 
 	count = 0;
 	while (*s != '\0')
@@ -29,10 +29,10 @@ static size_t	ft_countwords(char const *s, char c)
 	return (count);
 }
 
-static size_t	ft_wordslen(char const *s, char c, size_t index)
+static int	ft_wordslen(char *s, char c, int index)
 {
-	size_t	len;
-	size_t	i;
+	int	len;
+	int	i;
 
 	len = 0;
 	i = -1;
@@ -58,10 +58,10 @@ static size_t	ft_wordslen(char const *s, char c, size_t index)
 	return (len);
 }
 
-static size_t	ft_startidx(char const *s, char c, size_t index)
+static int	ft_startidx(char *s, char c, int index)
 {
-	size_t	start;
-	size_t	i;
+	int	start;
+	int	i;
 
 	start = 0;
 	i = -1;
@@ -87,7 +87,7 @@ static size_t	ft_startidx(char const *s, char c, size_t index)
 	return (0);
 }
 
-static char		**ft_freeall(char **s, size_t index)
+static char		**ft_freeall(char **s, int index)
 {
 	while (index >= 0)
 	{
@@ -98,12 +98,12 @@ static char		**ft_freeall(char **s, size_t index)
 	return (0);
 }
 
-char			**ft_split(char const *s, char c)
+char			**ft_split(char *s, char c)
 {
 	char	**splitted;
-	size_t	start;
-	size_t	len;
-	size_t	index;
+	int	start;
+	int	len;
+	int	index;
 
 	if (!(s))
 		return (0);

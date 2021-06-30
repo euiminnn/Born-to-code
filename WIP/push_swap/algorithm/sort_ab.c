@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 16:45:11 by echung            #+#    #+#             */
-/*   Updated: 2021/06/29 03:00:50 by echung           ###   ########.fr       */
+/*   Updated: 2021/07/01 00:59:59 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 static int	last_step(t_stack *a, t_stack *b, int *count, t_print *p)
 {
-	int i;
+	int	i;
 
 	i = count[RA];
 	if (count[RB] < count[RA])
