@@ -6,11 +6,12 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 22:59:07 by echung            #+#    #+#             */
-/*   Updated: 2021/07/01 14:42:03 by echung           ###   ########.fr       */
+/*   Updated: 2021/07/02 03:22:39 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#define BUFFER_SIZE 1
 
 static int	check_unique(t_stack *stack, int dup)
 {
