@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 00:13:56 by echung            #+#    #+#             */
-/*   Updated: 2021/07/02 03:43:02 by echung           ###   ########.fr       */
+/*   Updated: 2021/07/02 03:50:59 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,38 +60,38 @@ static int	run_op(t_stack *a, t_stack *b)
     while ((check = get_next_line(0, &line)) > 0)
     {
 		if (cmp_str(line, "sa", 2))
-			swap(a, b, 'a');
+			swap(a, b);
 		else if (cmp_str(line, "sb", 2))
-			swap(b, a, 'b');
+			swap(b, a);
 		else if (cmp_str(line, "ss", 2))
 		{
-			swap(a, b, 'a');
-			swap(b, a, 'b');
+			swap(a, b);
+			swap(b, a);
 		}
 		else if (cmp_str(line, "ra", 2))
-			rotate(a, 'a');
+			rotate(a);
 		else if (cmp_str(line, "rb", 2))
-			rotate(b, 'b');
+			rotate(b);
 		else if (cmp_str(line, "rr", 2))
 		{
-			rotate(a, 'a');
-			rotate(b, 'b');
+			rotate(a);
+			rotate(b);
 		}
 		else if (cmp_str(line, "rra", 3))
-			rrotate(a, 'a');
+			rrotate(a);
 		else if (cmp_str(line, "rrb", 3))
-			rrotate(b, 'b');
+			rrotate(b);
 		else if (cmp_str(line, "rrr", 3))
 			rrrotate(a, b);
 		else if (cmp_str(line, "pa", 2))
-			push(b, a, 'a');
+			push(b, a);
 		else if (cmp_str(line, "pb", 2))
-			push(a, b, 'b');
+			push(a, b);
         free(line);
     }
-	if (line)
-		printf("%s\n", line);
-    free(line);
+	//if (line)
+		//printf("%s\n", line);
+    //free(line);
 	return (1);
 }
 
