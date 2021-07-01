@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 18:09:15 by echung            #+#    #+#             */
-/*   Updated: 2021/07/01 01:12:29 by echung           ###   ########.fr       */
+/*   Updated: 2021/07/01 15:13:20 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,26 +56,28 @@ static void	mywrite(char *str)
 
 void		print(t_print *print)
 {
-	int	a;
+	int		flag;
+	t_pnode	*pnode;
 
+	pnode = print->bottom;
 	while (print->size > 1)
 	{
-		if ((a = compare_op(print->bottom, "sa", "sb")))
+		if ((flag = compare_op(pnode, "sa", "sb")))
 			write(1, "ss\n", 3);
-		else if ((a = compare_op(print->bottom, "ra", "rb")))
+		else if ((flag = compare_op(pnode, "ra", "rb")))
 			write(1, "rr\n", 3);
-		else if ((a = compare_op(print->bottom, "pa", "pb")))
+		else if ((flag = compare_op(pnode, "pa", "pb")))
 			mywrite("pp");
 		else
-			mywrite(print->bottom->op);
-		if (a)
+			mywrite(pnode->op);
+		if (flag)
 		{
-			print->bottom = print->bottom->next;
+			pnode = pnode->next;
 			(print->size)--;
 		}
-		print->bottom = print->bottom->next;
+		pnode = pnode->next;
 		(print->size)--;
 	}
 	if (print->size)
-		mywrite(print->bottom->op);
+		mywrite(pnode->op);
 }

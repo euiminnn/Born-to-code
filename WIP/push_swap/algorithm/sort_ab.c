@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 16:45:11 by echung            #+#    #+#             */
-/*   Updated: 2021/07/01 00:59:59 by echung           ###   ########.fr       */
+/*   Updated: 2021/07/01 15:02:07 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ int			b_to_a(t_stack *a, t_stack *b, int len, t_print *p)
 	int	pivot[2];
 	int	count[4];
 
-	ft_bzero(count, sizeof(int) * 4);
 	if (len < 3)
 		return (b_to_a_small(a, b, len, p));
+	ft_bzero(count, sizeof(int) * 4);
 	get_pivot(b, len, pivot);
 	while (len--)
 	{
@@ -92,9 +92,9 @@ int			a_to_b(t_stack *a, t_stack *b, int len, t_print *p)
 	int	pivot[2];
 	int	count[4];
 
-	ft_bzero(count, sizeof(int) * 4);
 	if (len < 3)
 		return (a_to_b_small(a, b, len, p));
+	ft_bzero(count, sizeof(int) * 4);
 	get_pivot(a, len, pivot);
 	while (len--)
 	{
