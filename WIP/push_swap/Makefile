@@ -6,12 +6,12 @@
 #    By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/15 22:13:22 by echung            #+#    #+#              #
-#    Updated: 2021/07/02 09:54:39 by echung           ###   ########.fr        #
+#    Updated: 2021/07/02 11:34:17 by echung           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= push_swap
-#BONUS_NAME = checker_min
+BONUS_NAME = checker
 
 CFLAGS	= -Wall -Wextra -Werror -I.
 SRCS	= push_swap.c \
@@ -36,7 +36,8 @@ SRCS	= push_swap.c \
 			utils/is_sorted.c \
 			print/pinit.c \
 			print/pput.c \
-			print/print.c
+			print/print.c \
+			parse_input.c
 
 BONUS_SRCS = checker.c \
 			 bonus/get_next_line.c \
@@ -45,12 +46,17 @@ BONUS_SRCS = checker.c \
 			 utils/ft_memcpy.c \
 			 utils/ft_substr.c \
 			 utils/ft_strlen.c \
+			 utils/is_sorted.c \
+			 utils/ft_split.c \
 			 operators/init.c \
 			 bonus/bonus_operators/pop.c \
 			 bonus/bonus_operators/push.c \
 			 bonus/bonus_operators/put.c \
 			 bonus/bonus_operators/rotate.c \
 			 bonus/bonus_operators/swap.c \
+			utils/ft_atoi.c \
+			utils/ft_isdigit.c \
+			 parse_input.c
 
 OBJS	= $(SRCS:%.c=%.o)
 BONUS_OBJS = $(BONUS_SRCS:%.c=%.o)

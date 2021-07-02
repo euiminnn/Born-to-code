@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 00:31:46 by echung            #+#    #+#             */
-/*   Updated: 2021/07/02 03:44:14 by echung           ###   ########.fr       */
+/*   Updated: 2021/07/02 11:32:37 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,8 @@ void	    rotate(t_stack *stack);
 void	    rrotate(t_stack *stack);
 void	    rrrotate(t_stack *main, t_stack *sub);
 void        swap(t_stack *main, t_stack *sub);
+int			is_sorted(t_stack *a);
+int			parse_input(int argc, char **argv, t_stack *a);
+char			**ft_split(char *s, char c);
 
 #endif

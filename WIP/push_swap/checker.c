@@ -6,12 +6,11 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 00:13:56 by echung            #+#    #+#             */
-/*   Updated: 2021/07/02 03:50:59 by echung           ###   ########.fr       */
+/*   Updated: 2021/07/02 11:45:45 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
-#include <stdio.h>
 
 static int	cmp_str(char *s1, char *s2, int n)
 {
@@ -37,28 +36,13 @@ static int	is_empty(t_stack *b)
 		return (0);
 }
 
-static int	is_sorted(t_stack *a)
-{
-	t_node *node;
-
-	node = a->top;
-	while (node->prev)
-	{
-		if (!(node->data < node->prev->data))
-			return (0);
-		node = node->prev;
-	}
-	printf("great job\n");
-	return (1);
-}
-
 static int	run_op(t_stack *a, t_stack *b)
 {
-	char *line;
-	int	check;
+	char	*line;
+	int		check;
 
-    while ((check = get_next_line(0, &line)) > 0)
-    {
+	while ((check = get_next_line(0, &line)) > 0)
+	{
 		if (cmp_str(line, "sa", 2))
 			swap(a, b);
 		else if (cmp_str(line, "sb", 2))
@@ -87,30 +71,37 @@ static int	run_op(t_stack *a, t_stack *b)
 			push(b, a);
 		else if (cmp_str(line, "pb", 2))
 			push(a, b);
-        free(line);
-    }
-	//if (line)
-		//printf("%s\n", line);
-    //free(line);
+		free(line);
+	}
+	// if (line)
+	// printf("%s\n", line);
+	// free(line);
 	return (1);
 }
 
-int    main(int argc, char **argv)
+int			main(int argc, char **argv)
 {
-	t_stack *a;
-	t_stack *b;
+	t_stack	*a;
+	t_stack	*b;
 
 	a = stack_init();
 	b = stack_init();
-
-	if (argc == 1)
+	if (argc < 2)
 		return (0);
-	if (!argv[0])
+	if (!argc || !argv)
 		return (0);
-	if (run_op(a, b) && is_sorted(a) && is_empty(b))
-		write(1, "OK\n", 3);
+	/*
+	if (parse_input(argc, argv, a))
+	{
+	*/
+		if (run_op(a, b) && is_sorted(a) && is_empty(b))
+			write(1, "OK\n", 3);
+		else
+			write(1, "KO\n", 3);
+	/*
+	}
 	else
-		write(1, "KO\n", 3);
-
-    return (0);
+		write(2, "Error\n", 6);
+	*/
+	return (0);
 }
