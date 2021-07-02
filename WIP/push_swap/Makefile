@@ -6,12 +6,12 @@
 #    By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/15 22:13:22 by echung            #+#    #+#              #
-#    Updated: 2021/07/02 03:36:44 by echung           ###   ########.fr        #
+#    Updated: 2021/07/02 09:54:39 by echung           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= push_swap
-BONUS_NAME = checker_min
+#BONUS_NAME = checker_min
 
 CFLAGS	= -Wall -Wextra -Werror -I.
 SRCS	= push_swap.c \
@@ -33,6 +33,7 @@ SRCS	= push_swap.c \
 			utils/ft_split.c \
 			utils/ft_strlen.c \
 			utils/ft_substr.c \
+			utils/is_sorted.c \
 			print/pinit.c \
 			print/pput.c \
 			print/print.c
