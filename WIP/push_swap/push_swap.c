@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 22:59:07 by echung            #+#    #+#             */
-/*   Updated: 2021/07/02 11:31:59 by echung           ###   ########.fr       */
+/*   Updated: 2021/07/02 18:22:01 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,14 @@ int			main(int argc, char **argv)
 	a = stack_init();
 	b = stack_init();
 	p = print_init();
-
 	if (parse_input(argc, argv, a))
 	{
-			if (is_sorted(a))
-				return (0);
-			if (a->size == 3 || a->size == 4 || a->size == 5)
-				sort_small(a, b, p);
-			else
-				a_to_b(a, b, a->size, p);
+		if (is_sorted(a))
+			return (0);
+		if (a->size == 3 || a->size == 4 || a->size == 5)
+			sort_small(a, b, p);
+		else
+			a_to_b(a, b, a->size, p);
 	}
 	else
 		write(2, "Error\n", 6);

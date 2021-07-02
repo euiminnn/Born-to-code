@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 18:01:52 by echung            #+#    #+#             */
-/*   Updated: 2021/07/01 01:09:44 by echung           ###   ########.fr       */
+/*   Updated: 2021/07/02 18:27:58 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static int	ft_startidx(char *s, char c, int index)
 	return (0);
 }
 
-static char		**ft_freeall(char **s, int index)
+static char	**ft_freeall(char **s, int index)
 {
 	while (index >= 0)
 	{
@@ -98,12 +98,12 @@ static char		**ft_freeall(char **s, int index)
 	return (0);
 }
 
-char			**ft_split(char *s, char c)
+char		**ft_split(char *s, char c)
 {
 	char	**splitted;
-	int	start;
-	int	len;
-	int	index;
+	int		start;
+	int		len;
+	int		index;
 
 	if (!(s))
 		return (0);

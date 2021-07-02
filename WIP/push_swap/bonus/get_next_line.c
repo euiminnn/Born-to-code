@@ -6,12 +6,13 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 20:26:15 by echung            #+#    #+#             */
-/*   Updated: 2021/07/02 00:55:12 by echung           ###   ########.fr       */
+/*   Updated: 2021/07/02 18:27:22 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 #define BUFFER_SIZE 1
+
 int	find_index(char *s, char c)
 {
 	int	index;
@@ -43,8 +44,8 @@ int	get_next_line(int fd, char **line)
 	static char	*str;
 	int			ret;
 	int			i_nl;
+	char		buff[BUFFER_SIZE + 1];
 
-	char buff[BUFFER_SIZE + 1];
 	if (fd < 0 || !line || BUFFER_SIZE < 1 || read(fd, buff, 0) < 0)
 		return (-1);
 	if (str && ((i_nl = find_index(str, '\n')) != -1))

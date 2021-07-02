@@ -6,27 +6,11 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 18:09:15 by echung            #+#    #+#             */
-/*   Updated: 2021/07/02 03:38:51 by echung           ###   ########.fr       */
+/*   Updated: 2021/07/02 18:43:50 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-static int	cmp_str(char *s1, char *s2, int n)
-{
-	while (*s1 != '\0' && *s2 != '\0' && n > 0)
-	{
-		if (*s1 != *s2)
-			break ;
-		s1++;
-		s2++;
-		n--;
-	}
-	if (n == 0)
-		return (1);
-	else
-		return (0);
-}
 
 static int	compare_op(t_pnode *pnode, char *s1, char *s2)
 {

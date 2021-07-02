@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 14:33:01 by echung            #+#    #+#             */
-/*   Updated: 2021/07/01 01:11:26 by echung           ###   ########.fr       */
+/*   Updated: 2021/07/02 18:25:27 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*ft_substr(char *s, int start, int len)
 {
 	char	*sub_of_s;
-	int	len_org;
+	int		len_org;
 
 	sub_of_s = malloc(sizeof(char) * (len + 1));
 	if (!(s))

@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push.c                                             :+:      :+:    :+:   */
+/*   cmp_str.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/28 14:49:54 by echung            #+#    #+#             */
-/*   Updated: 2021/07/02 17:22:15 by echung           ###   ########.fr       */
+/*   Created: 2021/07/02 18:42:59 by echung            #+#    #+#             */
+/*   Updated: 2021/07/02 18:43:39 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include "push_swap.h"
 
-void	push(t_stack *from, t_stack *to)
+int	cmp_str(char *s1, char *s2, int n)
 {
-	int	popdata;
-
-	if (from->size != 0)
+	while (*s1 != '\0' && *s2 != '\0' && n > 0)
 	{
-		popdata = pop(from);
-		put(to, popdata);
+		if (*s1 != *s2)
+			break ;
+		s1++;
+		s2++;
+		n--;
 	}
+	if (n == 0)
+		return (1);
+	else
+		return (0);
 }

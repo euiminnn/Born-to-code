@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 00:29:23 by echung            #+#    #+#             */
-/*   Updated: 2021/07/02 00:55:38 by echung           ###   ########.fr       */
+/*   Updated: 2021/07/02 18:25:04 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 char	*ft_strjoin_free(char *s1, char *s2)
 {
 	char	*s1plus2;
-	int	len_s1;
-	int	len_s2;
+	int		len_s1;
+	int		len_s2;
 
 	if (!(s1))
 		return (ft_strdup(s2));

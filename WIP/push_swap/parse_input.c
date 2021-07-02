@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 11:29:41 by echung            #+#    #+#             */
-/*   Updated: 2021/07/02 11:30:41 by echung           ###   ########.fr       */
+/*   Updated: 2021/07/02 18:23:50 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	free_split(char **splitted)
 	free(splitted);
 }
 
-int	parse_input(int argc, char **argv, t_stack *a)
+int			parse_input(int argc, char **argv, t_stack *a)
 {
 	int		i;
 	char	**splitted;
@@ -80,7 +80,5 @@ int	parse_input(int argc, char **argv, t_stack *a)
 		i--;
 		free_split(splitted);
 	}
-
 	return (1);
 }
-

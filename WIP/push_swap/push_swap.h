@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 21:34:37 by echung            #+#    #+#             */
-/*   Updated: 2021/07/02 11:31:10 by echung           ###   ########.fr       */
+/*   Updated: 2021/07/02 18:45:36 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,6 @@ char		*ft_substr(char *s, int start, int len);
 
 int			is_sorted(t_stack *a);
 int			parse_input(int argc, char **argv, t_stack *a);
+int			cmp_str(char *s1, char *s2, int n);
 
 #endif
