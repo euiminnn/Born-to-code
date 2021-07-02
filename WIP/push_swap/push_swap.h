@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 21:34:37 by echung            #+#    #+#             */
-/*   Updated: 2021/07/02 10:40:00 by echung           ###   ########.fr       */
+/*   Updated: 2021/07/02 11:14:40 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,6 @@ void		*ft_memset(void *b, int c, int len);
 char		**ft_split(char *s, char c);
 int			ft_strlen(char *str);
 char		*ft_substr(char *s, int start, int len);
-int			is_sorted(t_stack **a);
+int			is_sorted(t_stack *a);
 
 #endif

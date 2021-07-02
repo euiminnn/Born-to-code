@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 22:59:07 by echung            #+#    #+#             */
-/*   Updated: 2021/07/02 11:03:01 by echung           ###   ########.fr       */
+/*   Updated: 2021/07/02 11:15:22 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static int	parse_input(int argc, char **argv, t_stack *a)
 		{
 			if (!(check_input(a, splitted[j])))
 				return (0);
-			put(a, ft_atoi(slitted[j--]));
+			put(a, ft_atoi(splitted[j--]));
 		}
 		i--;
 		free_split(splitted);
@@ -83,7 +83,7 @@ static int	parse_input(int argc, char **argv, t_stack *a)
 
 	return (1);
 }
-#include <stdio.h>
+
 int			main(int argc, char **argv)
 {
 	t_stack	*a;
@@ -96,23 +96,15 @@ int			main(int argc, char **argv)
 
 	if (parse_input(argc, argv, a))
 	{
-			//printf("size: %d\n", a->size);
-			//printf("a: %d %d %d %d\n", a->top->data, a->top->prev->data, a->top->prev->prev->data, a->top->prev->prev->prev->data);
-			if (is_sorted(&a))
+			if (is_sorted(a))
 				return (0);
 			if (a->size == 3 || a->size == 4 || a->size == 5)
-			{
-				printf("here\n");
 				sort_small(a, b, p);
-	printf("??a: %d %d %d %d\n", a->top->data, a->top->prev->data, a->top->prev->prev->data, a->top->prev->prev->prev->data);
-			}
 			else
 				a_to_b(a, b, a->size, p);
 	}
 	else
 		write(2, "Error\n", 6);
-	//printf("a: %d %d %d %d\n", a->top->data, a->top->prev->data, a->top->prev->prev->data, a->top->prev->prev->prev->data);
-
 	print(p);
 	return (0);
 }
