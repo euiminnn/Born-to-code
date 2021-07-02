@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 03:38:44 by echung            #+#    #+#             */
-/*   Updated: 2021/06/27 04:59:56 by echung           ###   ########.fr       */
+/*   Updated: 2021/07/03 01:18:34 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 long long	ft_atoi(char *str)
 {
-	int			sign;
-	long long	result;
+	int	sign;
+	int	result;
 
 	sign = 1;
 	while (*str == ' ' || (9 <= *str && *str <= 13))
@@ -34,6 +34,5 @@ long long	ft_atoi(char *str)
 		result = result * 10 + (*str - '0');
 		str++;
 	}
-	result = sign * result;
-	return (result);
+	return (sign * result);
 }
