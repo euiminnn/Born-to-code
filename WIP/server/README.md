@@ -139,3 +139,8 @@ docker run --name {만들어질 컨테이너 이름} -v $(pwd):/home/node/app -p
 
 <p align = "center"><img src = "https://github.com/euiminnn/image-upload/blob/master/container%20execute.png" width = "600"></p>
 
+July 4th
+
+- srcs done
+
+- Dockerfile done
