@@ -35,3 +35,5 @@ cp -rp /root/wp-config.php /var/www/html/wordpress
 service nginx start
 service php7.3-fpm start
 service mysql restart
+
+bash
