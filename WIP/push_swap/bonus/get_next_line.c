@@ -6,14 +6,14 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 20:26:15 by echung            #+#    #+#             */
-/*   Updated: 2021/07/02 18:27:22 by echung           ###   ########.fr       */
+/*   Updated: 2021/07/05 15:47:48 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 #define BUFFER_SIZE 1
 
-int	find_index(char *s, char c)
+static int	find_index(char *s, char c)
 {
 	int	index;
 
@@ -28,7 +28,7 @@ int	find_index(char *s, char c)
 	return (-1);
 }
 
-int	save_line(char **str, char **line, int index)
+static int	save_line(char **str, char **line, int index)
 {
 	char	*temp;
 
@@ -39,7 +39,7 @@ int	save_line(char **str, char **line, int index)
 	return (1);
 }
 
-int	get_next_line(int fd, char **line)
+int			get_next_line(int fd, char **line)
 {
 	static char	*str;
 	int			ret;
