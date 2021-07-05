@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 21:34:37 by echung            #+#    #+#             */
-/*   Updated: 2021/07/05 21:06:30 by echung           ###   ########.fr       */
+/*   Updated: 2021/07/05 21:11:04 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 struct					s_node
 {
 	int					data;
-	struct s_node			*prev;
-	struct s_node			*next;
+	struct s_node		*prev;
+	struct s_node		*next;
 };
 
 typedef struct s_node	t_node;
@@ -29,15 +29,15 @@ typedef struct s_node	t_node;
 typedef struct			s_stack
 {
 	int					size;
-	t_node					*top;
-	t_node					*bottom;
+	t_node				*top;
+	t_node				*bottom;
 }						t_stack;
 
 typedef struct			s_pnode
 {
-	char					*op;
-	struct s_pnode			*prev;
-	struct s_pnode			*next;
+	char				*op;
+	struct s_pnode		*prev;
+	struct s_pnode		*next;
 }						t_pnode;
 
 typedef struct			s_print

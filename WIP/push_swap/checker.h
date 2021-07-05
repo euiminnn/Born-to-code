@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 00:31:46 by echung            #+#    #+#             */
-/*   Updated: 2021/07/05 21:06:40 by echung           ###   ########.fr       */
+/*   Updated: 2021/07/05 21:10:26 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,15 @@
 typedef struct		s_node
 {
 	int				data;
-	struct s_node		*prev;
-	struct s_node		*next;
+	struct s_node	*prev;
+	struct s_node	*next;
 }					t_node;
 
 typedef struct		s_stack
 {
 	int				size;
-	t_node				*top;
-	t_node				*bottom;
+	t_node			*top;
+	t_node			*bottom;
 }					t_stack;
 
 int					get_next_line(int fd, char **line);
