@@ -1,4 +1,4 @@
-# journey as a 42 seoul cadet (intra profile: echung)
+## my journey as a 42 seoul cadet (intra profile: echung)
 
 | Circle | Subject | Description |
 | ------- | ------- | ------- |
@@ -11,3 +11,6 @@
 | 2 | [minitalk]() | content |
 | 2 | [so_long]() | content |
 | 3 | [minishell]() | content |
+| 3 | [Philosophers]() | content |
+| 4 | [miniRT]() | content |
+| 4 | [CPP Module]() | content |
