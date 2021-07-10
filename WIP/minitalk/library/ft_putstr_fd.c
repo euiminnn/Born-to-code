@@ -1,24 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/09 18:55:53 by echung            #+#    #+#             */
-/*   Updated: 2021/07/10 19:18:17 by echung           ###   ########.fr       */
+/*   Created: 2021/01/23 16:08:01 by echung            #+#    #+#             */
+/*   Updated: 2021/01/23 16:40:45 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "libft.h"
 
-void	client(int pid, char *str)
+void	ft_putstr_fd(char *s, int fd)
 {
-	kill(pid, SIGUSR1);
-	kill(pid, SIGUSR2);
-}
-
-int 	main(int argc, char **argv)
-{
-	client(pid, argv[2]);
+	if (s != 0)
+		write(fd, s, ft_strlen(s));
 }

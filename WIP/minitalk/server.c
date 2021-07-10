@@ -6,9 +6,11 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/09 18:55:42 by echung            #+#    #+#             */
-/*   Updated: 2021/07/10 19:15:00 by echung           ###   ########.fr       */
+/*   Updated: 2021/07/10 19:18:25 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "minitalk.h"
 
 void	handler(int num)
 {

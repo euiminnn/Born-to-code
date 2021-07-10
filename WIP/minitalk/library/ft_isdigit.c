@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/09 18:55:53 by echung            #+#    #+#             */
-/*   Updated: 2021/07/10 19:18:17 by echung           ###   ########.fr       */
+/*   Created: 2020/12/24 16:34:44 by echung            #+#    #+#             */
+/*   Updated: 2021/01/22 15:39:23 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "libft.h"
 
-void	client(int pid, char *str)
+int	ft_isdigit(int c)
 {
-	kill(pid, SIGUSR1);
-	kill(pid, SIGUSR2);
-}
-
-int 	main(int argc, char **argv)
-{
-	client(pid, argv[2]);
+	if ('0' <= c && c <= '9')
+		return (1);
+	else
+		return (0);
 }

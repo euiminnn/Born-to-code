@@ -1,24 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/09 18:55:53 by echung            #+#    #+#             */
-/*   Updated: 2021/07/10 19:18:17 by echung           ###   ########.fr       */
+/*   Created: 2020/12/24 16:02:08 by echung            #+#    #+#             */
+/*   Updated: 2021/01/22 15:37:06 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "libft.h"
 
-void	client(int pid, char *str)
+int	ft_atoi(const char *str)
 {
-	kill(pid, SIGUSR1);
-	kill(pid, SIGUSR2);
-}
+	int	sign;
+	int	result;
 
-int 	main(int argc, char **argv)
-{
-	client(pid, argv[2]);
+	sign = 1;
+	while (*str == ' ' || (9 <= *str && *str <= 13))
+		str++;
+	while (*str == '-' || *str == '+')
+	{
+		if (*str == '-')
+			sign = sign * -1;
+		str++;
+		if (*str == '-' || *str == '+')
+			return (0);
+	}
+	result = 0;
+	while ('0' <= *str && *str <= '9')
+	{
+		result = result * 10 + (*str - '0');
+		str++;
+	}
+	return (sign * result);
 }

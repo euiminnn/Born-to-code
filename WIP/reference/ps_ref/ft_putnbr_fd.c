@@ -1,24 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/09 18:55:53 by echung            #+#    #+#             */
-/*   Updated: 2021/07/10 19:18:17 by echung           ###   ########.fr       */
+/*   Created: 2021/01/23 16:13:00 by echung            #+#    #+#             */
+/*   Updated: 2021/01/23 16:36:19 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "libft.h"
 
-void	client(int pid, char *str)
+void	ft_putnbr_fd(int n, int fd)
 {
-	kill(pid, SIGUSR1);
-	kill(pid, SIGUSR2);
-}
-
-int 	main(int argc, char **argv)
-{
-	client(pid, argv[2]);
+	if (n == -2147483648)
+	{
+		ft_putnbr_fd(n / 10, fd);
+		ft_putchar_fd('8', fd);
+	}
+	else if (n < 0)
+	{
+		ft_putchar_fd('-', fd);
+		ft_putnbr_fd(-n, fd);
+	}
+	else
+	{
+		if (n > 9)
+			ft_putnbr_fd(n / 10, fd);
+		ft_putchar_fd('0' + n % 10, fd);
+	}
 }
