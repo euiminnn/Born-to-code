@@ -6,13 +6,13 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/09 18:55:53 by echung            #+#    #+#             */
-/*   Updated: 2021/07/11 17:16:35 by echung           ###   ########.fr       */
+/*   Updated: 2021/07/12 18:41:08 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-void	client(int pid, char *str)
+void	send_str(int pid, char *str)
 {
 	int i;
 
@@ -34,6 +34,12 @@ void	client(int pid, char *str)
 
 int 	main(int argc, char **argv)
 {
-	client(pid, argv[2]);
+	int	pid;
+
+	if (argc != 3)
+		input_error();
+	if (is_num(argv[1]))
+		pid = ft_atoi(argv[1]);
+	send_str(pid, argv[2]);
 	return (0);
 }
