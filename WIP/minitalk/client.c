@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/09 18:55:53 by echung            #+#    #+#             */
-/*   Updated: 2021/07/18 00:14:19 by echung           ###   ########.fr       */
+/*   Updated: 2021/07/18 00:37:37 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,18 +67,27 @@ void	my_handler(int signum)
 {
 	if (signum == SIGUSR1)
 		//write(1, "Received SIGUSR1\n", 17);
-		printf("👦🏻 Love you more\n");
+		printf("Message sent.\n");
+}
+void	my_handler2(int signum)
+{
+	if (signum == SIGUSR2)
+		printf("👦🏻Love you more\n");
 }
 int 	main(int argc, char **argv)
 {
 	if (argc != 3)
 		usage_error();
 	signal(SIGUSR1, my_handler);
-	printf("PID: %d\n", getpid());
+	signal(SIGUSR2, my_handler2);
+	int pid = getpid();
+	printf("PID: %d\n", pid);
 	while (1)
 	{
 		printf("👧🏻 I love you babe💕\n");
 		sleep(1);
+		kill(pid, SIGUSR1);
+		sleep(5);
 	}
 	//send_message(argv[1], argv[2]);
 	return (0);
