@@ -5,50 +5,26 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/19 01:51:39 by echung            #+#    #+#             */
-/*   Updated: 2021/07/19 02:39:03 by echung           ###   ########.fr       */
+/*   Created: 2021/07/09 18:55:42 by echung            #+#    #+#             */
+/*   Updated: 2021/07/13 22:58:48 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-void	my_handler(int signum)
+void	handler(int num)
 {
-	int binary;
-	int i;
-	int result;
-	
-	binary = 0;
-	i = 0;
-	while (i < 8)
-	{
-		if (signum == SIGUSR1)
-		{
-			binary = binary << 1;
-			binary += 1;
-		}
-		else if (signum == SIGUSR2)
-		{
-			binary = binary << 1;
-		}
-		else
-			return (0);
-		i++;
-	}
-	result = binary + '0' - '0';
-	ft_putchar_fd(result, 1);
+	ft_putchar_fd(num, 1);
 }
 
-int	main(void)
+int		main(void)
 {
-	if (signal(SIGUSR1, my_handler) == SIG_ERR ||
-			signal(SIGUSR2, my_handler) == SIG_ERR)
+	if ((signal(SIGUSR1, handler) == SIG_ERR)
+			|| (signal(SIGUSR2, handler) == SIG_ERR))
 	{
-		ft_putstr_fd("Sig error.\n", 2);
+		write(2, "Error\n", 6);
 		return (0);
 	}
-	ft_putstr_fd("server PID: ", 1);
-	ft_putnbr_fd(getpid(), 1);
-	ft_putstr_fd("\n", 1);
-	return (0);
+	
+	printf("PID: %d\n", getpid());
 }

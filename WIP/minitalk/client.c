@@ -5,99 +5,59 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/09 18:55:53 by echung            #+#    #+#             */
-/*   Updated: 2021/07/18 00:37:37 by echung           ###   ########.fr       */
+/*   Created: 2021/07/19 00:30:27 by echung            #+#    #+#             */
+/*   Updated: 2021/07/19 01:50:52 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
-/*
-void	send_str(int pid, char *str)
-{
-	int i;
 
-	while (*str != '\0')
+void	send(int pid, unsigned char c)
+{
+	int cal;
+
+	cal = 1 << 7;		//1000 0000(2)
+	if (c)
 	{
-		i = 0;
-		while (i < 8)
+		while (cal)
 		{
-			if ()
-				kill(pid, SIGUSR1);
+			if ((cal & c) && kill(pid, SIGUSR1) > 0)	//SIGUSR1 = 1;
+				cal = cal >> 1;
+			else if (kill(pid, SIGUSR2) > 0)			//SIGUSR2 = 0;
+				cal = cal >> 1;
 			else
-				kill(pid, SIGUSR2);
-			usleep(100);
-			i++;
+				return (0);
 		}
-		str++;
 	}
 }
-*/
-/*
-void	pid_error(void)
-{
-	write(2, "Please check PID range.\n", 25);
-}
-*/
-/*
-void	send_char(int pid, char *message)
-{
 
-}
-
-void	send_message(char *pid, char *message)
+void	preprocess(char *pid, char *message)
 {
 	int	pid;
-
+	
 	pid = ft_atoi(pid);
 	while (*message != '\0')
 	{
-		send_char(pid, *message);
+		send(pid, *message);
 		message++;
 	}
 }
-*/
-void	usage_error(void)
+
+int	is_valid_arg(char **argv)
 {
-	write(2, "usage: ./client [PID] [MESSAGE]\n", 32);
-	exit(0);
+	if ((argv[0] == './client')
+		&& (argv[1] > 0 && argv[1] < 99999)
+		&& (argv[2] == str))
+		return (1);
+	else
+		return (0);
 }
 
-#include <stdio.h>
-void	my_handler(int signum)
+int	main(int argc, char **argv)
 {
-	if (signum == SIGUSR1)
-		//write(1, "Received SIGUSR1\n", 17);
-		printf("Message sent.\n");
-}
-void	my_handler2(int signum)
-{
-	if (signum == SIGUSR2)
-		printf("👦🏻Love you more\n");
-}
-int 	main(int argc, char **argv)
-{
-	if (argc != 3)
-		usage_error();
-	signal(SIGUSR1, my_handler);
-	signal(SIGUSR2, my_handler2);
-	int pid = getpid();
-	printf("PID: %d\n", pid);
-	while (1)
-	{
-		printf("👧🏻 I love you babe💕\n");
-		sleep(1);
-		kill(pid, SIGUSR1);
-		sleep(5);
-	}
-	//send_message(argv[1], argv[2]);
+	if ((argc == 3) && (is_valid_arg(argv)))
+		preprocess(argv[1], argv[2]);
+	else
+		ft_putstr_fd("Input error.\n", 2);
 	return (0);
-	/*
-	if (pid < 0 || pid > 32768)
-		pid_error();
-	*/
-	/*
-	if (is_num(argv[1]))
-		pid = ft_atoi(argv[1]);
-	send_str(pid, argv[2]);
-	*/
 }
