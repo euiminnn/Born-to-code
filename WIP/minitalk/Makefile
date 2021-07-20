@@ -6,7 +6,7 @@
 #    By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/15 22:13:22 by echung            #+#    #+#              #
-#    Updated: 2021/07/08 12:31:12 by echung           ###   ########.fr        #
+#    Updated: 2021/07/20 23:50:07 by echung           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,9 @@ NAME_CLIENT = client
 CFLAGS	= -Wall -Wextra -Werror -I.
 
 SRCS_SERVER	= server.c \
+			  utils.c
 SRCS_CLIENT	= client.c \
+			  utils.c
 
 
 OBJS_SERVER	= $(SRCS_SERVER:%.c=%.o)

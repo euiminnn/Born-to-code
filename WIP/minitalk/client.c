@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 00:30:27 by echung            #+#    #+#             */
-/*   Updated: 2021/07/19 01:50:52 by echung           ###   ########.fr       */
+/*   Updated: 2021/07/20 23:49:52 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,28 +26,65 @@ void	send(int pid, unsigned char c)
 			else if (kill(pid, SIGUSR2) > 0)			//SIGUSR2 = 0;
 				cal = cal >> 1;
 			else
-				return (0);
+				return ;
 		}
 	}
 }
 
+int	ft_atoi(char *str)
+{
+	int	sign;
+	int	result;
+
+	sign = 1;
+	while (*str == ' ' || (9 <= *str && *str <= 13))
+		str++;
+	while (*str == '-' || *str == '+')
+	{
+		if (*str == '-')
+			sign = sign * -1;
+		str++;
+		if (*str == '-' || *str == '+')
+			return (0);
+	}
+	result = 0;
+	while ('0' <= *str && *str <= '9')
+	{
+		result = result * 10 + (*str - '0');
+		str++;
+	}
+	return (sign * result);
+}
+
 void	preprocess(char *pid, char *message)
 {
-	int	pid;
+	int	send_pid;
 	
-	pid = ft_atoi(pid);
+	send_pid = ft_atoi(pid);
 	while (*message != '\0')
 	{
-		send(pid, *message);
+		send(send_pid, *message);
 		message++;
 	}
 }
 
+int	ft_isinteger(char *c)
+{
+	if (*c == '\0')
+		return (0);
+	while (*c != '\0')
+	{
+		if ('0' <= *c && *c <= '9')
+			c++;
+		else
+			return (0);
+	}
+	return (1);
+}
+
 int	is_valid_arg(char **argv)
 {
-	if ((argv[0] == './client')
-		&& (argv[1] > 0 && argv[1] < 99999)
-		&& (argv[2] == str))
+	if ((ft_isinteger(argv[1])) && (ft_strlen(argv[1]) <= 5))
 		return (1);
 	else
 		return (0);

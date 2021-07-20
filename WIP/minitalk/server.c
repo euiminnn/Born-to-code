@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 01:51:39 by echung            #+#    #+#             */
-/*   Updated: 2021/07/19 02:39:03 by echung           ###   ########.fr       */
+/*   Updated: 2021/07/20 23:39:21 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	my_handler(int signum)
 			binary = binary << 1;
 		}
 		else
-			return (0);
+			return ;
 		i++;
 	}
 	result = binary + '0' - '0';
