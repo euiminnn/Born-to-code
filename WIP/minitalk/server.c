@@ -6,12 +6,12 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 01:51:39 by echung            #+#    #+#             */
-/*   Updated: 2021/07/20 23:39:21 by echung           ###   ########.fr       */
+/*   Updated: 2021/07/20 23:57:21 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
-
+#include <stdio.h>
 void	my_handler(int signum)
 {
 	int binary;
@@ -50,5 +50,7 @@ int	main(void)
 	ft_putstr_fd("server PID: ", 1);
 	ft_putnbr_fd(getpid(), 1);
 	ft_putstr_fd("\n", 1);
+	while (1)
+		pause();
 	return (0);
 }

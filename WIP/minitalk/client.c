@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 00:30:27 by echung            #+#    #+#             */
-/*   Updated: 2021/07/20 23:49:52 by echung           ###   ########.fr       */
+/*   Updated: 2021/07/20 23:57:41 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	send(int pid, unsigned char c)
 				cal = cal >> 1;
 			else
 				return ;
+			usleep(100);
 		}
 	}
 }
