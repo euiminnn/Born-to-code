@@ -6,36 +6,46 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 01:51:39 by echung            #+#    #+#             */
-/*   Updated: 2021/07/20 23:57:21 by echung           ###   ########.fr       */
+/*   Updated: 2021/07/21 10:12:28 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 #include <stdio.h>
+
 void	my_handler(int signum)
 {
-	int binary;
+	static int binary;
 	int i;
-	int result;
+	static char result;
+	int nsig;
 	
+	nsig = 0;
 	binary = 0;
 	i = 0;
+	result = 0;
 	while (i < 8)
 	{
 		if (signum == SIGUSR1)
 		{
 			binary = binary << 1;
 			binary += 1;
+			nsig++;
+			//printf("SIGUSR1\n");
 		}
 		else if (signum == SIGUSR2)
 		{
 			binary = binary << 1;
+			nsig++;
+			//printf("SIGUSR2\n");
 		}
 		else
 			return ;
 		i++;
 	}
+	//printf("signal received = %d\n", nsig);
 	result = binary + '0' - '0';
+	//printf("result = %c\n", result);
 	ft_putchar_fd(result, 1);
 }
 

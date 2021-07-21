@@ -6,29 +6,42 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 00:30:27 by echung            #+#    #+#             */
-/*   Updated: 2021/07/20 23:57:41 by echung           ###   ########.fr       */
+/*   Updated: 2021/07/21 10:04:41 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
+#include <stdio.h>
 
 void	send(int pid, unsigned char c)
 {
 	int cal;
+	int count_send = 0;
 
 	cal = 1 << 7;		//1000 0000(2)
-	if (c)
+	//printf("cal = %d\n", cal);
+	while (cal > 0)
 	{
-		while (cal)
+		printf("char = %c\n", c);
+		if (cal & c)
+			printf("yes\n");
+		if ((cal & c) && kill(pid, SIGUSR1) != -1)	//SIGUSR1 = 1;
 		{
-			if ((cal & c) && kill(pid, SIGUSR1) > 0)	//SIGUSR1 = 1;
-				cal = cal >> 1;
-			else if (kill(pid, SIGUSR2) > 0)			//SIGUSR2 = 0;
-				cal = cal >> 1;
-			else
-				return ;
-			usleep(100);
+			printf("cal sigusr1 = %d\n", cal);
+			cal = cal >> 1;
+			count_send++;
+
 		}
+		else if (kill(pid, SIGUSR2) != -1)			//SIGUSR2 = 0;
+		{
+			printf("cal sigusr2 = %d\n", cal);
+			cal = cal >> 1;
+			count_send++;
+		}
+		else
+			return ;
+		printf("send count: %d\n", count_send);
+		usleep(100);
 	}
 }
 
@@ -97,5 +110,6 @@ int	main(int argc, char **argv)
 		preprocess(argv[1], argv[2]);
 	else
 		ft_putstr_fd("Input error.\n", 2);
+	printf("message = %s\n", argv[2]);
 	return (0);
 }
