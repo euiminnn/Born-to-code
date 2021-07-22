@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 23:46:15 by echung            #+#    #+#             */
-/*   Updated: 2021/07/20 23:48:21 by echung           ###   ########.fr       */
+/*   Updated: 2021/07/22 21:06:02 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,17 @@ size_t	ft_strlen(const char *str)
 		str++;
 	}
 	return (num);
+}
+
+int	ft_atoi(char *str)
+{
+	int	result;
+
+	result = 0;
+	while ('0' <= *str && *str <= '9')
+	{
+		result = result * 10 + (*str - '0');
+		str++;
+	}
+	return (result);
 }

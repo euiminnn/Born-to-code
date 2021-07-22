@@ -6,53 +6,42 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 01:51:39 by echung            #+#    #+#             */
-/*   Updated: 2021/07/21 10:12:28 by echung           ###   ########.fr       */
+/*   Updated: 2021/07/22 21:04:00 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
-#include <stdio.h>
 
 void	my_handler(int signum)
 {
-	static int binary;
-	int i;
-	static char result;
-	int nsig;
-	
-	nsig = 0;
-	binary = 0;
-	i = 0;
-	result = 0;
-	while (i < 8)
+	static int	binary = 0;
+	static int	i = 0;
+	char		result;
+
+	if (signum == SIGUSR1)
 	{
-		if (signum == SIGUSR1)
-		{
-			binary = binary << 1;
-			binary += 1;
-			nsig++;
-			//printf("SIGUSR1\n");
-		}
-		else if (signum == SIGUSR2)
-		{
-			binary = binary << 1;
-			nsig++;
-			//printf("SIGUSR2\n");
-		}
-		else
-			return ;
+		binary = binary << 1;
+		binary += 1;
 		i++;
 	}
-	//printf("signal received = %d\n", nsig);
-	result = binary + '0' - '0';
-	//printf("result = %c\n", result);
-	ft_putchar_fd(result, 1);
+	else if (signum == SIGUSR2)
+	{
+		binary = binary << 1;
+		i++;
+	}
+	else
+		return ;
+	if (i != 0 && i % 8 == 0)
+	{
+		result = binary + '0' - '0';
+		ft_putchar_fd(result, 1);
+	}
 }
 
 int	main(void)
 {
-	if (signal(SIGUSR1, my_handler) == SIG_ERR ||
-			signal(SIGUSR2, my_handler) == SIG_ERR)
+	if (signal(SIGUSR1, my_handler) == SIG_ERR
+		|| signal(SIGUSR2, my_handler) == SIG_ERR)
 	{
 		ft_putstr_fd("Sig error.\n", 2);
 		return (0);
