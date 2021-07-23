@@ -6,10 +6,10 @@
 #    By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/17 01:36:57 by echung            #+#    #+#              #
-#    Updated: 2021/07/17 01:36:58 by echung           ###   ########.fr        #
+#    Updated: 2021/07/23 22:12:21 by echung           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 all:
-	gcc -L../mlx -lmlx -framework OpenGL -framework AppKit main.c
+	gcc -L../mlx -lmlx -framework OpenGL -framework AppKit press_key.c
 	./a.out

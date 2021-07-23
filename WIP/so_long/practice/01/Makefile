@@ -6,10 +6,10 @@
 #    By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/17 01:29:35 by echung            #+#    #+#              #
-#    Updated: 2021/07/17 01:29:40 by echung           ###   ########.fr        #
+#    Updated: 2021/07/23 22:11:44 by echung           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 all:
-	gcc -L../mlx -lmlx -framework OpenGL -framework AppKit main.c
+	gcc -L../mlx -lmlx -framework OpenGL -framework AppKit open_window.c
 	./a.out
