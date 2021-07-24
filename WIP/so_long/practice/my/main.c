@@ -40,7 +40,11 @@ void			param_init(t_param *param)
 int				key_press(int keycode, t_param *param)
 {
 	static int a = 0;
-
+/*
+	void	*img_black;
+	int		img_w;
+	int		img_h;
+*/
 	if (keycode == KEY_W)//Action when W key pressed
 	{
 		printf("up key pressed\n");
@@ -49,6 +53,10 @@ int				key_press(int keycode, t_param *param)
 	else if (keycode == KEY_S) //Action when S key pressed
 	{
 		printf("down key pressed\n");
+/*
+		img_black = mlx_xpm_file_to_image(mlx, "../textures/black_window.xpm", &img_w, &img_h);
+		mlx_put_image_to_window(mlx, win, img, 200, 200);	// ?????should i send win?????
+*/
 		param->x--;
 	}
 	else if (keycode == KEY_ESC) //Quit the program when ESC key pressed
@@ -83,9 +91,9 @@ int		main(void)
 	img = mlx_xpm_file_to_image(mlx, "../textures/pduck-cutout.xpm", &img_width, &img_height);
 	img_h1 = mlx_xpm_file_to_image(mlx, "../textures/pduck_hurt1-cutout.xpm", &img_width, &img_height);
 	img_h2 = mlx_xpm_file_to_image(mlx, "../textures/pduck_hurt2-cutout.xpm", &img_width, &img_height);
-	mlx_put_image_to_window(mlx, win, img, 5, 5);
+	//mlx_put_image_to_window(mlx, win, img, 5, 5);
 	mlx_put_image_to_window(mlx, win, img_h1, 200, 200);
-	mlx_put_image_to_window(mlx, win, img_h2, 400, 400);
+	//mlx_put_image_to_window(mlx, win, img_h2, 400, 400);
 	
 	mlx_loop(mlx);
 }
