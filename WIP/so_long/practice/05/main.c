@@ -24,7 +24,7 @@ int main()
 
 		mlx = mlx_init();
 		win = mlx_new_window(mlx, 500, 500, "my_mlx");
-		img.ptr = mlx_xpm_file_to_image(mlx, "../textures/wall_s.xpm", &img.width, &img.height);
+		img.ptr = mlx_xpm_file_to_image(mlx, "../textures/pduck.xpm", &img.width, &img.height);
 		img.data = (int *)mlx_get_data_addr(img.ptr, &img.bpp, &img.size_l, &img.endian);
 
 		count_h = -1;
