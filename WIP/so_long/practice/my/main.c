@@ -53,11 +53,17 @@ int				key_press(int keycode, t_param *param)
 	else if (keycode == KEY_S) //Action when S key pressed
 	{
 		printf("down key pressed\n");
-/*
-		img_black = mlx_xpm_file_to_image(mlx, "../textures/black_window.xpm", &img_w, &img_h);
-		mlx_put_image_to_window(mlx, win, img, 200, 200);	// ?????should i send win?????
-*/
 		param->x--;
+	}
+	else if (keycode == KEY_D)
+	{
+		printf("front key pressed\n");
+		param->y++;
+	}
+	else if (keycode == KEY_A)
+	{
+		printf("back key pressed\n");
+		param->y--;
 	}
 	else if (keycode == KEY_ESC) //Quit the program when ESC key pressed
 		exit(0);
