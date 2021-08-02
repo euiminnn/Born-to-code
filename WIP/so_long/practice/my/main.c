@@ -31,9 +31,8 @@ typedef struct s_param{
 void	*mlx;
 void	*win;
 t_param	param;
-void	*img;
-void	*img_h1;
-void	*img_h2;
+void	*img_w1;
+void	*img_w3;
 void	*back;
 
 //Only param->x will be used.
@@ -78,9 +77,11 @@ int				key_press(int keycode)
 		exit(0);
 	printf("x: %d\n", param.x);
 	mlx_put_image_to_window(mlx, win, back, 0, 0);
-	//mlx_put_image_to_window(mlx, win, img, 5, 5);
-	mlx_put_image_to_window(mlx, win, img_h1, 200 + param.x, 200 + param.y);
-	//mlx_put_image_to_window(mlx, win, img_h2, 400, 400);
+	if ((param.x/32) % 2 == 0)
+		mlx_put_image_to_window(mlx, win, img_w1, param.x, param.y);
+	else
+		mlx_put_image_to_window(mlx, win, img_w3, param.x, param.y);
+		
 	return (0);
 }
 
@@ -94,21 +95,19 @@ int		main(void)
 	param_init(&param);
 
 	//open window
-	win = mlx_new_window(mlx, 800, 800, "purple_quack");
+	win = mlx_new_window(mlx, 400, 400, "mushroom");
 	
 	//key press
 	mlx_hook(win, X_EVENT_KEY_PRESS, 0, &key_press, 0);
 
 	//add image
-	back = mlx_new_image(mlx, 800, 800);
-	img = mlx_xpm_file_to_image(mlx, "../textures/pduck-cutout.xpm", &img_width, &img_height);
-	img_h1 = mlx_xpm_file_to_image(mlx, "../textures/pduck_hurt1-cutout.xpm", &img_width, &img_height);
-	img_h2 = mlx_xpm_file_to_image(mlx, "../textures/pduck_hurt2-cutout.xpm", &img_width, &img_height);
+	//back = mlx_new_image(mlx, 300, 300);
+	back = mlx_xpm_file_to_image(mlx, "../textures/mushroom_xpm/green.xpm", &img_width, &img_height);
+	img_w1 = mlx_xpm_file_to_image(mlx, "../textures/mushroom_xpm/walk1.xpm", &img_width, &img_height);
+	img_w3 = mlx_xpm_file_to_image(mlx, "../textures/mushroom_xpm/walk3.xpm", &img_width, &img_height);
 
 	mlx_put_image_to_window(mlx, win, back, 0, 0);
-	//mlx_put_image_to_window(mlx, win, img, 5, 5);
-	mlx_put_image_to_window(mlx, win, img_h1, 200 + param.x, 200 + param.y);
-	//mlx_put_image_to_window(mlx, win, img_h2, 400, 400);
+	mlx_put_image_to_window(mlx, win, img_w1, 0, 0);
 	
 	mlx_loop(mlx);
 }
