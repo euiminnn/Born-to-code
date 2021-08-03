@@ -1,6 +1,6 @@
 # SO_LONG
-## 0803
-<p align = "center"><img src = "https://github.com/euiminnn/image-upload/blob/master/shroom_and_tree.png" width = "600"></p>
+## Aug 3rd
+<p align = "center"><img src = "https://github.com/euiminnn/image-upload/blob/master/shroom_and_tree.png" width = "400"></p>
 
 - 나무(벽) 넣기
 - 왼발 오른발 움직이기
