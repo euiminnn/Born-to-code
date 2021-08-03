@@ -34,6 +34,7 @@ t_param	param;
 void	*img_w1;
 void	*img_w3;
 void	*back;
+void	*tree;
 
 //Only param->x will be used.
 void			param_init(t_param *param)
@@ -56,28 +57,34 @@ int				key_press(int keycode)
 	if (keycode == KEY_W)//Action when W key pressed
 	{
 		printf("up key pressed\n");
-		param.y -= 32;
+		param.y -= 48;
 	}
 	else if (keycode == KEY_S) //Action when S key pressed
 	{
 		printf("down key pressed\n");
-		param.y += 32;
+		param.y += 48;
 	}
 	else if (keycode == KEY_D)
 	{
 		printf("front key pressed\n");
-		param.x += 32;
+		param.x += 48;
 	}
 	else if (keycode == KEY_A)
 	{
 		printf("back key pressed\n");
-		param.x -= 32;
+		param.x -= 48;
 	}
 	else if (keycode == KEY_ESC) //Quit the program when ESC key pressed
 		exit(0);
 	printf("x: %d\n", param.x);
 	mlx_put_image_to_window(mlx, win, back, 0, 0);
-	if ((param.x/32) % 2 == 0)
+	mlx_put_image_to_window(mlx, win, tree, 96, 96);
+	mlx_put_image_to_window(mlx, win, tree, 96+48, 96);
+	mlx_put_image_to_window(mlx, win, tree, 96+48*2, 96);
+	mlx_put_image_to_window(mlx, win, tree, 96+48*3, 96);
+	mlx_put_image_to_window(mlx, win, tree, 96+48*3, 96+48);
+	mlx_put_image_to_window(mlx, win, tree, 96+48*3, 96+48*2);
+	if ((param.x/48) % 2 == 0)
 		mlx_put_image_to_window(mlx, win, img_w1, param.x, param.y);
 	else
 		mlx_put_image_to_window(mlx, win, img_w3, param.x, param.y);
@@ -95,18 +102,25 @@ int		main(void)
 	param_init(&param);
 
 	//open window
-	win = mlx_new_window(mlx, 400, 400, "mushroom");
+	win = mlx_new_window(mlx, 480, 480, "mushroom");
 	
 	//key press
 	mlx_hook(win, X_EVENT_KEY_PRESS, 0, &key_press, 0);
 
 	//add image
 	//back = mlx_new_image(mlx, 300, 300);
-	back = mlx_xpm_file_to_image(mlx, "../textures/mushroom_xpm/green.xpm", &img_width, &img_height);
+	back = mlx_xpm_file_to_image(mlx, "../textures/grass_n_flower-480.xpm", &img_width, &img_height);
+	tree = mlx_xpm_file_to_image(mlx, "../textures/tree_48.xpm", &img_width, &img_height);
 	img_w1 = mlx_xpm_file_to_image(mlx, "../textures/mushroom_xpm/walk1.xpm", &img_width, &img_height);
 	img_w3 = mlx_xpm_file_to_image(mlx, "../textures/mushroom_xpm/walk3.xpm", &img_width, &img_height);
 
 	mlx_put_image_to_window(mlx, win, back, 0, 0);
+	mlx_put_image_to_window(mlx, win, tree, 96, 96);
+	mlx_put_image_to_window(mlx, win, tree, 96+48, 96);
+	mlx_put_image_to_window(mlx, win, tree, 96+48*2, 96);
+	mlx_put_image_to_window(mlx, win, tree, 96+48*3, 96);
+	mlx_put_image_to_window(mlx, win, tree, 96+48*3, 96+48);
+	mlx_put_image_to_window(mlx, win, tree, 96+48*3, 96+48*2);
 	mlx_put_image_to_window(mlx, win, img_w1, 0, 0);
 	
 	mlx_loop(mlx);
