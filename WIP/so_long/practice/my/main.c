@@ -35,12 +35,16 @@ void	*img_w1;
 void	*img_w3;
 void	*back;
 void	*tree;
+void	*portal;
+void	*heart_r;
+void	*heart_b;
+void	*heart_p;
 
 //Only param->x will be used.
 void			param_init(t_param *param)
 {
-	param->x = 3;
-	param->y = 4;
+	param->x = 0;
+	param->y = 0;
 	param->str[0] = 'a';
 	param->str[1] = 'b';
 	param->str[2] = '\0';
@@ -49,6 +53,7 @@ void			param_init(t_param *param)
 int				key_press(int keycode)
 {
 	static int a = 0;
+	int flag = 0;
 /*
 	void	*img_black;
 	int		img_w;
@@ -58,37 +63,56 @@ int				key_press(int keycode)
 	{
 		printf("up key pressed\n");
 		param.y -= 48;
+		if (param.y == 96)
+			flag = -2;
 	}
 	else if (keycode == KEY_S) //Action when S key pressed
 	{
 		printf("down key pressed\n");
 		param.y += 48;
+		if (param.y == 96)
+			flag = 2;
 	}
 	else if (keycode == KEY_D)
 	{
 		printf("front key pressed\n");
 		param.x += 48;
+		if (param.x == 96)
+			flag = 1;
 	}
 	else if (keycode == KEY_A)
 	{
 		printf("back key pressed\n");
 		param.x -= 48;
+		if (param.x == 96)
+			flag = -1;
 	}
 	else if (keycode == KEY_ESC) //Quit the program when ESC key pressed
 		exit(0);
 	printf("x: %d\n", param.x);
 	mlx_put_image_to_window(mlx, win, back, 0, 0);
 	mlx_put_image_to_window(mlx, win, tree, 96, 96);
-	mlx_put_image_to_window(mlx, win, tree, 96+48, 96);
-	mlx_put_image_to_window(mlx, win, tree, 96+48*2, 96);
-	mlx_put_image_to_window(mlx, win, tree, 96+48*3, 96);
-	mlx_put_image_to_window(mlx, win, tree, 96+48*3, 96+48);
-	mlx_put_image_to_window(mlx, win, tree, 96+48*3, 96+48*2);
+	mlx_put_image_to_window(mlx, win, heart_r, 96+48, 96+48*2);
+	mlx_put_image_to_window(mlx, win, heart_b, 96+48*2, 96+48*2);
+	mlx_put_image_to_window(mlx, win, heart_p, 480-48*2, 480-48*3);
+	mlx_put_image_to_window(mlx, win, portal, 480-48*2, 480-48*2);
+	//mlx_put_image_to_window(mlx, win, tree, 96+48, 96);
+	//mlx_put_image_to_window(mlx, win, tree, 96+48*2, 96);
+	//mlx_put_image_to_window(mlx, win, tree, 96+48*3, 96);
+	//mlx_put_image_to_window(mlx, win, tree, 96+48*3, 96+48);
+	//mlx_put_image_to_window(mlx, win, tree, 96+48*3, 96+48*2);
+	if (param.x == 96 && param.y == 96 && (flag == 1 || flag == -1))
+		param.x -= flag * 48;
+	if (param.x == 96 && param.y == 96 && (flag == 2 || flag == -2))
+		param.y -= flag / 2 * 48;
+	if (param.x == 480-48*2 && param.y == 480-48*2)
+		exit(0);
+	if (param.x == 96+48 && param.y == 96+48*2)
+		mlx_destroy_image(mlx, heart_r);
 	if ((param.x/48) % 2 == 0)
 		mlx_put_image_to_window(mlx, win, img_w1, param.x, param.y);
 	else
-		mlx_put_image_to_window(mlx, win, img_w3, param.x, param.y);
-		
+		mlx_put_image_to_window(mlx, win, img_w3, param.x, param.y);	
 	return (0);
 }
 
@@ -113,14 +137,22 @@ int		main(void)
 	tree = mlx_xpm_file_to_image(mlx, "../textures/tree_48.xpm", &img_width, &img_height);
 	img_w1 = mlx_xpm_file_to_image(mlx, "../textures/mushroom_xpm/walk1.xpm", &img_width, &img_height);
 	img_w3 = mlx_xpm_file_to_image(mlx, "../textures/mushroom_xpm/walk3.xpm", &img_width, &img_height);
+	heart_r = mlx_xpm_file_to_image(mlx, "../textures/redheart_48_withmargin.xpm", &img_width, &img_height);
+	heart_b = mlx_xpm_file_to_image(mlx, "../textures/blueheart_48_withmargin.xpm", &img_width, &img_height);
+	heart_p = mlx_xpm_file_to_image(mlx, "../textures/purpleheart_48_withmargin.xpm", &img_width, &img_height);
+	portal = mlx_xpm_file_to_image(mlx, "../textures/portal_48.xpm", &img_width, &img_height);
 
 	mlx_put_image_to_window(mlx, win, back, 0, 0);
 	mlx_put_image_to_window(mlx, win, tree, 96, 96);
-	mlx_put_image_to_window(mlx, win, tree, 96+48, 96);
-	mlx_put_image_to_window(mlx, win, tree, 96+48*2, 96);
-	mlx_put_image_to_window(mlx, win, tree, 96+48*3, 96);
-	mlx_put_image_to_window(mlx, win, tree, 96+48*3, 96+48);
-	mlx_put_image_to_window(mlx, win, tree, 96+48*3, 96+48*2);
+	mlx_put_image_to_window(mlx, win, heart_r, 96+48, 96+48*2);
+	mlx_put_image_to_window(mlx, win, heart_b, 96+48*2, 96+48*2);
+	mlx_put_image_to_window(mlx, win, heart_p, 480-48*2, 480-48*3);
+	mlx_put_image_to_window(mlx, win, portal, 480-48*2, 480-48*2);
+	//mlx_put_image_to_window(mlx, win, tree, 96+48, 96);
+	//mlx_put_image_to_window(mlx, win, tree, 96+48*2, 96);
+	//mlx_put_image_to_window(mlx, win, tree, 96+48*3, 96);
+	//mlx_put_image_to_window(mlx, win, tree, 96+48*3, 96+48);
+	//mlx_put_image_to_window(mlx, win, tree, 96+48*3, 96+48*2);
 	mlx_put_image_to_window(mlx, win, img_w1, 0, 0);
 	
 	mlx_loop(mlx);
