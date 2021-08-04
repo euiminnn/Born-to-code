@@ -1,3 +1,4 @@
+#include "so_long.h"
 #include "../mlx/mlx.h"
 
 #include <stdio.h>
@@ -22,12 +23,6 @@
 
 //Since key_press() can recieve only one argument, all the argument shold be gathered in one structure
 //x,y and str are meaningless variables.
-typedef struct s_param{
-	int		x;
-	int		y;
-	char	str[3];
-}				t_param;
-
 
 void	*mlx;
 void	*win;
@@ -41,6 +36,7 @@ int		heart;
 void	*heart_r;
 void	*heart_b;
 void	*heart_p;
+char	**arr;
 
 //Only param->x will be used.
 void			param_init(t_param *param)
@@ -61,6 +57,7 @@ int				key_press(int keycode)
 	int		img_w;
 	int		img_h;
 */
+
 	if (keycode == KEY_W)//Action when W key pressed
 	{
 		printf("up key pressed\n");
@@ -94,16 +91,31 @@ int				key_press(int keycode)
 	printf("x: %d\n", param.x);
 	mlx_put_image_to_window(mlx, win, back, 0, 0);
 	mlx_put_image_to_window(mlx, win, tree, 96, 96);
+
+	arr = readfile("map.ber");
+	int row = count_gnl("map.ber");
+	int column = ft_strlen(arr[0]);
+	int i = 0;
+	int j = 0;
+
+	while (i < row)
+	{
+		j = 0;
+		while (j < column)
+		{
+			if (arr[i][j] == '1')
+				mlx_put_image_to_window(mlx, win, tree, 48*j, 48*i);
+			j++;
+		}
+		i++;
+	}
+
 	if (heart == 1)
 		mlx_put_image_to_window(mlx, win, heart_r, 96+48, 96+48*2);
 	mlx_put_image_to_window(mlx, win, heart_b, 96+48*2, 96+48*2);
 	mlx_put_image_to_window(mlx, win, heart_p, 480-48*2, 480-48*3);
 	mlx_put_image_to_window(mlx, win, portal, 480-48*2, 480-48*2);
-	//mlx_put_image_to_window(mlx, win, tree, 96+48, 96);
-	//mlx_put_image_to_window(mlx, win, tree, 96+48*2, 96);
-	//mlx_put_image_to_window(mlx, win, tree, 96+48*3, 96);
-	//mlx_put_image_to_window(mlx, win, tree, 96+48*3, 96+48);
-	//mlx_put_image_to_window(mlx, win, tree, 96+48*3, 96+48*2);
+
 	if (param.x == 96 && param.y == 96 && (flag == 1 || flag == -1))
 		param.x -= flag * 48;
 	if (param.x == 96 && param.y == 96 && (flag == 2 || flag == -2))
@@ -119,109 +131,6 @@ int				key_press(int keycode)
 	return (0);
 }
 
-
-#define BUFFER_SIZE 1
-
-static int	find_index(char *s, char c)
-{
-	int	index;
-
-	index = 0;
-	while (*s != '\0')
-	{
-		if (*s == c)
-			return (index);
-		s++;
-		index++;
-	}
-	return (-1);
-}
-
-static int	save_line(char **str, char **line, int index)
-{
-	char	*temp;
-
-	*line = ft_substr(*str, 0, index);
-	temp = ft_substr(*str, index + 1, ft_strlen(*str) - index - 1);
-	free(*str);
-	*str = temp;
-	return (1);
-}
-
-int			get_next_line(int fd, char **line)
-{
-	static char	*str;
-	int			ret;
-	int			i_nl;
-	char		buff[BUFFER_SIZE + 1];
-
-	if (fd < 0 || !line || BUFFER_SIZE < 1 || read(fd, buff, 0) < 0)
-		return (-1);
-	if (str && ((i_nl = find_index(str, '\n')) != -1))
-		return (save_line(&str, line, i_nl));
-	while ((ret = read(fd, buff, BUFFER_SIZE)) > 0)
-	{
-		buff[ret] = '\0';
-		str = ft_strjoin_free(str ? str : ft_strdup(""), buff);
-		if (((i_nl = find_index(str, '\n')) != -1))
-			return (save_line(&str, line, i_nl));
-	}
-	if (str)
-	{
-		*line = ft_strdup(str);
-		free(str);
-		str = NULL;
-		return (0);
-	}
-	*line = ft_strdup("");
-	return (0);
-}
-
-int		count_gnl(char *filename)
-{
-	int		fd;
-	int		row;
-	int		check;
-	char	*line;
-
-	fd = open(filename, O_RDONLY);
-	row = 0;
-
-	while ((check = get_next_line(fd, &line)) > 0)
-	{
-		row++;
-		free(line);
-	}
-	free(line);
-	close(fd);
-	return (row);
-}
-
-// input : file name
-// output : array
-char	**read(char *filename)
-{
-    int    	fd;
-	char	*line;
-	int		check;
-	int		row;
-	char	**arr;
-	int		i;
-
-	row = count_gnl(filename);
-	arr = malloc(sizeof(char*) * row);
-    fd = open(filename, O_RDONLY);
-
-	i = 0;
-	while ((check = get_next_line(fd, &line)) > 0)
-	{
-		arr[i] = line;
-		i++;
-	}
-	free(line);
-	close(fd);
-	return (arr);
-}
 
 int		main(void)
 {
@@ -261,7 +170,25 @@ int		main(void)
 	//mlx_put_image_to_window(mlx, win, tree, 96+48*3, 96+48);
 	//mlx_put_image_to_window(mlx, win, tree, 96+48*3, 96+48*2);
 	mlx_put_image_to_window(mlx, win, img_w1, 0, 0);
-	heart = 1;	
-	mlx_loop(mlx);
+	heart = 1;
+	arr = readfile("map.ber");
+	int row = count_gnl("map.ber");
+	int column = ft_strlen(arr[0]);
+	int i = 0;
+	int j = 0;
+
+	while (i < row)
+	{
+		j = 0;
+		while (j < column)
+		{
+			if (arr[i][j] == '1')
+				mlx_put_image_to_window(mlx, win, tree, 48*j, 48*i);
+			j++;
+		}
+		i++;
+	}
+
 	free(arr);
+	mlx_loop(mlx);
 }

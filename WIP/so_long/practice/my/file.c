@@ -1,3 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   file.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/08/05 00:50:55 by echung            #+#    #+#             */
+/*   Updated: 2021/08/05 00:58:34 by echung           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "so_long.h"
 #include <stdio.h>
 #include <fcntl.h>
 #include <stdlib.h>
@@ -6,18 +19,9 @@
 
 #define BUFFER_SIZE 1
 
-size_t	ft_strlen(const char *str);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
-char	*ft_strjoin_free(char const *s1, char const *s2);
-char	*ft_strdup(const char *s1);
-void	*ft_memcpy(void *dst, const void *src, size_t n);
-
-int		get_next_line(int fd, char **line);
-int		find_index(char *s, char c);
-
-size_t	ft_strlen(const char *str)
+int	ft_strlen(const char *str)
 {
-	size_t	num;
+	int	num;
 
 	num = 0;
 	while (*str != '\0')
@@ -28,10 +32,10 @@ size_t	ft_strlen(const char *str)
 	return (num);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char const *s, unsigned int start, int len)
 {
 	char	*sub_of_s;
-	size_t	len_org;
+	int	len_org;
 
 	sub_of_s = malloc(sizeof(char) * (len + 1));
 	if (!(s))
@@ -48,8 +52,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 char	*ft_strjoin_free(char const *s1, char const *s2)
 {
 	char	*s1plus2;
-	size_t	len_s1;
-	size_t	len_s2;
+	int	len_s1;
+	int	len_s2;
 
 	if (!(s1))
 		return (ft_strdup(s2));
@@ -89,7 +93,7 @@ char	*ft_strdup(const char *src)
 	return (new);
 }
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+void	*ft_memcpy(void *dst, const void *src, int n)
 {
 	unsigned char	*dst_org;
 	unsigned char	*dst_mod;
@@ -211,7 +215,7 @@ char	**readfile(char *filename)
 	close(fd);
 	return (arr);
 }
-
+/*
 int main(void)
 {
 	char	**arr;
@@ -219,3 +223,4 @@ int main(void)
 	printf("%s\n", arr[0]);
 	free(arr);
 }
+*/
