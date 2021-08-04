@@ -12,3 +12,9 @@
 - Done: 나무에 못 올라타게 하기, Collectibles 추가하기, Exit 추가하기
 - Comment: 좀 알 것 같기도..(하루만에 ㅋ)
 - TODO: 여러군데 이동시 오류 발생하는 것 제거
+
+## Aug 5th
+<p align = "center"><img src = "https://github.com/euiminnn/image-upload/blob/master/map.png" width = "400"></p>
+
+- Done: 여러군데 이동시 오류 발생 제거, map.ber 파일 다루기
+- TODO: 나무에 못 올라가기& 아이템 먹으면 화면에서 제거하기 (하드코딩으로 되어있음)
