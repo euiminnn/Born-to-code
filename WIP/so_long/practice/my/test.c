@@ -11,6 +11,7 @@ int	is_instring(int c, char *s)
 	}
 	return (0);
 }
+
 int main(void)
 {
 	if (is_instring('a', "abc"))

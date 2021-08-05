@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 00:50:55 by echung            #+#    #+#             */
-/*   Updated: 2021/08/06 02:01:17 by echung           ###   ########.fr       */
+/*   Updated: 2021/08/06 02:36:27 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,7 +211,14 @@ char	**readfile(char *filename)
 	while ((check = get_next_line(fd, &line)) > 0)
 	{
 		arr[i] = line;
-		i++;
+		if (ft_strlen(arr[0]) == ft_strlen(arr[i]))
+			i++;
+		else
+		{
+			printf("🚫 Error: different column size\n");
+			// SEG FAULT WHEN FIRST LINE OF MAP IS SMALLER //
+			return (0);
+		}
 	}
 	free(line);
 	close(fd);
@@ -231,7 +238,7 @@ int	is_instring(int c, char *s)
 	return (0);
 }
 
-int	parse_map(char **arr, int row, int column)
+int	check_element(char **arr, int row, int column)
 {
 	int i;
 	int j;
@@ -250,6 +257,72 @@ int	parse_map(char **arr, int row, int column)
 		i++;
 	}
 	return (1);
+}
+
+int	is_surrounded(char **arr, int row, int column)
+{
+	int i;
+	int j;
+	i = 0;
+	j = 0;
+	while (j < column)
+	{
+		if (arr[0][j] == '1' && arr[row-1][j] == '1')
+			j++;
+		else
+		{
+			printf("🚫 Error: column not surrounded\n");
+			return (0);
+		}
+	}
+	while (i < row)
+	{
+		if (arr[i][0] == '1' && arr[i][column-1] == '1')
+			i++;
+		else
+		{
+			printf("🚫 Error: row not surrounded\n");
+			return (0);
+		}
+	}
+	return (1);
+}
+/*
+int	is_samecolnum(char **arr, int row, int column)
+{
+	int i;
+	i = 0;
+	while (i < row)
+	{
+		if (ft_strlen(arr[i]) == column)
+			i++;
+		else
+			return (0);
+	}
+	return (1);
+}
+*/
+#define Max 2
+int	parse_map(char **arr, int row, int column)
+{
+	int score;
+
+	score = 0;
+/*
+	if (is_samecolnum(arr, row, column))
+		score++;
+	else
+		return (0);
+*/
+	if (check_element(arr, row, column))
+		score++;
+	if (is_surrounded(arr, row, column))
+		score++;
+
+	if (score == Max)
+		return (1);
+	else
+		return (0);
 }
 /*
 int main(void)
