@@ -208,9 +208,10 @@ int		main(void)
 		}
 		i++;
 	}
-	printf("start_x: %d\n", start_x);
-	printf("start_y: %d\n", start_y);
 	param_init(&param);
-	mlx_loop(mlx);
+	if (parse_map(arr, row, column))
+		mlx_loop(mlx);
+	else
+		printf("🚫 Error: invalid map\n");
 	free(arr);
 }

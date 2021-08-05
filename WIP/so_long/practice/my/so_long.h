@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 00:43:58 by echung            #+#    #+#             */
-/*   Updated: 2021/08/05 00:59:40 by echung           ###   ########.fr       */
+/*   Updated: 2021/08/06 02:01:55 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,8 @@ char	*ft_strdup(const char *src);
 char	*ft_strjoin_free(char const *s1, char const *s2);
 char	*ft_substr(char const *s, unsigned int start, int len);
 int	ft_strlen(const char *str);
+
+int	parse_map(char **arr, int row, int column);
+int	is_instring(int c, char *s);
 
 #endif

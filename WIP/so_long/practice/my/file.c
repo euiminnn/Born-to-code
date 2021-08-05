@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 00:50:55 by echung            #+#    #+#             */
-/*   Updated: 2021/08/05 00:58:34 by echung           ###   ########.fr       */
+/*   Updated: 2021/08/06 02:01:17 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+
+//char	**arr;
 
 #define BUFFER_SIZE 1
 
@@ -215,12 +217,53 @@ char	**readfile(char *filename)
 	close(fd);
 	return (arr);
 }
+
+int	is_instring(int c, char *s)
+{
+	if (c == '\0')
+		return (0);
+	while (*s != '\0')
+	{
+		if (c == *s)
+			return (1);
+		s++;
+	}
+	return (0);
+}
+
+int	parse_map(char **arr, int row, int column)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (i < row)
+	{
+		j = 0;
+		while (j < column)
+		{
+			if (is_instring(arr[i][j], "01CEP"))
+				j++;
+			else
+				return (0);
+		}
+		i++;
+	}
+	return (1);
+}
 /*
 int main(void)
 {
-	char	**arr;
 	arr = readfile("map.ber");
-	printf("%s\n", arr[0]);
+	//printf("%s\n", arr[0]);
+
+	int row = count_gnl("map.ber");
+	int column = ft_strlen(arr[0]);
+	
+	if (parse_map(arr, row, column))
+		printf("✅ Valid map\n");
+	else
+		printf("Error: invalid map\n");
 	free(arr);
 }
 */
