@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 00:50:55 by echung            #+#    #+#             */
-/*   Updated: 2021/08/06 02:36:27 by echung           ###   ########.fr       */
+/*   Updated: 2021/08/06 02:53:31 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -302,7 +302,46 @@ int	is_samecolnum(char **arr, int row, int column)
 	return (1);
 }
 */
-#define Max 2
+
+int	essential_element(char **arr, int row, int column)
+{
+	int e;
+	int c;
+	int p;
+
+	e = 0;
+	c = 0;
+	p = 0;
+
+	int i;
+	int j;
+	
+	i = 0;
+	while (i < row)
+	{
+		j = 0;
+		while (j < column)
+		{
+			if (arr[i][j] == 'E')
+				e++;
+			else if (arr[i][j] == 'C')
+				c++;
+			else if (arr[i][j] == 'P')
+				p++;
+			j++;
+		}
+		i++;
+	}
+	if (e*c*p == 1)
+		return (1);
+	else
+	{
+		printf("🚫 Essential element is missing!\n");
+		return (0);
+	}
+}
+
+#define Max 3
 int	parse_map(char **arr, int row, int column)
 {
 	int score;
@@ -314,11 +353,12 @@ int	parse_map(char **arr, int row, int column)
 	else
 		return (0);
 */
-	if (check_element(arr, row, column))
-		score++;
 	if (is_surrounded(arr, row, column))
 		score++;
-
+	if (check_element(arr, row, column))
+		score++;
+	if (essential_element(arr, row, column))
+		score++;
 	if (score == Max)
 		return (1);
 	else
