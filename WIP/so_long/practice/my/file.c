@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 00:50:55 by echung            #+#    #+#             */
-/*   Updated: 2021/08/06 02:53:31 by echung           ###   ########.fr       */
+/*   Updated: 2021/08/06 21:02:11 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,22 +205,19 @@ char	**readfile(char *filename)
 
 	row = count_gnl(filename);
 	arr = malloc(sizeof(char*) * row);
+	if (!arr)
+		return (0);
     fd = open(filename, O_RDONLY);
 
 	i = 0;
 	while ((check = get_next_line(fd, &line)) > 0)
 	{
 		arr[i] = line;
-		if (ft_strlen(arr[0]) == ft_strlen(arr[i]))
-			i++;
-		else
-		{
-			printf("🚫 Error: different column size\n");
-			// SEG FAULT WHEN FIRST LINE OF MAP IS SMALLER //
-			return (0);
-		}
+		i++;
 	}
 	free(line);
+	if (check == -1)
+		return (0);
 	close(fd);
 	return (arr);
 }
@@ -287,7 +284,7 @@ int	is_surrounded(char **arr, int row, int column)
 	}
 	return (1);
 }
-/*
+
 int	is_samecolnum(char **arr, int row, int column)
 {
 	int i;
@@ -297,11 +294,13 @@ int	is_samecolnum(char **arr, int row, int column)
 		if (ft_strlen(arr[i]) == column)
 			i++;
 		else
+		{
+			printf("🚫 Error: different column size\n");
 			return (0);
+		}
 	}
 	return (1);
 }
-*/
 
 int	essential_element(char **arr, int row, int column)
 {
@@ -341,25 +340,23 @@ int	essential_element(char **arr, int row, int column)
 	}
 }
 
-#define Max 3
+#define MAX 4
 int	parse_map(char **arr, int row, int column)
 {
 	int score;
 
 	score = 0;
-/*
 	if (is_samecolnum(arr, row, column))
 		score++;
 	else
 		return (0);
-*/
 	if (is_surrounded(arr, row, column))
 		score++;
 	if (check_element(arr, row, column))
 		score++;
 	if (essential_element(arr, row, column))
 		score++;
-	if (score == Max)
+	if (score == MAX)
 		return (1);
 	else
 		return (0);

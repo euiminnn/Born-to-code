@@ -128,20 +128,7 @@ int				key_press(int keycode)
 		}
 		i++;
 	}
-/*
-	if (heart == 1)
-		mlx_put_image_to_window(mlx, win, heart_r, 96+48*2, 96+48*2);
-*/
 
-/*
-	if (param.x == 480-48*2 && param.y == 480-48*2)
-		exit(0);
-*/
-//CHARACTER
-/*
-	if (param.x == 96+48 && param.y == 96+48*2)
-		heart = 0;
-*/
 	if ((param.x/48) % 2 == 0)
 		mlx_put_image_to_window(mlx, win, img_w1, param.x, param.y);
 	else
