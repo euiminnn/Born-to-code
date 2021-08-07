@@ -24,3 +24,8 @@
 
 - Done: 나무(못 올라가기), 아이템(먹으면 제거하기), 포탈(아이템 다 먹었으면 탈출하기), Map 검사(all valid elements, all surrounded by wall)
 - TODO: 전역변수 줄이기(백개정도ㅎㅎ;;), 함수 나누기(Norm :|), Leaks 검사, Map 검사(column size 다를 때 seg fault)
+
+## Aug 7th
+
+- Done: 함수 나누기, Map 검사
+- TODO: 전역변수 줄이기, Leaks 검사, 두 번째 인자 map.ber로 받기, Makefile 수정
