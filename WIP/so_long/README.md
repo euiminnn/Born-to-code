@@ -26,6 +26,7 @@
 - TODO: 전역변수 줄이기(백개정도ㅎㅎ;;), 함수 나누기(Norm :|), Leaks 검사, Map 검사(column size 다를 때 seg fault)
 
 ## Aug 7th
+<p align = "center"><img src = "https://github.com/euiminnn/image-upload/blob/master/lldb.png" width = "700"></p>
 
 - Done: 함수 나누기, Map 검사
 - TODO: 전역변수 줄이기, Leaks 검사, 두 번째 인자 map.ber로 받기, Makefile 수정
