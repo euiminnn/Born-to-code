@@ -1,4 +1,4 @@
 all:
-	gcc -L../mlx -lmlx -framework OpenGL -framework AppKit \
+	gcc -L../mlx -lmlx -framework OpenGL -framework AppKit -g \
 	main.c file.c
 	./a.out

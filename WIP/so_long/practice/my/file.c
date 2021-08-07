@@ -6,20 +6,40 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 00:50:55 by echung            #+#    #+#             */
-/*   Updated: 2021/08/06 21:02:11 by echung           ###   ########.fr       */
+/*   Updated: 2021/08/07 22:47:32 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-#include <stdio.h>
 #include <fcntl.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 
-
-//char	**arr;
-
 #define BUFFER_SIZE 1
+
+void	*ft_memset(void *b, int c, int len)
+{
+	unsigned char	*b_org;
+	unsigned char	*b_mod;
+	unsigned char	c_mod;
+
+	b_org = b;
+	b_mod = b;
+	c_mod = c;
+	while (len > 0)
+	{
+		*b_mod = c_mod;
+		b_mod++;
+		len--;
+	}
+	return (b_org);
+}
+
+void	ft_bzero(void *s, int n)
+{
+	ft_memset(s, 0, n);
+}
 
 int	ft_strlen(const char *str)
 {
@@ -37,7 +57,7 @@ int	ft_strlen(const char *str)
 char	*ft_substr(char const *s, unsigned int start, int len)
 {
 	char	*sub_of_s;
-	int	len_org;
+	int		len_org;
 
 	sub_of_s = malloc(sizeof(char) * (len + 1));
 	if (!(s))
@@ -54,8 +74,8 @@ char	*ft_substr(char const *s, unsigned int start, int len)
 char	*ft_strjoin_free(char const *s1, char const *s2)
 {
 	char	*s1plus2;
-	int	len_s1;
-	int	len_s2;
+	int		len_s1;
+	int		len_s2;
 
 	if (!(s1))
 		return (ft_strdup(s2));
@@ -83,7 +103,8 @@ char	*ft_strdup(const char *src)
 	size = 0;
 	while (src[size])
 		size++;
-	if (!(new = malloc(sizeof(char) * (size + 1))))
+	new = malloc(sizeof(char) * (size + 1));
+	if (!new)
 		return (NULL);
 	i = 0;
 	while (src[i])
@@ -116,7 +137,6 @@ void	*ft_memcpy(void *dst, const void *src, int n)
 	return (dst_org);
 }
 
-
 int	find_index(char *s, char c)
 {
 	int	index;
@@ -143,36 +163,55 @@ static int	save_line(char **str, char **line, int index)
 	return (1);
 }
 
-int			get_next_line(int fd, char **line)
+char	*ft_strjoin_free_sub(char *str, char *buff)
+{
+	char	*ret;
+
+	if (str)
+		ret = ft_strjoin_free(str, buff);
+	else
+		ret = ft_strjoin_free(ft_strdup(""), buff);
+	return (ret);
+}
+
+int	get_next_line_sub(char **str, char **line)
+{
+	*line = ft_strdup(*str);
+	free(*str);
+	*str = NULL;
+	return (0);
+}
+
+int	get_next_line(int fd, char **line)
 {
 	static char	*str;
 	int			ret;
-	int			i_nl;
 	char		buff[BUFFER_SIZE + 1];
+	int			i_nl;
 
 	if (fd < 0 || !line || BUFFER_SIZE < 1 || read(fd, buff, 0) < 0)
 		return (-1);
-	if (str && ((i_nl = find_index(str, '\n')) != -1))
+	if (str)
+		i_nl = find_index(str, '\n');
+	if (str && (i_nl != -1))
 		return (save_line(&str, line, i_nl));
-	while ((ret = read(fd, buff, BUFFER_SIZE)) > 0)
+	ret = read(fd, buff, BUFFER_SIZE);
+	while (ret > 0)
 	{
 		buff[ret] = '\0';
-		str = ft_strjoin_free(str ? str : ft_strdup(""), buff);
-		if (((i_nl = find_index(str, '\n')) != -1))
+		str = ft_strjoin_free_sub(str, buff);
+		i_nl = find_index(str, '\n');
+		if (i_nl != -1)
 			return (save_line(&str, line, i_nl));
+		ret = read(fd, buff, BUFFER_SIZE);
 	}
 	if (str)
-	{
-		*line = ft_strdup(str);
-		free(str);
-		str = NULL;
-		return (0);
-	}
+		return (get_next_line_sub(&str, line));
 	*line = ft_strdup("");
 	return (0);
 }
 
-int		count_gnl(char *filename)
+int	count_gnl(char *filename)
 {
 	int		fd;
 	int		row;
@@ -181,11 +220,12 @@ int		count_gnl(char *filename)
 
 	fd = open(filename, O_RDONLY);
 	row = 0;
-
-	while ((check = get_next_line(fd, &line)) > 0)
+	check = get_next_line(fd, &line);
+	while (check > 0)
 	{
 		row++;
 		free(line);
+		check = get_next_line(fd, &line);
 	}
 	free(line);
 	close(fd);
@@ -194,26 +234,25 @@ int		count_gnl(char *filename)
 
 // input : file name
 // output : array
-char	**readfile(char *filename)
+char	**readfile(char *filename, int row)
 {
-    int    	fd;
+	int		fd;
 	char	*line;
 	int		check;
-	int		row;
 	char	**arr;
 	int		i;
 
-	row = count_gnl(filename);
-	arr = malloc(sizeof(char*) * row);
+	arr = malloc(sizeof(char *) * row);
 	if (!arr)
 		return (0);
-    fd = open(filename, O_RDONLY);
-
+	fd = open(filename, O_RDONLY);
 	i = 0;
-	while ((check = get_next_line(fd, &line)) > 0)
+	check = get_next_line(fd, &line);
+	while (check > 0)
 	{
 		arr[i] = line;
 		i++;
+		check = get_next_line(fd, &line);
 	}
 	free(line);
 	if (check == -1)
@@ -237,8 +276,8 @@ int	is_instring(int c, char *s)
 
 int	check_element(char **arr, int row, int column)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (i < row)
@@ -256,26 +295,24 @@ int	check_element(char **arr, int row, int column)
 	return (1);
 }
 
-int	is_surrounded(char **arr, int row, int column)
+int	is_surrounded(char **arr, int row, int column, t_iter it)
 {
-	int i;
-	int j;
-	i = 0;
-	j = 0;
-	while (j < column)
+	it.i = 0;
+	it.j = 0;
+	while (it.j < column)
 	{
-		if (arr[0][j] == '1' && arr[row-1][j] == '1')
-			j++;
+		if (arr[0][it.j] == '1' && arr[row - 1][it.j] == '1')
+			(it.j)++;
 		else
 		{
 			printf("🚫 Error: column not surrounded\n");
 			return (0);
 		}
 	}
-	while (i < row)
+	while (it.i < row)
 	{
-		if (arr[i][0] == '1' && arr[i][column-1] == '1')
-			i++;
+		if (arr[it.i][0] == '1' && arr[it.i][column - 1] == '1')
+			it.i++;
 		else
 		{
 			printf("🚫 Error: row not surrounded\n");
@@ -287,7 +324,8 @@ int	is_surrounded(char **arr, int row, int column)
 
 int	is_samecolnum(char **arr, int row, int column)
 {
-	int i;
+	int	i;
+
 	i = 0;
 	while (i < row)
 	{
@@ -302,74 +340,69 @@ int	is_samecolnum(char **arr, int row, int column)
 	return (1);
 }
 
-int	essential_element(char **arr, int row, int column)
+#define E 0
+#define C 1
+#define P 2
+
+int	essential_element(char **arr, int row, int column, t_iter it)
 {
-	int e;
-	int c;
-	int p;
+	int	element[3];
 
-	e = 0;
-	c = 0;
-	p = 0;
-
-	int i;
-	int j;
-	
-	i = 0;
-	while (i < row)
+	ft_bzero(element, sizeof(element));
+	it.i = 0;
+	while (it.i < row)
 	{
-		j = 0;
-		while (j < column)
+		it.j = 0;
+		while (it.j < column)
 		{
-			if (arr[i][j] == 'E')
-				e++;
-			else if (arr[i][j] == 'C')
-				c++;
-			else if (arr[i][j] == 'P')
-				p++;
-			j++;
+			if (arr[it.i][it.j] == 'E')
+				element[E] = 1;
+			else if (arr[it.i][it.j] == 'C')
+				element[C] = 1;
+			else if (arr[it.i][it.j] == 'P')
+				element[P] = 1;
+			it.j++;
 		}
-		i++;
+		it.i++;
 	}
-	if (e*c*p == 1)
+	if (element[E] * element[C] * element[P] == 1)
 		return (1);
 	else
-	{
-		printf("🚫 Essential element is missing!\n");
 		return (0);
-	}
 }
 
-#define MAX 4
+#define MAX_SCORE 4
 int	parse_map(char **arr, int row, int column)
 {
-	int score;
+	int		score;
+	t_iter	iter;
 
 	score = 0;
 	if (is_samecolnum(arr, row, column))
 		score++;
 	else
 		return (0);
-	if (is_surrounded(arr, row, column))
+	if (is_surrounded(arr, row, column, iter))
 		score++;
 	if (check_element(arr, row, column))
 		score++;
-	if (essential_element(arr, row, column))
+	if (essential_element(arr, row, column, iter))
 		score++;
-	if (score == MAX)
+	if (score == MAX_SCORE)
 		return (1);
 	else
 		return (0);
 }
 /*
-int main(void)
+int			main(void)
 {
+	int	row;
+	int	column;
+
 	arr = readfile("map.ber");
 	//printf("%s\n", arr[0]);
-
-	int row = count_gnl("map.ber");
-	int column = ft_strlen(arr[0]);
-	
+	row = count_gnl("map.ber");
+	column = ft_strlen(arr[0]);
 	if (parse_map(arr, row, column))
 		printf("✅ Valid map\n");
 	else

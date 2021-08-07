@@ -13,7 +13,7 @@ int main(void)
 	}
 	while (j++ < column)
 		printf("j = %d\n", j);
-	while (k++ < column)
+	while (k++ < column - 1)
 		printf("k = %d\n", k);
 	return (0);
 }
