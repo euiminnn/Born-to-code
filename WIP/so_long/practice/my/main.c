@@ -13,10 +13,7 @@
 //Mac key code example
 //All the key code example other than below is described on the site linked in READEME.md
 #define KEY_ESC			53
-# define KEY_Q			12
 # define KEY_W			13
-# define KEY_E			14
-# define KEY_R			15
 # define KEY_A			0
 # define KEY_S			1
 # define KEY_D			2
@@ -32,13 +29,14 @@ void	*img_w3;
 void	*back;
 void	*tree;
 void	*portal;
-int		heart;
 void	*heart_r;
 void	*heart_b;
 void	*heart_p;
 char	**arr;
 int		start_x;
 int		start_y;
+int		row;
+int		column;
 int		count_heart;
 int		collectibles;
 
@@ -106,9 +104,8 @@ int				key_press(int keycode)
 	}
 	mlx_put_image_to_window(mlx, win, back, 0, 0);
 
-	//arr = readfile("map.ber");
-	int row = count_gnl("map.ber");
-	int column = ft_strlen(arr[0]);
+	row = count_gnl("map.ber");
+	column = ft_strlen(arr[0]);
 	int i = 0;
 	int j = 0;
 
@@ -136,45 +133,17 @@ int				key_press(int keycode)
 	return (0);
 }
 
-
-int		main(void)
+void	init_map(void)
 {
-	int		img_width;
-	int 	img_height;
-
-	//initiation
-	mlx = mlx_init();
-
-	//open window
-	win = mlx_new_window(mlx, 480, 480, "mushroom");
+	int i;
+	int j;
 	
-	//key press
-	mlx_hook(win, X_EVENT_KEY_PRESS, 0, &key_press, 0);
-
-	//add image
-	back = mlx_xpm_file_to_image(mlx, "../textures/grass_n_flower-3840.xpm", &img_width, &img_height);
-	tree = mlx_xpm_file_to_image(mlx, "../textures/tree_48.xpm", &img_width, &img_height);
-	img_w1 = mlx_xpm_file_to_image(mlx, "../textures/mushroom_xpm/walk1.xpm", &img_width, &img_height);
-	img_w3 = mlx_xpm_file_to_image(mlx, "../textures/mushroom_xpm/walk3.xpm", &img_width, &img_height);
-	heart_r = mlx_xpm_file_to_image(mlx, "../textures/redheart_48_withmargin.xpm", &img_width, &img_height);
-	heart_b = mlx_xpm_file_to_image(mlx, "../textures/blueheart_48_withmargin.xpm", &img_width, &img_height);
-	heart_p = mlx_xpm_file_to_image(mlx, "../textures/purpleheart_48_withmargin.xpm", &img_width, &img_height);
-	portal = mlx_xpm_file_to_image(mlx, "../textures/portal_48.xpm", &img_width, &img_height);
-
 	mlx_put_image_to_window(mlx, win, back, 0, 0);
-
-	heart = 1;
-
-	arr = readfile("map.ber");
-	int row = count_gnl("map.ber");
-	int column = ft_strlen(arr[0]);
-	int i = 0;
-	int j = 0;
-
-	while (i < row)
+	i = -1;
+	while (i++ < row-1)
 	{
-		j = 0;
-		while (j < column)
+		j = -1;
+		while (j++ < column-1)
 		{
 			if (arr[i][j] == '1')
 				mlx_put_image_to_window(mlx, win, tree, 48*j, 48*i);
@@ -191,10 +160,45 @@ int		main(void)
 				start_x = 48*j;
 				start_y = 48*i;
 			}
-			j++;
 		}
-		i++;
 	}
+}
+
+void	get_image(void)
+{
+	int		img_width;
+	int 	img_height;
+
+	back = mlx_xpm_file_to_image(mlx, "../textures/grass_n_flower-3840.xpm", &img_width, &img_height);
+	tree = mlx_xpm_file_to_image(mlx, "../textures/tree_48.xpm", &img_width, &img_height);
+	img_w1 = mlx_xpm_file_to_image(mlx, "../textures/mushroom_xpm/walk1.xpm", &img_width, &img_height);
+	img_w3 = mlx_xpm_file_to_image(mlx, "../textures/mushroom_xpm/walk3.xpm", &img_width, &img_height);
+	heart_r = mlx_xpm_file_to_image(mlx, "../textures/redheart_48_withmargin.xpm", &img_width, &img_height);
+	heart_b = mlx_xpm_file_to_image(mlx, "../textures/blueheart_48_withmargin.xpm", &img_width, &img_height);
+	heart_p = mlx_xpm_file_to_image(mlx, "../textures/purpleheart_48_withmargin.xpm", &img_width, &img_height);
+	portal = mlx_xpm_file_to_image(mlx, "../textures/portal_48.xpm", &img_width, &img_height);
+}
+
+int		main(void)
+{
+
+	//initiation
+	mlx = mlx_init();
+
+	//open window
+	win = mlx_new_window(mlx, 480, 480, "mushroom");
+	
+	//key press
+	mlx_hook(win, X_EVENT_KEY_PRESS, 0, &key_press, 0);
+
+	//add image
+	get_image();
+
+	arr = readfile("map.ber");
+	row = count_gnl("map.ber");
+	column = ft_strlen(arr[0]);
+
+	init_map();
 	param_init(&param);
 	if (parse_map(arr, row, column))
 		mlx_loop(mlx);
