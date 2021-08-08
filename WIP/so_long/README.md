@@ -30,3 +30,7 @@
 
 - Done: 함수 나누기, Map 검사
 - TODO: 전역변수 줄이기, Leaks 검사, 두 번째 인자 map.ber로 받기, Makefile 수정
+
+## Aug 8th
+- Done: Makefile 수정
+- TODO: 전역변수 줄이기, Leaks 검사
