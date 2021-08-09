@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 00:43:58 by echung            #+#    #+#             */
-/*   Updated: 2021/08/09 00:46:57 by echung           ###   ########.fr       */
+/*   Updated: 2021/08/09 21:30:30 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ typedef struct s_param{
 	int		x;
 	int		y;
 	char	str[3];
-}				t_param;
+}	t_param;
 
 # include "../mlx/mlx.h"
 # include "so_long.h"
@@ -39,22 +39,24 @@ typedef struct s_param{
 
 // x,y and str are meaningless variables.
 
-void			*mlx;
-void			*win;
-t_param			param;
-void			*img_w1;
-void			*img_w3;
-void			*back;
-void			*tree;
-void			*portal;
-void			*heart_r;
-int				heart;
-char			**arr;
-int				start_x;
-int				start_y;
-int				row;
-int				column;
-int				collectibles;
+typedef struct s_global{
+	void			*mlx;
+	void			*win;
+	t_param			param;
+	void			*img_w1;
+	void			*img_w3;
+	void			*back;
+	void			*tree;
+	void			*portal;
+	void			*heart_r;
+	int				heart;
+	char			**arr;
+	int				start_x;
+	int				start_y;
+	int				row;
+	int				column;
+	int				collectibles;
+}	t_global;
 
 typedef struct s_iter
 {
