@@ -34,3 +34,11 @@
 ## Aug 8th
 - Done: Makefile 수정
 - TODO: 전역변수 줄이기, Leaks 검사
+
+## Aug 9th
+- Done: Norm
+- TODO: 전역변수 줄이기, Leaks 검사
+
+## Aug 10th
+- Done: 전역변수 to 구조체, Leaks 검사
+- TODO: 2nd argument(.ber), print a step count
