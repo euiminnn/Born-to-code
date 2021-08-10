@@ -6,14 +6,13 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 00:50:55 by echung            #+#    #+#             */
-/*   Updated: 2021/08/09 21:24:45 by echung           ###   ########.fr       */
+/*   Updated: 2021/08/10 18:23:06 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-#include <stdio.h>
 
-int	count_gnl(char *filename)
+int	count_row(char *filename)
 {
 	int		fd;
 	int		row;
@@ -34,8 +33,6 @@ int	count_gnl(char *filename)
 	return (row);
 }
 
-// input : file name
-// output : array
 char	**readfile(char *filename, int row)
 {
 	int		fd;

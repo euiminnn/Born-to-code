@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 00:43:58 by echung            #+#    #+#             */
-/*   Updated: 2021/08/09 21:30:30 by echung           ###   ########.fr       */
+/*   Updated: 2021/08/10 18:42:23 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,16 @@ typedef struct s_param{
 	char	str[3];
 }	t_param;
 
-# include "../mlx/mlx.h"
+typedef struct s_iter
+{
+	int	i;
+	int	j;
+	int	k;
+	int	l;
+	int	m;
+
+}	t_iter;
+# include "../srcs/mlx/mlx.h"
 # include "so_long.h"
 # include <fcntl.h>
 # include <stdio.h>
@@ -42,7 +51,6 @@ typedef struct s_param{
 typedef struct s_global{
 	void			*mlx;
 	void			*win;
-	t_param			param;
 	void			*img_w1;
 	void			*img_w3;
 	void			*back;
@@ -56,22 +64,15 @@ typedef struct s_global{
 	int				row;
 	int				column;
 	int				collectibles;
+	t_param			param;
+	t_iter			iter;
 }	t_global;
 
-typedef struct s_iter
-{
-	int	i;
-	int	j;
-	int	k;
-	int	l;
-	int	m;
 
-}	t_iter;
-
-int				key_press(int keycode);
-void			param_init(t_param *param);
+int				key_press(int keycode, t_global *g);
+void			param_init(t_global *g);
 char	**readfile(char *filename, int row);
-int		count_gnl(char *filename);
+int		count_row(char *filename);
 int			get_next_line(int fd, char **line);
 //static int	save_line(char **str, char **line, int index);
 //int	find_index(char *s, char c);
@@ -88,11 +89,13 @@ void	*ft_memcpy(void *dst, void *src, int n);
 int	parse_map(char **arr, int row, int column);
 int	is_instring(int c, char *s);
 
-void	load_image(void);
+void	load_image(t_global *g);
 
-void	init_map(t_iter it);
-void	edit_map(int param_x, int param_y);
+void	init_map(t_global *g);
+void	edit_map(t_global *g);
 
 int	parse_map(char **arr, int row, int column);
+
+void	img_to_win(t_global *g, void *img, int i, int j);
 
 #endif
