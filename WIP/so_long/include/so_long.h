@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 00:43:58 by echung            #+#    #+#             */
-/*   Updated: 2021/08/11 20:07:30 by echung           ###   ########.fr       */
+/*   Updated: 2021/08/12 00:38:10 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ int		parse_map(char **arr, int row, int column);
 
 void	img_to_win(t_global *g, void *img, int i, int j);
 
-int		check_flag(char c1, char c2);
+int		check_char(char c1, char c2);
+
+int	check_arg(char *arg);
 
 #endif

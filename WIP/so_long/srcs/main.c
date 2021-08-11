@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/07 20:28:30 by echung            #+#    #+#             */
-/*   Updated: 2021/08/11 20:39:42 by echung           ###   ########.fr       */
+/*   Updated: 2021/08/12 00:42:30 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,14 +75,18 @@ int	key_press(int keycode, t_global *g)
 	return (0);
 }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	t_global	g;
 
+	if (argc != 2)
+		return (0);
+	if (!check_arg(argv[1]))
+		return (0);
 	ft_bzero(&g, sizeof(g));
 	g.mlx = mlx_init();
-	g.row = count_row("map.ber");
-	g.arr = readfile("map.ber", g.row);
+	g.row = count_row(argv[1]);
+	g.arr = readfile(argv[1], g.row);
 	g.column = ft_strlen(g.arr[0]);
 	g.win = mlx_new_window(g.mlx, g.row * 48, g.column * 48, "mushroom");
 	mlx_hook(g.win, X_EVENT_KEY_PRESS, 0, &key_press, &g);
