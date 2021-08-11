@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/07 20:28:30 by echung            #+#    #+#             */
-/*   Updated: 2021/08/10 18:22:58 by echung           ###   ########.fr       */
+/*   Updated: 2021/08/11 20:39:42 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 //#define X_EVENT_KEY_PRESS 2
 //#define X_EVENT_KEY_RELEASE 3
-#define X_EVENT_KEY_EXIT 17 // exit key code
+//#define X_EVENT_KEY_EXIT 17 // exit key code
 
 // Mac key code example
 #define KEY_ESC 53
@@ -22,24 +22,6 @@
 #define KEY_A 0
 #define KEY_S 1
 #define KEY_D 2
-/*
-	void			*mlx;
-	void			*win;
-	t_param			param;
-	void			*img_w1;
-	void			*img_w3;
-	void			*back;
-	void			*tree;
-	void			*portal;
-	void			*heart_r;
-	int				heart;
-	char			**arr;
-	int				start_x;
-	int				start_y;
-	int				row;
-	int				column;
-	int				collectibles;
-*/
 
 void	param_init(t_global *g)
 {
@@ -71,23 +53,21 @@ void	get_collectibles(t_global *g)
 
 int	key_press(int keycode, t_global *g)
 {
-	if (keycode == KEY_W || keycode == KEY_S)
+	g->movement++;
+	g->param.y -= ((keycode == KEY_W) - (keycode == KEY_S)) * 48;
+	g->param.x += ((keycode == KEY_D) - (keycode == KEY_A)) * 48;
+	if (g->arr[g->param.y / 48][g->param.x / 48] == '1')
 	{
-		g->param.y -= ((keycode == KEY_W) - (keycode == KEY_S)) * 48;
-		if (g->arr[g->param.y / 48][g->param.x / 48] == '1')
-			g->param.y += ((keycode == KEY_W) - (keycode == KEY_S)) * 48;
+		g->param.y += ((keycode == KEY_W) - (keycode == KEY_S)) * 48;
+		g->param.x -= ((keycode == KEY_D) - (keycode == KEY_A)) * 48;
+		g->movement--;
 	}
-	else if (keycode == KEY_D || keycode == KEY_A)
-	{
-		g->param.x += ((keycode == KEY_D) - (keycode == KEY_A)) * 48;
-		if (g->arr[g->param.y / 48][g->param.x / 48] == '1')
-			g->param.x -= ((keycode == KEY_D) - (keycode == KEY_A)) * 48;
-	}
-	else if (keycode == KEY_ESC)
+	if (keycode == KEY_ESC)
 	{
 		free(g->arr);
 		exit(0);
 	}
+	printf("move: %d\n", g->movement);
 	get_collectibles(g);
 	mlx_put_image_to_window(g->mlx, g->win, g->back, 0, 0);
 	edit_map(g);
@@ -106,6 +86,7 @@ int	main(void)
 	g.column = ft_strlen(g.arr[0]);
 	g.win = mlx_new_window(g.mlx, g.row * 48, g.column * 48, "mushroom");
 	mlx_hook(g.win, X_EVENT_KEY_PRESS, 0, &key_press, &g);
+	mlx_hook(g.win, X_EVENT_KEY_EXIT, 0, &key_press, &g);				//Bus Error
 	load_image(&g);
 	init_map(&g);
 	param_init(&g);

@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 22:51:29 by echung            #+#    #+#             */
-/*   Updated: 2021/08/10 18:23:13 by echung           ###   ########.fr       */
+/*   Updated: 2021/08/11 20:35:29 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,14 @@ int	is_instring(int c, char *s)
 		s++;
 	}
 	return (0);
+}
+
+int	check_flag(char c1, char c2)
+{
+	if (!c1 || !c2)
+		return (-1);
+	if (c1 == c2)
+		return (1);
+	else
+		return (0);
 }
