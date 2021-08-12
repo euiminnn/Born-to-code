@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/07 20:28:30 by echung            #+#    #+#             */
-/*   Updated: 2021/08/12 00:42:30 by echung           ###   ########.fr       */
+/*   Updated: 2021/08/12 13:51:04 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,9 @@ int	main(int argc, char **argv)
 	g.row = count_row(argv[1]);
 	g.arr = readfile(argv[1], g.row);
 	g.column = ft_strlen(g.arr[0]);
-	g.win = mlx_new_window(g.mlx, g.row * 48, g.column * 48, "mushroom");
+	printf("g.row = %d\n", g.row);
+	printf("g.col = %d\n", g.column);
+	g.win = mlx_new_window(g.mlx, g.column * 48, g.row * 48, "mushroom");
 	mlx_hook(g.win, X_EVENT_KEY_PRESS, 0, &key_press, &g);
 	mlx_hook(g.win, X_EVENT_KEY_EXIT, 0, &key_press, &g);				//Bus Error
 	load_image(&g);
