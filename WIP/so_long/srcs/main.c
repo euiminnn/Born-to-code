@@ -6,22 +6,11 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/07 20:28:30 by echung            #+#    #+#             */
-/*   Updated: 2021/08/12 13:51:04 by echung           ###   ########.fr       */
+/*   Updated: 2021/08/13 01:52:40 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-//#define X_EVENT_KEY_PRESS 2
-//#define X_EVENT_KEY_RELEASE 3
-//#define X_EVENT_KEY_EXIT 17 // exit key code
-
-// Mac key code example
-#define KEY_ESC 53
-#define KEY_W 13
-#define KEY_A 0
-#define KEY_S 1
-#define KEY_D 2
 
 void	param_init(t_global *g)
 {
@@ -51,30 +40,6 @@ void	get_collectibles(t_global *g)
 	}
 }
 
-int	key_press(int keycode, t_global *g)
-{
-	g->movement++;
-	g->param.y -= ((keycode == KEY_W) - (keycode == KEY_S)) * 48;
-	g->param.x += ((keycode == KEY_D) - (keycode == KEY_A)) * 48;
-	if (g->arr[g->param.y / 48][g->param.x / 48] == '1')
-	{
-		g->param.y += ((keycode == KEY_W) - (keycode == KEY_S)) * 48;
-		g->param.x -= ((keycode == KEY_D) - (keycode == KEY_A)) * 48;
-		g->movement--;
-	}
-	if (keycode == KEY_ESC)
-	{
-		free(g->arr);
-		exit(0);
-	}
-	printf("move: %d\n", g->movement);
-	get_collectibles(g);
-	mlx_put_image_to_window(g->mlx, g->win, g->back, 0, 0);
-	edit_map(g);
-	end_game(g);
-	return (0);
-}
-
 int	main(int argc, char **argv)
 {
 	t_global	g;
@@ -88,11 +53,9 @@ int	main(int argc, char **argv)
 	g.row = count_row(argv[1]);
 	g.arr = readfile(argv[1], g.row);
 	g.column = ft_strlen(g.arr[0]);
-	printf("g.row = %d\n", g.row);
-	printf("g.col = %d\n", g.column);
 	g.win = mlx_new_window(g.mlx, g.column * 48, g.row * 48, "mushroom");
 	mlx_hook(g.win, X_EVENT_KEY_PRESS, 0, &key_press, &g);
-	mlx_hook(g.win, X_EVENT_KEY_EXIT, 0, &key_press, &g);				//Bus Error
+	mlx_hook(g.win, X_EVENT_KEY_EXIT, 0, &mouse_press, &g);
 	load_image(&g);
 	init_map(&g);
 	param_init(&g);

@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 00:43:58 by echung            #+#    #+#             */
-/*   Updated: 2021/08/12 00:38:10 by echung           ###   ########.fr       */
+/*   Updated: 2021/08/13 01:58:29 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 # define X_EVENT_KEY_PRESS 2
 # define X_EVENT_KEY_RELEASE 3
-# define X_EVENT_KEY_EXIT 17 // exit key code
+# define X_EVENT_KEY_EXIT 17
 
 # define KEY_ESC 53
 # define KEY_W 13
@@ -96,6 +96,16 @@ void	img_to_win(t_global *g, void *img, int i, int j);
 
 int		check_char(char c1, char c2);
 
-int	check_arg(char *arg);
+int		check_arg(char *arg);
+
+int		mouse_press(t_global *g);
+
+int		key_press(int keycode, t_global *g);
+
+void	get_collectibles(t_global *g);
+
+void	end_game(t_global *g);
+
+void	param_init(t_global *g);
 
 #endif

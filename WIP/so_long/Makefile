@@ -6,7 +6,7 @@
 #    By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/15 22:13:22 by echung            #+#    #+#              #
-#    Updated: 2021/08/12 00:38:28 by echung           ###   ########.fr        #
+#    Updated: 2021/08/13 01:52:10 by echung           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ SRCS	= srcs/main.c \
 		  srcs/lib.c \
 		  srcs/libstr.c \
 		  srcs/short_mlx.c \
-		  srcs/check_arg.c
+		  srcs/check_arg.c \
+		  srcs/press.c
 
 OBJS	= $(SRCS:%.c=%.o)
 
