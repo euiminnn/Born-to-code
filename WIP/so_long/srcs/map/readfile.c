@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 00:50:55 by echung            #+#    #+#             */
-/*   Updated: 2021/08/10 18:23:06 by echung           ###   ########.fr       */
+/*   Updated: 2021/08/13 21:49:39 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,21 +59,3 @@ char	**readfile(char *filename, int row)
 	close(fd);
 	return (arr);
 }
-
-/*
-int			main(void)
-{
-	int	row;
-	int	column;
-
-	arr = readfile("map.ber");
-	//printf("%s\n", arr[0]);
-	row = count_gnl("map.ber");
-	column = ft_strlen(arr[0]);
-	if (parse_map(arr, row, column))
-		printf("✅ Valid map\n");
-	else
-		printf("Error: invalid map\n");
-	free(arr);
-}
-*/
