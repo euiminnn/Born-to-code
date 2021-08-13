@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 22:24:18 by echung            #+#    #+#             */
-/*   Updated: 2021/08/10 18:43:42 by echung           ###   ########.fr       */
+/*   Updated: 2021/08/13 15:52:11 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	init_map(t_global *g)
 			if (g->arr[g->iter.i][g->iter.j] == 'C')
 			{
 				img_to_win(g, g->heart_r, 48 * g->iter.j, 48 * g->iter.i);
-				g->collectibles++;
+				g->heart++;
 			}
 			if (g->arr[g->iter.i][g->iter.j] == 'E')
 				img_to_win(g, g->portal, 48 * g->iter.j, 48 * g->iter.i);

@@ -6,25 +6,25 @@
 #    By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/15 22:13:22 by echung            #+#    #+#              #
-#    Updated: 2021/08/13 01:52:10 by echung           ###   ########.fr        #
+#    Updated: 2021/08/13 16:05:01 by echung           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= so_long
 
 CFLAGS	= -Wall -Wextra -Werror -I./include -g
-MLX     = -L srcs/mlx -lmlx -framework OpenGL -framework AppKit
+MLX     = -L mlx -lmlx -framework OpenGL -framework AppKit
 SRCS	= srcs/main.c \
-		  srcs/readfile.c \
-		  srcs/load_image.c \
-		  srcs/map.c \
-		  srcs/parse_map.c \
-		  srcs/get_next_line.c \
-		  srcs/lib.c \
-		  srcs/libstr.c \
-		  srcs/short_mlx.c \
-		  srcs/check_arg.c \
-		  srcs/press.c
+		  srcs/map/check_arg.c \
+		  srcs/map/readfile.c \
+		  srcs/map/load_image.c \
+		  srcs/map/map.c \
+		  srcs/map/parse_map.c \
+		  srcs/utils/get_next_line.c \
+		  srcs/utils/lib.c \
+		  srcs/utils/libstr.c \
+		  srcs/utils/short_mlx.c \
+		  srcs/key/press.c
 
 OBJS	= $(SRCS:%.c=%.o)
 

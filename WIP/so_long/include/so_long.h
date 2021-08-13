@@ -6,14 +6,14 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 00:43:58 by echung            #+#    #+#             */
-/*   Updated: 2021/08/13 01:58:29 by echung           ###   ########.fr       */
+/*   Updated: 2021/08/13 16:04:25 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# include "../srcs/mlx/mlx.h"
+# include "../mlx/mlx.h"
 # include "so_long.h"
 # include <fcntl.h>
 # include <stdio.h>
@@ -33,7 +33,6 @@
 typedef struct s_param{
 	int		x;
 	int		y;
-	char	str[3];
 }	t_param;
 
 typedef struct s_iter
@@ -56,12 +55,12 @@ typedef struct s_global{
 	void			*portal;
 	void			*heart_r;
 	int				heart;
+	int				item;
 	char			**arr;
 	int				start_x;
 	int				start_y;
 	int				row;
 	int				column;
-	int				collectibles;
 	int				movement;
 	t_param			param;
 	t_iter			iter;

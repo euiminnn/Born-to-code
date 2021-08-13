@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/07 20:28:30 by echung            #+#    #+#             */
-/*   Updated: 2021/08/13 01:52:40 by echung           ###   ########.fr       */
+/*   Updated: 2021/08/13 15:52:28 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,15 @@ void	param_init(t_global *g)
 {
 	g->param.x = g->start_x;
 	g->param.y = g->start_y;
-	g->param.str[0] = 'a';
-	g->param.str[1] = 'b';
-	g->param.str[2] = '\0';
 }
 
 void	end_game(t_global *g)
 {
 	if (g->arr[g->param.y / 48][g->param.x / 48] == 'E' \
-			&& g->heart == g->collectibles)
+			&& g->item == g->heart)
 	{
 		free(g->arr);
 		exit(0);
-	}
-}
-
-void	get_collectibles(t_global *g)
-{
-	if (g->arr[g->param.y / 48][g->param.x / 48] == 'C')
-	{
-		g->heart++;
-		g->arr[g->param.y / 48][g->param.x / 48] = '0';
 	}
 }
 
