@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 00:43:58 by echung            #+#    #+#             */
-/*   Updated: 2021/08/13 16:04:25 by echung           ###   ########.fr       */
+/*   Updated: 2021/08/14 17:49:52 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,17 +48,19 @@ typedef struct s_iter
 typedef struct s_global{
 	void			*mlx;
 	void			*win;
+
 	void			*img_w1;
 	void			*img_w3;
 	void			*back;
 	void			*tree;
 	void			*portal;
 	void			*heart_r;
+
 	int				heart;
 	int				item;
-	char			**arr;
 	int				start_x;
 	int				start_y;
+	char			**arr;
 	int				row;
 	int				column;
 	int				movement;

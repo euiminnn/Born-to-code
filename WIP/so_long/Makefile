@@ -6,13 +6,13 @@
 #    By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/15 22:13:22 by echung            #+#    #+#              #
-#    Updated: 2021/08/13 23:06:54 by echung           ###   ########.fr        #
+#    Updated: 2021/08/14 00:05:59 by echung           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= so_long
 
-CFLAGS	= -Wall -Wextra -Werror -I./include -g3 
+CFLAGS	= -Wall -Wextra -Werror -I./include 
 MLX     = -L mlx -lmlx -framework OpenGL -framework AppKit
 SRCS	= srcs/main.c \
 		  srcs/map/check_arg.c \
@@ -32,7 +32,7 @@ all: $(NAME)
 	./so_long "map.ber"
 
 $(NAME): $(OBJS)
-	gcc $(CFLAGS) $(MLX) -o $(NAME) $(OBJS) -fsanitize=address
+	gcc $(CFLAGS) $(MLX) -o $(NAME) $(OBJS)
 
 clean:
 	rm -f $(OBJS)

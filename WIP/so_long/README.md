@@ -42,3 +42,12 @@
 ## Aug 10th
 - Done: 전역변수 to 구조체, Leaks 검사
 - TODO: 2nd argument(.ber), print a step count
+
+## Aug 14th
+- Done: argument, step count
+- TODO: 오류 찾기
+
+### Note
+- fcntl: O_RDONLY
+- stdlib: free
+- unistd: close
