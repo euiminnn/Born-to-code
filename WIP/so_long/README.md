@@ -49,5 +49,5 @@
 
 ### Note
 - fcntl: O_RDONLY
-- stdlib: free
+- stdlib: free, exit
 - unistd: close
