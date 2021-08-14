@@ -10,11 +10,17 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= minishell
+NAME		=	minishell
 
-CFLAGS		= -Wall -Wextra -Werror -Iinclude -g
+# FILE =================================================
 
-FILE		= main.c
+FILE		=	main.c
+
+# Options =================================================
+
+CC			=	gcc
+INCLUDE 	=	-Iinclude
+CFLAGS		=	-Wall -Werror -Wextra $(INCLUDE) -g
 
 SRC_DIR		=	./src
 SRCS		=	$(addprefix $(SRC_DIR)/, $(FILE))
@@ -22,14 +28,16 @@ SRCS		=	$(addprefix $(SRC_DIR)/, $(FILE))
 OBJ_DIR		=	./obj
 OBJS		=	$(addprefix $(OBJ_DIR)/, $(patsubst %.c,%.o,$(FILE)))
 
-all: $(NAME)
+# =========================================================
+
+all				: $(NAME)
 
 $(OBJ_DIR)/%.o	: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME)			: $(OBJS)
-	gcc $(CFLAGS) -o $@ $^ -lpthread
+	gcc $(CFLAGS) -o $@ $^
 
 norm			:
 	@python3 -m norminette include/*
