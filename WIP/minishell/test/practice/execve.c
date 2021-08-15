@@ -20,7 +20,8 @@ int main(int argc, char *argv[], char **environ) // 3번재 인자에 환경 변
 
 	// argc를 execve 파라미터에 전달할 수 없기 때문에 NULL을 끝으로 지정해주어야 함
 	new_argv[argc] = NULL;
-    environ = malloc();
+    // environ = malloc();
+
     printf("env[0] : %s\n", environ[0]);
 
     // fork
@@ -30,7 +31,7 @@ int main(int argc, char *argv[], char **environ) // 3번재 인자에 환경 변
 		return 1;
 	}
     // child :
-    free(environ)
+    // free(environ)
 
 	printf("이후 로직은 실행되지 않습니다..\n");
 	return (0);

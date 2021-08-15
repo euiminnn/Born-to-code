@@ -6,7 +6,7 @@
 #    By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/15 22:13:22 by echung            #+#    #+#              #
-#    Updated: 2021/08/14 00:05:59 by echung           ###   ########.fr        #
+#    Updated: 2021/08/15 05:36:42 by echung           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,18 +28,22 @@ SRCS	= srcs/main.c \
 
 OBJS	= $(SRCS:%.c=%.o)
 
+.PHONY: all
 all: $(NAME)
 	./so_long "map.ber"
 
 $(NAME): $(OBJS)
 	gcc $(CFLAGS) $(MLX) -o $(NAME) $(OBJS)
 
+.PHONY: clean
 clean:
 	rm -f $(OBJS)
 
+.PHONY: fclean
 fclean: clean
 	rm -f $(NAME)
 
+.PHONY: re
 re: fclean all
 
-.PHONY: clean fclean all re
+#.PHONY: all clean fclean re

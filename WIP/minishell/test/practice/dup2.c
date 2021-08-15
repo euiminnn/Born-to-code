@@ -12,13 +12,16 @@ int main(void)
 			exit(0);
 	}
 
-	// /* 표준 출력을 file.txt 파일로 redirection 함 */ 
-	// dup2(fd, 1); 
+	printf("이제 어디로 출력 될까?\n");
 
-	// /* 표준 오류를 file.txt 파일로 redirection 함 */
-	// dup2(fd, 2);
-	printf("fd :%d\n", fd);
-	write(fd, "abcabc", 6);
+	/* 표준 출력을 file.txt 파일로 redirection 함 */ 
+	dup2(fd, 1); 
+
+	/* 표준 오류를 file.txt 파일로 redirection 함 */
+	dup2(fd, 2);
+
+	printf("여기로 왔어요!\n");
+
 	close(fd);
 
 
