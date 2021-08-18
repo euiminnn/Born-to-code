@@ -6,7 +6,7 @@
 #    By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/15 22:13:22 by echung            #+#    #+#              #
-#    Updated: 2021/08/18 17:05:06 by echung           ###   ########.fr        #
+#    Updated: 2021/08/18 18:34:39 by echung           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,10 +33,12 @@ all: $(NAME)
 	./so_long "map.ber"
 
 $(NAME): $(OBJS)
+	make -C mlx	
 	gcc $(CFLAGS) $(MLX) -o $(NAME) $(OBJS)
 
 .PHONY: clean
 clean:
+	make -C mlx clean
 	rm -f $(OBJS)
 
 .PHONY: fclean
