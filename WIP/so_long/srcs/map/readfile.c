@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 00:50:55 by echung            #+#    #+#             */
-/*   Updated: 2021/08/13 21:49:39 by echung           ###   ########.fr       */
+/*   Updated: 2021/08/18 18:08:42 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	count_row(char *filename)
 	char	*line;
 
 	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+		return (-1);
 	row = 0;
 	check = get_next_line(fd, &line);
 	while (check > 0)
