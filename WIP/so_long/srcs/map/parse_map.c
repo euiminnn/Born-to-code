@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 22:37:06 by echung            #+#    #+#             */
-/*   Updated: 2021/08/12 00:33:31 by echung           ###   ########.fr       */
+/*   Updated: 2021/08/18 18:51:29 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #define C 1
 #define P 2
 
-int	essential_element(char **arr, int row, int column, t_iter it)
+static int	essential_element(char **arr, int row, int column, t_iter it)
 {
 	int	element[3];
 
@@ -42,7 +42,7 @@ int	essential_element(char **arr, int row, int column, t_iter it)
 		return (0);
 }
 
-int	check_element(char **arr, int row, int column)
+static int	check_element(char **arr, int row, int column)
 {
 	int	i;
 	int	j;
@@ -63,7 +63,7 @@ int	check_element(char **arr, int row, int column)
 	return (1);
 }
 
-int	is_surrounded(char **arr, int row, int column, t_iter it)
+static int	is_surrounded(char **arr, int row, int column, t_iter it)
 {
 	it.i = 0;
 	it.j = 0;
@@ -90,7 +90,7 @@ int	is_surrounded(char **arr, int row, int column, t_iter it)
 	return (1);
 }
 
-int	is_samecolnum(char **arr, int row, int column)
+static int	is_samecolnum(char **arr, int row, int column)
 {
 	int	i;
 

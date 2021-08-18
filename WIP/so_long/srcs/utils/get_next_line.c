@@ -6,14 +6,14 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 22:42:21 by echung            #+#    #+#             */
-/*   Updated: 2021/08/10 18:22:20 by echung           ###   ########.fr       */
+/*   Updated: 2021/08/18 19:03:17 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 #define BUFFER_SIZE 1
 
-int	find_index(char *s, char c)
+static int	find_index(char *s, char c)
 {
 	int	index;
 
@@ -39,7 +39,7 @@ static int	save_line(char **str, char **line, int index)
 	return (1);
 }
 
-int	get_next_line_sub(char **str, char **line)
+static int	_get_next_line_sub(char **str, char **line)
 {
 	*line = ft_strdup(*str);
 	free(*str);
@@ -71,7 +71,7 @@ int	get_next_line(int fd, char **line)
 		ret = read(fd, buff, BUFFER_SIZE);
 	}
 	if (str)
-		return (get_next_line_sub(&str, line));
+		return (_get_next_line_sub(&str, line));
 	*line = ft_strdup("");
 	return (0);
 }
