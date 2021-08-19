@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 00:43:58 by echung            #+#    #+#             */
-/*   Updated: 2021/08/14 17:49:52 by echung           ###   ########.fr       */
+/*   Updated: 2021/08/20 00:26:30 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ typedef struct s_global{
 }	t_global;
 
 int		key_press(int keycode, t_global *g);
+int		mouse_press(t_global *g);
 void	param_init(t_global *g);
 char	**readfile(char *filename, int row);
 int		count_row(char *filename);
@@ -99,9 +100,6 @@ int		check_char(char c1, char c2);
 
 int		check_arg(char *arg);
 
-int		mouse_press(t_global *g);
-
-int		key_press(int keycode, t_global *g);
 
 void	get_collectibles(t_global *g);
 
