@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   client_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 00:30:27 by echung            #+#    #+#             */
-/*   Updated: 2021/07/22 21:05:43 by echung           ###   ########.fr       */
+/*   Updated: 2021/10/04 16:56:41 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "../include/minitalk_bonus.h"
 
 void	send(int pid, unsigned char c)
 {
@@ -47,20 +47,6 @@ void	preprocess(char *pid, char *message)
 		send(send_pid, *message);
 		message++;
 	}
-}
-
-int	ft_isinteger(char *c)
-{
-	if (*c == '\0')
-		return (0);
-	while (*c != '\0')
-	{
-		if ('0' <= *c && *c <= '9')
-			c++;
-		else
-			return (0);
-	}
-	return (1);
 }
 
 int	is_valid_arg(char **argv)

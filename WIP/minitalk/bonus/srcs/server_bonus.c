@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   server_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 01:51:39 by echung            #+#    #+#             */
-/*   Updated: 2021/07/22 21:04:00 by echung           ###   ########.fr       */
+/*   Updated: 2021/10/04 16:52:24 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "../include/minitalk_bonus.h"
 
-void	my_handler(int signum)
+static void	my_handler(int signum)
 {
 	static int	binary = 0;
 	static int	i = 0;
