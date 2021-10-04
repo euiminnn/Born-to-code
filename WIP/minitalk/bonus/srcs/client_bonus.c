@@ -6,27 +6,27 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 00:30:27 by echung            #+#    #+#             */
-/*   Updated: 2021/10/04 16:56:41 by echung           ###   ########.fr       */
+/*   Updated: 2021/10/04 21:08:38 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minitalk_bonus.h"
+#include "minitalk_bonus.h"
 
-void	send(int pid, unsigned char c)
+static void	send(int pid, unsigned char c)
 {
 	int	cal;
 	int	count_send;
 
-	cal = 1 << 7; // 1000 0000(2)
+	cal = 1 << 7;
 	count_send = 0;
 	while (cal > 0)
 	{
-		if ((cal & c) && kill(pid, SIGUSR1) != -1) // SIGUSR1 = 1;
+		if ((cal & c) && kill(pid, SIGUSR1) != -1)
 		{
 			cal = cal >> 1;
 			count_send++;
 		}
-		else if (kill(pid, SIGUSR2) != -1) // SIGUSR2 = 0;
+		else if (kill(pid, SIGUSR2) != -1)
 		{
 			cal = cal >> 1;
 			count_send++;
@@ -37,7 +37,7 @@ void	send(int pid, unsigned char c)
 	}
 }
 
-void	preprocess(char *pid, char *message)
+static void	preprocess(char *pid, char *message)
 {
 	int	send_pid;
 
@@ -49,7 +49,7 @@ void	preprocess(char *pid, char *message)
 	}
 }
 
-int	is_valid_arg(char **argv)
+static int	is_valid_pid(char **argv)
 {
 	if ((ft_isinteger(argv[1])) && (ft_strlen(argv[1]) <= 5))
 		return (1);
@@ -59,7 +59,7 @@ int	is_valid_arg(char **argv)
 
 int	main(int argc, char **argv)
 {
-	if ((argc == 3) && (is_valid_arg(argv)))
+	if ((argc == 3) && (is_valid_pid(argv)))
 		preprocess(argv[1], argv[2]);
 	else
 		ft_putstr_fd("Input error.\n", 2);

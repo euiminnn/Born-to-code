@@ -6,17 +6,16 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/10 19:16:38 by echung            #+#    #+#             */
-/*   Updated: 2021/10/04 17:03:22 by echung           ###   ########.fr       */
+/*   Updated: 2021/10/04 21:13:28 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
+#ifndef MINITALK_BONUS_H
 
-# define MINITALK_H
+# define MINITALK_BONUS_H
 
 # include <unistd.h>
 # include <signal.h>
-# include <stdlib.h>
 
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);

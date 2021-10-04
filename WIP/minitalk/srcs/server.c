@@ -6,12 +6,11 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 01:51:39 by echung            #+#    #+#             */
-/*   Updated: 2021/10/04 17:51:13 by echung           ###   ########.fr       */
+/*   Updated: 2021/10/04 20:14:13 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minitalk.h"
-#include <stdio.h>
+#include "minitalk.h"
 
 static void	my_handler(int signum)
 {

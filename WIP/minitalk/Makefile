@@ -6,7 +6,7 @@
 #    By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/15 22:13:22 by echung            #+#    #+#              #
-#    Updated: 2021/10/04 16:58:37 by echung           ###   ########.fr        #
+#    Updated: 2021/10/04 20:23:23 by echung           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ NAME_CLIENT = client
 NAME_SERVER_BONUS = server_bonus
 NAME_CLIENT_BONUS = client_bonus
 
-CFLAGS	= -Wall -Wextra -Werror -I.
+CFLAGS	= -Wall -Wextra -Werror -I./include -I./bonus/include
+CC = gcc
 
 SRCS_SERVER	= srcs/server.c \
 			  srcs/utils.c \

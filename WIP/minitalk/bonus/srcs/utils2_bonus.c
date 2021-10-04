@@ -6,11 +6,11 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 16:54:52 by echung            #+#    #+#             */
-/*   Updated: 2021/10/04 16:55:32 by echung           ###   ########.fr       */
+/*   Updated: 2021/10/04 20:15:34 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minitalk_bonus.h"
+#include "minitalk_bonus.h"
 
 int	ft_isinteger(char *c)
 {
