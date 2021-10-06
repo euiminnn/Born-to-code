@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 00:30:27 by echung            #+#    #+#             */
-/*   Updated: 2021/10/04 21:08:23 by echung           ###   ########.fr       */
+/*   Updated: 2021/10/06 20:23:59 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,21 @@
 
 static void	send(int pid, unsigned char c)
 {
-	int	cal;
-	int	count_send;
+	int	digit;
 
-	cal = 1 << 7;
-	count_send = 0;
-	while (cal > 0)
+	digit = 1 << 7;
+	while (digit > 0)
 	{
-		if ((cal & c) && kill(pid, SIGUSR1) != -1)
+		if (digit & c)
 		{
-			cal = cal >> 1;
-			count_send++;
-		}
-		else if (kill(pid, SIGUSR2) != -1)
-		{
-			cal = cal >> 1;
-			count_send++;
+			kill(pid, SIGUSR1);
+			digit >>= 1;
 		}
 		else
-			return ;
+		{
+			kill(pid, SIGUSR2);
+			digit >>= 1;
+		}
 		usleep(100);
 	}
 }
@@ -49,9 +45,9 @@ static void	preprocess(char *pid, char *message)
 	}
 }
 
-static int	is_valid_pid(char **argv)
+static int	is_valid_pid(char *pid)
 {
-	if ((ft_isinteger(argv[1])) && (ft_strlen(argv[1]) <= 5))
+	if ((ft_isinteger(pid)) && (ft_strlen(pid) <= 5))
 		return (1);
 	else
 		return (0);
@@ -59,7 +55,7 @@ static int	is_valid_pid(char **argv)
 
 int	main(int argc, char **argv)
 {
-	if ((argc == 3) && (is_valid_pid(argv)))
+	if ((argc == 3) && (is_valid_pid(argv[1])))
 		preprocess(argv[1], argv[2]);
 	else
 		ft_putstr_fd("Input error.\n", 2);
