@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 00:30:27 by echung            #+#    #+#             */
-/*   Updated: 2021/10/06 19:27:12 by echung           ###   ########.fr       */
+/*   Updated: 2021/10/07 16:29:16 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,20 @@
 static void	send(int pid, unsigned char c)
 {
 	int	digit;
-	//int	count_send;
 
 	digit = 1 << 7;
-	//count_send = 0;
 	while (digit > 0)
 	{
-		if ((digit & c) && kill(pid, SIGUSR1) != -1)
+		if (digit & c)
 		{
+			kill(pid, SIGUSR1);
 			digit >>= 1;
-			//count_send++;
-		}
-		else if (kill(pid, SIGUSR2) != -1)
-		{
-			digit >>= 1;
-			//count_send++;
 		}
 		else
-			return ;
+		{
+			kill(pid, SIGUSR2);
+			digit >>= 1;
+		}
 		usleep(100);
 	}
 }
