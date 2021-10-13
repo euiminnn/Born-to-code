@@ -17,7 +17,7 @@ static t_env *make_env_node(char *key, char *value)
     return (env);
 }
 
-static char **get_key_value(char* line)
+char **get_key_value(char* line)
 {
     char    **output;
     char    *equal;
