@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 16:26:55 by echung            #+#    #+#             */
-/*   Updated: 2021/10/13 14:08:21 by echung           ###   ########.fr       */
+/*   Updated: 2021/10/13 16:44:59 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 void	mshell_exit(int argc, char **argv, char **env)
 {
-	return 0;
+	exit(0);
 }
