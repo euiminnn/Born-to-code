@@ -1,20 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin.h                                          :+:      :+:    :+:   */
+/*   mshell_envp.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/12 16:31:58 by echung            #+#    #+#             */
-/*   Updated: 2021/10/13 14:55:23 by echung           ###   ########.fr       */
+/*   Created: 2021/10/13 16:33:40 by echung            #+#    #+#             */
+/*   Updated: 2021/10/13 16:42:25 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTIN_H
-# define BUILTIN_H
+#include "../../../include/builtin.h"
 
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
+void	mshell_envp(int argc, char **argv, char **env)
+{
+	int i;
 
-#endif
+	i = 0;
+	while (env[i])
+	{
+		printf("\n%s", env[i]);
+		i++;
+	}
+/*
+	for (i = 0; env[i] != NULL; i++)
+		printf("\n%s", env[i]);
+*/
+}
+
+int	main(int argc, char **argv, char **env)
+{
+	mshell_envp(argc, argv, env);
+	return (0);
+}
