@@ -6,7 +6,7 @@
 #    By: su <su@student.42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/02 00:01:37 by ycha              #+#    #+#              #
-#    Updated: 2021/10/11 05:16:23 by su               ###   ########.fr        #
+#    Updated: 2021/10/13 20:20:20 by echung           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ NAME		=	minishell
 FILE		=	\
 				main.c \
 				core/builtin/builtin_cd.c \
+				core/builtin/builtin_export.c \
 				core/builtin/builtin_pwd.c \
 				core/execute/build_proc.c \
 				core/execute/execute.c \

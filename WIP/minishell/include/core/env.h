@@ -49,6 +49,9 @@ t_env   *init_env(char **envp);
  */
 char    *search_env(t_env *env, char *key);
 
+
+char **get_key_value(char* line);
+
 /**
  * 환경 변수에 값을 추가합니다.
  * 
