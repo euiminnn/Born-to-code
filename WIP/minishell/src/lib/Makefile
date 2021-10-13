@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+         #
+#    By: su <su@student.42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/15 22:13:22 by echung            #+#    #+#              #
-#    Updated: 2021/02/02 20:33:26 by echung           ###   ########.fr        #
+#    Updated: 2021/10/11 03:37:46 by su               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= libft.a
-CFLAGS	= -Wall -Wextra -Werror -I. -c
+CFLAGS	= -Wall -Wextra -Werror -I../../include/lib/ -c
 SRCS	= ft_atoi.c \
 		  ft_isalnum.c \
 		  ft_isalpha.c \
@@ -46,15 +46,6 @@ SRCS	= ft_atoi.c \
 		  ft_split.c \
 		  ft_itoa.c \
 		  ft_strmapi.c
-SRCS_B	= ft_lstnew.c \
-		  ft_lstadd_front.c \
-		  ft_lstsize.c \
-		  ft_lstlast.c \
-		  ft_lstadd_back.c
-		  #ft_lstdelone.c \
-		  ft_lstclear.c \
-		  ft_lstiter.c \
-		  ft_lstmap.c
 
 OBJS	= $(SRCS:.c=.o)
 OBJS_B	= $(SRCS_B:.c=.o)

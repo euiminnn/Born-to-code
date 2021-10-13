@@ -9,5 +9,7 @@
 
 # define ERR_SYNTAX		0
 # define ERR_NO_FILE	1
+# define ERR_MULTI_LINE_COMMAND 2
 
 #endif
+

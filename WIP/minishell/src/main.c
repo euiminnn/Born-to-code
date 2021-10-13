@@ -1,35 +1,53 @@
 #include "minishell.h"
 
-typedef struct s_list t_list;
+// #define ERRORCODE = 1 2 4 8
 
-typedef struct s_argv
+// void free()
+// {
+// 	(ERRCODE & 2) && free(line);
+// 	(ERRCODE & 4) && free(line);
+// 	(ERRCODE & 6) && free(line);
+// 	(ERRCODE & 2) && free(line);
+// }
+// ERROCODE |= parse();
+// (ERROCODE & 0) |= parse();
+// (ERROCODE & 0) |= parse();
+// (ERROCODE & 0) |= parse();
+// checkerrror(ERRORC);
+
+void    start(char **envp)
 {
-	t_list *list;
-}   t_argv;
+	char	*line;
+	t_env	*env;
+	t_list	*cmds;
 
-void    init_list(char **envp)
-{
-
-}
-
-t_argv  *envp_to_list(char **envp)
-{
-	init_list(&argv);
-}
-
-void    startshell(char **envp)
-{
-	envp_to_list(envp);
-	while (1)
+	env = init_env(envp);
+	while (input(&line) == OK)
 	{
-		write_message_to_command("bash > ");
-		get_command();
-		parse_command();
+		cmds = init_list();
+		if (parse(line, env, cmds) != OK)
+		{
+			printf("에러남 ㅠ \n");
+			free(line);
+			continue ;
+		}
+		if (execute(cmds, env) != OK)
+		{
+			printf("에러남 ㅠ \n");
+			free(line);
+			free_list(cmds, free_cmd);
+			continue ;
+		}
+		free(line);
+		free_list(cmds, free_cmd);
 	}
-}    
+	free(env);
+}
 
 int main(int argc, char **argv, char **envp)
 {
-	startshell();
+	(void)argv;
+	(void)argc;
+	start(envp);
 	return (0);
 }

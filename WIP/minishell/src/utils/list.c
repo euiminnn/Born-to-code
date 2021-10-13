@@ -1,32 +1,63 @@
-#include "utils.h"
+#include "utils/list.h"
 
-t_list	*create_list()
+static t_list	*create_node(void *data)
 {
-    t_list  *list;
+	t_list *output;
 
-    list = (t_list *)malloc()
-    if (!list)
-
-
-    return (list);
+	output = malloc(sizeof(t_list));
+	if (!output)
+		exit(12);
+	output->data = data;
+	output->next = NULL;
+	return (output);
 }
 
-void	init_list(t_list *list)
+t_list	*init_list()
 {
-
+	return (create_node(NULL));
 }
 
-int	push_list(t_list *list, void *data)
+void    push_list(t_list *list, void *data)
 {
+	t_list *push_position;
+	t_list *new_node;
 
+	push_position = list;
+	new_node = create_node(data);
+	while (push_position->next)
+		push_position = push_position->next;
+	push_position->next = new_node;
 }
 
-int	pop_list(t_list *list, void **data, void del(void *)))
+void    free_list(t_list *list, void (*del)(void *data))
 {
+	t_list *delete_position;
+	t_list *ptr;
 
+	ptr = list->next;
+	while (ptr)
+	{
+		delete_position = ptr;
+		ptr = ptr->next;
+		if (del)
+			del(delete_position->data);
+		free(delete_position);
+		delete_position = 0;
+	}
+	free(list);
 }
 
-void	free_list(t_list *list, void del(void *))
+int count_list(t_list *list)
 {
+	int		size;
+	t_list	*node;
 
+	node = list->next;
+	size = 0;
+	while (node)
+	{
+		++size;
+		node = node->next;
+	}
+	return (size);
 }
