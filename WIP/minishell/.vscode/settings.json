@@ -1,0 +1,12 @@
+{
+    "files.associations": {
+        "debug_utils.h": "c",
+        "chrono": "c",
+        "utils.h": "c",
+        "redir.h": "c",
+        "unistd.h": "c",
+        "minishell.h": "c",
+        "parse.h": "c",
+        "debug_execute.h": "c"
+    }
+}

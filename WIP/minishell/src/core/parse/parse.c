@@ -2,32 +2,39 @@
 #include "core/env.h"
 #include "core/parse/parse.h"
 #include "debug/debug_parse.h"
+#include "debug/debug_utils.h"
 
 static int  replace(t_list *tokens, t_env *env);
 
+/**
+ * 파싱 과정
+ * 
+ * 토큰나이저 : 문자열을 토큰으로 자름
+ * 렉서 : 토큰의 타입을 정함
+ * env 적용 : 환경변수를 적용함
+ * 파서 : 최종 커맨드 구조체를 만듬
+ * 
+ */
 int parse(char *line, t_env *env, t_list *cmds)
 {
     t_list  *tokens;
     char    **strings;
 
     tokens = init_list();
-    tokenizer(line, &strings);
-    printf("-------tokenizer-------\n");
-    print_pp(strings);
-
+    if (!tokenizer(line, &strings))
+        return (ERROR);
+    DEBUG && printf("-------tokenizer-------\n");
+    DEBUG && print_strings(strings, 0);
     lexer(strings, tokens);
-    printf("---------lexer---------\n");
-    print_token_list(tokens, 0);
-
+    DEBUG && printf("---------lexer---------\n");
+    DEBUG && print_token_list(tokens, 0);
     replace(tokens, env);
-    printf("--------replace--------\n");
-    print_token_list(tokens, 0);
-
+    DEBUG && printf("--------replace--------\n");
+    DEBUG && print_token_list(tokens, 0);
     parser(tokens, cmds);
-    printf("--------parser---------\n");
-    print_cmd_list(cmds, 0);
-
-    ft_split_free(strings);
+    DEBUG && printf("--------parser---------\n");
+    DEBUG && print_cmd_list(cmds, 0);
+    ft_free_strings(strings);
     free_list(tokens, free_token);
     return (OK);
 }
@@ -50,16 +57,13 @@ int parse(char *line, t_env *env, t_list *cmds)
  * @example cmds : [
  *  {
  *    args: [{type: T_ARG, value: 'echo'}, {type: T_ARG, value: 'hello'}]
- *    rd_in: []
- *    rd_out: [{type: T_RIGHT_REDIR, value: 'abc'}]
+ *    rd : [{type: T_RIGHT_REDIR, value: 'abc'}]
  *  },
  *  {
  *    args: [{type: T_CMD, value: 'cat'}]
- *    rd_in: [{type: T_LEFT_REDIR, value: 'abc'}]
- *    rd_out: []
+ *    rd: [{type: T_LEFT_REDIR, value: 'abc'}]
  *  }
  * ]
- *
  */
 int parser(t_list *tokens, t_list *cmds)
 {
@@ -76,10 +80,8 @@ int parser(t_list *tokens, t_list *cmds)
             token = dup_token((t_token *)node->data);
             if (token->type == T_ARG)
                 push_list(cmd->args, (void *)token);
-            else if (token->type == T_LEFT_REDIR || token->type == T_LEFT_DOUBLE_REDIR)
-                push_list(cmd->rd_in, (void *)token);
             else
-                push_list(cmd->rd_out, (void *)token);
+                push_list(cmd->rd, (void *)token);
             node = node->next;
         }
         push_list(cmds, (void *)cmd);

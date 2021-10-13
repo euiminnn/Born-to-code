@@ -62,8 +62,11 @@ static int find_dallor(char **ptr, char **buf)
 			return (OK);
 		*(*buf)++ = *(*ptr)++;
 		if (**ptr == '\'')
+		{
+			*(*buf)++ = *(*ptr)++;
 			while (**ptr && **ptr != '\'')
 				*(*buf)++ = *(*ptr)++;
+		}
 	}
 	return (ERROR);
 }
@@ -102,19 +105,22 @@ static char	*find_key_from_env(char *key_start, char *key_end, t_env *env)
 static char *remove_quote(char *str)
 {
 	char	buf[BUFFER_SIZE];
+	char	quote;
 	int		idx;
 
 	idx = 0;
 	while (*str)
 	{
+		buf[idx++] = *str++;
 		if (*str == '\'' || *str == '\"')
 		{
+			quote = *str;
 			str++;
-			continue ;
+			while (*str && *str != quote)
+				buf[idx++] = *str++;
+			if (*str)
+				str++;
 		}
-		buf[idx] = *str;
-		idx++;
-		str++;
 	}
 	buf[idx] = '\0';
 	return (ft_strdup(buf));

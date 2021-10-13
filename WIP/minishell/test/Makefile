@@ -11,8 +11,6 @@
 # **************************************************************************** #
 
 TESTS		=	\
-        		parse/test_lexer \
-				parse/test_parser \
 				parse/test_tokenizer
 
 # =========================================================
@@ -25,7 +23,7 @@ all				:
 
 test			:
 	@$(MAKE) -C ../
-	@$(MAKE) -C $(TEST_PATH) test;
+	@$(MAKE) -C $(TEST_NAME) test;
 
 fclean			:
 	@for DIRS in $(TESTS); do \

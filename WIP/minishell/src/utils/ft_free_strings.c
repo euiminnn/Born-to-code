@@ -1,6 +1,6 @@
 #include "utils/utils.h"
 
-char    **ft_split_free(char **arr)
+char    **ft_free_strings(char **arr)
 {
     int idx;
 

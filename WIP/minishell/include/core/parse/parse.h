@@ -4,6 +4,7 @@
 # include "define.h"
 # include "lib/libft.h"
 # include "utils/list.h"
+# include "utils/utils.h"
 # include "core/env.h"
 # include "core/parse/cmd.h"
 # include "core/parse/token.h"
@@ -31,7 +32,10 @@ int parse(char *line, t_env *env, t_list *cmds);
  *
  * @param line 입력받은 한줄
  * @param strings 반환 받을 문자열들
- * @return 성공하면 OK, 실패하면 ERR 번호
+ * @return 성공하면 OK, 실패하면 ERROR
+ * 
+ * @e ERR_PARSE_MULTI_LINE
+ * @e ERR_PARSE_SYNTAX
  */
 int tokenizer(char *line, char ***strings);
 
@@ -40,7 +44,9 @@ int tokenizer(char *line, char ***strings);
  *
  * @param strings split 된 문자열
  * @param tokens 토큰을 추가할 연결 리스트
- * @return 성공하면 OK, 실패하면 ERR
+ * @return 성공하면 OK, 실패하면 ERROR
+ * 
+ * @e ERR_PARSE_SYNTAX
  */
 int lexer(char **strings, t_list *tokens);
 

@@ -3,6 +3,9 @@
 #include "core/parse/parse.h"
 #include "core/parse/token.h"
 
+#define FD_IN 0
+#define FD_OUT 1
+
 // TODO: export_env 랑 코드가 중복됨.... 고쳐볼지 생각해볼것....
 static char **export_tokens_to_arr(t_list *tokens)
 {
@@ -12,7 +15,7 @@ static char **export_tokens_to_arr(t_list *tokens)
     t_list  *node;
 
     size = count_list(tokens);
-    rt = (char **)malloc(sizeof(char *) * size);
+    rt = (char **)malloc(sizeof(char *) * (size + 1));
     if (!rt)
         ft_exit(12);
     idx = 0;
@@ -27,46 +30,38 @@ static char **export_tokens_to_arr(t_list *tokens)
     return (rt);
 }
 
-static int  find_fd_in(t_list *tokens, int default_fd)
+static int  get_fd_type(int type)
 {
-    int     fd;
-    t_token *token;
-    t_list  *node;
-
-    fd = default_fd;
-    node = tokens->next;
-    while (node)
-    {
-        ft_close(fd);
-        token = node->data;
-        if (token->type == T_LEFT_REDIR)
-            fd = left_redir(token->value);
-        else
-            fd = left_double_redir(token->value);
-        node = node->next;
-    }
-    return (fd);
+    if (type == T_LEFT_REDIR || type == T_LEFT_DOUBLE_REDIR)
+        return (FD_IN);
+    return (FD_OUT);
 }
 
-static int find_fd_out(t_list *tokens, int default_fd)
+static int  get_redir_fd(t_list *tokens, int fds[2])
 {
-    int     fd;
+    int     fd_type;
     t_token *token;
     t_list  *node;
 
-    fd = default_fd;
     node = tokens->next;
     while (node)
     {
-        ft_close(fd);
         token = node->data;
-        if (token->type == T_RIGHT_REDIR)
-            fd = right_redir(token->value);
-        else
-            fd = right_double_redir(token->value);
+        fd_type = get_fd_type(token->type);
+        ft_close(fds[fd_type]);
+        if (token->type == T_LEFT_REDIR)
+            fds[fd_type] = left_redir(token->value);
+        else if (token->type == T_LEFT_DOUBLE_REDIR)
+            fds[fd_type] = left_double_redir(token->value);
+        else if (token->type == T_RIGHT_REDIR)
+            fds[fd_type] = right_redir(token->value);
+        else if (token->type == T_RIGHT_DOUBLE_REDIR)
+            fds[fd_type] = right_double_redir(token->value);
+        if (fds[fd_type] == -1)
+            return (ERROR);
         node = node->next;
     }
-    return (fd);
+    return (OK);
 }
 
 /**
@@ -89,6 +84,7 @@ static int find_fd_out(t_list *tokens, int default_fd)
  */
 t_proc  *build_proc(t_cmd *cmd, t_env *env, int fd_in, int fd_out)
 {
+    int     fds[2];
     t_proc  *proc;
 
     proc = (t_proc *)malloc(sizeof(t_proc));
@@ -97,7 +93,10 @@ t_proc  *build_proc(t_cmd *cmd, t_env *env, int fd_in, int fd_out)
     proc->argv = export_tokens_to_arr(cmd->args);
     proc->argc = count_list(cmd->args);
     proc->env = env;
-    proc->fd_in = find_fd_in(cmd->rd_in, fd_in);
-    proc->fd_out = find_fd_out(cmd->rd_out, fd_out);
+    fds[FD_IN] = fd_in;
+    fds[FD_OUT] = fd_out;
+    get_redir_fd(cmd->rd, fds);
+    proc->fd_in = fds[FD_IN];
+    proc->fd_out = fds[FD_OUT];
     return (proc);
 }

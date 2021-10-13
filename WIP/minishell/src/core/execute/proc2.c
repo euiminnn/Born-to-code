@@ -1,4 +1,5 @@
 #include "core/execute/proc.h"
+#include "utils/utils.h"
 #include <unistd.h>
 
 int get_proc_type(t_proc *proc)
@@ -19,6 +20,7 @@ static int	wait_cmd()
 	return (OK);
 }
 
+// TODO: if PATH not valid
 int execute_extern_proc(t_proc *proc)
 {
 	char	*command;
@@ -28,19 +30,19 @@ int execute_extern_proc(t_proc *proc)
 	int		pid;
     
 	envp = export_env(proc->env);
-	path = ft_split(search_env(proc->env, "PATH"), ':');
 	pid = fork();
 	if (pid > 0)
-	{
 		wait_cmd();
-	}
 	else
 	{
+		ft_dup(proc->fd_in, STDIN_FILENO);
+		ft_dup(proc->fd_out, STDOUT_FILENO);
 		if (ft_strchr(proc->argv[0], '/'))
 			execve(proc->argv[0], proc->argv, envp);
 		else 
 		{
 			idx = -1;
+			path = ft_split(search_env(proc->env, "PATH"), ':');
 			while (path[++idx])
 			{
 				command = ft_strjoins((char *[3]){path[idx], "/", proc->argv[0]}, 3);
@@ -49,13 +51,12 @@ int execute_extern_proc(t_proc *proc)
 			}
 		}
 	}
-	ft_split_free(envp);
-	ft_split_free(path);
+	ft_free_strings(envp);
 	return (OK);
 }
 
 void    free_proc(t_proc *proc)
 {
-	ft_split_free(proc->argv);
+	ft_free_strings(proc->argv);
 	free(proc);
 }

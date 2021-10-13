@@ -7,20 +7,17 @@
  * @brief 한 명령어 대한 구조체
  *
  * @p args 명령어 + 인자 token 배열
- * @p rd_in 입력 리다이렉션이 저장되는 token 배열
- * @p rd_out 출력 리다이렉션이 저장되는 token 배열
+ * @p rd_in 리다이렉션이 저장되는 token 배열
  *
  * @example {
  *   args : [{type: T_ARG, value: 'echo'}, {type: T_ARG, value: 'hello'}]
- *   rd_in : []
- *   rd_out : [{type: T_RIGHT_REDIR, value: 'abc'}]
+ *   rd : [{type: T_RIGHT_REDIR, value: 'abc'}]
  * }
  */
 typedef struct s_cmd
 {
     t_list  *args;
-    t_list  *rd_in;
-    t_list  *rd_out;
+    t_list  *rd;
 }   t_cmd;
 
 /**

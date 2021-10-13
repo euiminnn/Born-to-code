@@ -18,9 +18,9 @@ FILE		=	\
 				main.c \
 				core/builtin/builtin_cd.c \
 				core/builtin/builtin_pwd.c \
-				core/execute/build_proc.c \
 				core/execute/execute.c \
-				core/execute/proc.c \
+				core/execute/proc1.c \
+				core/execute/proc2.c \
 				core/execute/redir.c \
 				core/env/env.c \
 				core/parse/cmd.c \
@@ -29,18 +29,22 @@ FILE		=	\
 				core/parse/replace.c \
 				core/parse/token.c \
 				core/parse/tokenizer.c \
-				core/input.c \
 				utils/ft_close.c \
+				utils/ft_dup.c \
+				utils/ft_error.c \
 				utils/ft_exit.c \
 				utils/ft_free.c \
-				utils/ft_split_free.c \
+				utils/ft_free_strings.c \
 				utils/ft_strjoins.c \
 				utils/list.c \
-				debug/debug_parse.c
+				debug/debug_parse.c \
+				debug/debug_execute.c \
+				debug/debug_utils.c
 
 
 # Options =================================================
 
+# CC			=	clang --analyze
 CC			=	gcc
 INCLUDE 	=	include
 # CFLAGS		=	-Wall -Werror -Wextra -I$(INCLUDE) -g
@@ -53,6 +57,8 @@ SRCS		=	$(addprefix $(SRC_DIR)/, $(FILE))
 OBJ_DIR		=	./obj
 OBJS		=	$(addprefix $(OBJ_DIR)/, $(patsubst %.c,%.o,$(FILE)))
 
+DEBUG		=	0
+
 export FILE
 
 # =========================================================
@@ -61,16 +67,22 @@ all				: $(NAME)
 
 $(OBJ_DIR)/%.o	: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@ -DDEBUG=$(DEBUG)
 
 $(NAME)			: $(OBJS)
 	$(MAKE) -C ./src/lib
 	ar rcs ./obj/libminishell.a $(OBJS)
-	gcc $(CFLAGS) $(CLIB) -o $@ $^
+	gcc $(CFLAGS) $(CLIB) -o $@ $^ 
 
 norm			:
 	@python3 -m norminette include/*
 	@python3 -m norminette src/*
+
+debug			:
+	@$(MAKE) DEBUG=1
+
+test			:
+	@$(MAKE) -C ./test
 
 show			:
 	@printf "SRCS : $(SRCS)"
@@ -83,7 +95,8 @@ clean			:
 fclean			: clean
 	rm -f $(NAME)
 	$(MAKE) -C ./src/lib fclean
+	@$(MAKE) -C ./test fclean
 
 re				: fclean all
 
-.PHONY: clean fclean all re norm show
+.PHONY: clean fclean all re norm show test

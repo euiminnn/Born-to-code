@@ -10,21 +10,21 @@
 #                                                                              #
 # **************************************************************************** #
 
-TEST_NAME	=	$(notdir $(shell pwd))
+TEST_FILE	=	$(notdir $(shell pwd))
 
-TEST_PATH	=	./parse/$(TEST_NAME)
-TEST_FILE	=	$(TEST_NAME).c
+TEST_NAME	=	./parse/$(TEST_FILE)
 
 all			:
-	@$(MAKE) -C ../../ TEST_PATH=$(TEST_PATH) test
+	@$(MAKE) -C ../../ TEST_NAME=$(TEST_NAME) test
 
 test		:
-	@printf "[TEST] $(TEST_NAME)\n";
-	@g++ $(TEST_FILE) -lminishell -L../../../obj
-	@./a.out
+	@printf "[TEST] $(TEST_NAME)";
+	@gcc $(TEST_FILE).c -I../../../include -lminishell -lft -L../../../obj -L../../../src/lib
+	@../../unit_test.sh $(TEST_FILE).c
 
 fclean		:
 	@rm -f ./a.out
+	@rm -f output
 
 re			: fclean all
 
