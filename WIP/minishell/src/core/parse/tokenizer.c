@@ -12,20 +12,20 @@ static void revert_quote(char *str);
  * line 에 있는 기호 양 옆에 스페이스를 넣어주고, (따움표 제외)
  * 따움표 안의 스페이스를 SPACE로 바꾸고,
  * ' ' 기준으로 split 한다.
- * 마지막으로 lexer를 호출해서 토큰을 구한다.
  *
  * @example line : echo hello > abc | cat << abc
  * @example strings : ['echo', 'hello', '>', 'abc', '|', 'cat', '<<' ,'abc']
  */
+
 int tokenizer(char *line, char ***strings)
 {
     char    buf[BUFFER_SIZE];
     int     idx;
 
     if (!convert_quote(line))
-        return (ERROR);
+        return (ft_error(ERR_PARSE_MULTI_LINE));
     if (!convert_symbol(line, buf))
-        return (ERROR);
+        return (ft_error(ERR_PARSE_SYNTAX));
     idx = -1;
     *strings = ft_split(buf, ' ');
     while ((*strings)[++idx])
@@ -33,31 +33,23 @@ int tokenizer(char *line, char ***strings)
     return (OK);
 }
 
-static int convert_quote(char *line)
+static int convert_quote(char *str)
 {
-    int     flag;
     char    quote;
 
-    flag = 0;
-    while (*line)
+    while (*str)
     {
-        if (!flag)
+        str++;
+        if (*str == '\'' || *str == '\"')
         {
-            if (*line == '\'' || *line == '\"')
-                flag = 1;
-            quote = *line;
+            quote = *str;
+            str++;
+            while (*str && *str != quote)
+                *str++ *= -1;
+            if (!*str)
+                return (ERROR);
         }
-        else
-        {
-            if (*line == quote)
-                flag = 0;
-            else
-                *line *= -1;
-        }
-        ++line;
     }
-    if (flag)
-        return (ERROR);
     return (OK);
 }
 

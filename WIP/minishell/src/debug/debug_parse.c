@@ -1,15 +1,7 @@
 #include "debug/debug_parse.h"
+#include "debug/debug_utils.h"
 
-static void print_space(int depth)
-{
-    int c;
-
-    c = depth * 4;
-    while (c--)
-        printf(" ");
-}
-
-void    print_cmd(t_cmd *cmd, int depth)
+int    print_cmd(t_cmd *cmd, int depth)
 {
     print_space(depth);
     printf("{\n");
@@ -17,16 +9,14 @@ void    print_cmd(t_cmd *cmd, int depth)
     printf("args : \n");
     print_token_list(cmd->args, depth + 2);
     print_space(depth + 1);
-    printf("rd_in : \n");
-    print_token_list(cmd->rd_in, depth + 2);
-    print_space(depth + 1);
-    printf("rd_out : \n");
-    print_token_list(cmd->rd_out, depth + 2);
+    printf("rd : \n");
+    print_token_list(cmd->rd, depth + 2);
     print_space(depth);
     printf("}\n");
+    return (OK);
 }
 
-void    print_cmd_list(t_list *cmds, int depth)
+int    print_cmd_list(t_list *cmds, int depth)
 {
     t_list  *node;
 
@@ -40,9 +30,10 @@ void    print_cmd_list(t_list *cmds, int depth)
     }
     print_space(depth);
     printf("]\n");
+    return (OK);
 }
 
-void    print_token(t_token *token, int depth)
+int    print_token(t_token *token, int depth)
 {
     char *c;
 
@@ -60,9 +51,10 @@ void    print_token(t_token *token, int depth)
         c = "T_PIPE";
     print_space(depth);
     printf("{type: %s, value: %s}\n", c, token->value);
+    return (OK);
 }
 
-void    print_token_list(t_list *tokens, int depth)
+int    print_token_list(t_list *tokens, int depth)
 {
     t_list  *node;
 
@@ -76,15 +68,5 @@ void    print_token_list(t_list *tokens, int depth)
     }
     print_space(depth);
     printf("]\n");
-}
-
-void	print_pp(char **arr)
-{
-	int idx;
-
-	idx = -1;
-	while (arr[++idx])
-	{
-		printf("{line[%d] : %s}\n", idx, arr[idx]);
-	}
+    return (OK);
 }

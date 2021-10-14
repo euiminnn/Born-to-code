@@ -1,0 +1,175 @@
+----- test1 -----
+[
+    echo
+    hello
+]
+->
+1
+----- test2 -----
+[
+    echo
+    hello
+    world
+]
+->
+1
+----- test2-1 -----
+[
+    echo
+    -n
+    $USER
+]
+->
+1
+----- test2-2 -----
+[
+    echo
+    "$USER"
+]
+->
+1
+----- test3 -----
+[
+    "echo"
+    hello
+]
+->
+1
+----- test3-1 -----
+[
+    "e"c'h'o
+    hello
+]
+->
+1
+----- test3-1-1 -----
+[
+    "e"'ch'o
+    hello
+]
+->
+1
+----- test3-1-1 -----
+[
+    ""''o
+    hello
+]
+->
+1
+----- test3-2 -----
+[
+    echo
+    "hello"
+    world
+]
+->
+1
+----- test4 -----
+[
+    echo
+    "hello world"
+]
+->
+1
+----- test5 -----
+[
+    echo
+    "hello world"hello
+]
+->
+1
+----- test6 -----
+[
+    echo
+    ""hello
+]
+->
+1
+----- test6-1 -----
+[
+    echo
+    ""
+]
+->
+1
+----- test6-2 -----
+[
+    echo
+    abc""
+]
+->
+1
+----- test7 -----
+->
+0
+ERR_PARSE_MULTI_LINE
+----- test8 -----
+->
+0
+ERR_PARSE_MULTI_LINE
+----- test9 -----
+->
+0
+ERR_PARSE_SYNTAX
+----- test9-1 -----
+->
+0
+ERR_PARSE_SYNTAX
+----- test9-2 -----
+->
+0
+ERR_PARSE_SYNTAX
+----- test10 -----
+->
+0
+ERR_PARSE_MULTI_LINE
+----- test11 -----
+[
+    echo
+    hello
+    >
+    a
+    |
+    cat
+    a
+    |
+    cat
+    <
+    a
+    >
+    b
+]
+->
+1
+----- test11-1 -----
+[
+    echo
+    hello
+    >
+    a
+    |
+    cat
+    a
+    |
+    cat
+    <
+    a
+    >
+    b
+]
+->
+1
+----- test12 -----
+[
+    echo
+    hel'lo>a|c'at
+    a
+    |
+    cat
+    <
+    a
+    >
+    b
+]
+->
+1

@@ -1,6 +1,10 @@
 #ifndef REDIR_H
 # define REDIR_H
 
+# include <readline/readline.h>
+# include <fcntl.h>
+# include <unistd.h>
+
 /**
  * 왼쪽 리다이렉션 (<) 을 처리합니다. 
  * 

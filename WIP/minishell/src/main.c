@@ -1,19 +1,17 @@
 #include "minishell.h"
 
-// #define ERRORCODE = 1 2 4 8
+int	input(char **line)
+{
+    char *str;
 
-// void free()
-// {
-// 	(ERRCODE & 2) && free(line);
-// 	(ERRCODE & 4) && free(line);
-// 	(ERRCODE & 6) && free(line);
-// 	(ERRCODE & 2) && free(line);
-// }
-// ERROCODE |= parse();
-// (ERROCODE & 0) |= parse();
-// (ERROCODE & 0) |= parse();
-// (ERROCODE & 0) |= parse();
-// checkerrror(ERRORC);
+	str = readline("의민쉘$ ");
+	if (str)
+		*line = str;
+	else
+		return (ERROR);
+	add_history(str);
+    return(OK);
+}
 
 void    start(char **envp)
 {

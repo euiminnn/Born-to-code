@@ -24,6 +24,7 @@ static int get_type(char *str);
  *  {type: T_REDIR, value: 'abc'},
  * ]
  */
+
 int lexer(char **strings, t_list *tokens)
 {
     int     index;
@@ -41,7 +42,7 @@ int lexer(char **strings, t_list *tokens)
         else if (strings[index + 1] && get_type(strings[index + 1]) == T_ARG)
             value = ft_strdup(strings[index++ + 1]);
         else
-            return (ERROR);
+            return (ft_error(ERR_PARSE_SYNTAX));
         push_list(tokens, init_token(type, value));
     }
     return (OK);

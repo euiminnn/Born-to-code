@@ -9,8 +9,7 @@ t_cmd    *init_cmd()
     if (!cmd)
         exit(12);
     cmd->args = init_list();
-    cmd->rd_in = init_list();
-    cmd->rd_out = init_list();
+    cmd->rd = init_list();
     return (cmd);
 }
 
@@ -20,7 +19,6 @@ void    free_cmd(void *data)
 
     cmd = (t_cmd *)data;
     free_list(cmd->args, free_token);
-    free_list(cmd->rd_in, free_token);
-    free_list(cmd->rd_out, free_token);
+    free_list(cmd->rd, free_token);
     free(cmd);
 }
