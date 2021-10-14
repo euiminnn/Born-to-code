@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 16:26:55 by echung            #+#    #+#             */
-/*   Updated: 2021/10/13 21:23:09 by echung           ###   ########.fr       */
+/*   Updated: 2021/10/14 17:16:37 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,6 @@ void	builtin_export_only(int argc, char **argv, t_env *env)
 void	builtin_export(int argc, char **argv, t_env *env)
 {
 	char **output;
-
-    (void)argc;
-    (void)argv;
 
 	if (argc == 1)	//export만 들어온 경우
 		builtin_export_only(argc, argv, env);
