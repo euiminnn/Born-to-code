@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_cd.c                                       :+:      :+:    :+:   */
+/*   builtin_unset.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: su <su@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/12 16:23:34 by echung            #+#    #+#             */
-/*   Updated: 2021/10/14 17:24:27 by echung           ###   ########.fr       */
+/*   Created: 2021/09/12 16:26:55 by echung            #+#    #+#             */
+/*   Updated: 2021/10/14 17:19:39 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core/builtin.h"
+#include "core/env.h"
 
-void	builtin_cd(int argc, char **argv, char **env)
+void	builtin_unset(int argc, char **argv, t_env *env)
 {
-	(void)env;
-	(void)argc;
-	if (argc == 1)
-		printf("You need a path!\n")
-	chdir(argv[1]);
+	char **output;
+
+	if (argc == 1)	//export만 들어온 경우
+		return ;
+	output = get_key_value(argv[1]);
+    remove_env(env, output[0]);
 }
