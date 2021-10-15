@@ -48,10 +48,9 @@ int	string_start(int argc, char **argv)
 	return i;
 }
 
-void	builtin_echo(int argc, char **argv, t_env *env)
+int	builtin_echo(int argc, char **argv, t_env *env, int fd)
 {
 	(void)env;
-
 	int n_option;
 	int s;
 
@@ -63,46 +62,14 @@ void	builtin_echo(int argc, char **argv, t_env *env)
 	while (s < argc)
 	{
 		if (s != argc - 1)
-			printf("%s ", argv[s]);
+    {
+      ft_putstr_fd(argv[s], fd);
+			ft_putstr_fd(" ", fd);
+    }
 		else
-			printf("%s", argv[s]);
+			ft_putstr_fd(argv[s], fd);
 		s++;
 	}
 	if (!n_option)
-		printf("\n");
+		ft_putstr_fd("\n", fd);
 }
-
-/*
-int		ft_strcmp(const char *s1, const char *s2)
-{
-	while (*s1 && *s1 == *s2)
-	{
-		s1++;
-		s2++;
-	}
-	return (*(unsigned char*)s1 - *(unsigned char*)s2);
-}
-*/
-
-/*
-int main(int argc, char **argv)
-{
-	int n_option = 1;
-	int s;
-
-	s = string_start(argc, argv);
-
-	if (valid_n(argv[1]) != 0)	//without n option
-		n_option = 0;
-	while (s < argc)
-	{
-		if (s != argc - 1)
-			printf("%s ", argv[s]);
-		else
-			printf("%s", argv[s]);
-		s++;
-	}
-	if (!n_option)
-		printf("\n");
-}
-*/

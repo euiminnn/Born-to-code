@@ -1,10 +1,11 @@
 #include "core/parse/parse.h"
+#include "core/error.h"
 
 static int get_type(char *str);
 
 /**
  * 앞에서 부터 순회하면서
- * tokens 에 type 추론해서 넣기,
+ * tokens 에 type 추론해서 넣기
  * type을 구해서
  *      arg 이면
  *          token 에 문자열 추가
@@ -42,20 +43,12 @@ int lexer(char **strings, t_list *tokens)
         else if (strings[index + 1] && get_type(strings[index + 1]) == T_ARG)
             value = ft_strdup(strings[index++ + 1]);
         else
-            return (ft_error(ERR_PARSE_SYNTAX));
+            return (ft_error(ERR_PARSE_SYNTAX, 0));
         push_list(tokens, init_token(type, value));
     }
     return (OK);
 }
 
-/**
- * 문자열에 해당하는 타입 종류를 찾습니다.
- *
- * @param str 문자열
- * @return 타입 종류를 반환합니다.
- *
- * TODO: @test str = '>>a' 인경우에도 잘 돌아가는지 확인...
- */
 static int get_type(char *str)
 {
     if (ft_strncmp(str, "|", 1) == 0)

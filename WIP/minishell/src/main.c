@@ -1,6 +1,12 @@
 #include "minishell.h"
 
-int	input(char **line)
+/**
+ * 쉘을 입력 받습니다.
+ *
+ * @param line 입력받은 문자열 저장할 주소
+ * @return 성공하면 OK 실패하면 ERROR
+ */
+static int	input(char **line)
 {
     char *str;
 
@@ -20,22 +26,11 @@ void    start(char **envp)
 	t_list	*cmds;
 
 	env = init_env(envp);
-	while (input(&line) == OK)
+	while (input(&line))
 	{
 		cmds = init_list();
-		if (parse(line, env, cmds) != OK)
-		{
-			printf("에러남 ㅠ \n");
-			free(line);
-			continue ;
-		}
-		if (execute(cmds, env) != OK)
-		{
-			printf("에러남 ㅠ \n");
-			free(line);
-			free_list(cmds, free_cmd);
-			continue ;
-		}
+		if (parse(line, env, cmds))
+			execute(cmds, env);
 		free(line);
 		free_list(cmds, free_cmd);
 	}

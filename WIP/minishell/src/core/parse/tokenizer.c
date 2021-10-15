@@ -1,5 +1,6 @@
 #include "core/parse/parse.h"
 #include "utils/utils.h"
+#include "core/error.h"
 
 #define BUFFER_SIZE 42000
 #define SPACE 1
@@ -23,9 +24,9 @@ int tokenizer(char *line, char ***strings)
     int     idx;
 
     if (!convert_quote(line))
-        return (ft_error(ERR_PARSE_MULTI_LINE));
+        return (ft_error(ERR_PARSE_MULTI_LINE, 0));
     if (!convert_symbol(line, buf))
-        return (ft_error(ERR_PARSE_SYNTAX));
+        return (ft_error(ERR_PARSE_SYNTAX, 0));
     idx = -1;
     *strings = ft_split(buf, ' ');
     while ((*strings)[++idx])

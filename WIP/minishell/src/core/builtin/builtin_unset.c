@@ -13,12 +13,14 @@
 #include "core/builtin.h"
 #include "core/env.h"
 
-void	builtin_unset(int argc, char **argv, t_env *env)
+int	builtin_unset(int argc, char **argv, t_env *env, int fd)
 {
 	char **output;
 
+	(void)fd;
 	if (argc == 1)	//export만 들어온 경우
-		return ;
+		return (1);
 	output = get_key_value(argv[1]);
     remove_env(env, output[0]);
+	return (0);
 }

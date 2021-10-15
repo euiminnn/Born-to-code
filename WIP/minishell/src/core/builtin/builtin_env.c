@@ -13,7 +13,7 @@
 #include "core/builtin.h"
 #include "core/env.h"
 
-void	builtin_env(int argc, char **argv, t_env *env)
+int	builtin_env(int argc, char **argv, t_env *env, int fd)
 {
 	char	**envp;
 	int i;
@@ -22,11 +22,12 @@ void	builtin_env(int argc, char **argv, t_env *env)
 	envp = export_env(env);
 	while (envp[i])
 	{
-		printf("\n%s", envp[i]);
+		ft_putstr_fd(envp[i], fd);
 		i++;
 	}
 /*
 	for (i = 0; env[i] != NULL; i++)
 		printf("\n%s", env[i]);
 */
+	return (0);
 }
