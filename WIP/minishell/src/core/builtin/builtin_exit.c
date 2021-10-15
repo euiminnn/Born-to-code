@@ -18,6 +18,7 @@ int builtin_exit(int argc, char **argv, t_env *env, int fd)
     (void)argv;
     (void)env;
     (void)fd;
-	exit(0);
+    if (argc < 3)
+	    exit(0);
     return (0);
 }

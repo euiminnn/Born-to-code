@@ -81,8 +81,9 @@ static t_env    *search_env_position(t_env *env, char *key)
     node = env;
     while (node->next)
     {
-        if (ft_strncmp(node->next->key, key, KEY_MAX))
+        if (ft_strncmp(node->next->key, key, KEY_MAX) > 0)
             break;
+        node = node->next;
     }
     return (node);
 }
@@ -139,7 +140,7 @@ char    **export_env(t_env *env)
     int     size;
     int     idx;
     t_env	*node;
-    
+
     size = count_env(env);
     rt = (char **)malloc(sizeof(char *) * (size + 1));
     if (!rt)

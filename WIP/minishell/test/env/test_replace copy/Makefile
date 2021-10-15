@@ -3,37 +3,30 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ycha <ycha@student.42seoul.kr>             +#+  +:+       +#+         #
+#    By: su <su@student.42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/02 00:01:37 by ycha              #+#    #+#              #
-#    Updated: 2021/10/16 06:47:14 by ycha             ###   ########.fr        #
+#    Updated: 2021/10/11 04:02:52 by su               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-TESTS		=	\
-				builtin/test_echo \
-				builtin/test_export \
-				builtin/test_exit \
-				parse/test_replace \
-				parse/test_tokenizer
+TEST_FILE	=	$(notdir $(shell pwd))
 
-# =========================================================
+TEST_NAME	=	./parse/$(TEST_FILE)
 
-all				:
-	@$(MAKE) -C ../
-	@for DIRS in $(TESTS); do \
-		$(MAKE) -C $$DIRS test; \
-	done
+all			:
+	@$(MAKE) -C ../../ TEST_NAME=$(TEST_NAME) test
 
-test			:
-	@$(MAKE) -C ../
-	@$(MAKE) -C $(TEST_NAME) test;
+test		:
+	@printf "[TEST] $(TEST_NAME)";
+	@gcc $(TEST_FILE).c -I../../../include -lminishell -lft -L../../../obj -L../../../src/lib
+	@../../unit_test.sh $(TEST_FILE).c
 
-fclean			:
-	@for DIRS in $(TESTS); do \
-		$(MAKE) -C $$DIRS fclean; \
-	done
+fclean		:
+	@rm -f ./a.out
+	@rm -f output
 
-re				: fclean all
+re			: fclean all
 
-.PHONY: fclean all re show
+.PHONY: fclean all re test
+

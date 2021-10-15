@@ -47,7 +47,10 @@ int	builtin_export(int argc, char **argv, t_env *env, int fd)
 	char **output;
 
 	if (argc == 1)	//export만 들어온 경우
+	{
 		builtin_export_only(argc, argv, env, fd);
+		return (0);
+	}
 	output = get_key_value(argv[1]);
     insert_env(env, output[0], output[1]);
 	return (0);

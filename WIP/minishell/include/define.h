@@ -13,5 +13,11 @@
 # define TRUE			1
 # define FALSE			0
 
+#define CHARSET "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_"
+#define CHARSET_WITH_DIGIT \
+		"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_0123456789"
+#define CHARSET_WITH_Q \
+		"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_?"
+
 #endif
 
