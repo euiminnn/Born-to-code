@@ -22,8 +22,11 @@
  *
  * @param line 입력받은 한줄
  * @param end 환경변수 구조체
- * @param cmds 반환할 커맨드들
- * @return 입력받은 한줄에 오류가 없으면 OK, 오류가 있으면 ERROR
+ * @param cmds 반환할 커맨드 리스트 (init_list 필요)
+ * @return 성공하면 OK, 오류가 있으면 ERROR
+ *
+ * @p ERR_PARSE_MULTI_LINE
+ * @p ERR_PARSE_SYNTAX
  */
 int parse(char *line, t_env *env, t_list *cmds);
 
@@ -33,20 +36,35 @@ int parse(char *line, t_env *env, t_list *cmds);
  * @param line 입력받은 한줄
  * @param strings 반환 받을 문자열들
  * @return 성공하면 OK, 실패하면 ERROR
- * 
- * @e ERR_PARSE_MULTI_LINE
- * @e ERR_PARSE_SYNTAX
+ *
+ * @p ERR_PARSE_MULTI_LINE 따움표가 쌍이 맞지 않는 경우
+ * @p ERR_PARSE_SYNTAX 허락되지 않은 문자가 있는 경우
+ *
+ * @example line : echo hello > abc | cat << abc
+ * @example strings : ['echo', 'hello', '>', 'abc', '|', 'cat', '<<' ,'abc']
+ *
+ * @test parse/test_tokenizer
  */
 int tokenizer(char *line, char ***strings);
 
 /**
- * 문자열들을 받아서, 타입을 결정하고, 토큰 리스트에 추가합니다.
+ * 문자열들의 타입을 결정하고, 토큰 리스트에 추가합니다.
  *
  * @param strings split 된 문자열
- * @param tokens 토큰을 추가할 연결 리스트
+ * @param tokens 토큰을 추가할 리스트 (init_list 필요)
  * @return 성공하면 OK, 실패하면 ERROR
- * 
- * @e ERR_PARSE_SYNTAX
+ *
+ * @p ERR_PARSE_SYNTAX redirection 다음에 문자열이 없는 경우
+ *
+ * @example strings : ['echo', 'hello', '>', 'abc', '|', 'cat', '<<' ,'abc']
+ * @example tokens : [
+ *  {type: T_ARG, value: 'echo'},
+ *  {type: T_ARG, value: 'hello'},
+ *  {type: T_RIGHT_REDIR, value: 'abc'},
+ *  {type: T_PIPE, value: null},
+ *  {type: T_CMD, value: 'cat'},
+ *  {type: T_LEFT_DOUBLE_REDIR, value: 'abc'},
+ * ]
  */
 int lexer(char **strings, t_list *tokens);
 
@@ -55,17 +73,38 @@ int lexer(char **strings, t_list *tokens);
  *
  * @param token 토큰 구조체
  * @param env 환경 변수 구조체
- * @return 환경변수 적용에 오류가 있으면 EROOR 없으면 OK
+ *
+ * @example abc"hello$USER asdf"abc -> abchelloycha asdfabc
+ *
+ * @test parse/test_replace
  */
-int replace_env_in_token(t_token *token, t_env *env);
+void replace_env_in_token(t_token *token, t_env *env);
 
 /**
- * 토큰을 분석하여, 커맨드 리스트를 만듭니다.
+ * 토큰을 타입에 따라서, 커맨드 리스트를 만듭니다.
  *
  * @param token 토큰 리스트
- * @param cmds 반환할 커멘드들
- * @return 성공하면 OK, 실패하면 ERR 번호
+ * @param cmds 반환할 커멘드 리스트
+ *
+ * @example tokens : [
+ *  {type: T_ARG, value: 'echo'},
+ *  {type: T_ARG, value: 'hello'},
+ *  {type: T_RIGHT_REDIR, value: 'abc'},
+ *  {type: T_PIPE, value: null},
+ *  {type: T_CMD, value: 'cat'},
+ *  {type: T_LEFT_REDIR, value: 'abc'},
+ * ]
+ * @example cmds : [
+ *  {
+ *    args: [{type: T_ARG, value: 'echo'}, {type: T_ARG, value: 'hello'}]
+ *    rd : [{type: T_RIGHT_REDIR, value: 'abc'}]
+ *  },
+ *  {
+ *    args: [{type: T_CMD, value: 'cat'}]
+ *    rd: [{type: T_LEFT_REDIR, value: 'abc'}]
+ *  }
+ * ]
  */
-int parser(t_list *tokens, t_list *cmds);
+void parser(t_list *tokens, t_list *cmds);
 
 #endif

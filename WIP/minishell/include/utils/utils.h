@@ -10,4 +10,3 @@ char    **ft_free_strings(char **arr);
 void    ft_free(void *data);
 void    ft_close(int fd);
 int     ft_dup(int fd1, int fd2);
-int     ft_error(int errtype);

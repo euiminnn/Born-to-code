@@ -4,7 +4,7 @@
 # include "core/env.h"
 
 /**
- * @brief t_token 토큰 구초제
+ * t_token 토큰 구초제
  *
  * @p type 종류
  * @p value 값 (free 필요)

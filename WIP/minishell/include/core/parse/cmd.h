@@ -4,7 +4,7 @@
 # include "utils/list.h"
 
 /**
- * @brief 한 명령어 대한 구조체
+ * 명령어 대한 구조체
  *
  * @p args 명령어 + 인자 token 배열
  * @p rd_in 리다이렉션이 저장되는 token 배열

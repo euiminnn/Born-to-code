@@ -13,13 +13,17 @@
 #include "core/builtin.h"
 #include "core/env.h"
 
-void	builtin_echo(int argc, char **argv, t_env *env)
+int	builtin_echo(int argc, char **argv, t_env *env, int fd)
 {
 	(void)argc;
 	(void)argv;
 	(void)env;
-	
+
 	if (ft_strncmp(argv[1], "-n", 2))
-		printf("Option -n is missing.\n");
-	printf("%s", argv[2]); //echo가 argv[0], -n이 argv[1], string이 argv[2] 맞는지
+	{
+		ft_putstr_fd("Option -n is missing.\n", fd);
+		return (0);
+	}
+	ft_putstr_fd(argv[2], fd); //echo가 argv[0], -n이 argv[1], string이 argv[2] 맞는지
+	return (0);
 }

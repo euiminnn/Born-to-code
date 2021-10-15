@@ -12,10 +12,12 @@
 
 #include "core/builtin.h"
 
-void	builtin_exit(int argc, char **argv, char **env)
+int builtin_exit(int argc, char **argv, t_env *env, int fd)
 {
     (void)argc;
     (void)argv;
     (void)env;
+    (void)fd;
 	exit(0);
+    return (0);
 }

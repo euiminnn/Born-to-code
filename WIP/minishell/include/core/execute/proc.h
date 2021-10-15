@@ -7,14 +7,16 @@
 # include "utils/utils.h"
 # include "define.h"
 
+# define BUILTIN_NUM 7
+
 # define P_EXTERN 0
-# define P_BUILTIN_ECHO 1
-# define P_BUILTIN_CD 2
-# define P_BUILTIN_PWD 3
-# define P_BUILTIN_EXPORT 4
-# define P_BUILTIN_UNSET 5
-# define P_BUILTIN_ENV 6
-# define P_BUILTIN_EXIT 7
+# define P_BUILTIN_CD 1
+# define P_BUILTIN_ECHO 2
+# define P_BUILTIN_ENV 3
+# define P_BUILTIN_EXIT 4
+# define P_BUILTIN_EXPORT 5
+# define P_BUILTIN_PWD 6
+# define P_BUILTIN_UNSET 7
 
 /**
  * @brief 한 프로세스에 대한 구조체
@@ -48,7 +50,7 @@ typedef struct s_proc
  * @param envp 환경변수 문자열 배열
  * @param fd_in 입력 fd 초기값
  * @param fd_out 출력 fd 초기값
- * @return 프로세스 구조체 (free 필요)
+ * @return 성공시 프로세스 구조체 (free 필요), 실패시 NULL
  */
 t_proc  *build_proc(t_cmd *cmd, t_env *env, int fd_in, int fd_out);
 
@@ -56,25 +58,9 @@ t_proc  *build_proc(t_cmd *cmd, t_env *env, int fd_in, int fd_out);
  * 프로세스 종류를 파악합니다.
  *
  * @param proc 프로세스 구조체
- * @return 빌트인 프로세스라면, P_BUILTIN_* 을, 외부 프로세스라면 P_EXTERN
+ * @return 빌트인 프로세스라면 P_BUILTIN_* 을, 외부 프로세스라면 P_EXTERN
  */
 int get_proc_type(t_proc *proc);
-
-/**
- * 빌트인 프로세스를 실행시킵니다.
- * 
- * @param proc 프로세스 구조체
- * @return 정상적으로 실행되면 OK, 실패시 에러코드
- */
-int execute_builtin_proc(t_proc *proc);
-
-/**
- * 외부 프로세스를 실행시킵니다.
- * 
- * @param proc 프로세스 구조체
- * @return 정상적으로 실행되면 OK, 실패시 에러코드
- */
-int execute_extern_proc(t_proc *proc);
 
 /**
  * 프로세스 구조체 메모리를 해제합니다.

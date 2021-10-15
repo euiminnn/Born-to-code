@@ -17,30 +17,37 @@ NAME		=	minishell
 FILE		=	\
 				main.c \
 				core/builtin/builtin_cd.c \
+				core/builtin/builtin_echo.c \
+				core/builtin/builtin_env.c \
+				core/builtin/builtin_exit.c \
 				core/builtin/builtin_export.c \
 				core/builtin/builtin_pwd.c \
-				core/execute/execute.c \
+				core/builtin/builtin_unset.c \
+				core/env/env.c \
+				core/error/error_msg.c \
+				core/error/error.c \
+				core/execute/execute1.c \
+				core/execute/execute2.c \
 				core/execute/proc1.c \
 				core/execute/proc2.c \
 				core/execute/redir.c \
-				core/env/env.c \
 				core/parse/cmd.c \
 				core/parse/lexer.c \
 				core/parse/parse.c \
+				core/parse/parser.c \
 				core/parse/replace.c \
 				core/parse/token.c \
 				core/parse/tokenizer.c \
+				debug/debug_parse.c \
+				debug/debug_execute.c \
+				debug/debug_utils.c \
 				utils/ft_close.c \
 				utils/ft_dup.c \
-				utils/ft_error.c \
 				utils/ft_exit.c \
 				utils/ft_free.c \
 				utils/ft_free_strings.c \
 				utils/ft_strjoins.c \
-				utils/list.c \
-				debug/debug_parse.c \
-				debug/debug_execute.c \
-				debug/debug_utils.c
+				utils/list.c
 
 
 # Options =================================================
@@ -68,19 +75,19 @@ all				: $(NAME)
 
 $(OBJ_DIR)/%.o	: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c $< -o $@ -DDEBUG=$(DEBUG)
+	$(CC) $(CFLAGS)  -c $< -o $@ -DDEBUG=$(DEBUG) $(CLIB)
 
 $(NAME)			: $(OBJS)
 	$(MAKE) -C ./src/lib
 	ar rcs ./obj/libminishell.a $(OBJS)
-	gcc $(CFLAGS) $(CLIB) -o $@ $^ 
+	gcc $(CFLAGS)  -o $@ $^ $(CLIB)
 
 norm			:
 	@python3 -m norminette include/*
 	@python3 -m norminette src/*
 
 debug			:
-	@$(MAKE) DEBUG=1
+	@$(MAKE) re DEBUG=1
 
 test			:
 	@$(MAKE) -C ./test

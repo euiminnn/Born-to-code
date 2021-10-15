@@ -2,6 +2,7 @@
 #include "core/execute/redir.h"
 #include "core/parse/parse.h"
 #include "core/parse/token.h"
+#include "core/error.h"
 
 #define FD_IN 0
 #define FD_OUT 1
@@ -58,7 +59,7 @@ static int  get_redir_fd(t_list *tokens, int fds[2])
         else if (token->type == T_RIGHT_DOUBLE_REDIR)
             fds[fd_type] = right_double_redir(token->value);
         if (fds[fd_type] == -1)
-            return (ERROR);
+            return (ft_error(ERR_EXECUTE_NO_FILE, token->value));
         node = node->next;
     }
     return (OK);
@@ -68,7 +69,7 @@ static int  get_redir_fd(t_list *tokens, int fds[2])
  * cmd 에서 args 로 argv 를 만든다.
  * 환경변수를 그대로 적용하고,
  * 리다이렉션에 따라서 fd_in 최종값과, fd_out 최종값을 구한다.
- * 
+ *
  * @example cmd : {
  *   args: [{type: T_ARG, value: 'echo'}, {type: T_ARG, value: 'hello'}]
  *   rd_in: []
@@ -82,6 +83,7 @@ static int  get_redir_fd(t_list *tokens, int fds[2])
  *   fd_out : 1
  * }
  */
+
 t_proc  *build_proc(t_cmd *cmd, t_env *env, int fd_in, int fd_out)
 {
     int     fds[2];
@@ -95,7 +97,11 @@ t_proc  *build_proc(t_cmd *cmd, t_env *env, int fd_in, int fd_out)
     proc->env = env;
     fds[FD_IN] = fd_in;
     fds[FD_OUT] = fd_out;
-    get_redir_fd(cmd->rd, fds);
+    if (!get_redir_fd(cmd->rd, fds))
+    {
+        free_proc(proc);
+        return (NULL);
+    }
     proc->fd_in = fds[FD_IN];
     proc->fd_out = fds[FD_OUT];
     return (proc);

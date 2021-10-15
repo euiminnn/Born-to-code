@@ -18,13 +18,14 @@ static char *remove_quote(char *str);
  * $ 나오면, key 찾기, (가능한 key 참고) [a-zA-Z_][a-zA-Z0-9_]*
  * key 에 해당하는 value 를 찾는다
  * value 를 buf 에 붙여넣는다
+ * 마지막으로 따옴표를 뻰다.
  *
  * @example abc"hello$USER asdf"abc
  * @example abc"helloycha asdf"abc
  * @example abchelloycha asdfabc
- *
  */
-int replace_env_in_token(t_token *token, t_env *env)
+
+void replace_env_in_token(t_token *token, t_env *env)
 {
 	char	buf[BUFFER_SIZE];
 	char	*buf_ptr;
@@ -36,11 +37,8 @@ int replace_env_in_token(t_token *token, t_env *env)
 	str_ptr = token->value;
 	while (find_dallor(&str_ptr, &buf_ptr))
 	{
-		printf("is dallar? %c\n", *str_ptr);
 		key_last_ptr = find_key(str_ptr);
-		printf("is key last? %c\n", *key_last_ptr);
 		value = find_key_from_env(str_ptr, key_last_ptr, env);
-		printf("is value? %s\n", value);
 		if (value)
 		{
 			ft_memcpy(buf_ptr, value, ft_strlen(value));
@@ -51,7 +49,6 @@ int replace_env_in_token(t_token *token, t_env *env)
 	*buf_ptr = '\0';
 	free(token->value);
 	token->value = remove_quote(buf);
-	return (OK);
 }
 
 static int find_dallor(char **ptr, char **buf)
@@ -59,7 +56,7 @@ static int find_dallor(char **ptr, char **buf)
 	while (**ptr)
 	{
 		if(**ptr == '$')
-			return (OK);
+			return (TRUE);
 		*(*buf)++ = *(*ptr)++;
 		if (**ptr == '\'')
 		{
@@ -68,7 +65,7 @@ static int find_dallor(char **ptr, char **buf)
 				*(*buf)++ = *(*ptr)++;
 		}
 	}
-	return (ERROR);
+	return (FALSE);
 }
 
 static char	*find_key(char *str)

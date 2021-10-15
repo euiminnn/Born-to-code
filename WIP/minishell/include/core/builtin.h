@@ -15,8 +15,37 @@
 
 # include <unistd.h>
 
-void	builtin_echo(int argc, char **argv, char **env);
-void	builtin_cd(int argc, char **argv, char **env);
-void	builtin_pwd(int argc, char **argv, char **env);
+# include "define.h"
+# include "core/env.h"
+# include "lib/libft.h"
+# include "core/execute/proc.h"
+
+/**
+ * built 함수
+ *
+ * @param argc 인자 갯수
+ * @param argv 인자 들
+ * @param env 환경변수 구조체
+ * @return 정상 종료하면 0, 오류 있으면 그 이외의 값
+ *
+ * @example argc : 3
+ * @example argv : [
+ *   'echo',
+ *   '-n',
+ *   'hello'
+ * ]
+ *
+ * @test builtin/test_echo
+ * @test builtin/test_export
+ * @test builtin/test_unset
+ * @test builtin/test_env
+ */
+int    builtin_echo(int argc, char **argv, t_env *env, int fd);
+int    builtin_cd(int argc, char **argv, t_env *env, int fd);
+int    builtin_pwd(int argc, char **argv, t_env *env, int fd);
+int    builtin_export(int argc, char **argv, t_env *env, int fd);
+int    builtin_unset(int argc, char **argv, t_env *env, int fd);
+int    builtin_env(int argc, char **argv, t_env *env, int fd);
+int    builtin_exit(int argc, char **argv, t_env *env, int fd);
 
 #endif

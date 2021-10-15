@@ -13,9 +13,5 @@
 # define TRUE			1
 # define FALSE			0
 
-# define ERR_PARSE_SYNTAX	    201
-# define ERR_PARSE_MULTI_LINE   203
-# define ERR_EXE_NO_FILE        202
-
 #endif
 
