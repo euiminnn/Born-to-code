@@ -24,5 +24,26 @@
 # include "core/parse/parse.h"
 # include "core/execute/execute.h"
 
+/**
+ * 쉘을 입력 받습니다.
+ *
+ * @param line 입력받은 문자열 저장할 주소
+ * @return 성공하면 OK 실패하면 ERROR
+ */
+int	input(char **line);
+
+/**
+ * SIGINT 에 대해서 처리합니다.
+ *
+ * @param sig 시그널
+ */
+void	sigint_handler(int sig);
+
+/**
+ * SIGQUIT 에 대해서 처리합니다.
+ *
+ * @param sig 시그널
+ */
+void	sigquit_handler(int sig);
 
 #endif

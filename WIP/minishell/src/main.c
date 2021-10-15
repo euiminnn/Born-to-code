@@ -1,23 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ycha <ycha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/16 02:18:24 by ycha              #+#    #+#             */
+/*   Updated: 2021/10/16 02:43:16 by ycha             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
-
-/**
- * 쉘을 입력 받습니다.
- *
- * @param line 입력받은 문자열 저장할 주소
- * @return 성공하면 OK 실패하면 ERROR
- */
-static int	input(char **line)
-{
-    char *str;
-
-	str = readline("의민쉘$ ");
-	if (str)
-		*line = str;
-	else
-		return (ERROR);
-	add_history(str);
-    return(OK);
-}
 
 void    start(char **envp)
 {
@@ -34,6 +27,7 @@ void    start(char **envp)
 		free(line);
 		free_list(cmds, free_cmd);
 	}
+	printf("exit\n");
 	free(env);
 }
 
@@ -41,6 +35,8 @@ int main(int argc, char **argv, char **envp)
 {
 	(void)argv;
 	(void)argc;
+	signal(SIGINT, sigint_handler);
+	signal(SIGQUIT, sigquit_handler);
 	start(envp);
 	return (0);
 }

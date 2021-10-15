@@ -16,6 +16,8 @@ NAME		=	minishell
 
 FILE		=	\
 				main.c \
+				core/input.c \
+				core/signal.c \
 				core/builtin/builtin_cd.c \
 				core/builtin/builtin_echo.c \
 				core/builtin/builtin_env.c \
