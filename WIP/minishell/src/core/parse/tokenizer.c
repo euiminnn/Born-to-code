@@ -40,7 +40,6 @@ static int convert_quote(char *str)
 
     while (*str)
     {
-        str++;
         if (*str == '\'' || *str == '\"')
         {
             quote = *str;
@@ -50,6 +49,7 @@ static int convert_quote(char *str)
             if (!*str)
                 return (ERROR);
         }
+        str++;
     }
     return (OK);
 }

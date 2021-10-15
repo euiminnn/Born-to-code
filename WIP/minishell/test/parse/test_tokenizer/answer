@@ -49,7 +49,7 @@
 ]
 ->
 1
------ test3-1-1 -----
+----- test3-1-2 -----
 [
     ""''o
     hello
@@ -100,29 +100,35 @@
 ->
 1
 ----- test7 -----
+minishell: multi line not allowed
 ->
 0
-ERR_PARSE_MULTI_LINE
+errno 42
 ----- test8 -----
+minishell: multi line not allowed
 ->
 0
-ERR_PARSE_MULTI_LINE
+errno 42
 ----- test9 -----
+minishell: syntax error
 ->
 0
-ERR_PARSE_SYNTAX
+errno 2
 ----- test9-1 -----
+minishell: syntax error
 ->
 0
-ERR_PARSE_SYNTAX
+errno 2
 ----- test9-2 -----
+minishell: syntax error
 ->
 0
-ERR_PARSE_SYNTAX
+errno 2
 ----- test10 -----
+minishell: multi line not allowed
 ->
 0
-ERR_PARSE_MULTI_LINE
+errno 42
 ----- test11 -----
 [
     echo

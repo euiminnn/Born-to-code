@@ -78,7 +78,7 @@ $(OBJ_DIR)/%.o	: $(SRC_DIR)/%.c
 	$(CC) $(CFLAGS)  -c $< -o $@ -DDEBUG=$(DEBUG) $(CLIB)
 
 $(NAME)			: $(OBJS)
-	$(MAKE) -C ./src/lib
+	@$(MAKE) -C ./src/lib >
 	ar rcs ./obj/libminishell.a $(OBJS)
 	gcc $(CFLAGS)  -o $@ $^ $(CLIB)
 
@@ -90,7 +90,7 @@ debug			:
 	@$(MAKE) re DEBUG=1
 
 test			:
-	@$(MAKE) -C ./test
+	@$(MAKE) -s -C ./test
 
 show			:
 	@printf "SRCS : $(SRCS)"

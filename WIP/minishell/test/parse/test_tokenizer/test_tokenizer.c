@@ -7,7 +7,7 @@ void test(char *test_name, char *line)
 {
     char **strs = 0;
     int ret;
-    
+
     printf("----- %s -----\n", test_name);
 
     ret = tokenizer(line, &strs);
@@ -16,7 +16,7 @@ void test(char *test_name, char *line)
     printf("->\n");
     printf("%d\n", ret);
     if (!ret)
-        print_error_type(errno);
+        printf("errno %d\n", errno);
 }
 
 int main()
@@ -45,7 +45,7 @@ int main()
     test("test9-2", ft_strdup(";echo hello\\"));
     test("test10", ft_strdup(";ec\'ho hello\\"));
 
-    
+
     test("test11", ft_strdup("echo hello > a | cat a | cat < a > b"));
     test("test11-1", ft_strdup("echo hello>a|cat a|cat<a>b"));
 
