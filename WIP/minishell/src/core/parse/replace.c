@@ -108,7 +108,6 @@ static char *remove_quote(char *str)
 	idx = 0;
 	while (*str)
 	{
-		buf[idx++] = *str++;
 		if (*str == '\'' || *str == '\"')
 		{
 			quote = *str;
@@ -118,6 +117,7 @@ static char *remove_quote(char *str)
 			if (*str)
 				str++;
 		}
+		buf[idx++] = *str++;
 	}
 	buf[idx] = '\0';
 	return (ft_strdup(buf));
