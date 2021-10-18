@@ -13,6 +13,9 @@
         "execute.h": "c",
         "wait.h": "c",
         "builtin.h": "c",
-        "proc.h": "c"
+        "proc.h": "c",
+        "define.h": "c",
+        "*.tcc": "c",
+        "list.h": "c"
     }
 }

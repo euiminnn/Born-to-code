@@ -58,7 +58,7 @@ static int convert_symbol(char *line, char *buf)
 {
     while (*line)
     {
-        if (ft_strchr("()?;\\", *line))
+        if (ft_strchr("();\\", *line))
             return (ERROR);
         if (ft_strchr("<>|", *line))
         {

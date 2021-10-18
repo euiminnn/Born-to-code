@@ -2,15 +2,15 @@
 #include "core/parse/parse.h"
 #include "core/parse/token.h"
 #include "core/env.h"
+#include "define.h"
+
+
 
 #define BUFFER_SIZE 420000
-#define CHARSET "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_"
-#define CHARSET_WITH_DIGIT \
-		"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_0123456789"
 
 static int find_dallor(char **ptr, char **buf);
 static char	*find_key(char *str);
-static char	*find_key_from_env(char *key_start, char *key_end, t_env *env);
+static char	*find_key_from_env(char **key_start, char *key_end, t_env *env);
 static char *remove_quote(char *str);
 
 /**
@@ -38,13 +38,17 @@ void replace_env_in_token(t_token *token, t_env *env)
 	while (find_dallor(&str_ptr, &buf_ptr))
 	{
 		key_last_ptr = find_key(str_ptr);
-		value = find_key_from_env(str_ptr, key_last_ptr, env);
-		if (value)
+		if (str_ptr + 1 == key_last_ptr)
 		{
-			ft_memcpy(buf_ptr, value, ft_strlen(value));
-			buf_ptr += ft_strlen(value);
+			*buf_ptr++ = *str_ptr++;
+			continue;
 		}
-		str_ptr = key_last_ptr;
+		value = find_key_from_env(&str_ptr, key_last_ptr, env);
+		if (!value)
+			continue;
+		ft_memcpy(buf_ptr, value, ft_strlen(value));
+		buf_ptr += ft_strlen(value);
+		free(value);
 	}
 	*buf_ptr = '\0';
 	free(token->value);
@@ -57,13 +61,14 @@ static int find_dallor(char **ptr, char **buf)
 	{
 		if(**ptr == '$')
 			return (TRUE);
-		*(*buf)++ = *(*ptr)++;
 		if (**ptr == '\'')
 		{
 			*(*buf)++ = *(*ptr)++;
 			while (**ptr && **ptr != '\'')
 				*(*buf)++ = *(*ptr)++;
 		}
+		if (**ptr)
+			*(*buf)++ = *(*ptr)++;
 	}
 	return (FALSE);
 }
@@ -78,7 +83,7 @@ static char	*find_key(char *str)
 	{
 		charset = CHARSET_WITH_DIGIT;
 		if (index == 1)
-			charset = CHARSET;
+			charset = CHARSET_WITH_Q;
 		if (ft_strchr(charset, str[index]))
 			++index;
 		else
@@ -87,16 +92,29 @@ static char	*find_key(char *str)
 	return (&str[index]);
 }
 
-static char	*find_key_from_env(char *key_start, char *key_end, t_env *env)
+static char	*find_key_from_env(char **key_start, char *key_end, t_env *env)
 {
 	char	key_end_value;
 	char	*value;
+	char	*ret;
 
+	ret = 0;
 	key_end_value = *key_end;
 	*key_end = '\0';
-	value = search_env(env, key_start + 1);
+	if (*(*key_start + 1) == '?')
+	{
+		ret = ft_itoa(g_exit_code);
+		*key_start += 2;
+	}
+	else
+	{
+		value = search_env(env, *key_start + 1);
+		if (value)
+			ret = ft_strdup(value);
+		*key_start = key_end;
+	}
 	*key_end = key_end_value;
-	return (value);
+	return (ret);
 }
 
 static char *remove_quote(char *str)
@@ -117,7 +135,8 @@ static char *remove_quote(char *str)
 			if (*str)
 				str++;
 		}
-		buf[idx++] = *str++;
+		else
+			buf[idx++] = *str++;
 	}
 	buf[idx] = '\0';
 	return (ft_strdup(buf));

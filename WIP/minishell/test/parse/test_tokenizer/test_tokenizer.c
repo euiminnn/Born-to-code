@@ -1,54 +1,61 @@
 #include "core/parse/parse.h"
 #include "debug/debug_utils.h"
 
-// 기본은 스페이스 단위, but "" 또는 ''로 묶여있는거 제외
-
 void test(char *test_name, char *line)
 {
+    char *input;
     char **strs = 0;
     int ret;
 
     printf("----- %s -----\n", test_name);
 
-    ret = tokenizer(line, &strs);
+    input = ft_strdup(line);
+    ret = tokenizer(input, &strs);
+    free(input);
 
     print_strings(strs, 0);
     printf("->\n");
     printf("%d\n", ret);
     if (!ret)
-        printf("errno %d\n", errno);
+        printf("errno %d\n", g_exit_code);
 }
 
 int main()
 {
-    test("test1", ft_strdup("echo hello"));
-    test("test2", ft_strdup("echo hello world"));
-    test("test2-1", ft_strdup("echo -n $USER"));
-    test("test2-2", ft_strdup("echo \"$USER\""));
+    test("normal_1", "echo hello");
+    test("normal_2", "echo hello world");
+    test("normal_3", "echo -n $USER");
 
-    test("test3", ft_strdup("\"echo\" hello"));
-    test("test3-1", ft_strdup("\"e\"c\'h\'o hello"));
-    test("test3-1-1", ft_strdup("\"e\"\'ch\'o hello"));
-    test("test3-1-2", ft_strdup("\"\"\'\'o hello"));
-    test("test3-2", ft_strdup("echo \"hello\" world"));
-    test("test4", ft_strdup("echo \"hello world\""));
-    test("test5", ft_strdup("echo \"hello world\"hello"));
-    test("test6", ft_strdup("echo \"\"hello"));
-    test("test6-1", ft_strdup("echo \"\""));
-    test("test6-2", ft_strdup("echo abc\"\""));
+    test("quote_1", "echo \"$USER\"");
+    test("quote_2", "\"echo\" hello");
+    test("quote_3", "\"e\"c\'h\'o hello");
+    test("quote_4", "\"e\"\'ch\'o hello");
+    test("quote_5", "\"\"\'\'o hello");
+    test("quote_6", "echo \"hello\" world");
+    test("quote_7", "echo \"hello world\"");
+    test("quote_8", "echo \"hello world\"hello");
+    test("quote_9", "echo \"\"hello");
+    test("quote_10", "echo \"\"");
+    test("quote_11", "echo abc\"\"");
 
-    test("test7", ft_strdup("echo \"hello"));
-    test("test8", ft_strdup("echo \'hello"));
+    test("quote_mix_1", "echo \"aa\'bb\'cc\"");
+    test("quote_mix_2", "echo \"aa\'bb\"cc\'");
+    test("quote_mix_3", "echo \"aa\'bb\"cc\'dd\'");
+    test("quote_mix_4", "echo \'aa\"bb\'cc\"dd\'");
+    test("quote_mix_5", "echo \'aa\"bb\'c\'c\"dd\'");
+    test("quote_mix_6", "echo aa\'aa\"bb\'c\'c\"dd\'ee");
 
-    test("test9", ft_strdup("echo hello;"));
-    test("test9-1", ft_strdup("echo hello\\"));
-    test("test9-2", ft_strdup(";echo hello\\"));
-    test("test10", ft_strdup(";ec\'ho hello\\"));
+    test("error_1", "echo \"hello");
+    test("error_1_1", "echo \'hello");
 
+    test("error_2", "echo hello;");
+    test("error_2_1", "echo hello\\");
+    test("error_2_2", ";echo hello\\");
+    test("error_2_3", ";ec\'ho hello\\");
 
-    test("test11", ft_strdup("echo hello > a | cat a | cat < a > b"));
-    test("test11-1", ft_strdup("echo hello>a|cat a|cat<a>b"));
+    test("complicate_1", "echo hello > a | cat a | cat < a > b");
+    test("complicate_2", "echo hello>a|cat a|cat<a>b");
 
-    test("test12", ft_strdup("echo hel\'lo>a|c\'at a|cat<a>b"));
+    test("complicate_3", "echo hel\'lo>a|c\'at a|cat<a>b");
     return (0);
 }

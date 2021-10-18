@@ -12,6 +12,7 @@ static void replace(t_list *tokens, t_env *env);
  * 토큰나이저 : 문자열을 토큰으로 자름
  * 렉서 : 토큰의 타입을 정함
  * env 적용 : 환경변수를 적용함
+ * heredoc 처리 : << 리다이렉션 입력 받기
  * 파서 : 최종 커맨드 구조체를 만듬
  */
 
@@ -25,12 +26,14 @@ int parse(char *line, t_env *env, t_list *cmds)
         return (ERROR);
     DEBUG && printf("-------tokenizer-------\n");
     DEBUG && print_strings(strings, 0);
-    lexer(strings, tokens);
+    if (!lexer(strings, tokens))
+        return (ERROR);
     DEBUG && printf("---------lexer---------\n");
     DEBUG && print_token_list(tokens, 0);
     replace(tokens, env);
     DEBUG && printf("--------replace--------\n");
     DEBUG && print_token_list(tokens, 0);
+    heredoc(tokens);
     parser(tokens, cmds);
     DEBUG && printf("--------parser---------\n");
     DEBUG && print_cmd_list(cmds, 0);

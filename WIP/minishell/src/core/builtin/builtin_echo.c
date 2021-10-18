@@ -72,4 +72,5 @@ int	builtin_echo(int argc, char **argv, t_env *env, int fd)
 	}
 	if (!n_option)
 		ft_putstr_fd("\n", fd);
+	return (0);
 }

@@ -16,6 +16,8 @@ NAME		=	minishell
 
 FILE		=	\
 				main.c \
+				core/input.c \
+				core/signal.c \
 				core/builtin/builtin_cd.c \
 				core/builtin/builtin_echo.c \
 				core/builtin/builtin_env.c \
@@ -32,6 +34,7 @@ FILE		=	\
 				core/execute/proc2.c \
 				core/execute/redir.c \
 				core/parse/cmd.c \
+				core/parse/heredoc.c \
 				core/parse/lexer.c \
 				core/parse/parse.c \
 				core/parse/parser.c \
@@ -45,6 +48,7 @@ FILE		=	\
 				utils/ft_dup.c \
 				utils/ft_exit.c \
 				utils/ft_free.c \
+				utils/ft_get_key_value.c \
 				utils/ft_free_strings.c \
 				utils/ft_strjoins.c \
 				utils/list.c

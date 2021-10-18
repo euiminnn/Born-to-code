@@ -47,7 +47,7 @@ typedef struct s_proc
  * 커맨드 구조체로 프로세스 구조체를 만듭니다.
  *
  * @param cmd 커맨드 구조체
- * @param envp 환경변수 문자열 배열
+ * @param env 환경변수 구조체
  * @param fd_in 입력 fd 초기값
  * @param fd_out 출력 fd 초기값
  * @return 성공시 프로세스 구조체 (free 필요), 실패시 NULL

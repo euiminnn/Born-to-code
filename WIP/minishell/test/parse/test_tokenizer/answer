@@ -1,11 +1,11 @@
------ test1 -----
+----- normal_1 -----
 [
     echo
     hello
 ]
 ->
 1
------ test2 -----
+----- normal_2 -----
 [
     echo
     hello
@@ -13,7 +13,7 @@
 ]
 ->
 1
------ test2-1 -----
+----- normal_3 -----
 [
     echo
     -n
@@ -21,42 +21,42 @@
 ]
 ->
 1
------ test2-2 -----
+----- quote_1 -----
 [
     echo
     "$USER"
 ]
 ->
 1
------ test3 -----
+----- quote_2 -----
 [
     "echo"
     hello
 ]
 ->
 1
------ test3-1 -----
+----- quote_3 -----
 [
     "e"c'h'o
     hello
 ]
 ->
 1
------ test3-1-1 -----
+----- quote_4 -----
 [
     "e"'ch'o
     hello
 ]
 ->
 1
------ test3-1-2 -----
+----- quote_5 -----
 [
     ""''o
     hello
 ]
 ->
 1
------ test3-2 -----
+----- quote_6 -----
 [
     echo
     "hello"
@@ -64,72 +64,110 @@
 ]
 ->
 1
------ test4 -----
+----- quote_7 -----
 [
     echo
     "hello world"
 ]
 ->
 1
------ test5 -----
+----- quote_8 -----
 [
     echo
     "hello world"hello
 ]
 ->
 1
------ test6 -----
+----- quote_9 -----
 [
     echo
     ""hello
 ]
 ->
 1
------ test6-1 -----
+----- quote_10 -----
 [
     echo
     ""
 ]
 ->
 1
------ test6-2 -----
+----- quote_11 -----
 [
     echo
     abc""
 ]
 ->
 1
------ test7 -----
+----- quote_mix_1 -----
+[
+    echo
+    "aa'bb'cc"
+]
+->
+1
+----- quote_mix_2 -----
 minishell: multi line not allowed
 ->
 0
 errno 42
------ test8 -----
+----- quote_mix_3 -----
+[
+    echo
+    "aa'bb"cc'dd'
+]
+->
+1
+----- quote_mix_4 -----
 minishell: multi line not allowed
 ->
 0
 errno 42
------ test9 -----
-minishell: syntax error
+----- quote_mix_5 -----
+[
+    echo
+    'aa"bb'c'c"dd'
+]
 ->
-0
-errno 2
------ test9-1 -----
-minishell: syntax error
+1
+----- quote_mix_6 -----
+[
+    echo
+    aa'aa"bb'c'c"dd'ee
+]
 ->
-0
-errno 2
------ test9-2 -----
-minishell: syntax error
-->
-0
-errno 2
------ test10 -----
+1
+----- error_1 -----
 minishell: multi line not allowed
 ->
 0
 errno 42
------ test11 -----
+----- error_1_1 -----
+minishell: multi line not allowed
+->
+0
+errno 42
+----- error_2 -----
+minishell: syntax error
+->
+0
+errno 2
+----- error_2_1 -----
+minishell: syntax error
+->
+0
+errno 2
+----- error_2_2 -----
+minishell: syntax error
+->
+0
+errno 2
+----- error_2_3 -----
+minishell: multi line not allowed
+->
+0
+errno 42
+----- complicate_1 -----
 [
     echo
     hello
@@ -147,7 +185,7 @@ errno 42
 ]
 ->
 1
------ test11-1 -----
+----- complicate_2 -----
 [
     echo
     hello
@@ -165,7 +203,7 @@ errno 42
 ]
 ->
 1
------ test12 -----
+----- complicate_3 -----
 [
     echo
     hel'lo>a|c'at

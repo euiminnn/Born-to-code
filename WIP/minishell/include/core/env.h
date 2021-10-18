@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "define.h"
+#include "utils/list.h"
 
 /**
  * 환경 변수란?
@@ -48,9 +49,6 @@ t_env   *init_env(char **envp);
  * @return key 에 해당하는 value 값, 없을 경우 NULL
  */
 char    *search_env(t_env *env, char *key);
-
-
-char **get_key_value(char* line);
 
 /**
  * 환경 변수에 값을 추가합니다.
