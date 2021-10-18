@@ -46,11 +46,11 @@ int main(int ac, char **av, char **en)
     test("add_1", "export TEST=10");
     test("add_1_print", "export");
 
-    test("add_2", "export TEST2=10 TEST3=10");
-    test("add_2_print", "export");
+    // test("add_2", "export TEST2=10 TEST3=10");
+    // test("add_2_print", "export");
 
-    test("add_3", "export test=yoyo=yaya");
-    test("add_3_print", "export");
+    test("add_2", "export test=yoyo=yaya");
+    test("add_2_print", "export");
 
     // test("override_1", "export TEST=20");
     // test("override_1_print", "export");
