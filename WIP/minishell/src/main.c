@@ -35,8 +35,8 @@ int main(int argc, char **argv, char **envp)
 {
 	(void)argv;
 	(void)argc;
-	signal(SIGINT, sigint_handler);
-	signal(SIGQUIT, sigquit_handler);
+	sigint_old = signal(SIGINT, sigint_handler);
+	sigquit_old = signal(SIGQUIT, sigquit_handler);
 	start(envp);
 	return (0);
 }

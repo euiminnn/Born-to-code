@@ -80,6 +80,9 @@ int lexer(char **strings, t_list *tokens);
  */
 void replace_env_in_token(t_token *token, t_env *env);
 
+
+void  heredoc(t_list *tokens);
+
 /**
  * 토큰을 타입에 따라서, 커맨드 리스트를 만듭니다.
  *

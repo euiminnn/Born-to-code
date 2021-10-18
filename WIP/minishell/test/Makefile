@@ -6,7 +6,7 @@
 #    By: ycha <ycha@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/02 00:01:37 by ycha              #+#    #+#              #
-#    Updated: 2021/10/16 06:47:14 by ycha             ###   ########.fr        #
+#    Updated: 2021/10/17 21:46:42 by ycha             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,12 @@ TESTS		=	\
 				builtin/test_exit \
 				parse/test_replace \
 				parse/test_tokenizer
+
+#				env/test_change \
+#				env/test_init \
+#				env/test_insert \
+#				env/test_remove \
+#				env/test_search \
 
 # =========================================================
 

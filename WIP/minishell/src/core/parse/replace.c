@@ -4,6 +4,8 @@
 #include "core/env.h"
 #include "define.h"
 
+
+
 #define BUFFER_SIZE 420000
 
 static int find_dallor(char **ptr, char **buf);
@@ -101,7 +103,7 @@ static char	*find_key_from_env(char **key_start, char *key_end, t_env *env)
 	*key_end = '\0';
 	if (*(*key_start + 1) == '?')
 	{
-		ret = ft_itoa(errno);
+		ret = ft_itoa(g_exit_code);
 		*key_start += 2;
 	}
 	else

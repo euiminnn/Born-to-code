@@ -17,7 +17,7 @@ void test(char *test_name, char *line)
     printf("->\n");
     printf("%d\n", ret);
     if (!ret)
-        printf("errno %d\n", errno);
+        printf("errno %d\n", g_exit_code);
 }
 
 int main()

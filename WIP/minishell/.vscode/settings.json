@@ -14,6 +14,8 @@
         "wait.h": "c",
         "builtin.h": "c",
         "proc.h": "c",
-        "define.h": "c"
+        "define.h": "c",
+        "*.tcc": "c",
+        "list.h": "c"
     }
 }

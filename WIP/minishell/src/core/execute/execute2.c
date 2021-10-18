@@ -1,12 +1,13 @@
 #include <unistd.h>
 
+#include "minishell.h"
 #include "core/builtin.h"
 #include "core/execute/execute.h"
 #include "utils/utils.h"
 #include "core/error.h"
 #include "debug/debug_utils.h"
 
-static void	wait_process();
+static void	wait_process(t_proc *proc);
 
 void	execute_builtin_proc(t_proc *proc)
 {
@@ -23,8 +24,15 @@ void	execute_builtin_proc(t_proc *proc)
 	type = get_proc_type(proc);
 	DEBUG && printf("-------builtin------\n");
 	DEBUG && print_proc_type(type);
-	errno = builtin[type](proc->argc, proc->argv, proc->env, proc->fd_out);
+	g_exit_code = builtin[type](proc->argc, proc->argv, proc->env, proc->fd_out);
 }
+
+/**
+ * 원래 프로세스에 문제가 없도록 
+ * 시그널을 원래 시그널로 되돌려놓는다
+ * dup 으로 fd 를 연결하고,
+ * 외부 프로그램을 실행시킨다.
+ */
 
 void	execute_extern_proc(t_proc *proc)
 {
@@ -32,12 +40,12 @@ void	execute_extern_proc(t_proc *proc)
 	char	**envp;
 	char	**path;
 	int		idx;
-	int		pid;
 
-	envp = export_env(proc->env);
-	pid = fork();
-	if (pid == 0)
+	if (fork() == 0)
 	{
+		envp = export_env(proc->env);
+		signal(SIGINT, sigint_old);
+		signal(SIGQUIT, sigquit_old);
 		ft_dup(proc->fd_in, STDIN_FILENO);
 		ft_dup(proc->fd_out, STDOUT_FILENO);
 		if (ft_strchr(proc->argv[0], '/'))
@@ -53,17 +61,19 @@ void	execute_extern_proc(t_proc *proc)
 				free(command);
 			}
 		}
-		ft_error(ERR_EXECTUE_NOT_COMMAND, proc->argv[0]);
-		exit(errno);
+		exit(ERR_EXECTUE_NOT_COMMAND);
 	}
-	wait_process();
-	ft_free_strings(envp);
+	wait_process(proc);
 }
 
-static void	wait_process()
+static void	wait_process(t_proc *proc)
 {
 	int	status;
 
 	wait(&status);
-	errno = status >> 8;
+	g_exit_code = WEXITSTATUS(status);
+	if (g_exit_code == ERR_EXECTUE_NOT_COMMAND)
+		ft_error(ERR_EXECTUE_NOT_COMMAND, proc->argv[0]);
+	if (WIFSIGNALED(status))
+		g_exit_code = 128 + WTERMSIG(status);
 }

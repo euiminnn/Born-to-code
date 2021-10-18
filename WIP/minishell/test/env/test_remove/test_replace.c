@@ -38,13 +38,10 @@ int main(int ac, char **av, char **en)
     test("env_9", "abc$");
     test("env_10", "$");
     test("env_11", "$?");
-    test("env_12", "$??");
-    test("env_13", "$?hello");
-    test("env_14", "$?$TEST");
 
     test("env_quote_1", "\"$TEST\"");
     test("env_quote_2", "\'$TEST\'");
-    // test("env_quote_3", "$\'TEST\'"); -- TEST GIVEUP!!
+    test("env_quote_3", "$\'TEST\'");
 
     test("quote_1", "echo \"hello\"");
     test("quote_2", "\"echo\" hello");

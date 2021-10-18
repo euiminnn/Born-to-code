@@ -3,7 +3,7 @@
 #include <sys/wait.h>
 #include <stdlib.h>
 
-int main() {
+int main(int ac, char **av, char **en) {
   pid_t pid;
   int status,i;
 
@@ -18,17 +18,18 @@ int main() {
 			printf("error\n");
 		else
 		{
+			printf("status : %d\n", status & 255);
 			if (WIFEXITED(status))
 				printf("자식 프로세스 정상 종료 %d\n", status >> 8);
 			else if (WIFSIGNALED(status))
-				printf("자식 프로세스 비정상 종료: %d %d\n", WTERMSIG(status), status & 255);
+				printf("자식 프로세스 비정상 종료: %d %d\n", WTERMSIG(status), status >> 8);
                 // 비정상종료: kill 등으로 종료
                 // $? 에 들어갈 내용 WTERMSIG(status)
 		}
 	}
   else if (pid == 0){  // 자식 프로세스
       printf("자식 PID : %ld \n",(long)getpid());
-			sleep(3);
+			execve("/bin/cat", av, en);
 			// exit(100);
 	}
   else {  // fork 실패

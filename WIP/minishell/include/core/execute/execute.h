@@ -5,6 +5,7 @@
 # define OUT 1
 
 #include <sys/wait.h>
+#include <termios.h>
 
 #include "core/env.h"
 #include "core/execute/proc.h"
@@ -24,9 +25,10 @@ void	execute(t_list *cmds, t_env *env);
  *
  * @param cmds 커맨드 연결 리스트
  * @param env 환경 변수 구조체
- * @param fd_in 기본 입력 fd
+ * @param fd_in 기본 입력 fd (stdin 으로 시작)
+ * @param last_pid 이전 프로세스 id (-1 로 시작)
  */
-void	execute_cmds(t_list *cmds, t_env *env, int fd_in);
+void	execute_cmds(t_list *node, t_env *env, int fd_in, int last_pid);
 
 /**
  * fd 에 따라서 커맨드를 실행시킵니다.

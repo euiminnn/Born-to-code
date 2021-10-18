@@ -15,12 +15,14 @@
 
 int	builtin_unset(int argc, char **argv, t_env *env, int fd)
 {
-	char **output;
+	char *key;
+	char *value;
 
 	(void)fd;
 	if (argc == 1)	//export만 들어온 경우
 		return (1);
-	output = get_key_value(argv[1]);
-    remove_env(env, output[0]);
+	ft_get_key_value(argv[1], &key, &value);
+    remove_env(env, key);
+	free(key);
 	return (0);
 }

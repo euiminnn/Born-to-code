@@ -33,12 +33,19 @@
 int	input(char **line);
 
 /**
- * SIGINT 에 대해서 처리합니다.
+ * SIGINT 에 대해서 prompt 를 다시 띄우는 처리를 합니다.
  *
  * @param sig 시그널
  */
 void	sigint_handler(int sig);
 
+/**
+ * SIGINT 에 대해서 프로세스를 종류하는 처리를 합니다.
+ * 
+ * @param sig 시그널
+ */
+void	sigint_handler_in_execute(int sig);
+void	sigquit_handler_in_execute(int sig);
 /**
  * SIGQUIT 에 대해서 처리합니다.
  *

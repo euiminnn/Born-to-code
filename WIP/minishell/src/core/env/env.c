@@ -11,49 +11,27 @@ static t_env *make_env_node(char *key, char *value)
     env = (t_env *)malloc(sizeof(t_env));
     if (!env)
         exit(12);
-    env->key = key;
-    env->value = value;
+    env->key = ft_strdup(key);
+    env->value = ft_strdup(value);
     env->next = NULL;
     return (env);
 }
 
-char **get_key_value(char* line)
-{
-    char    **output;
-    char    *equal;
-
-    output = malloc(sizeof(char *) * 2);
-    equal = line;
-    while (*equal && *equal != '=')
-        equal++;
-    if (*equal)
-    {
-        *equal = '\0';
-        output[0] = ft_strdup(line);
-        output[1] = ft_strdup(equal + 1);
-    }
-    else
-    {
-        output[0] = ft_strdup(line);
-        output[1] = NULL;
-    }
-    return (output);
-}
-
-// TODO: key_value 변수 free 제대로 할것
 t_env *init_env(char **envp)
 {
     t_env   *output;
-    char    **key_value;
+    char    *key;
+    char    *value;
     int     idx;
 
     output = make_env_node(NULL, NULL);
     idx = -1;
     while (envp[++idx])
     {
-        key_value = get_key_value(envp[idx]);
-        insert_env(output, key_value[0], key_value[1]);
-        free(key_value);
+        ft_get_key_value(envp[idx], &key, &value);
+        insert_env(output, key, value);
+        free(key);
+        free(value);
     }
     return (output);
 }

@@ -12,7 +12,7 @@
 
 TEST_FILE	=	$(notdir $(shell pwd))
 
-TEST_NAME	=	./parse/$(TEST_FILE)
+TEST_NAME	=	./env/$(TEST_FILE)
 
 all			:
 	@$(MAKE) -C ../../ TEST_NAME=$(TEST_NAME) test

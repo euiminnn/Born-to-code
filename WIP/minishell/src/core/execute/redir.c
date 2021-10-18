@@ -1,33 +1,14 @@
 #include "core/execute/redir.h"
 #include "lib/libft.h"
 
-#define PIPE_IN 1
-#define PIPE_OUT 0
-#define LIMITER_MAX 420000
-
 int left_redir(char *file)
 {
     return (open(file, O_RDONLY));
 }
 
-int left_double_redir(char *limiter)
+int left_double_redir(char *fd)
 {
-    int pipe_fd[2];
-    char    *line;
-
-    pipe(pipe_fd);
-    while (1)
-    {
-        line = readline("> ");
-        if (!line)
-            break;
-        if (ft_strncmp(line, limiter, LIMITER_MAX) == 0)
-            break;
-        write(pipe_fd[PIPE_IN], line, ft_strlen(line));
-        write(pipe_fd[PIPE_IN], "\n", 1);
-    }
-    close(pipe_fd[PIPE_IN]);
-    return (pipe_fd[PIPE_OUT]);
+    return (ft_atoi(fd));
 }
 
 int right_redir(char *file)

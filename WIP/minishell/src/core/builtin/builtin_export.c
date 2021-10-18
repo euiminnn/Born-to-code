@@ -44,14 +44,17 @@ void	builtin_export_only(int argc, char **argv, t_env *env, int fd)
 
 int	builtin_export(int argc, char **argv, t_env *env, int fd)
 {
-	char **output;
+	char *key;
+	char *value;
 
 	if (argc == 1)	//export만 들어온 경우
 	{
 		builtin_export_only(argc, argv, env, fd);
 		return (0);
 	}
-	output = get_key_value(argv[1]);
-    insert_env(env, output[0], output[1]);
+	ft_get_key_value(argv[1], &key, &value);
+    insert_env(env, key, value);
+	free(key);
+	free(value);
 	return (0);
 }

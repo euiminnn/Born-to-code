@@ -16,7 +16,7 @@ void test(char *test_name, char *str)
 
 int main(int ac, char **av, char **en)
 {
-    errno = 100;
+    g_exit_code = 100;
     env = init_env(en);
     token = init_token(T_ARG, 0);
     insert_env(env, "TEST", "yeah");

@@ -1,8 +1,9 @@
 #include "core/error.h"
 
+
 int ft_error(int type, char *data)
 {
-	errno = type;
+	g_exit_code = type;
 	if (type == ERR_PARSE_SYNTAX)
 		ft_error_msg_syntax();
 	if (type == ERR_PARSE_MULTI_LINE)
