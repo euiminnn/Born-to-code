@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 15:20:19 by echung            #+#    #+#             */
-/*   Updated: 2021/10/19 18:35:53 by echung           ###   ########.fr       */
+/*   Updated: 2021/10/19 18:57:37 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	builtin_echo(int argc, char **argv, t_env *env, int fd)
 	s = string_start(argc, argv);
 
 	/*
-	if (argc == 1)		//echo ->echo인지는 이 전에 확인하고 여기로 넘어오는지?
+	if (argc == 1)		//echo 
 	{
 		write(fd, "\n", 1);
 		return (0);
