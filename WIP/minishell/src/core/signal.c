@@ -1,4 +1,11 @@
-#include "minishell.h"
+#include "core/signal.h"
+
+t_signal_handler	*sig_handler()
+{
+	static t_signal_handler	signals;
+
+	return (&signals);
+}
 
 void	sigint_handler(int sig)
 {
@@ -9,14 +16,14 @@ void	sigint_handler(int sig)
 	g_exit_code = 1;
 }
 
-void	sigint_handler_in_execute(int sig)
-{
-	printf("\n");
-}
-
 void	sigquit_handler(int sig)
 {
 	printf("\b\b  \b\b");
+}
+
+void	sigint_handler_in_execute(int sig)
+{
+	printf("\n");
 }
 
 void	sigquit_handler_in_execute(int sig)

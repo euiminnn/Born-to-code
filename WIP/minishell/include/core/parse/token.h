@@ -1,7 +1,7 @@
 #ifndef TOKEN_H
 # define TOKEN_H
 
-# include "core/env.h"
+# include "core/env/env.h"
 
 /**
  * t_token 토큰 구초제
@@ -43,5 +43,12 @@ t_token *dup_token(t_token *token);
  * @param token 토큰
  */
 void    free_token(void *token);
+
+/**
+ * 토큰을 문자열로 변환합니다.
+ *
+ * @param token 토큰
+ */
+char    *to_string_token(void *token); 
 
 #endif

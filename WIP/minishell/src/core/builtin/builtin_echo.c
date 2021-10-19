@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "core/builtin.h"
-#include "core/env.h"
+#include "core/env/env.h"
 #include <stdio.h>
 
 int valid_n(char *n_option)
@@ -57,7 +57,6 @@ int	builtin_echo(int argc, char **argv, t_env *env, int fd)
 	n_option = 1;
 	s = string_start(argc, argv);
 
-	/*
 	if (argc == 1)		//echo 
 	{
 		write(fd, "\n", 1);
@@ -67,7 +66,6 @@ int	builtin_echo(int argc, char **argv, t_env *env, int fd)
 	{
 		return (0);
 	}
-	*/
 	if (valid_n(argv[1]) != 0)	//without n option
 		n_option = 0;
 	while (s < argc)

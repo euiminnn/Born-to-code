@@ -7,28 +7,49 @@
 #define FD_IN 0
 #define FD_OUT 1
 
-// TODO: export_env 랑 코드가 중복됨.... 고쳐볼지 생각해볼것....
-static char **export_tokens_to_arr(t_list *tokens)
-{
-    char    **rt;
-    int     size;
-    int     idx;
-    t_list  *node;
+static int  get_fd_type(int type);
+static int  get_redir_fd(t_list *tokens, int fds[2]);
 
-    size = count_list(tokens);
-    rt = (char **)malloc(sizeof(char *) * (size + 1));
-    if (!rt)
+/**
+ * cmd 에서 args 로 argv 를 만든다.
+ * 환경변수를 그대로 적용하고,
+ * 리다이렉션에 따라서 fd_in 최종값과, fd_out 최종값을 구한다.
+ *
+ * @example cmd : {
+ *   args: [{type: T_ARG, value: 'echo'}, {type: T_ARG, value: 'hello'}]
+ *   rd_in: []
+ *   rd_out: [{type: T_RIGHT_REDIR, value: 'abc'}]
+ * }
+ * @example proc : {
+ *   argv : ['hello', ]
+ *   argc : 1
+ *   env : pointer
+ *   fd_in : 0
+ *   fd_out : 1
+ * }
+ */
+
+t_proc  *build_proc(t_cmd *cmd, t_env *env, int fd_in, int fd_out)
+{
+    int     fds[2];
+    t_proc  *proc;
+
+    proc = (t_proc *)malloc(sizeof(t_proc));
+    if (!proc)
         ft_exit(12);
-    idx = 0;
-    node = tokens->next;
-    while (node)
+    proc->argv = to_string_list(cmd->args, to_string_token);
+    proc->argc = count_list(cmd->args);
+    proc->env = env;
+    fds[FD_IN] = fd_in;
+    fds[FD_OUT] = fd_out;
+    if (!get_redir_fd(cmd->rd, fds))
     {
-        rt[idx] = ft_strdup(((t_token *)node->data)->value);
-        node = node->next;
-        ++idx;
+        free_proc(proc);
+        return (NULL);
     }
-    rt[idx] = 0;
-    return (rt);
+    proc->fd_in = fds[FD_IN];
+    proc->fd_out = fds[FD_OUT];
+    return (proc);
 }
 
 static int  get_fd_type(int type)
@@ -63,46 +84,4 @@ static int  get_redir_fd(t_list *tokens, int fds[2])
         node = node->next;
     }
     return (OK);
-}
-
-/**
- * cmd 에서 args 로 argv 를 만든다.
- * 환경변수를 그대로 적용하고,
- * 리다이렉션에 따라서 fd_in 최종값과, fd_out 최종값을 구한다.
- *
- * @example cmd : {
- *   args: [{type: T_ARG, value: 'echo'}, {type: T_ARG, value: 'hello'}]
- *   rd_in: []
- *   rd_out: [{type: T_RIGHT_REDIR, value: 'abc'}]
- * }
- * @example proc : {
- *   argv : ['hello', ]
- *   argc : 1
- *   env : pointer
- *   fd_in : 0
- *   fd_out : 1
- * }
- */
-
-t_proc  *build_proc(t_cmd *cmd, t_env *env, int fd_in, int fd_out)
-{
-    int     fds[2];
-    t_proc  *proc;
-
-    proc = (t_proc *)malloc(sizeof(t_proc));
-    if (!proc)
-        ft_exit(12);
-    proc->argv = export_tokens_to_arr(cmd->args);
-    proc->argc = count_list(cmd->args);
-    proc->env = env;
-    fds[FD_IN] = fd_in;
-    fds[FD_OUT] = fd_out;
-    if (!get_redir_fd(cmd->rd, fds))
-    {
-        free_proc(proc);
-        return (NULL);
-    }
-    proc->fd_in = fds[FD_IN];
-    proc->fd_out = fds[FD_OUT];
-    return (proc);
 }

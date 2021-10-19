@@ -7,7 +7,7 @@
 #include <sys/wait.h>
 #include <termios.h>
 
-#include "core/env.h"
+#include "core/env/env.h"
 #include "core/execute/proc.h"
 #include "core/parse/cmd.h"
 #include "utils/list.h"
@@ -28,7 +28,7 @@ void	execute(t_list *cmds, t_env *env);
  * @param fd_in 기본 입력 fd (stdin 으로 시작)
  * @param last_pid 이전 프로세스 id (-1 로 시작)
  */
-void	execute_cmds(t_list *node, t_env *env, int fd_in, int last_pid);
+int	execute_cmds(t_list *node, t_env *env, int fd_in, int last_pid);
 
 /**
  * fd 에 따라서 커맨드를 실행시킵니다.
@@ -38,7 +38,7 @@ void	execute_cmds(t_list *node, t_env *env, int fd_in, int last_pid);
  * @param fd_in 기본 입력 fd
  * @param fd_out 기본 출력 fd
  */
-void	execute_cmd(t_cmd *cmd, t_env *env, int fd_in, int fd_out);
+int	execute_cmd(t_cmd *cmd, t_env *env, int fd_in, int fd_out);
 
 /**
  * 빌트인 프로세스를 실행시킵니다.

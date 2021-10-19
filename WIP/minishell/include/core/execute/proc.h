@@ -1,7 +1,7 @@
 #ifndef PROC_H
 # define PROC_H
 
-# include "core/env.h"
+# include "core/env/env.h"
 # include "core/parse/cmd.h"
 # include "utils/list.h"
 # include "utils/utils.h"

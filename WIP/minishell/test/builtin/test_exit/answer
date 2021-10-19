@@ -17,21 +17,21 @@ minishell: exit: too many arguments
 1
 ----- alpha -----
 exit
-bash: exit: hi: numeric argument required
+minishell: exit: hi: numeric argument required
 ->
 2
 ----- multi_alpha_1 -----
 exit
-bash: exit: hi: numeric argument required
+minishell: exit: hi: numeric argument required
 ->
 2
 ----- multi_alpha_2 -----
 exit
-bash: exit: too many arguments
+minishell: exit: too many arguments
 ->
 1
 ----- multi_alpha_3 -----
 exit
-bash: exit: hi: numeric argument required
+minishell: exit: hi: numeric argument required
 ->
 2

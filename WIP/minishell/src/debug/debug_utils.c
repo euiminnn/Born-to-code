@@ -36,21 +36,3 @@ int    print_error_type(int errtype)
         printf("ERR_PARSE_MULTI_LINE\n");
     return (OK);
 }
-
-int    print_proc_type(int type)
-{
-    if (type == P_BUILTIN_CD)
-        printf("P_BUILTIN_CD\n");
-    if (type == P_BUILTIN_ECHO)
-        printf("P_BUILTIN_ECHO\n");
-    if (type == P_BUILTIN_ENV)
-        printf("P_BUILTIN_ENV\n");
-    if (type == P_BUILTIN_EXIT)
-        printf("P_BUILTIN_EXIT\n");
-    if (type == P_BUILTIN_EXPORT)
-        printf("P_BUILTIN_EXPORT\n");
-    if (type == P_BUILTIN_PWD)
-        printf("P_BUILTIN_PWD\n");
-    if (type == P_BUILTIN_UNSET)
-        printf("P_BUILTIN_UNSET\n");
-}

@@ -16,18 +16,19 @@
 # include <unistd.h>
 
 # include "define.h"
-# include "core/env.h"
+# include "core/env/env.h"
 # include "lib/libft.h"
 # include "core/execute/proc.h"
 
 /**
- * built 함수
+ * builtin 함수들
  *
  * @param argc 인자 갯수
  * @param argv 인자 들
  * @param env 환경변수 구조체
  * @return 정상 종료하면 0, 오류 있으면 그 이외의 값
  *
+ * @example echo -n hello
  * @example argc : 3
  * @example argv : [
  *   'echo',
@@ -36,8 +37,9 @@
  * ]
  *
  * @test builtin/test_echo
- * @test builtin/test_export
  * @test builtin/test_exit
+ * @test builtin/test_export
+ * @test builtin/test_unset
  */
 int    builtin_echo(int argc, char **argv, t_env *env, int fd);
 int    builtin_cd(int argc, char **argv, t_env *env, int fd);

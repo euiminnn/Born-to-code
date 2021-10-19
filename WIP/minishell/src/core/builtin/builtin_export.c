@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "core/builtin.h"
-#include "core/env.h"
+#include "core/env/env.h"
 
 /**
  *
@@ -25,18 +25,26 @@
  *
  */
 
+
+// env 구조 바뀌면서 ycha가 조금 수정했음....
+// 근데 builtin_env 를 참고해서 다른방식으로도 짤 수 있음...
+// 자세한 내용은 builtin_env 에서...
+// 꼭 그럴필요는 없기함
+// 읽었으면 주석 지워주세요
 void	builtin_export_only(int argc, char **argv, t_env *env, int fd)
 {
 	t_env *node;
+	t_env_data	*data;
 
 	node = env->next;
 	while (node)
 	{
+		data = node->data;
 		ft_putstr_fd("declare -x ", fd);
-		ft_putstr_fd(node->key, fd);
+		ft_putstr_fd(data->key, fd);
 		ft_putstr_fd("=", fd);
 		ft_putstr_fd("\"", fd);
-		ft_putstr_fd(node->value, fd);
+		ft_putstr_fd(data->value, fd);
 		ft_putstr_fd("\"\n", fd);
 		node = node->next;
 	}

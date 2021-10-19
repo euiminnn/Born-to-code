@@ -44,6 +44,8 @@ int main(int ac, char **av, char **en)
 
     test("env_quote_1", "\"$TEST\"");
     test("env_quote_2", "\'$TEST\'");
+    test("env_quote_3", "\"\'$TEST\'\"");
+    test("env_quote_4", "\'\"$TEST\"\'");
     // test("env_quote_3", "$\'TEST\'"); -- TEST GIVEUP!!
 
     test("quote_1", "echo \"hello\"");

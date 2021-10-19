@@ -40,6 +40,10 @@ $
 yeah
 ----- env_quote_2 -----
 $TEST
+----- env_quote_3 -----
+'yeah'
+----- env_quote_4 -----
+"$TEST"
 ----- quote_1 -----
 echo hello
 ----- quote_2 -----

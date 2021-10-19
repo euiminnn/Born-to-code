@@ -29,11 +29,4 @@ int	print_strings(char **arr, int depth);
  */
 int    print_error_type(int errtype);
 
-/**
- * 프로세스 종류 이름을 출력합니다.
- *
- * @param type 프로세스 종류
- */
-int    print_proc_type(int type);
-
 #endif

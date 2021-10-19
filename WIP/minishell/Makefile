@@ -16,7 +16,7 @@ NAME		=	minishell
 
 FILE		=	\
 				main.c \
-				core/input.c \
+				input.c \
 				core/signal.c \
 				core/builtin/builtin_cd.c \
 				core/builtin/builtin_echo.c \
@@ -25,7 +25,9 @@ FILE		=	\
 				core/builtin/builtin_export.c \
 				core/builtin/builtin_pwd.c \
 				core/builtin/builtin_unset.c \
-				core/env/env.c \
+				core/env/env_data.c \
+				core/env/env1.c \
+				core/env/env2.c \
 				core/error/error_msg.c \
 				core/error/error.c \
 				core/execute/execute1.c \
@@ -41,17 +43,18 @@ FILE		=	\
 				core/parse/replace.c \
 				core/parse/token.c \
 				core/parse/tokenizer.c \
+				debug/debug_env.c \
 				debug/debug_parse.c \
 				debug/debug_execute.c \
 				debug/debug_utils.c \
 				utils/ft_close.c \
 				utils/ft_dup.c \
 				utils/ft_exit.c \
-				utils/ft_free.c \
 				utils/ft_get_key_value.c \
 				utils/ft_free_strings.c \
 				utils/ft_strjoins.c \
-				utils/list.c
+				utils/list1.c \
+				utils/list2.c
 
 
 # Options =================================================
