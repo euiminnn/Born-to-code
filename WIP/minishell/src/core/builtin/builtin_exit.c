@@ -18,6 +18,8 @@ int builtin_exit(int argc, char **argv, t_env *env, int fd)
     (void)argv;
     (void)env;
     (void)fd;
-	exit(0);
+    ft_putstr_fd("exit\n", fd);
+    if (argc < 3)
+	    exit(42);
     return (0);
 }

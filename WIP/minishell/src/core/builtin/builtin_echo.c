@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 15:20:19 by echung            #+#    #+#             */
-/*   Updated: 2021/10/16 01:32:42 by echung           ###   ########.fr       */
+/*   Updated: 2021/10/19 18:57:37 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,17 @@ int	builtin_echo(int argc, char **argv, t_env *env, int fd)
 	n_option = 1;
 	s = string_start(argc, argv);
 
+	/*
+	if (argc == 1)		//echo 
+	{
+		write(fd, "\n", 1);
+		return (0);
+	}
+	if ((argc == 2) && (valid_n(argv[1]) == 0))		//echo -n
+	{
+		return (0);
+	}
+	*/
 	if (valid_n(argv[1]) != 0)	//without n option
 		n_option = 0;
 	while (s < argc)
@@ -72,4 +83,5 @@ int	builtin_echo(int argc, char **argv, t_env *env, int fd)
 	}
 	if (!n_option)
 		ft_putstr_fd("\n", fd);
+	return (0);
 }

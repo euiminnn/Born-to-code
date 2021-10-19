@@ -37,8 +37,7 @@
  *
  * @test builtin/test_echo
  * @test builtin/test_export
- * @test builtin/test_unset
- * @test builtin/test_env
+ * @test builtin/test_exit
  */
 int    builtin_echo(int argc, char **argv, t_env *env, int fd);
 int    builtin_cd(int argc, char **argv, t_env *env, int fd);

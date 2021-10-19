@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/07 20:28:30 by echung            #+#    #+#             */
-/*   Updated: 2021/08/18 18:13:47 by echung           ###   ########.fr       */
+/*   Updated: 2021/10/19 18:42:20 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	main(int argc, char **argv)
 {
 	t_global	g;
 
-	if (argc != 2 || !check_arg(argv[1]))
+	if (argc != 2 || !is_valid_file_type(argv[1], ".ber"))
 	{
 		printf("Error\n");
 		return (0);
