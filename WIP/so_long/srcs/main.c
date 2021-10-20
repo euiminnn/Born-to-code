@@ -6,11 +6,12 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/07 20:28:30 by echung            #+#    #+#             */
-/*   Updated: 2021/10/19 18:42:20 by echung           ###   ########.fr       */
+/*   Updated: 2021/10/20 15:34:44 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+#define STEP 48
 
 void	param_init(t_global *g)
 {
@@ -20,7 +21,7 @@ void	param_init(t_global *g)
 
 void	end_game(t_global *g)
 {
-	if (g->arr[g->param.y / 48][g->param.x / 48] == 'E' \
+	if (g->arr[g->param.y / STEP][g->param.x / STEP] == 'E' \
 			&& g->item == g->heart)
 	{
 		free(g->arr);
@@ -28,15 +29,16 @@ void	end_game(t_global *g)
 	}
 }
 
-int	init_game(char *argv1, t_global *g)
+int	init_game(char *map, t_global *g)
 {
-	g->row = count_row(argv1);
+	g->row = count_row(map);
 	if (g->row < 0)
 		return (0);
-	g->arr = readfile(argv1, g->row);
+	g->arr = readfile(map, g->row);
 	g->column = ft_strlen(g->arr[0]);
 	g->mlx = mlx_init();
-	g->win = mlx_new_window(g->mlx, g->column * 48, g->row * 48, "mushroom");
+	g->win = mlx_new_window(g->mlx, g->column * STEP, \
+			g->row * STEP, "mushroom");
 	mlx_hook(g->win, X_EVENT_KEY_PRESS, 0, &key_press, g);
 	mlx_hook(g->win, X_EVENT_KEY_EXIT, 0, &mouse_press, g);
 	load_image(g);
@@ -48,14 +50,16 @@ int	init_game(char *argv1, t_global *g)
 int	main(int argc, char **argv)
 {
 	t_global	g;
+	char		*map;
 
-	if (argc != 2 || !is_valid_file_type(argv[1], ".ber"))
+	map = argv[1];
+	if (argc != 2 || !is_valid_file_type(map, ".ber"))
 	{
 		printf("Error\n");
 		return (0);
 	}
 	ft_bzero(&g, sizeof(g));
-	if (init_game(argv[1], &g) == 0)
+	if (init_game(map, &g) == 0)
 	{
 		printf("Error\n");
 		return (0);

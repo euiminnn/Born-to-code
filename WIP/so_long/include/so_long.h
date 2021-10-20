@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 00:43:58 by echung            #+#    #+#             */
-/*   Updated: 2021/10/19 18:42:37 by echung           ###   ########.fr       */
+/*   Updated: 2021/10/20 15:30:15 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ void	img_to_win(t_global *g, void *img, int i, int j);
 int		check_char(char c1, char c2);
 
 int		is_valid_file_type(char *arg, char *type);
-
 
 void	get_collectibles(t_global *g);
 
