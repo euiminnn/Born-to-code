@@ -19,12 +19,12 @@ minishell: exit: too many arguments
 exit
 bash: exit: hi: numeric argument required
 ->
-2
+255
 ----- multi_alpha_1 -----
 exit
 bash: exit: hi: numeric argument required
 ->
-2
+255
 ----- multi_alpha_2 -----
 exit
 bash: exit: too many arguments
@@ -34,4 +34,4 @@ bash: exit: too many arguments
 exit
 bash: exit: hi: numeric argument required
 ->
-2
+255

@@ -57,7 +57,7 @@ int main(int ac, char **av, char **en)
     test("number", "exit 42", 1);
     test("negative", "exit -42", 1);
 
-    test("mutli", "exit 42 42", 0);
+    test("multi", "exit 42 42", 0);
     test("alpha", "exit hi", 1);
 
     test("multi_alpha_1", "exit hi 42", 1);
