@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: su <su@student.42.fr>                      +#+  +:+       +#+         #
+#    By: ycha <ycha@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/02 00:01:37 by ycha              #+#    #+#              #
-#    Updated: 2021/10/13 20:20:20 by echung           ###   ########.fr        #
+#    Updated: 2021/10/20 17:00:45 by echung           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,13 +56,10 @@ FILE		=	\
 
 # Options =================================================
 
-# CC			=	clang --analyze
 CC			=	gcc
-INCLUDE 	=	include
-# CFLAGS		=	-Wall -Werror -Wextra -I$(INCLUDE) -g
-CFLAGS		=	-I$(INCLUDE) -g
-CLIB		=	-Lsrc/lib -lft -lreadline
-
+#CFLAGS		=	-Wall -Wextra -Werror -g
+CFLAGS		=	-Iinclude -I/Users/$(USER)/.brew/opt/readline/include
+CLIB		=	-Lsrc/lib -lft -lreadline -L/Users/$(USER)/.brew/opt/readline/lib
 SRC_DIR		=	./src
 SRCS		=	$(addprefix $(SRC_DIR)/, $(FILE))
 
@@ -79,7 +76,9 @@ all				: $(NAME)
 
 $(OBJ_DIR)/%.o	: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS)  -c $< -o $@ -DDEBUG=$(DEBUG) $(CLIB)
+	$(CC) $(CFLAGS) -c $< -o $@ -DDEBUG=$(DEBUG)
+
+#	$(CC) $(CFLAGS) $< -o $@ -DDEBUG=$(DEBUG) $(CLIB) $(LDFLAGS)
 
 $(NAME)			: $(OBJS)
 	@$(MAKE) -C ./src/lib
