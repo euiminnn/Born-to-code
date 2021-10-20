@@ -1,6 +1,7 @@
 #ifndef REDIR_H
 # define REDIR_H
 
+# include <stdio.h>
 # include <readline/readline.h>
 # include <fcntl.h>
 # include <unistd.h>
