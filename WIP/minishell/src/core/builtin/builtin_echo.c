@@ -23,17 +23,17 @@ int valid_n(char *n_option)
 	{
 		ptr++;
 		if (!(*ptr))
-			return (-1);
+			return (FALSE);
 		while (*ptr)
 		{
 			if (*ptr != 'n')
-				return (-1);
+				return (FALSE);
 			ptr++;
 		}
-		return (0);
+		return (TRUE);
 	}
 	else
-		return (-1);
+		return (FALSE);
 }
 
 int	string_start(int argc, char **argv)
@@ -41,8 +41,8 @@ int	string_start(int argc, char **argv)
 	int i = 1;
 	while (i < argc)
 	{
-		if (valid_n(argv[i]))
-			return i;	// -n 뒤의 index 반환
+		if (valid_n(argv[i]) == FALSE)
+			return i;	// -n 뒤의 arg의 index 반환
 		i++;
 	}
 	return i;
@@ -57,24 +57,20 @@ int	builtin_echo(int argc, char **argv, t_env *env, int fd)
 	n_option = 1;
 	s = string_start(argc, argv);
 
-	if (argc == 1)		//echo 
+	if (argc == 1)		//echo
 	{
 		write(fd, "\n", 1);
 		return (0);
 	}
-	if ((argc == 2) && (valid_n(argv[1]) == 0))		//echo -n
-	{
-		return (0);
-	}
-	if (valid_n(argv[1]) != 0)	//without n option
+	if (valid_n(argv[1]) == FALSE)	//without n option
 		n_option = 0;
 	while (s < argc)
 	{
 		if (s != argc - 1)
-    {
-      ft_putstr_fd(argv[s], fd);
+		{
+			ft_putstr_fd(argv[s], fd);
 			ft_putstr_fd(" ", fd);
-    }
+		}
 		else
 			ft_putstr_fd(argv[s], fd);
 		s++;

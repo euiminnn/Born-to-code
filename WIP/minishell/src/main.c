@@ -14,6 +14,7 @@
 
 void	start(t_env *env, char *line)
 {
+	int		ret;
 	t_list	*cmds;
 	
 	cmds = init_list();

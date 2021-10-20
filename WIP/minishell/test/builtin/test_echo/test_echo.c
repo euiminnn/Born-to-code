@@ -39,6 +39,7 @@ int main(int ac, char **av, char **en)
 
     test("normal_0", "echo");
     test("normal_0_1", "echo -n");
+    test("normal_0_2", "echo -");
     test("normal_1", "echo hello");
     test("normal_2", "echo hello world");
     test("normal_3", "echo hello world world");
