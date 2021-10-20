@@ -12,31 +12,42 @@
 
 #include "minishell.h"
 
-void    start(char **envp)
+void	start(t_env *env, char *line)
+{
+	int		ret;
+	t_list	*cmds;
+	
+	cmds = init_list();
+	if (parse(line, env, cmds))
+		execute(cmds, env);
+	free_list(cmds, free_cmd);
+}
+
+void    loop(t_env *env)
 {
 	char	*line;
-	t_env	*env;
-	t_list	*cmds;
 
-	env = init_env(envp);
 	while (input(&line))
 	{
-		cmds = init_list();
-		if (parse(line, env, cmds))
-			execute(cmds, env);
+		start(env, line);
 		free(line);
-		free_list(cmds, free_cmd);
 	}
 	printf("exit\n");
-	free(env);
 }
 
 int main(int argc, char **argv, char **envp)
 {
-	(void)argv;
-	(void)argc;
-	sigint_old = signal(SIGINT, sigint_handler);
-	sigquit_old = signal(SIGQUIT, sigquit_handler);
-	start(envp);
+	t_env	*env;
+	
+	env = init_env(envp);
+	sig_handler()->sigint = signal(SIGINT, sigint_handler);
+	sig_handler()->sigquit = signal(SIGQUIT, sigquit_handler);
+	if (argc == 3 && ft_strncmp(argv[1], "-c", 3) == 0)
+	{
+		start(env, argv[2]);
+		exit(g_exit_code);
+	}
+	loop(env);
+	free_env(env);
 	return (0);
 }

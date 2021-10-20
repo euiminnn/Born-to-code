@@ -1,15 +1,16 @@
-#include "core/env.h"
+#include "core/env/env.h"
 #include "minishell.h"
 #include "core/execute/execute.h"
 #include "core/execute/proc.h"
 #include "core/parse/cmd.h"
 #include "utils/utils.h"
 #include "debug/debug_execute.h"
+#include "core/signal.h"
 
 #define PIPE_IN 1
 #define PIPE_OUT 0
 
-static void	wait_cmds();
+static int	wait_cmds();
 
 /**
  * 커맨드로 프로세스를 만들기
@@ -18,13 +19,13 @@ static void	wait_cmds();
  *     외부 명령어로 실행
  */
 
-void	execute_cmd(t_cmd *cmd, t_env *env, int fd_in, int fd_out)
+int	execute_cmd(t_cmd *cmd, t_env *env, int fd_in, int fd_out)
 {
 	t_proc *proc;
 
 	proc = build_proc(cmd, env, fd_in, fd_out);
 	if (!proc)
-		return ;
+		return (ERROR);
 	DEBUG && printf("-----process-----\n");
 	DEBUG && print_proc(proc, 0);
 	if (get_proc_type(proc) == P_EXTERN)
@@ -32,6 +33,7 @@ void	execute_cmd(t_cmd *cmd, t_env *env, int fd_in, int fd_out)
 	else
 		execute_builtin_proc(proc);
 	free_proc(proc);
+	return (OK);
 }
 
 /**
@@ -50,25 +52,21 @@ void	execute_cmd(t_cmd *cmd, t_env *env, int fd_in, int fd_out)
  *     pipe_fd[OUT] 은 필요없음!
  *     그래서 닫음!
  *     exit code 로 종료하기
- */
-
-/**
+ *
+ * @note
  * 자식 프로세스의 시그널과 동시에
  * 부모 프로세스의 시그널이 작동되지 않게 하기 위해서
  * 부모 프로세스의 시그널는 끕니다.
  */
 
-void	execute_cmds(t_list *node, t_env *env, int fd_in, int last_pid)
+int	execute_cmds(t_list *node, t_env *env, int fd_in, int last_pid)
 {
 	int		pipe_fd[2];
 	int		fd_out;
 	int		pid;
 
 	if (!node)
-	{
-		wait_cmds(last_pid);
-		return ;	
-	}
+		return (wait_cmds(last_pid));
 	fd_out = STDOUT_FILENO;
 	if (node->next)
 	{
@@ -86,10 +84,10 @@ void	execute_cmds(t_list *node, t_env *env, int fd_in, int last_pid)
 	}
 	ft_close(fd_in);
 	ft_close(fd_out);
-	execute_cmds(node->next, env, pipe_fd[PIPE_OUT], pid);
+	return (execute_cmds(node->next, env, pipe_fd[PIPE_OUT], pid));
 }
 
-static void	wait_cmds(int last_pid)
+static int	wait_cmds(int last_pid)
 {
 	int	status;
 
@@ -97,14 +95,15 @@ static void	wait_cmds(int last_pid)
 	g_exit_code = WEXITSTATUS(status);
 	while (wait(&status) != -1)
 		;
+	return (OK);
 }
 
 /**
  * 시그널 처리 방식을 바꿔주고,
- * 
+ *
  * 명령어 2개 이상이면, fork 뜨면서 재귀,
  * 1개면 그냥 실행
- * 
+ *
  * 실행이 끝났으면, 시그널 원래 처리 방식으로 복귀
  */
 

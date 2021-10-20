@@ -1,6 +1,5 @@
 #include "core/error.h"
 
-
 int ft_error(int type, char *data)
 {
 	g_exit_code = type;

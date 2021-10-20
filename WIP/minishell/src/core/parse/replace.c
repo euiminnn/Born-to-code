@@ -1,10 +1,8 @@
 #include "lib/libft.h"
 #include "core/parse/parse.h"
 #include "core/parse/token.h"
-#include "core/env.h"
+#include "core/env/env.h"
 #include "define.h"
-
-
 
 #define BUFFER_SIZE 420000
 
@@ -61,11 +59,21 @@ static int find_dallor(char **ptr, char **buf)
 	{
 		if(**ptr == '$')
 			return (TRUE);
-		if (**ptr == '\'')
+		else if (**ptr == '\'')
 		{
 			*(*buf)++ = *(*ptr)++;
 			while (**ptr && **ptr != '\'')
 				*(*buf)++ = *(*ptr)++;
+		}
+		else if (**ptr == '\"')
+		{
+			*(*buf)++ = *(*ptr)++;
+			while (**ptr && **ptr != '\"')
+			{
+				if(**ptr == '$')
+					return (TRUE);
+				*(*buf)++ = *(*ptr)++;
+			}
 		}
 		if (**ptr)
 			*(*buf)++ = *(*ptr)++;

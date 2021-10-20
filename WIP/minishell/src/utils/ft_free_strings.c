@@ -1,6 +1,6 @@
 #include "utils/utils.h"
 
-char    **ft_free_strings(char **arr)
+void	ft_free_strings(char **arr)
 {
     int idx;
 
@@ -12,5 +12,4 @@ char    **ft_free_strings(char **arr)
 	}
 	free(arr);
 	arr = 0;
-	return (0);
 }

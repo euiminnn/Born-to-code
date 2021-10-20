@@ -1,4 +1,5 @@
 #include "utils/list.h"
+#include "utils/utils.h"
 
 static t_list	*create_node(void *data)
 {
@@ -45,19 +46,4 @@ void    free_list(t_list *list, void (*del)(void *data))
 		delete_position = 0;
 	}
 	free(list);
-}
-
-int count_list(t_list *list)
-{
-	int		size;
-	t_list	*node;
-
-	node = list->next;
-	size = 0;
-	while (node)
-	{
-		++size;
-		node = node->next;
-	}
-	return (size);
 }

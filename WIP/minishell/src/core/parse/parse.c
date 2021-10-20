@@ -1,10 +1,10 @@
 #include "utils/utils.h"
-#include "core/env.h"
+#include "core/env/env.h"
 #include "core/parse/parse.h"
 #include "debug/debug_parse.h"
 #include "debug/debug_utils.h"
 
-static void replace(t_list *tokens, t_env *env);
+static void  replace(t_list *tokens, t_env *env);
 
 /**
  * 파싱 과정

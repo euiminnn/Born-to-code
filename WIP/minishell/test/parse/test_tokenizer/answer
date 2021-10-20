@@ -151,17 +151,17 @@ errno 42
 minishell: syntax error
 ->
 0
-errno 2
+errno 258
 ----- error_2_1 -----
 minishell: syntax error
 ->
 0
-errno 2
+errno 258
 ----- error_2_2 -----
 minishell: syntax error
 ->
 0
-errno 2
+errno 258
 ----- error_2_3 -----
 minishell: multi line not allowed
 ->

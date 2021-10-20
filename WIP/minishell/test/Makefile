@@ -11,18 +11,16 @@
 # **************************************************************************** #
 
 TESTS		=	\
-				builtin/test_echo \
-				builtin/test_export \
-				builtin/test_exit \
 				parse/test_replace \
-				parse/test_tokenizer
-
-#				env/test_change \
-#				env/test_init \
-#				env/test_insert \
-#				env/test_remove \
-#				env/test_search \
-
+				parse/test_tokenizer \
+				env/test_change \
+				env/test_insert \
+				env/test_remove \
+				env/test_search \
+				builtin/test_echo
+				
+#				builtin/test_export \
+#				builtin/test_exit \
 # =========================================================
 
 all				:

@@ -5,7 +5,7 @@
 # include "lib/libft.h"
 # include "utils/list.h"
 # include "utils/utils.h"
-# include "core/env.h"
+# include "core/env/env.h"
 # include "core/parse/cmd.h"
 # include "core/parse/token.h"
 # include "core/execute/execute.h"
@@ -81,6 +81,13 @@ int lexer(char **strings, t_list *tokens);
 void replace_env_in_token(t_token *token, t_env *env);
 
 
+/**
+ * << 에 대해서 heredoc 을 처리하고, 해당 fd 를 문자열로 저장합니다.
+ *
+ * @param tokens 토큰 리스트
+ *
+ * @example {type: T_LEFT_DOUBLD_REDIR, value: "3"},
+ */
 void  heredoc(t_list *tokens);
 
 /**

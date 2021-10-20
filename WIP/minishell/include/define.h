@@ -19,8 +19,5 @@
 
 int	g_exit_code;
 
-void	(*sigint_old)();
-void	(*sigquit_old)();
-
 #endif
 
