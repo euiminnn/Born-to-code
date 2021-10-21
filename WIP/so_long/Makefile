@@ -6,7 +6,7 @@
 #    By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/15 22:13:22 by echung            #+#    #+#              #
-#    Updated: 2021/10/21 11:32:58 by echung           ###   ########.fr        #
+#    Updated: 2021/10/21 20:51:53 by echung           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,8 @@ NAME	= so_long
 CFLAGS	= -Wall -Wextra -Werror -I./include 
 MLX     = -L mlx -lmlx -framework OpenGL -framework AppKit
 SRCS	= srcs/main.c \
+		  srcs/game/init.c \
+		  srcs/game/end.c \
 		  srcs/map/is_valid_file_type.c \
 		  srcs/map/readfile.c \
 		  srcs/map/load_image.c \

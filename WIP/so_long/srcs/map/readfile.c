@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 00:50:55 by echung            #+#    #+#             */
-/*   Updated: 2021/08/18 18:08:42 by echung           ###   ########.fr       */
+/*   Updated: 2021/10/21 20:33:10 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,16 @@ int	count_row(char *filename)
 	return (row);
 }
 
+void	free_all(char **s, int count)
+{
+	while (count > 0)
+	{
+		count--;
+		free(s[count]);
+	}
+	free(s);
+}
+
 char	**readfile(char *filename, int row)
 {
 	int		fd;
@@ -43,10 +53,12 @@ char	**readfile(char *filename, int row)
 	char	**arr;
 	int		i;
 
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+		return (0);
 	arr = malloc(sizeof(char *) * row);
 	if (!arr)
 		return (0);
-	fd = open(filename, O_RDONLY);
 	i = 0;
 	check = get_next_line(fd, &line);
 	while (check > 0)
@@ -57,7 +69,10 @@ char	**readfile(char *filename, int row)
 	}
 	free(line);
 	if (check == -1)
+	{
+		free_all(arr, i);
 		return (0);
+	}
 	close(fd);
 	return (arr);
 }
