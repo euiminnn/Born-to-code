@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/21 17:15:40 by echung            #+#    #+#             */
+/*   Updated: 2021/10/21 17:15:42 by echung           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PARSE_H
 # define PARSE_H
 
@@ -28,7 +40,7 @@
  * @p ERR_PARSE_MULTI_LINE
  * @p ERR_PARSE_SYNTAX
  */
-int parse(char *line, t_env *env, t_list *cmds);
+int		parse(char *line, t_env *env, t_list *cmds);
 
 /**
  * 입력받은 한줄을 토큰 단위로 잘라, 문자열로 쪼갭니다.
@@ -45,7 +57,7 @@ int parse(char *line, t_env *env, t_list *cmds);
  *
  * @test parse/test_tokenizer
  */
-int tokenizer(char *line, char ***strings);
+int		tokenizer(char *line, char ***strings);
 
 /**
  * 문자열들의 타입을 결정하고, 토큰 리스트에 추가합니다.
@@ -66,7 +78,7 @@ int tokenizer(char *line, char ***strings);
  *  {type: T_LEFT_DOUBLE_REDIR, value: 'abc'},
  * ]
  */
-int lexer(char **strings, t_list *tokens);
+int		lexer(char **strings, t_list *tokens);
 
 /**
  * 토큰에서 환경변수를 문자열 치환하고, 따옴표를 뺍니다.
@@ -78,8 +90,7 @@ int lexer(char **strings, t_list *tokens);
  *
  * @test parse/test_replace
  */
-void replace_env_in_token(t_token *token, t_env *env);
-
+void	replace_env_in_token(t_token *token, t_env *env);
 
 /**
  * << 에 대해서 heredoc 을 처리하고, 해당 fd 를 문자열로 저장합니다.
@@ -88,7 +99,7 @@ void replace_env_in_token(t_token *token, t_env *env);
  *
  * @example {type: T_LEFT_DOUBLD_REDIR, value: "3"},
  */
-void  heredoc(t_list *tokens);
+void	heredoc(t_list *tokens);
 
 /**
  * 토큰을 타입에 따라서, 커맨드 리스트를 만듭니다.
@@ -115,6 +126,6 @@ void  heredoc(t_list *tokens);
  *  }
  * ]
  */
-void parser(t_list *tokens, t_list *cmds);
+void	parser(t_list *tokens, t_list *cmds);
 
 #endif

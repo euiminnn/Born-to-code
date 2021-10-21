@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 16:31:58 by echung            #+#    #+#             */
-/*   Updated: 2021/09/12 16:32:43 by echung           ###   ########.fr       */
+/*   Updated: 2021/10/21 17:02:19 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,12 @@
  * @test builtin/test_export
  * @test builtin/test_unset
  */
-int    builtin_echo(int argc, char **argv, t_env *env, int fd);
-int    builtin_cd(int argc, char **argv, t_env *env, int fd);
-int    builtin_pwd(int argc, char **argv, t_env *env, int fd);
-int    builtin_export(int argc, char **argv, t_env *env, int fd);
-int    builtin_unset(int argc, char **argv, t_env *env, int fd);
-int    builtin_env(int argc, char **argv, t_env *env, int fd);
-int    builtin_exit(int argc, char **argv, t_env *env, int fd);
+int	builtin_echo(int argc, char **argv, t_env *env, int fd);
+int	builtin_cd(int argc, char **argv, t_env *env, int fd);
+int	builtin_pwd(int argc, char **argv, t_env *env, int fd);
+int	builtin_export(int argc, char **argv, t_env *env, int fd);
+int	builtin_unset(int argc, char **argv, t_env *env, int fd);
+int	builtin_env(int argc, char **argv, t_env *env, int fd);
+int	builtin_exit(int argc, char **argv, t_env *env, int fd);
 
 #endif

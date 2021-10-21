@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env_data.h                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/21 17:06:50 by echung            #+#    #+#             */
+/*   Updated: 2021/10/21 17:25:29 by echung           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef ENV_DATA_H
 # define ENV_DATA_H
 
@@ -21,29 +33,29 @@
  */
 typedef struct s_env_data
 {
-    char *key;
-    char *value;
-}   t_env_data;
+	char	*key;
+	char	*value;
+}	t_env_data;
 
 /**
  * 환경 변수 메모리를 해제합니다.
  * 
  * @param env 환경 변수 구조체
  */
-t_env_data   *init_env_data(char *key, char *value);
+t_env_data	*init_env_data(char *key, char *value);
 
 /**
  * 환경 변수 데이터 구조체 메모리를 해제합니다.
  * 
  * @param data 환경 변수 데이터 구조체
  */
-void free_env_data(void *data);
+void		free_env_data(void *data);
 
 /**
  * 환경 변수 데이터 구조체를 문자열로 변경합니다.
  * 
  * @return 문자열, value 가 없으면 NULL
  */
-char    *to_string_env_data(t_env_data *data);
+char		*to_string_env_data(t_env_data *data);
 
 #endif

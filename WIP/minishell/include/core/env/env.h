@@ -6,7 +6,7 @@
 /*   By: ycha <ycha@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 02:51:17 by ycha              #+#    #+#             */
-/*   Updated: 2021/10/20 02:51:18 by ycha             ###   ########.fr       */
+/*   Updated: 2021/10/21 17:10:16 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
  * 
  * @ref env_data.h
  */
-typedef t_list t_env;
+typedef t_list	t_env;
 
 /**
  * 환경 변수를 초기홥니다.
@@ -44,7 +44,7 @@ typedef t_list t_env;
  * @param envp 환경 변수 문자열
  * @return 초기화된 env (free 필요)
  */
-t_env   *init_env(char **envp);
+t_env	*init_env(char **envp);
 
 /**
  * 환경 변수에서 key의 value 값을 찾습니다.
@@ -55,7 +55,7 @@ t_env   *init_env(char **envp);
  * 
  * @test env/test_search
  */
-char    *search_env(t_env *env, char *key);
+char	*search_env(t_env *env, char *key);
 
 /**
  * 환경 변수에 값을 추가합니다.
@@ -66,7 +66,7 @@ char    *search_env(t_env *env, char *key);
  * 
  * @test env/test_insert
  */
-void    insert_env(t_env *env, char *key, char *value);
+void	insert_env(t_env *env, char *key, char *value);
 
 /**
  * 환경 변수에서 key에 해당하는 value 값을 수정합니다.
@@ -78,7 +78,7 @@ void    insert_env(t_env *env, char *key, char *value);
  * 
  * @test env/test_change
  */
-int change_env(t_env *env, char *key, char *value);
+int		change_env(t_env *env, char *key, char *value);
 
 /**
  * 환경 변수에서 key값을 삭제합니다.
@@ -89,14 +89,14 @@ int change_env(t_env *env, char *key, char *value);
  * 
  * @test env/test_remove
  */
-int remove_env(t_env *env, char *key);
+int		remove_env(t_env *env, char *key);
 
 /**
  * 환경 변수 메모리를 해제합니다.
  * 
  * @param env 환경 변수 구조체
  */
-void    free_env(t_env *env);
+void	free_env(t_env *env);
 
 /**
  * 주어진 함수에 따라 환경 변수를 이차원 문자열로 변환합니다.
@@ -105,6 +105,6 @@ void    free_env(t_env *env);
  * @param to_string 환경 변수 데이터 구조체를 문자열로 변환 시킬 함수
  * @return 이차원 문자열 (free 필요)
  */
-char    **to_string_env(t_env *env, char *(*to_string)(t_env_data *data));
+char	**to_string_env(t_env *env, char *(*to_string)(t_env_data *data));
 
 #endif

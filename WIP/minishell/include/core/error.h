@@ -1,5 +1,17 @@
-#ifndef FT_ERROR_H
-# define FT_ERROR_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/21 17:03:08 by echung            #+#    #+#             */
+/*   Updated: 2021/10/21 17:04:32 by echung           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef ERROR_H
+# define ERROR_H
 
 # include <stdio.h>
 
@@ -25,15 +37,15 @@
  *
  * @throw 에러코드를 g_exit_code 에 담습니다.
  */
-int	ft_error(int type, char *data);
+int		ft_error(int type, char *data);
 
 /**
  * 에러 메세지를 출력합니다.
  *
  * @note ft_error 호출함
  */
-void	ft_error_msg_multi_line();
-void	ft_error_msg_syntax();
+void	ft_error_msg_multi_line(void);
+void	ft_error_msg_syntax(void);
 void	ft_error_msg_no_file(char *file);
 void	ft_error_msg_not_command(char *command);
 

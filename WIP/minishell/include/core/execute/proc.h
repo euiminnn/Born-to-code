@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   proc.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/21 17:11:36 by echung            #+#    #+#             */
+/*   Updated: 2021/10/21 17:27:23 by echung           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PROC_H
 # define PROC_H
 
@@ -36,12 +48,12 @@
  */
 typedef struct s_proc
 {
-    char    **argv;
-    int     argc;
-    t_env   *env;
-    int     fd_in;
-    int     fd_out;
-}   t_proc;
+	char	**argv;
+	int		argc;
+	t_env	*env;
+	int		fd_in;
+	int		fd_out;
+}	t_proc;
 
 /**
  * 커맨드 구조체로 프로세스 구조체를 만듭니다.
@@ -52,7 +64,7 @@ typedef struct s_proc
  * @param fd_out 출력 fd 초기값
  * @return 성공시 프로세스 구조체 (free 필요), 실패시 NULL
  */
-t_proc  *build_proc(t_cmd *cmd, t_env *env, int fd_in, int fd_out);
+t_proc	*build_proc(t_cmd *cmd, t_env *env, int fd_in, int fd_out);
 
 /**
  * 프로세스 종류를 파악합니다.
@@ -60,13 +72,13 @@ t_proc  *build_proc(t_cmd *cmd, t_env *env, int fd_in, int fd_out);
  * @param proc 프로세스 구조체
  * @return 빌트인 프로세스라면 P_BUILTIN_* 을, 외부 프로세스라면 P_EXTERN
  */
-int get_proc_type(t_proc *proc);
+int		get_proc_type(t_proc *proc);
 
 /**
  * 프로세스 구조체 메모리를 해제합니다.
  *
  * @param proc 프로세스 구조체
  */
-void    free_proc(t_proc *proc);
+void	free_proc(t_proc *proc);
 
 #endif

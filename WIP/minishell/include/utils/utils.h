@@ -1,8 +1,23 @@
-#include "lib/libft.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/21 17:32:39 by echung            #+#    #+#             */
+/*   Updated: 2021/10/21 17:38:27 by echung           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include "define.h"
-#include <stdio.h>
-#include <string.h>
+#ifndef UTILS_H
+# define UTILS_H
+
+# include "lib/libft.h"
+
+# include "define.h"
+# include <stdio.h>
+# include <string.h>
 
 /**
  * close 함수를 안전하게 사용합니다.
@@ -11,7 +26,7 @@
  * 
  * @param fd 닫을 fd 값
  */
-void    ft_close(int fd);
+void	ft_close(int fd);
 
 /**
  * dup2 를 안전하게 사용합니다.
@@ -23,7 +38,7 @@ void    ft_close(int fd);
  * @param fd2 fd 값
  * @return dup2 의 return 과 동일
  */
-int     ft_dup(int fd1, int fd2);
+int		ft_dup(int fd1, int fd2);
 
 /**
  * 에러번호에 따라 오류를 출력하고 exit 합니다.
@@ -48,7 +63,7 @@ void	ft_free_strings(char **arr);
  * @param key key 문자열 포인터 (free 필요)
  * @param value value 문자열 포인터 (없을경우 NULL, free 필요)
  */
-void     ft_get_key_value(char* str, char **key, char **value);
+void	ft_get_key_value(char *str, char **key, char **value);
 
 /**
  * 문자열 여러개를 합칩니다.
@@ -63,4 +78,6 @@ void     ft_get_key_value(char* str, char **key, char **value);
  * result = ft_strjoins((char *[3]){"hello", str, "\n"}, 3);
  * printf("%s", result); // "helloworld!\n" 가 출력된다.
  */
-char*	ft_strjoins(char **strs, int n);
+char	*ft_strjoins(char **strs, int n);
+
+#endif
