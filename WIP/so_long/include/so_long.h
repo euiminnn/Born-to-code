@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 00:43:58 by echung            #+#    #+#             */
-/*   Updated: 2021/10/20 15:30:15 by echung           ###   ########.fr       */
+/*   Updated: 2021/10/21 16:56:25 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ void	*ft_memset(void *b, int c, int len);
 void	ft_bzero(void *s, int n);
 void	*ft_memcpy(void *dst, void *src, int n);
 
-int		parse_map(char **arr, int row, int column);
 int		is_instring(int c, char *s);
 
 void	load_image(t_global *g);
@@ -92,7 +91,7 @@ void	load_image(t_global *g);
 void	init_map(t_global *g);
 void	edit_map(t_global *g);
 
-int		parse_map(char **arr, int row, int column);
+int		parse_map(t_global *g);
 
 void	img_to_win(t_global *g, void *img, int i, int j);
 

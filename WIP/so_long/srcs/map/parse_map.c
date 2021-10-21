@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 22:37:06 by echung            #+#    #+#             */
-/*   Updated: 2021/10/20 15:34:46 by echung           ###   ########.fr       */
+/*   Updated: 2021/10/21 16:57:27 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@ static int	essential_element(char **arr, int row, int column, t_iter it)
 	}
 	if (element[E] * element[C] * element[P] == 1)
 		return (1);
-	else
-		return (0);
+	printf("🚫 Error: at least one C, E, P should be used\n");
+	return (0);
 }
 
-static int	check_element(char **arr, int row, int column)
+static int	is_valid_element(char **arr, int row, int column)
 {
 	int	i;
 	int	j;
@@ -56,7 +56,10 @@ static int	check_element(char **arr, int row, int column)
 			if (is_instring(arr[i][j], "01CEP"))
 				j++;
 			else
+			{
+				printf("🚫 Error: only 0, 1, C, E, P could be used\n");
 				return (0);
+			}
 		}
 		i++;
 	}
@@ -90,7 +93,7 @@ static int	is_surrounded(char **arr, int row, int column, t_iter it)
 	return (1);
 }
 
-static int	is_samecolnum(char **arr, int row, int column)
+static int	is_samelength(char **arr, int row, int column)
 {
 	int	i;
 
@@ -101,33 +104,28 @@ static int	is_samecolnum(char **arr, int row, int column)
 			i++;
 		else
 		{
-			printf("🚫 Error: different column size\n");
+			printf("🚫 Error: different row length\n");
 			return (0);
 		}
 	}
 	return (1);
 }
 
-#define MAX_SCORE 4
-int	parse_map(char **arr, int row, int column)
+int	parse_map(t_global *g)
 {
 	int		score;
 	t_iter	iter;
 
 	score = 0;
 	ft_bzero(&iter, sizeof(t_iter));
-	if (is_samecolnum(arr, row, column))
-		score++;
-	else
-		return (0);
-	if (is_surrounded(arr, row, column, iter))
-		score++;
-	if (check_element(arr, row, column))
-		score++;
-	if (essential_element(arr, row, column, iter))
-		score++;
-	if (score == MAX_SCORE)
+	if (is_samelength(g->arr, g->row, g->column) && \
+		is_surrounded(g->arr, g->row, g->column, iter) && \
+		is_valid_element(g->arr, g->row, g->column) && \
+		essential_element(g->arr, g->row, g->column, iter))
+	{
+		mlx_loop(g->mlx);
 		return (1);
+	}
 	else
 		return (0);
 }

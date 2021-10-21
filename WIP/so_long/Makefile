@@ -6,7 +6,7 @@
 #    By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/15 22:13:22 by echung            #+#    #+#              #
-#    Updated: 2021/10/19 18:38:30 by echung           ###   ########.fr        #
+#    Updated: 2021/10/21 11:32:58 by echung           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ OBJS	= $(SRCS:%.c=%.o)
 
 .PHONY: all
 all: $(NAME)
-	./so_long "map.ber"
+#	./so_long "map.ber"
 
 $(NAME): $(OBJS)
 	make -C mlx	
