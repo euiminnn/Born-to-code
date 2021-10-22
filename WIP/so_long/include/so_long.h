@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 00:43:58 by echung            #+#    #+#             */
-/*   Updated: 2021/10/21 16:56:25 by echung           ###   ########.fr       */
+/*   Updated: 2021/10/21 20:52:09 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@
 # define KEY_A 0
 # define KEY_S 1
 # define KEY_D 2
+
+# define STEP 48
 
 typedef struct s_param{
 	int		x;
@@ -70,8 +72,10 @@ typedef struct s_global{
 
 int		key_press(int keycode, t_global *g);
 int		mouse_press(t_global *g);
-void	param_init(t_global *g);
+
+int		init_game(char *map, t_global *g);
 char	**readfile(char *filename, int row);
+void	free_all(char **s, int count);
 int		count_row(char *filename);
 int		get_next_line(int fd, char **line);
 char	*ft_strdup(char *src);
@@ -102,7 +106,5 @@ int		is_valid_file_type(char *arg, char *type);
 void	get_collectibles(t_global *g);
 
 void	end_game(t_global *g);
-
-void	param_init(t_global *g);
 
 #endif

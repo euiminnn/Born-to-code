@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 18:01:52 by echung            #+#    #+#             */
-/*   Updated: 2021/01/28 21:45:56 by echung           ###   ########.fr       */
+/*   Updated: 2021/10/21 21:12:15 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,12 +87,12 @@ static size_t	ft_startidx(char const *s, char c, size_t index)
 	return (0);
 }
 
-static char		**ft_freeall(char **s, size_t index)
+static char		**ft_freeall(char **s, size_t line_count)
 {
-	while (index >= 0)
+	while (line_count > 0)
 	{
-		index--;
-		free(s[index]);
+		line_count--;
+		free(s[line_count]);
 	}
 	free(s);
 	return (0);
