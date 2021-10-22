@@ -33,12 +33,15 @@ int parse(char *line, t_env *env, t_list *cmds)
     replace(tokens, env);
     DEBUG && printf("--------replace--------\n");
     DEBUG && print_token_list(tokens, 0);
-    heredoc(tokens);
+    if (!heredoc(tokens))
+        return (ERROR);
+    DEBUG && printf("--------heredoc--------\n");
+    DEBUG && print_token_list(tokens, 0);
     parser(tokens, cmds);
     DEBUG && printf("--------parser---------\n");
     DEBUG && print_cmd_list(cmds, 0);
     ft_free_strings(strings);
-    free_list(tokens, free_token);
+    free_list(tokens, free_token_without_close);
     return (OK);
 }
 

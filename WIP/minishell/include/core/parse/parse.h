@@ -32,6 +32,8 @@
 /**
  * 입력받은 한줄을 파싱하여, 환경변수를 적용하여, 커맨드들을 구합니다.
  *
+ * @note 아래의 함수를 순차적으로 실행합니다.
+ * 
  * @param line 입력받은 한줄
  * @param end 환경변수 구조체
  * @param cmds 반환할 커맨드 리스트 (init_list 필요)
@@ -52,8 +54,8 @@ int		parse(char *line, t_env *env, t_list *cmds);
  * @p ERR_PARSE_MULTI_LINE 따움표가 쌍이 맞지 않는 경우
  * @p ERR_PARSE_SYNTAX 허락되지 않은 문자가 있는 경우
  *
- * @example line : echo hello > abc | cat << abc
- * @example strings : ['echo', 'hello', '>', 'abc', '|', 'cat', '<<' ,'abc']
+ * @example line : "echo hello > abc | cat << abc"
+ * @example strings : ["echo", "hello", ">", "abc", "|", "cat", "<<" ,"abc"]
  *
  * @test parse/test_tokenizer
  */
@@ -96,10 +98,11 @@ void	replace_env_in_token(t_token *token, t_env *env);
  * << 에 대해서 heredoc 을 처리하고, 해당 fd 를 문자열로 저장합니다.
  *
  * @param tokens 토큰 리스트
+ * @return 시그널을 받아서 종료되면 ERROR, 정상 입력 받으면 OK
  *
  * @example {type: T_LEFT_DOUBLD_REDIR, value: "3"},
  */
-void	heredoc(t_list *tokens);
+int		heredoc(t_list *tokens);
 
 /**
  * 토큰을 타입에 따라서, 커맨드 리스트를 만듭니다.
@@ -117,12 +120,21 @@ void	heredoc(t_list *tokens);
  * ]
  * @example cmds : [
  *  {
- *    args: [{type: T_ARG, value: 'echo'}, {type: T_ARG, value: 'hello'}]
- *    rd : [{type: T_RIGHT_REDIR, value: 'abc'}]
+ *    args: [
+ *      {type: T_ARG, value: 'echo'},
+ *      {type: T_ARG, value: 'hello'}
+ *    ]
+ *    rd : [
+ *      {type: T_RIGHT_REDIR, value: 'abc'}
+ *    ]
  *  },
  *  {
- *    args: [{type: T_CMD, value: 'cat'}]
- *    rd: [{type: T_LEFT_REDIR, value: 'abc'}]
+ *    args: [
+ *      {type: T_CMD, value: 'cat'}
+ *    ]
+ *    rd: [
+ *      {type: T_LEFT_REDIR, value: 'abc'}
+ *    ]
  *  }
  * ]
  */

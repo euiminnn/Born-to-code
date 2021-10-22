@@ -26,7 +26,8 @@
  * @param argc 인자 갯수
  * @param argv 인자 들
  * @param env 환경변수 구조체
- * @return 정상 종료하면 0, 오류 있으면 그 이외의 값
+ * @param fd 출력 fd 값
+ * @return 적절한 exit code
  *
  * @example echo -n hello
  * @example argc : 3
@@ -35,8 +36,15 @@
  *   '-n',
  *   'hello'
  * ]
+ * @example fd : 1
+ * @example return : 0
  *
+ * @note 정상적인 출력 은 출력 fd 값으로
+ * @note 에러 메세지는 printf 를 쓰거나, fd 1 로 쓰기
+ * @note 함수의 return 값이 프로세스의 exit code 가 됩니다.
+ * 
  * @test builtin/test_echo
+ * @test builtin/test_cd
  * @test builtin/test_exit
  * @test builtin/test_export
  * @test builtin/test_unset

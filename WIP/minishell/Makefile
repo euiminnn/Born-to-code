@@ -96,7 +96,7 @@ debug			:
 	@$(MAKE) re DEBUG=1
 
 test			:
-	@$(MAKE) -s -C ./test
+	@$(MAKE) -s -C ./test/unit
 
 show			:
 	@printf "SRCS : $(SRCS)"
@@ -109,7 +109,7 @@ clean			:
 fclean			: clean
 	rm -f $(NAME)
 	$(MAKE) -C ./src/lib fclean
-	@$(MAKE) -C ./test fclean
+	@$(MAKE) -C ./test/unit fclean
 
 re				: fclean all
 

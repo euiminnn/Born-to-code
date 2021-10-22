@@ -33,7 +33,7 @@ int builtin_exit(int argc, char **argv, t_env *env, int fd)
     ft_putstr_fd("exit\n", fd);
 	if (argc == 1)
 	{
-		exit(1);
+		exit(g_exit_code);
 	}
     if (argc == 2)
 	{
