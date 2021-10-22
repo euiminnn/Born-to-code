@@ -1,5 +1,5 @@
 ----- no path -----
-cd: usage: cd DIR
+minishell: cd: usage: cd DIR
 ->
 1
 ----- invalid path -----
