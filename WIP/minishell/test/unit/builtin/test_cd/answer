@@ -1,0 +1,8 @@
+----- no path -----
+cd: usage: cd DIR
+->
+1
+----- invalid path -----
+minishell: cd: asdf: No such file or directory
+->
+1
