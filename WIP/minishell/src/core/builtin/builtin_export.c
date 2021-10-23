@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 16:26:55 by echung            #+#    #+#             */
-/*   Updated: 2021/10/23 17:19:41 by echung           ###   ########.fr       */
+/*   Updated: 2021/10/24 02:31:14 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,21 @@ int	builtin_export(int argc, char **argv, t_env *env, int fd)
 {
 	char *key;
 	char *value;
+	int	i;
 
 	if (argc == 1)	//export만 들어온 경우
 	{
 		builtin_export_only(argc, argv, env, fd);
 		return (0);
 	}
-	ft_get_key_value(argv[1], &key, &value);
-    insert_env(env, key, value);
-	free(key);
-	free(value);
+	i = 1;
+	while (argv[i])
+	{
+		ft_get_key_value(argv[i], &key, &value);
+		insert_env(env, key, value);
+		free(key);
+		free(value);
+		i++;
+	}
 	return (0);
 }
