@@ -6,7 +6,7 @@
 #    By: ycha <ycha@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/02 00:01:37 by ycha              #+#    #+#              #
-#    Updated: 2021/10/21 17:43:44 by echung           ###   ########.fr        #
+#    Updated: 2021/10/23 05:07:10 by ycha             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -97,6 +97,7 @@ debug			:
 
 test			:
 	@$(MAKE) -s -C ./test/unit
+	@$(MAKE) -s -C ./test/integration
 
 show			:
 	@printf "SRCS : $(SRCS)"
@@ -110,6 +111,7 @@ fclean			: clean
 	rm -f $(NAME)
 	$(MAKE) -C ./src/lib fclean
 	@$(MAKE) -C ./test/unit fclean
+	@$(MAKE) -C ./test/integration fclean
 
 re				: fclean all
 

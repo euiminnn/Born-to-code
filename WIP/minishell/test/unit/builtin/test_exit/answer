@@ -1,0 +1,37 @@
+----- normal -----
+exit
+->
+42
+----- number -----
+exit
+->
+42
+----- negative -----
+exit
+->
+214
+----- mutli -----
+exit
+minishell: exit: too many arguments
+->
+1
+----- alpha -----
+exit
+minishell: exit: hi: numeric argument required
+->
+255
+----- multi_alpha_1 -----
+exit
+minishell: exit: hi: numeric argument required
+->
+255
+----- multi_alpha_2 -----
+exit
+minishell: exit: too many arguments
+->
+1
+----- multi_alpha_3 -----
+exit
+minishell: exit: hi: numeric argument required
+->
+255
