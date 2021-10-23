@@ -37,9 +37,13 @@ int main(int ac, char **av, char **en)
 {
     env = init_env(en);
     
-    test("no path", "cd");
+    test("env only", "env");
     
-    test("invalid path", "cd nonopath");
+    test("key only", "env A");
+    
+	test("env with 1 set(key+value)", "env A=3");
+	
+	test("env with 2 sets", "env A=3 B=4");
 
     return (0);
 }
