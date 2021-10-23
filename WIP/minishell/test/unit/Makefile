@@ -19,6 +19,7 @@ TESTS		=	\
 				env/test_search \
 				builtin/test_cd \
 				builtin/test_echo \
+				builtin/test_env \
 				builtin/test_exit \
 				builtin/test_export \
 				builtin/test_unset
