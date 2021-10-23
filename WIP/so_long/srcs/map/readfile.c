@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 00:50:55 by echung            #+#    #+#             */
-/*   Updated: 2021/10/21 20:33:10 by echung           ###   ########.fr       */
+/*   Updated: 2021/10/23 14:43:06 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,6 @@ int	count_row(char *filename)
 	free(line);
 	close(fd);
 	return (row);
-}
-
-void	free_all(char **s, int count)
-{
-	while (count > 0)
-	{
-		count--;
-		free(s[count]);
-	}
-	free(s);
 }
 
 char	**readfile(char *filename, int row)

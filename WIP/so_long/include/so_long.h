@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 00:43:58 by echung            #+#    #+#             */
-/*   Updated: 2021/10/21 20:52:09 by echung           ###   ########.fr       */
+/*   Updated: 2021/10/23 14:58:34 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,41 +70,44 @@ typedef struct s_global{
 	t_iter			iter;
 }	t_global;
 
+/*		srcs/key		*/
 int		key_press(int keycode, t_global *g);
 int		mouse_press(t_global *g);
 
+/*		srcs/game		*/
 int		init_game(char *map, t_global *g);
+void	end_game(t_global *g);
+
+/*		srcs/map		*/
+int		is_valid_file_type(char *arg, char *type);
+void	load_image(t_global *g);
+/* map.c */
+void	init_map(t_global *g);
+void	edit_map(t_global *g);
+/* parse_map.c */
+int		parse_map(t_global *g);
+/* readfile.c */
 char	**readfile(char *filename, int row);
-void	free_all(char **s, int count);
 int		count_row(char *filename);
+
+/*		utils			*/
+/* get_next_line.c */
 int		get_next_line(int fd, char **line);
+/* lib.c */
+void	*ft_memset(void *b, int c, int len);
+void	ft_bzero(void *s, int n);
+void	*ft_memcpy(void *dst, void *src, int n);
+int		is_instring(int c, char *s);
+int		check_char(char c1, char c2);
+/* libstr.c */
 char	*ft_strdup(char *src);
 char	*ft_strjoin_free(char *s1, char *s2);
 char	*ft_strjoin_free_sub(char *str, char *buff);
 char	*ft_substr(char *s, int start, int len);
 int		ft_strlen(char *str);
-
-void	*ft_memset(void *b, int c, int len);
-void	ft_bzero(void *s, int n);
-void	*ft_memcpy(void *dst, void *src, int n);
-
-int		is_instring(int c, char *s);
-
-void	load_image(t_global *g);
-
-void	init_map(t_global *g);
-void	edit_map(t_global *g);
-
-int		parse_map(t_global *g);
-
+/* libfree.c */
+void	free_all(char **s, int count);
+/* short_mlx.c */
 void	img_to_win(t_global *g, void *img, int i, int j);
-
-int		check_char(char c1, char c2);
-
-int		is_valid_file_type(char *arg, char *type);
-
-void	get_collectibles(t_global *g);
-
-void	end_game(t_global *g);
 
 #endif

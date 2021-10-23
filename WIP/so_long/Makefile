@@ -6,7 +6,7 @@
 #    By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/15 22:13:22 by echung            #+#    #+#              #
-#    Updated: 2021/10/21 20:51:53 by echung           ###   ########.fr        #
+#    Updated: 2021/10/23 14:43:36 by echung           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SRCS	= srcs/main.c \
 		  srcs/utils/get_next_line.c \
 		  srcs/utils/lib.c \
 		  srcs/utils/libstr.c \
+		  srcs/utils/libfree.c \
 		  srcs/utils/short_mlx.c \
 		  srcs/key/press.c
 
