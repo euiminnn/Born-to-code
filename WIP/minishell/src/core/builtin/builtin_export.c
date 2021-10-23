@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 16:26:55 by echung            #+#    #+#             */
-/*   Updated: 2021/10/23 15:46:45 by echung           ###   ########.fr       */
+/*   Updated: 2021/10/23 17:19:41 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 static char	*to_string(t_env_data *data)
 {
 	if (!data->value)
-		return (NULL);
+		return (ft_strjoins((char *[3]){"declare -x ", data->key, "\n"}, 3));
 	return (ft_strjoins((char *[6]){"declare -x ", data->key, "=", "\"", data->value, "\"\n"}, 6));
 }
 

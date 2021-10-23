@@ -110,8 +110,8 @@ clean			:
 fclean			: clean
 	rm -f $(NAME)
 	$(MAKE) -C ./src/lib fclean
-	@$(MAKE) -C ./test/unit fclean
-	@$(MAKE) -C ./test/integration fclean
+	@$(MAKE) -C -s ./test/unit fclean
+	@$(MAKE) -C -s ./test/integration fclean
 
 re				: fclean all
 
