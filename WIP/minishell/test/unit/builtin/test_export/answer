@@ -52,6 +52,18 @@ A=10
 B=20
 TEST4=(null)
 TEST5=
+----- novalue_print -----
+declare -x A="10"
+declare -x B="20"
+declare -x TEST4
+declare -x TEST5=""
+->
+0
+=>
+A=10
+B=20
+TEST4=(null)
+TEST5=
 ----- error_1 -----
 minishell: export: '1TEST=20': not a valid identifier
 ->

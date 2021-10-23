@@ -58,8 +58,8 @@ int main(int ac, char **av, char **en)
     free_env(env);
     env = init_env(envp);
     test("novalue_1", "export TEST4");
-
     test("novalue_2", "export TEST5=");
+	test("novalue_print", "export");
 
     test("error_1", "export 1TEST=20"); // 해도 되고 안해도 되고..
     test("error_2", "export TEST[=20"); // 해도 되고 안해도 되고..
