@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 16:33:40 by echung            #+#    #+#             */
-/*   Updated: 2021/10/23 17:33:44 by echung           ###   ########.fr       */
+/*   Updated: 2021/10/23 17:59:24 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,7 @@ int	builtin_env(int argc, char **argv, t_env *env, int fd)
 		ft_get_key_value(argv[1], &key, &value);
 		if (!value)
 		{
-			ft_putstr_fd(ft_strjoins((char *[3]){"env: ", \
-						key, ": No such file or directory\n"}, 3), fd);
+			printf("env: %s: No such file or directory\n", key);
 			return (127);
 		}
 		free(key);
