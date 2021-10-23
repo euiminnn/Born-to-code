@@ -6,7 +6,7 @@
 #    By: ycha <ycha@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/02 00:01:37 by ycha              #+#    #+#              #
-#    Updated: 2021/10/24 01:14:15 by echung           ###   ########.fr        #
+#    Updated: 2021/10/24 03:10:27 by echung           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,10 +61,10 @@ FILE		=	\
 
 CC			=	gcc
 #CFLAGS		=	-Wall -Wextra -Werror -g
-#CFLAGS		=	-Iinclude -I/Users/$(USER)/.brew/opt/readline/include
-CFLAGS		=	-Iinclude -I/opt/homebrew/opt/readline/include
-#CLIB		=	-Lsrc/lib -lft -lreadline -L/Users/$(USER)/.brew/opt/readline/lib
-CLIB		=	-Lsrc/lib -lft -lreadline -L/opt/homebrew/opt/readline/lib
+CFLAGS		=	-Iinclude -I/Users/$(USER)/.brew/opt/readline/include
+#CFLAGS		=	-Iinclude -I/opt/homebrew/opt/readline/include
+CLIB		=	-Lsrc/lib -lft -lreadline -L/Users/$(USER)/.brew/opt/readline/lib
+#CLIB		=	-Lsrc/lib -lft -lreadline -L/opt/homebrew/opt/readline/lib
 SRC_DIR		=	./src
 SRCS		=	$(addprefix $(SRC_DIR)/, $(FILE))
 

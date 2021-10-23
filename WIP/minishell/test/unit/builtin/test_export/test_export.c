@@ -53,7 +53,7 @@ int main(int ac, char **av, char **en)
     
     free_env(env);
     env = init_env(envp);
-    test("add_multi_1", "export TEST2=10 TEST3=10"); // 해도 되고 안해도 되고..
+    test("add_multi_1", "export TEST2=10 TEST3=10"); // 해도 되고 안해도 되고.. ->했어요
 
     free_env(env);
     env = init_env(envp);
