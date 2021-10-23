@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 16:26:55 by echung            #+#    #+#             */
-/*   Updated: 2021/10/14 17:16:37 by echung           ###   ########.fr       */
+/*   Updated: 2021/10/23 15:46:45 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,29 +24,24 @@
  *
  *
  */
+static char	*to_string(t_env_data *data)
+{
+	if (!data->value)
+		return (NULL);
+	return (ft_strjoins((char *[6]){"declare -x ", data->key, "=", "\"", data->value, "\"\n"}, 6));
+}
 
-
-// env 구조 바뀌면서 ycha가 조금 수정했음....
-// 근데 builtin_env 를 참고해서 다른방식으로도 짤 수 있음...
-// 자세한 내용은 builtin_env 에서...
-// 꼭 그럴필요는 없기함
-// 읽었으면 주석 지워주세요
 void	builtin_export_only(int argc, char **argv, t_env *env, int fd)
 {
-	t_env *node;
-	t_env_data	*data;
+	char	**envp;
+	int i;
 
-	node = env->next;
-	while (node)
+	i = 0;
+	envp = to_string_env(env, to_string);
+	while (envp[i])
 	{
-		data = node->data;
-		ft_putstr_fd("declare -x ", fd);
-		ft_putstr_fd(data->key, fd);
-		ft_putstr_fd("=", fd);
-		ft_putstr_fd("\"", fd);
-		ft_putstr_fd(data->value, fd);
-		ft_putstr_fd("\"\n", fd);
-		node = node->next;
+		ft_putstr_fd(envp[i], fd);
+		i++;
 	}
 }
 
