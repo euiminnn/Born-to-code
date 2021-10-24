@@ -6,7 +6,7 @@
 #    By: ycha <ycha@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/02 00:01:37 by ycha              #+#    #+#              #
-#    Updated: 2021/10/24 03:10:27 by echung           ###   ########.fr        #
+#    Updated: 2021/10/24 19:14:22 by ycha             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -112,8 +112,8 @@ clean			:
 fclean			: clean
 	rm -f $(NAME)
 	$(MAKE) -C ./src/lib fclean
-	@$(MAKE) -C -s ./test/unit fclean
-	@$(MAKE) -C -s ./test/integration fclean
+	@$(MAKE) -s -C ./test/unit fclean
+	@$(MAKE) -s -C ./test/integration fclean
 
 re				: fclean all
 

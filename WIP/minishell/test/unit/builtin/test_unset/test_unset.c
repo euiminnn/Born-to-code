@@ -46,9 +46,14 @@ int main(int ac, char **av, char **en)
         "E=50",
         '\n');
     env = init_env(envp);
+	test("normal", "unset A");
+    
+	free_env(env);
+    env = init_env(envp);
+	test("multiple", "unset A B");
 
-    test("normal", "unset A");
-    test("multiple", "unset A B");
+	free_env(env);
+    env = init_env(envp);
     test("with value", "unset A B=20");
 
     return (0);
