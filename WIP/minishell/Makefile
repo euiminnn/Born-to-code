@@ -6,7 +6,7 @@
 #    By: ycha <ycha@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/02 00:01:37 by ycha              #+#    #+#              #
-#    Updated: 2021/10/23 05:07:10 by ycha             ###   ########.fr        #
+#    Updated: 2021/10/24 19:14:22 by ycha             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,7 +62,9 @@ FILE		=	\
 CC			=	gcc
 #CFLAGS		=	-Wall -Wextra -Werror -g
 CFLAGS		=	-Iinclude -I/Users/$(USER)/.brew/opt/readline/include
+#CFLAGS		=	-Iinclude -I/opt/homebrew/opt/readline/include
 CLIB		=	-Lsrc/lib -lft -lreadline -L/Users/$(USER)/.brew/opt/readline/lib
+#CLIB		=	-Lsrc/lib -lft -lreadline -L/opt/homebrew/opt/readline/lib
 SRC_DIR		=	./src
 SRCS		=	$(addprefix $(SRC_DIR)/, $(FILE))
 
@@ -110,8 +112,8 @@ clean			:
 fclean			: clean
 	rm -f $(NAME)
 	$(MAKE) -C ./src/lib fclean
-	@$(MAKE) -C -s ./test/unit fclean
-	@$(MAKE) -C -s ./test/integration fclean
+	@$(MAKE) -s -C ./test/unit fclean
+	@$(MAKE) -s -C ./test/integration fclean
 
 re				: fclean all
 

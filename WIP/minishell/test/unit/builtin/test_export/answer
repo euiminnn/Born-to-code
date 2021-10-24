@@ -65,7 +65,7 @@ B=20
 TEST4=(null)
 TEST5=
 ----- error_1 -----
-minishell: export: '1TEST=20': not a valid identifier
+minishell: export: `1TEST=20': not a valid identifier
 ->
 1
 =>
@@ -74,7 +74,7 @@ B=20
 TEST4=(null)
 TEST5=
 ----- error_2 -----
-minishell: export: '1TEST=20': not a valid identifier
+minishell: export: `TEST[=20': not a valid identifier
 ->
 1
 =>
@@ -83,7 +83,7 @@ B=20
 TEST4=(null)
 TEST5=
 ----- error_3 -----
-minishell: export: '=20': not a valid identifier
+minishell: export: `=20': not a valid identifier
 ->
 1
 =>
@@ -92,7 +92,7 @@ B=20
 TEST4=(null)
 TEST5=
 ----- error_4 -----
-minishell: export: '=': not a valid identifier
+minishell: export: `=': not a valid identifier
 ->
 1
 =>
