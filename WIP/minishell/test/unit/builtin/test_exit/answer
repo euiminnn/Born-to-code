@@ -10,7 +10,7 @@ exit
 exit
 ->
 214
------ mutli -----
+----- multi -----
 exit
 minishell: exit: too many arguments
 ->

@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 16:26:55 by echung            #+#    #+#             */
-/*   Updated: 2021/10/24 03:07:20 by echung           ###   ########.fr       */
+/*   Updated: 2021/10/26 17:31:08 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,14 @@ static char	*to_string(t_env_data *data)
 {
 	if (!data->value)
 		return (ft_strjoins((char *[3]){"declare -x ", data->key, "\n"}, 3));
-	return (ft_strjoins((char *[6]){"declare -x ", data->key, "=", "\"", data->value, "\"\n"}, 6));
+	return (ft_strjoins((char *[6]){"declare -x ", data->key, \
+				"=", "\"", data->value, "\"\n"}, 6));
 }
 
 void	builtin_export_only(int argc, char **argv, t_env *env, int fd)
 {
 	char	**envp;
-	int i;
+	int		i;
 
 	i = 0;
 	envp = to_string_env(env, to_string);
@@ -48,49 +49,60 @@ void	builtin_export_only(int argc, char **argv, t_env *env, int fd)
 static int	is_invalid_id(char *arg, char *key, char *value)
 {
 	(void) arg;
-	if (!key && value)
+	if (!key || key[0] == '\0')
 		return (1);
-//	if (key && !value && sign)
-//		return (1); //	-> 지금은 sign 관계없이 key만 있는 경우는 따로 처리하므로 sign이 있는지 확인하는 함수 필요 -> return 1 오류 아님....A= 는 env에 기록되네 ㅠ
+	if ('0' <= key[0] && key[0] <= '9')
+		return (1);
 	while (*key)
 	{
-		if (!('a' <= *key && *key <= 'z') || !('A' <= *key && *key <= 'Z'))
+		if (!(('a' <= *key && *key <= 'z') || ('A' <= *key && *key <= 'Z')
+				|| ('0' <= *key && *key <= '9')))
 			return (1);
 		key++;
 	}
 	return (0);
 }
 
+int	_builtin_export(int argc, char **argv, t_env *env)
+{
+	char	*key_and_value[2];
+	int		i;
+	int		flag;
+
+	i = 1;
+	flag = 0;
+	while (argv[i])
+	{
+		ft_get_key_value(argv[i], &key_and_value[0], &key_and_value[1]);
+		if (is_invalid_id(argv[i], key_and_value[0], key_and_value[1]))
+		{
+			printf("minishell: export: \`%s\': not a valid identifier\n", \
+					argv[i]);
+			flag = 1;
+		}
+		else
+		{
+			remove_env(env, key_and_value[0]);
+			insert_env(env, key_and_value[0], key_and_value[1]);
+		}
+		free(key_and_value[0]);
+		free(key_and_value[1]);
+		i++;
+	}
+	return (flag);
+}
+
 int	builtin_export(int argc, char **argv, t_env *env, int fd)
 {
-	char *key;
-	char *value;
-	int	i;
-	int flag;
+	char	*key;
+	char	*value;
+	int		flag;
 
-	if (argc == 1)	//export만 들어온 경우
+	if (argc == 1)
 	{
 		builtin_export_only(argc, argv, env, fd);
 		return (0);
 	}
-	i = 1;
-	while (argv[i])
-	{
-		ft_get_key_value(argv[i], &key, &value);
-		if (is_invalid_id(argv[i], key, value))
-		{
-			printf("minishell: export: \`%s\': not a valid identifier\n", argv[i]);
-			flag += 1;
-		}
-		else
-		{
-			insert_env(env, key, value);
-			free(key);
-			free(value);
-		}
-		i++;
-	}
-	if (flag)
-		return (1);
-	return (0);
+	flag = _builtin_export(argc, argv, env);
+	return (flag);
 }

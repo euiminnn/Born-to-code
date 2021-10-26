@@ -1,8 +1,8 @@
------ no path -----
-minishell: cd: usage: cd DIR
+----- invalid path -----
+minishell: cd: nonopath: No such file or directory
 ->
 1
------ invalid path -----
-minishell: cd: asdf: No such file or directory
+----- invalid home path -----
+minishell: cd: HOME not set
 ->
 1

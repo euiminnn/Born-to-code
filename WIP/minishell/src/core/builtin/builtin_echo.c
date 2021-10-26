@@ -6,17 +6,16 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 15:20:19 by echung            #+#    #+#             */
-/*   Updated: 2021/10/26 14:44:01 by echung           ###   ########.fr       */
+/*   Updated: 2021/10/26 16:30:40 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core/builtin.h"
 #include "core/env/env.h"
-//#include <stdio.h>
 
-int valid_n(char *n_option)
+static int	valid_n(char *n_option)
 {
-	char *ptr;
+	char	*ptr;
 
 	ptr = n_option;
 	if (*ptr == '-')
@@ -36,36 +35,33 @@ int valid_n(char *n_option)
 		return (FALSE);
 }
 
-int	string_start(int argc, char **argv)
+static int	string_start(int argc, char **argv)
 {
-	int i = 1;
+	int	i;
+
+	i = 1;
 	while (i < argc)
 	{
 		if (valid_n(argv[i]) == FALSE)
-			return i;	// -n 뒤의 arg의 index 반환
+			return (i);
 		i++;
 	}
-	return i;
+	return (i);
 }
 
-int	builtin_echo(int argc, char **argv, t_env *env, int fd)
+static void	_builtin_echo(int argc, char **argv, t_env *env, int fd)
 {
+	int	s;
+
 	(void)env;
-	int n_option;
-	int s;
-
-	n_option = 1;
 	s = string_start(argc, argv);
-
-	if (argc == 1)		//echo
-	{
-		write(fd, "\n", 1);
-		return (0);
-	}
-	if (valid_n(argv[1]) == FALSE)	//without n option
-		n_option = 0;
 	while (s < argc)
 	{
+		if (!*argv[s])
+		{
+			s++;
+			continue ;
+		}
 		if (s != argc - 1)
 		{
 			ft_putstr_fd(argv[s], fd);
@@ -75,6 +71,22 @@ int	builtin_echo(int argc, char **argv, t_env *env, int fd)
 			ft_putstr_fd(argv[s], fd);
 		s++;
 	}
+}
+
+int	builtin_echo(int argc, char **argv, t_env *env, int fd)
+{
+	int	n_option;
+
+	(void)env;
+	n_option = 1;
+	if (argc == 1)
+	{
+		write(fd, "\n", 1);
+		return (0);
+	}
+	_builtin_echo(argc, argv, env, fd);
+	if (valid_n(argv[1]) == FALSE)
+		n_option = 0;
 	if (!n_option)
 		ft_putstr_fd("\n", fd);
 	return (0);
