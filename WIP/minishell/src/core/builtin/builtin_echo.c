@@ -6,13 +6,13 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 15:20:19 by echung            #+#    #+#             */
-/*   Updated: 2021/10/19 18:57:37 by echung           ###   ########.fr       */
+/*   Updated: 2021/10/26 14:44:01 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core/builtin.h"
 #include "core/env/env.h"
-#include <stdio.h>
+//#include <stdio.h>
 
 int valid_n(char *n_option)
 {
