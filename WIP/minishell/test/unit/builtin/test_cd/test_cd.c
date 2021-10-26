@@ -37,9 +37,14 @@ int main(int ac, char **av, char **en)
 {
     env = init_env(en);
     
-    test("no path", "cd");
+    //test("no path", "cd");
     
     test("invalid path", "cd nonopath");
+
+	remove_env(env, "HOME");
+    test("invalid home path", "cd");
+
+
 
     return (0);
 }

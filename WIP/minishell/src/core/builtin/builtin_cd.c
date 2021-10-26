@@ -3,22 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: su <su@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/12 16:23:34 by echung            #+#    #+#             */
-/*   Updated: 2021/10/14 21:44:23 by echung           ###   ########.fr       */
+/*   Created: 2021/10/26 15:54:20 by echung            #+#    #+#             */
+/*   Updated: 2021/10/26 17:43:17 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core/builtin.h"
-#include <stdio.h>
+
+static int	move_to_home(char **argv, t_env *env)
+{
+	int		cd_ret;
+	char	*search_ret;
+
+	search_ret = search_env(env, "HOME");
+	if (!search_ret)
+	{
+		printf("minishell: cd: HOME not set\n");
+		return (1);
+	}
+	cd_ret = chdir(search_ret);
+	if (cd_ret == -1)
+	{
+		printf("minishell: cd: %s: No such file or directory\n", search_ret);
+		return (1);
+	}
+	return (0);
+}
 
 int	builtin_cd(int argc, char **argv, t_env *env, int fd)
 {
-	(void)env;
-	(void)argc;
+	int		cd_ret;
+	char	*search_ret;
+
+	(void)fd;
 	if (argc == 1)
-		ft_putstr_fd("You need a path!\n", fd);
-	chdir(argv[1]);
+		return (move_to_home(argv, env));
+	cd_ret = chdir(argv[1]);
+	if (cd_ret == -1)
+	{
+		printf("minishell: cd: %s: No such file or directory\n", argv[1]);
+		return (1);
+	}
 	return (0);
 }
