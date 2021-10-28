@@ -6,7 +6,7 @@
 #    By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/15 22:13:22 by echung            #+#    #+#              #
-#    Updated: 2021/10/23 14:43:36 by echung           ###   ########.fr        #
+#    Updated: 2021/10/28 14:38:45 by echung           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,11 +17,11 @@ MLX     = -L mlx -lmlx -framework OpenGL -framework AppKit
 SRCS	= srcs/main.c \
 		  srcs/game/init.c \
 		  srcs/game/end.c \
-		  srcs/map/is_valid_file_type.c \
-		  srcs/map/readfile.c \
-		  srcs/map/load_image.c \
-		  srcs/map/map.c \
-		  srcs/map/parse_map.c \
+		  srcs/map/validfiletype.c \
+		  srcs/map/read.c \
+		  srcs/map/load.c \
+		  srcs/map/render.c \
+		  srcs/map/validmap.c \
 		  srcs/utils/get_next_line.c \
 		  srcs/utils/lib.c \
 		  srcs/utils/libstr.c \
@@ -33,11 +33,19 @@ OBJS	= $(SRCS:%.c=%.o)
 
 .PHONY: all
 all: $(NAME)
-#	./so_long "map.ber"
+	./so_long "map.ber"
 
 $(NAME): $(OBJS)
 	make -C mlx	
 	gcc $(CFLAGS) $(MLX) -o $(NAME) $(OBJS)
+
+.PHONY: norm
+norm:
+	Norminette $(SRCS) ./include/*.h
+
+.PHONY: nm
+nm:
+	nm -u $(OBJS)
 
 .PHONY: clean
 clean:

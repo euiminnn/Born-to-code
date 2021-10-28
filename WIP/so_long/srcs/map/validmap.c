@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_map.c                                        :+:      :+:    :+:   */
+/*   validmap.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 22:37:06 by echung            #+#    #+#             */
-/*   Updated: 2021/10/21 20:36:49 by echung           ###   ########.fr       */
+/*   Updated: 2021/10/28 14:32:22 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ static int	is_samelength(char **arr, int row, int column)
 	return (1);
 }
 
-int	parse_map(t_global *g)
+int	is_valid_map(t_global *g)
 {
 	int		score;
 	t_iter	iter;

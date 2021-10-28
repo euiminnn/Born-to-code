@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 20:45:36 by echung            #+#    #+#             */
-/*   Updated: 2021/10/21 20:51:34 by echung           ###   ########.fr       */
+/*   Updated: 2021/10/28 14:27:31 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	init_global(char *map, t_global *g)
 	g->row = count_row(map);
 	if (g->row == -1)
 		return ;
-	g->arr = readfile(map, g->row);
+	g->arr = read_map(map, g->row);
 	if (g->arr == 0)
 		return ;
 	g->column = ft_strlen(g->arr[0]);

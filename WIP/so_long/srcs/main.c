@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/07 20:28:30 by echung            #+#    #+#             */
-/*   Updated: 2021/10/21 20:50:19 by echung           ###   ########.fr       */
+/*   Updated: 2021/10/28 14:23:12 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	ft_bzero(&g, sizeof(g));
-	if (!init_game(map, &g) || !parse_map(&g))
+	if (!init_game(map, &g) || !is_valid_map(&g))
 		printf("Error\n");
 	free_all(g.arr, g.row);
 	return (0);

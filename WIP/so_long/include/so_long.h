@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 00:43:58 by echung            #+#    #+#             */
-/*   Updated: 2021/10/23 14:58:34 by echung           ###   ########.fr       */
+/*   Updated: 2021/10/28 14:27:24 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,10 @@ void	load_image(t_global *g);
 void	init_map(t_global *g);
 void	edit_map(t_global *g);
 /* parse_map.c */
-int		parse_map(t_global *g);
+int		is_valid_map(t_global *g);
 /* readfile.c */
-char	**readfile(char *filename, int row);
-int		count_row(char *filename);
+char	**read_map(char *map, int row);
+int		count_row(char *map);
 
 /*		utils			*/
 /* get_next_line.c */
