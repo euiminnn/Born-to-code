@@ -3,30 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_pwd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: su <su@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/12 16:26:55 by echung            #+#    #+#             */
-/*   Updated: 2021/10/11 02:55:55 by su               ###   ########.fr       */
+/*   Created: 2021/10/26 17:43:28 by echung            #+#    #+#             */
+/*   Updated: 2021/10/26 17:43:31 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "core/builtin.h"
-
 #define PATH_MAX 1000
 
 int	builtin_pwd(int argc, char **argv, t_env *env, int fd)
 {
-	char cwd[PATH_MAX];
+	char	cwd[PATH_MAX];
 
 	(void)env;
 	(void)argc;
 	(void)argv;
-   	if (getcwd(cwd, sizeof(cwd)) != NULL)
+	if (getcwd(cwd, sizeof(cwd)) != NULL)
 	{
 		ft_putstr_fd(cwd, fd);
 		ft_putstr_fd("\n", fd);
 	}
 	return (0);
 }
-
