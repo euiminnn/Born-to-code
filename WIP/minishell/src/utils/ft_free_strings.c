@@ -2,7 +2,7 @@
 
 void	ft_free_strings(char **arr)
 {
-    int idx;
+	int	idx;
 
 	idx = -1;
 	while (arr[++idx])

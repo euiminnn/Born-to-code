@@ -8,7 +8,7 @@
  */
 int	input(char **line)
 {
-    char *str;
+	char	*str;
 
 	str = readline("euimini$ ");
 	if (str)
@@ -16,5 +16,5 @@ int	input(char **line)
 	else
 		return (ERROR);
 	add_history(str);
-    return(OK);
+	return (OK);
 }

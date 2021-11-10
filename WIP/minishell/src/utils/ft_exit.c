@@ -2,6 +2,7 @@
 
 void	ft_exit(int err)
 {
-	printf("%s\n", strerror(err));
+	ft_putstr_fd(strerror(err), 2);
+	ft_putstr_fd("\n", 2);
 	exit(err);
 }

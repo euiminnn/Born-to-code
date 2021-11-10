@@ -20,13 +20,15 @@ static int	move_to_home(char **argv, t_env *env)
 	search_ret = search_env(env, "HOME");
 	if (!search_ret)
 	{
-		printf("minishell: cd: HOME not set\n");
+		ft_putstr_fd("minishell: cd: HOME not set\n", 2);
 		return (1);
 	}
 	cd_ret = chdir(search_ret);
 	if (cd_ret == -1)
 	{
-		printf("minishell: cd: %s: No such file or directory\n", search_ret);
+		ft_putstr_fd("minishell: cd: ", 2);
+		ft_putstr_fd(search_ret, 2);
+		ft_putstr_fd("No such file or directory\n", 2);
 		return (1);
 	}
 	return (0);
@@ -43,7 +45,9 @@ int	builtin_cd(int argc, char **argv, t_env *env, int fd)
 	cd_ret = chdir(argv[1]);
 	if (cd_ret == -1)
 	{
-		printf("minishell: cd: %s: No such file or directory\n", argv[1]);
+		ft_putstr_fd("minishell: cd: ", 2);
+		ft_putstr_fd(argv[1], 2);
+		ft_putstr_fd(": No such file or directory\n", 2);
 		return (1);
 	}
 	return (0);

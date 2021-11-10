@@ -44,7 +44,7 @@ static int	ft_power(int n)
 	return (result);
 }
 
-char		*ft_itoa(int n)
+char	*ft_itoa(int n)
 {
 	char	*ascii;
 	char	*ascii_org;

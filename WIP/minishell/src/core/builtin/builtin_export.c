@@ -76,8 +76,9 @@ int	_builtin_export(int argc, char **argv, t_env *env)
 		ft_get_key_value(argv[i], &key_and_value[0], &key_and_value[1]);
 		if (is_invalid_id(argv[i], key_and_value[0], key_and_value[1]))
 		{
-			printf("minishell: export: \`%s\': not a valid identifier\n", \
-					argv[i]);
+			ft_putstr_fd("minishell: export: \`", 2);
+			ft_putstr_fd(argv[i], 2);
+			ft_putstr_fd("\': not a valid identifier\n", 2);
 			flag = 1;
 		}
 		else

@@ -8,15 +8,15 @@ static char	*to_string(t_env_data *data)
 	return (ft_strjoins((char *[3]){data->key, "=", "(null)"}, 3));
 }
 
-int    print_env(t_env *env)
+int	print_env(t_env *env)
 {
 	char	**envp;
 	int		idx;
-	
+
 	envp = to_string_env(env, to_string);
 	idx = -1;
 	while (envp[++idx])
 		printf("%s\n", envp[idx]);
 	ft_free_strings(envp);
-    return (OK);
+	return (OK);
 }

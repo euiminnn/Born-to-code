@@ -1,21 +1,26 @@
 #include "core/error.h"
+#include "lib/libft.h"
 
 void	ft_error_msg_multi_line()
 {
-	printf("minishell: multi line not allowed\n");
+	ft_putstr_fd("minishell: multi line not allowed\n", 2);
 }
 
 void	ft_error_msg_syntax()
 {
-	printf("minishell: syntax error\n");
+	ft_putstr_fd("minishell: syntax error\n", 2);
 }
 
 void	ft_error_msg_no_file(char *file)
 {
-	printf("minishell: %s: No such file or directory\n", file);
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(file, 2);
+	ft_putstr_fd("No such file or directory\n", 2);
 }
 
 void	ft_error_msg_not_command(char *command)
 {
-    printf("minishell: %s: command not found\n", command);
+    ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(command, 2);
+	ft_putstr_fd(": command not found\n", 2);
 }

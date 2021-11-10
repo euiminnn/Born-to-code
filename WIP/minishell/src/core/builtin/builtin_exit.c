@@ -38,12 +38,14 @@ int	builtin_exit(int argc, char **argv, t_env *env, int fd)
 		{
 			if (argc == 2)
 				exit(ft_atoi(argv[1]));
-			printf("minishell: exit: too many arguments\n");
+			ft_putstr_fd("minishell: exit: too many arguments\n", 2);
 			return (1);
 		}
 		else
 		{
-			printf("minishell: exit: %s: numeric argument required\n", argv[1]);
+			ft_putstr_fd("minishell: exit: ", 2);
+			ft_putstr_fd(argv[1], 2);
+			ft_putstr_fd(": numeric argument required\n", 2);
 			exit(255);
 		}
 	}

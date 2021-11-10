@@ -4,7 +4,7 @@ test() {
     local test_file=$1
 
     printf " ... "
-    ./a.out > output
+    ./a.out &> output
     if [ "$(diff output answer)" == "" ]; then
         printf "\033[32mpassed\e[0m\n"
     else

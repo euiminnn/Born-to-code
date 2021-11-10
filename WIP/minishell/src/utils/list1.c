@@ -3,7 +3,7 @@
 
 static t_list	*create_node(void *data)
 {
-	t_list *output;
+	t_list	*output;
 
 	output = malloc(sizeof(t_list));
 	if (!output)
@@ -13,15 +13,15 @@ static t_list	*create_node(void *data)
 	return (output);
 }
 
-t_list	*init_list()
+t_list	*init_list(void)
 {
 	return (create_node(NULL));
 }
 
-void    push_list(t_list *list, void *data)
+void	push_list(t_list *list, void *data)
 {
-	t_list *push_position;
-	t_list *new_node;
+	t_list	*push_position;
+	t_list	*new_node;
 
 	push_position = list;
 	new_node = create_node(data);
@@ -30,10 +30,10 @@ void    push_list(t_list *list, void *data)
 	push_position->next = new_node;
 }
 
-void    free_list(t_list *list, void (*del)(void *data))
+void	free_list(t_list *list, void (*del)(void *data))
 {
-	t_list *delete_position;
-	t_list *ptr;
+	t_list	*delete_position;
+	t_list	*ptr;
 
 	ptr = list->next;
 	while (ptr)

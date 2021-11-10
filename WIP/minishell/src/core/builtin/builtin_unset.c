@@ -27,8 +27,11 @@ static int	_builtin_unset(int argc, char **argv, t_env *env)
 		ft_get_key_value(argv[i], &key, &value);
 		if (value)
 		{
-			printf("minishell: unset: \`%s=%s\': not a valid identifier\n", \
-					key, value);
+			ft_putstr_fd("minishell: unset: \`", 2);
+			ft_putstr_fd(key, 2);
+			ft_putstr_fd("=", 2);
+			ft_putstr_fd(value, 2);
+			ft_putstr_fd("\': not a valid identifier\n", 2);
 			flag = 1;
 		}
 		else

@@ -1,6 +1,6 @@
 #include "utils/utils.h"
 
-char*	ft_strjoins(char **strs, int n)
+char	*ft_strjoins(char **strs, int n)
 {
 	char	*temp;
 	char	*output;

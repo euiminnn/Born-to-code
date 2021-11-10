@@ -45,7 +45,9 @@ static int	_builtin_env(int argc, char **argv, t_env *env, int fd)
 		ft_get_key_value(argv[i], &key_and_value[0], &key_and_value[1]);
 		if (!key_and_value[1])
 		{
-			printf("env: %s: No such file or directory\n", key_and_value[0]);
+			ft_putstr_fd("env: ", 2);
+			ft_putstr_fd(key_and_value[0], 2);
+			ft_putstr_fd(": No such file or directory\n", 2);
 			free(key_and_value[0]);
 			free(key_and_value[1]);
 			return (127);
