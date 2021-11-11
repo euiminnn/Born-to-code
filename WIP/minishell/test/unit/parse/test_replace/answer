@@ -76,3 +76,20 @@ echo aa'bbccdd
 echo aa"bbcc"dd
 ----- quote_mix_5 -----
 echo aaaa"bbcc"ddee
+----- tilde_normal -----
+/Users/euimin
+----- tilde_with_char_1 -----
+~abc
+----- tilde_with_char_2 -----
+abc~
+----- tilde_path_1 -----
+/Users/euimin/abc
+----- tilde_path_2 -----
+abc/~
+----- tilde_path_3 -----
+/Users/euimin///
+
+
+
+
+
