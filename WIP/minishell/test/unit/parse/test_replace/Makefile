@@ -20,14 +20,13 @@ all			:
 test		:
 	@printf "[UNIT_TEST] $(TEST_NAME)";
 	@gcc $(TEST_FILE).c -I../../../../include -lminishell -lft -L../../../../obj -L../../../../src/lib
-	@sed -i '' "80s|.*|${HOME}|g" answer 
-	@sed -i '' "86s|.*|${HOME}/abc|g" answer 
-	@sed -i '' "90s|.*|${HOME}///|g" answer
+	@sed -e "80s|.*|${HOME}|g" -e "86s|.*|${HOME}/abc|g" -e "90s|.*|${HOME}///|g" answer.original > answer
 	@unset TEST; ../../unit_test.sh $(TEST_FILE).c
 
 fclean		:
 	@rm -f ./a.out
 	@rm -f output
+	@rm -f answer
 
 re			: fclean all
 
