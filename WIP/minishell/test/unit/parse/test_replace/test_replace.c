@@ -66,10 +66,9 @@ int main(int ac, char **av, char **en)
     test("quote_mix_4", "echo \'aa\"bb\'c\'c\"dd\'");
     test("quote_mix_5", "echo aa\'aa\"bb\'c\'c\"dd\'ee");
 
-    test("tilde_normal", "~");
+    test("tilde_normal_1", "~");
     test("tilde_with_char_1", "~abc");
     test("tilde_with_char_2", "abc~");
-    test("tilde_path_0", "/Users/euimin");
     test("tilde_path_1", "~/abc");
     test("tilde_path_2", "abc/~");
     test("tilde_path_3", "~///");
