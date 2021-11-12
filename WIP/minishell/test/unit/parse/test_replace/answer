@@ -82,6 +82,8 @@ echo aaaa"bbcc"ddee
 ~abc
 ----- tilde_with_char_2 -----
 abc~
+----- tilde-path_0 -----
+$HOME
 ----- tilde_path_1 -----
 /Users/euimin/abc
 ----- tilde_path_2 -----

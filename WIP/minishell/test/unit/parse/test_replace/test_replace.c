@@ -69,6 +69,7 @@ int main(int ac, char **av, char **en)
     test("tilde_normal", "~");
     test("tilde_with_char_1", "~abc");
     test("tilde_with_char_2", "abc~");
+    test("tilde_path_0", "/Users/euimin");
     test("tilde_path_1", "~/abc");
     test("tilde_path_2", "abc/~");
     test("tilde_path_3", "~///");
