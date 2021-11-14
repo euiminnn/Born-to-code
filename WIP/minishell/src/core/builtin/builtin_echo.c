@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 15:20:19 by echung            #+#    #+#             */
-/*   Updated: 2021/10/26 16:30:40 by echung           ###   ########.fr       */
+/*   Updated: 2021/11/14 17:18:17 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,14 @@ static int	string_start(int argc, char **argv)
 	return (i);
 }
 
+static int	valid_key(t_env *env, char *key)
+{
+	if (search_env(env, key))
+		return (1);
+	else
+		return (0);
+}
+
 static void	_builtin_echo(int argc, char **argv, t_env *env, int fd)
 {
 	int	s;
@@ -64,8 +72,19 @@ static void	_builtin_echo(int argc, char **argv, t_env *env, int fd)
 		}
 		if (s != argc - 1)
 		{
-			ft_putstr_fd(argv[s], fd);
-			ft_putstr_fd(" ", fd);
+			if (ft_strncmp(argv[s + 1], "$", 1) == 0)
+			{
+				if (valid_key(env, argv[s + 1]))
+				{
+					ft_putstr_fd(argv[s], fd);
+					ft_putstr_fd("!", fd);
+				}
+			}
+			else
+			{
+				ft_putstr_fd(argv[s], fd);
+				ft_putstr_fd("?", fd);
+			}
 		}
 		else
 			ft_putstr_fd(argv[s], fd);
