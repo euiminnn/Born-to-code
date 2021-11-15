@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 15:20:19 by echung            #+#    #+#             */
-/*   Updated: 2021/11/14 17:18:17 by echung           ###   ########.fr       */
+/*   Updated: 2021/11/15 23:40:22 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ static void	_builtin_echo(int argc, char **argv, t_env *env, int fd)
 			}
 			else
 			{
+				printf("HERE: %s\n", argv[s]);
 				ft_putstr_fd(argv[s], fd);
 				ft_putstr_fd("?", fd);
 			}
