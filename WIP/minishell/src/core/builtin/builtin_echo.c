@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 15:20:19 by echung            #+#    #+#             */
-/*   Updated: 2021/11/15 23:40:22 by echung           ###   ########.fr       */
+/*   Updated: 2021/11/15 23:46:06 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,9 @@ static void	_builtin_echo(int argc, char **argv, t_env *env, int fd)
 
 	(void)env;
 	s = string_start(argc, argv);
+	printf("argv[0] = %s\n", argv[0]);
+	printf("argv[1] = %s\n", argv[1]);
+	printf("argv[2] = %s\n", argv[2]);
 	while (s < argc)
 	{
 		if (!*argv[s])
@@ -72,6 +75,7 @@ static void	_builtin_echo(int argc, char **argv, t_env *env, int fd)
 		}
 		if (s != argc - 1)
 		{
+			printf("s+1 = %s\n", argv[s+1]);
 			if (ft_strncmp(argv[s + 1], "$", 1) == 0)
 			{
 				if (valid_key(env, argv[s + 1]))
