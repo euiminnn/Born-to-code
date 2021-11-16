@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 15:20:19 by echung            #+#    #+#             */
-/*   Updated: 2021/11/15 23:46:06 by echung           ###   ########.fr       */
+/*   Updated: 2021/11/16 18:17:03 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,13 @@ static int	valid_key(t_env *env, char *key)
 		return (0);
 }
 
+/*
 static void	_builtin_echo(int argc, char **argv, t_env *env, int fd)
 {
 	int	s;
 
 	(void)env;
 	s = string_start(argc, argv);
-	printf("argv[0] = %s\n", argv[0]);
-	printf("argv[1] = %s\n", argv[1]);
-	printf("argv[2] = %s\n", argv[2]);
 	while (s < argc)
 	{
 		if (!*argv[s])
@@ -75,28 +73,43 @@ static void	_builtin_echo(int argc, char **argv, t_env *env, int fd)
 		}
 		if (s != argc - 1)
 		{
-			printf("s+1 = %s\n", argv[s+1]);
-			if (ft_strncmp(argv[s + 1], "$", 1) == 0)
-			{
-				if (valid_key(env, argv[s + 1]))
-				{
-					ft_putstr_fd(argv[s], fd);
-					ft_putstr_fd("!", fd);
-				}
-			}
-			else
-			{
-				printf("HERE: %s\n", argv[s]);
-				ft_putstr_fd(argv[s], fd);
-				ft_putstr_fd("?", fd);
-			}
+			ft_putstr_fd(argv[s], fd);
+			ft_putstr_fd(" ", fd);
 		}
 		else
 			ft_putstr_fd(argv[s], fd);
 		s++;
 	}
 }
+*/
+static void	_builtin_echo(int argc, char **argv, t_env *env, int fd)
+{
+	int	s;
 
+	(void)env;
+	s = string_start(argc, argv);
+	while (s < argc)
+	{
+		if (!*argv[s])
+		{
+			s++;
+			continue ;
+		}
+		if (s != argc - 1)
+		{
+			if (ft_strlen(argv[s+1]) > 0 || valid_key(env, argv[s+1]))
+			{
+				ft_putstr_fd(argv[s], fd);
+				ft_putstr_fd(" ", fd);
+			}
+			else
+				ft_putstr_fd(argv[s], fd);
+		}
+		else
+			ft_putstr_fd(argv[s], fd);
+		s++;
+	}
+}
 int	builtin_echo(int argc, char **argv, t_env *env, int fd)
 {
 	int	n_option;
