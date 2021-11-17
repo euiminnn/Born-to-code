@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   replace.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/17 22:43:54 by echung            #+#    #+#             */
+/*   Updated: 2021/11/17 22:43:55 by echung           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lib/libft.h"
 #include "core/parse/parse.h"
 #include "core/parse/token.h"
@@ -6,10 +18,10 @@
 
 #define BUFFER_SIZE 420000
 
-static int find_dallor(char **ptr, char **buf);
+static int	find_dallor(char **ptr, char **buf);
 static char	*find_key(char *str);
 static char	*find_key_from_env(char **key_start, char *key_end, t_env *env);
-static char *remove_quote(char *str);
+static char	*remove_quote(char *str);
 
 /**
  * $ 나올때 까지 돌기 ('')
@@ -23,7 +35,7 @@ static char *remove_quote(char *str);
  * @example abchelloycha asdfabc
  */
 
-void replace_env_in_token(t_token *token, t_env *env)
+void	replace_env_in_token(t_token *token, t_env *env)
 {
 	char	buf[BUFFER_SIZE];
 	char	*buf_ptr;
@@ -39,11 +51,11 @@ void replace_env_in_token(t_token *token, t_env *env)
 		if (str_ptr + 1 == key_last_ptr)
 		{
 			*buf_ptr++ = *str_ptr++;
-			continue;
+			continue ;
 		}
 		value = find_key_from_env(&str_ptr, key_last_ptr, env);
 		if (!value)
-			continue;
+			continue ;
 		ft_memcpy(buf_ptr, value, ft_strlen(value));
 		buf_ptr += ft_strlen(value);
 		free(value);
@@ -53,11 +65,11 @@ void replace_env_in_token(t_token *token, t_env *env)
 	token->value = remove_quote(buf);
 }
 
-static int find_dallor(char **ptr, char **buf)
+static int	find_dallor(char **ptr, char **buf)
 {
 	while (**ptr)
 	{
-		if(**ptr == '$')
+		if (**ptr == '$')
 			return (TRUE);
 		else if (**ptr == '\'')
 		{
@@ -70,7 +82,7 @@ static int find_dallor(char **ptr, char **buf)
 			*(*buf)++ = *(*ptr)++;
 			while (**ptr && **ptr != '\"')
 			{
-				if(**ptr == '$')
+				if (**ptr == '$')
 					return (TRUE);
 				*(*buf)++ = *(*ptr)++;
 			}
@@ -87,7 +99,7 @@ static char	*find_key(char *str)
 	char	*charset;
 
 	index = 1;
- 	while (str[index])
+	while (str[index])
 	{
 		charset = CHARSET_WITH_DIGIT;
 		if (index == 1)
@@ -95,7 +107,7 @@ static char	*find_key(char *str)
 		if (ft_strchr(charset, str[index]))
 			++index;
 		else
-			break;
+			break ;
 	}
 	return (&str[index]);
 }
@@ -125,7 +137,7 @@ static char	*find_key_from_env(char **key_start, char *key_end, t_env *env)
 	return (ret);
 }
 
-static char *remove_quote(char *str)
+static char	*remove_quote(char *str)
 {
 	char	buf[BUFFER_SIZE];
 	char	quote;

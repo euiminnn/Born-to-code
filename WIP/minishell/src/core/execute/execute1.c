@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   execute1.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/17 22:33:33 by echung            #+#    #+#             */
+/*   Updated: 2021/11/17 22:33:34 by echung           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "core/env/env.h"
 #include "minishell.h"
 #include "core/execute/execute.h"
@@ -10,7 +22,7 @@
 #define PIPE_IN 1
 #define PIPE_OUT 0
 
-static int	wait_cmds();
+static int	wait_cmds(void);
 
 /**
  * 커맨드로 프로세스를 만들기
@@ -21,7 +33,7 @@ static int	wait_cmds();
 
 int	execute_cmd(t_cmd *cmd, t_env *env, int fd_in, int fd_out)
 {
-	t_proc *proc;
+	t_proc	*proc;
 
 	proc = build_proc(cmd, env, fd_in, fd_out);
 	if (!proc)
@@ -109,7 +121,7 @@ static int	wait_cmds(int last_pid)
 
 void	execute(t_list *cmds, t_env *env)
 {
-	int count;
+	int	count;
 
 	signal(SIGINT, sigint_handler_in_execute);
 	signal(SIGQUIT, sigquit_handler_in_execute);

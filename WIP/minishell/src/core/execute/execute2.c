@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   execute2.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/17 22:33:51 by echung            #+#    #+#             */
+/*   Updated: 2021/11/17 22:33:56 by echung           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 
 #include "minishell.h"
@@ -56,7 +68,7 @@ static void	_execute_extern_proc(t_proc *proc)
 	char	*command;
 	char	**path;
 	int		idx;
-	
+
 	envp = to_string_env(proc->env, to_string_env_data);
 	if (proc->argc == 0)
 		exit(0);
@@ -68,7 +80,8 @@ static void	_execute_extern_proc(t_proc *proc)
 		path = ft_split(search_env(proc->env, "PATH"), ':');
 		while (path && path[++idx])
 		{
-			command = ft_strjoins((char *[3]){path[idx], "/", proc->argv[0]}, 3);
+			command = ft_strjoins((char *[3]) \
+			{path[idx], "/", proc->argv[0]}, 3);
 			execve(command, proc->argv, envp);
 			free(command);
 		}

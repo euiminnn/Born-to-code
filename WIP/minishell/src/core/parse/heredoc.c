@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   heredoc.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/17 22:43:18 by echung            #+#    #+#             */
+/*   Updated: 2021/11/17 22:43:20 by echung           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "utils/utils.h"
 #include "core/signal.h"
 #include "core/env/env.h"
@@ -12,8 +24,8 @@
 
 #define ERR_SIGNAL  1
 
-static int input_heredoc(char *limiter);
-static void				sigint_handler_in_heredoc(int sig);
+static int	input_heredoc(char *limiter);
+static void	sigint_handler_in_heredoc(int sig);
 
 /**
  * 토큰을 돌면서,
@@ -21,27 +33,27 @@ static void				sigint_handler_in_heredoc(int sig);
  * fd 값을 받아오고, 문자열로 저장한다.
  */
 
-int  heredoc(t_list *tokens)
+int	heredoc(t_list *tokens)
 {
-    int     fd;
-    t_list  *node;
-    t_token *token;
+	int		fd;
+	t_list	*node;
+	t_token	*token;
 
-    node = tokens->next;
-    while (node)
-    {
-        token = node->data;
-        node = node->next;
-        if (token->type == T_LEFT_DOUBLE_REDIR)
-        {
-            fd = input_heredoc(token->value);
-            if (fd == -1)
-                return (ERROR);
-            free(token->value);
-            token->value = ft_itoa(fd);
-        }
-    }
-    return (OK);
+	node = tokens->next;
+	while (node)
+	{
+		token = node->data;
+		node = node->next;
+		if (token->type == T_LEFT_DOUBLE_REDIR)
+		{
+			fd = input_heredoc(token->value);
+			if (fd == -1)
+				return (ERROR);
+			free(token->value);
+			token->value = ft_itoa(fd);
+		}
+	}
+	return (OK);
 }
 
 /**
@@ -52,33 +64,33 @@ int  heredoc(t_list *tokens)
  * 실제로 시그널을 받은경우는 -1을 반환합니다.
  */
 
-static int input_heredoc(char *limiter)
+static int	input_heredoc(char *limiter)
 {
-    int status;
-    int pipe_fd[2];
-    char    *line;
+	int		status;
+	int		pipe_fd[2];
+	char	*line;
 
-    pipe(pipe_fd);
-    signal(SIGINT, SIG_IGN);
-    if (fork() == 0)
-    {
-        ft_close(pipe_fd[PIPE_OUT]);
-        signal(SIGINT, sigint_handler_in_heredoc);
-        while (1)
-        {
-            line = readline("> ");
-            if (!line || ft_strncmp(line, limiter, LIMITER_MAX) == 0)
-                exit(0);
-            write(pipe_fd[PIPE_IN], line, ft_strlen(line));
-            write(pipe_fd[PIPE_IN], "\n", 1);
-        }
-    }
-    ft_close(pipe_fd[PIPE_IN]);
-    wait(&status);
-    signal(SIGINT, sigint_handler);
-    if (WEXITSTATUS(status) == ERR_SIGNAL)
-        return (-1);
-    return (pipe_fd[PIPE_OUT]);
+	pipe(pipe_fd);
+	signal(SIGINT, SIG_IGN);
+	if (fork() == 0)
+	{
+		ft_close(pipe_fd[PIPE_OUT]);
+		signal(SIGINT, sigint_handler_in_heredoc);
+		while (1)
+		{
+			line = readline("> ");
+			if (!line || ft_strncmp(line, limiter, LIMITER_MAX) == 0)
+				exit(0);
+			write(pipe_fd[PIPE_IN], line, ft_strlen(line));
+			write(pipe_fd[PIPE_IN], "\n", 1);
+		}
+	}
+	ft_close(pipe_fd[PIPE_IN]);
+	wait(&status);
+	signal(SIGINT, sigint_handler);
+	if (WEXITSTATUS(status) == ERR_SIGNAL)
+		return (-1);
+	return (pipe_fd[PIPE_OUT]);
 }
 
 /**
@@ -88,8 +100,8 @@ static int input_heredoc(char *limiter)
  *
  * @param sig 시그널
  */
-static void				sigint_handler_in_heredoc(int sig)
+static void	sigint_handler_in_heredoc(int sig)
 {
-    printf("\b\b  \b\b\n");
-    exit(ERR_SIGNAL);
+	printf("\b\b  \b\b\n");
+	exit(ERR_SIGNAL);
 }

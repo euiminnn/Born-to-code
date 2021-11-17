@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/17 22:43:46 by echung            #+#    #+#             */
+/*   Updated: 2021/11/17 22:43:49 by echung           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "core/env/env.h"
 #include "core/parse/parse.h"
 #include "utils/utils.h"
@@ -28,25 +40,27 @@
  * ]
  */
 
-void parser(t_list *tokens, t_list *cmds) {
-    t_list *node;
-    t_cmd *cmd;
-    t_token *token;
+void	parser(t_list *tokens, t_list *cmds)
+{
+	t_list	*node;
+	t_cmd	*cmd;
+	t_token	*token;
 
-    node = tokens->next;
-    while (node)
-    {
-        cmd = init_cmd();
-        while (node && ((t_token *)node->data)->type != T_PIPE)
-        {
-            token = dup_token((t_token *)node->data);
-            if (token->type == T_ARG)
-                push_list(cmd->args, (void *)token);
-            else
-                push_list(cmd->rd, (void *)token);
-            node = node->next;
-        }
-        push_list(cmds, (void *)cmd);
-        if (node) node = node->next;
-    }
+	node = tokens->next;
+	while (node)
+	{
+		cmd = init_cmd();
+		while (node && ((t_token *)node->data)->type != T_PIPE)
+		{
+			token = dup_token((t_token *)node->data);
+			if (token->type == T_ARG)
+				push_list(cmd->args, (void *)token);
+			else
+				push_list(cmd->rd, (void *)token);
+			node = node->next;
+		}
+		push_list(cmds, (void *)cmd);
+		if (node)
+			node = node->next;
+	}
 }
