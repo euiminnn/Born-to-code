@@ -22,7 +22,7 @@
 #define PIPE_IN 1
 #define PIPE_OUT 0
 
-static int	wait_cmds(void);
+static int	wait_cmds(int last_pid);
 
 /**
  * 커맨드로 프로세스를 만들기

@@ -87,7 +87,7 @@ static size_t	ft_startidx(char const *s, char c, size_t index)
 	return (0);
 }
 
-static char		**ft_freeall(char **s, int index)
+static char	**ft_freeall(char **s, int index)
 {
 	while (index >= 0)
 	{
@@ -98,7 +98,7 @@ static char		**ft_freeall(char **s, int index)
 	return (0);
 }
 
-char			**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
 	char	**splitted;
 	size_t	start;
