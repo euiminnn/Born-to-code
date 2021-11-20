@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   signal.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ycha <ycha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/20 22:29:41 by ycha              #+#    #+#             */
+/*   Updated: 2021/11/20 22:29:54 by ycha             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "core/signal.h"
 
-t_signal_handler	*sig_handler()
+t_signal_handler	*sig_handler(void)
 {
 	static t_signal_handler	signals;
 
