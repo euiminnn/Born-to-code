@@ -65,7 +65,6 @@ char	*_ft_itoa(int n, int n_org, int len)
 		*ascii = n / ft_power(len - 1) + '0';
 		n = n - ((*ascii++ - '0') * ft_power(len-- - 1));
 	}
-	free(ascii);
 	return (ascii_org);
 }
 

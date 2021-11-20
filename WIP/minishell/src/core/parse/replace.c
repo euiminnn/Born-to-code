@@ -18,7 +18,7 @@
 
 #define BUFFER_SIZE 420000
 
-static int	find_dallor(char **ptr, char **buf);
+static int	find_dollar(char **ptr, char **buf);
 static char	*find_key(char *str);
 static char	*find_key_from_env(char **key_start, char *key_end, t_env *env);
 static char	*remove_quote(char *str);
@@ -45,7 +45,7 @@ void	replace_env_in_token(t_token *token, t_env *env)
 
 	buf_ptr = buf;
 	str_ptr = token->value;
-	while (find_dallor(&str_ptr, &buf_ptr))
+	while (find_dollar(&str_ptr, &buf_ptr))
 	{
 		key_last_ptr = find_key(str_ptr);
 		if (str_ptr + 1 == key_last_ptr)
@@ -65,7 +65,7 @@ void	replace_env_in_token(t_token *token, t_env *env)
 	token->value = remove_quote(buf);
 }
 
-static int	find_dallor(char **ptr, char **buf)
+static int	find_dollar(char **ptr, char **buf)
 {
 	while (**ptr)
 	{
