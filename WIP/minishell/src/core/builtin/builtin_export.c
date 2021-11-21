@@ -63,6 +63,13 @@ static int	is_invalid_id(char *arg, char *key, char *value)
 	return (0);
 }
 
+void	error_message_for_export(char **argv)
+{
+	ft_putstr_fd("minishell: export: \`", 2);
+	ft_putstr_fd(*argv, 2);
+	ft_putstr_fd("\': not a valid identifier\n", 2);
+}
+
 int	_builtin_export(int argc, char **argv, t_env *env)
 {
 	char	*key_and_value[2];
@@ -76,9 +83,7 @@ int	_builtin_export(int argc, char **argv, t_env *env)
 		ft_get_key_value(argv[i], &key_and_value[0], &key_and_value[1]);
 		if (is_invalid_id(argv[i], key_and_value[0], key_and_value[1]))
 		{
-			ft_putstr_fd("minishell: export: \`", 2);
-			ft_putstr_fd(argv[i], 2);
-			ft_putstr_fd("\': not a valid identifier\n", 2);
+			error_message_for_export(&argv[i]);
 			flag = 1;
 		}
 		else

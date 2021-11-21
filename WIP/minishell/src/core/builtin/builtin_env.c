@@ -34,6 +34,13 @@ static void	print_env_list(int argc, char **argv, t_env *env, int fd)
 	}
 }
 
+void	error_message_for_env(char **key_and_value)
+{
+	ft_putstr_fd("env: ", 2);
+	ft_putstr_fd(key_and_value[0], 2);
+	ft_putstr_fd(": No such file or directory\n", 2);
+}
+
 static int	_builtin_env(int argc, char **argv, t_env *env, int fd)
 {
 	char	*key_and_value[2];
@@ -45,9 +52,7 @@ static int	_builtin_env(int argc, char **argv, t_env *env, int fd)
 		ft_get_key_value(argv[i], &key_and_value[0], &key_and_value[1]);
 		if (!key_and_value[1])
 		{
-			ft_putstr_fd("env: ", 2);
-			ft_putstr_fd(key_and_value[0], 2);
-			ft_putstr_fd(": No such file or directory\n", 2);
+			error_message_for_env(&key_and_value[0]);
 			free(key_and_value[0]);
 			free(key_and_value[1]);
 			return (127);

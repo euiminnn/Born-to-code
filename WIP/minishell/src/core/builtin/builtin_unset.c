@@ -13,6 +13,15 @@
 #include "core/builtin.h"
 #include "core/env/env.h"
 
+void	error_message_for_unset(char **key, char **value)
+{			
+	ft_putstr_fd("minishell: unset: \`", 2);
+	ft_putstr_fd(key, 2);
+	ft_putstr_fd("=", 2);
+	ft_putstr_fd(value, 2);
+	ft_putstr_fd("\': not a valid identifier\n", 2);
+}
+
 static int	_builtin_unset(int argc, char **argv, t_env *env)
 {
 	char	*key;
@@ -27,11 +36,7 @@ static int	_builtin_unset(int argc, char **argv, t_env *env)
 		ft_get_key_value(argv[i], &key, &value);
 		if (value)
 		{
-			ft_putstr_fd("minishell: unset: \`", 2);
-			ft_putstr_fd(key, 2);
-			ft_putstr_fd("=", 2);
-			ft_putstr_fd(value, 2);
-			ft_putstr_fd("\': not a valid identifier\n", 2);
+			error_message_for_unset(&key, &value);
 			flag = 1;
 		}
 		else
