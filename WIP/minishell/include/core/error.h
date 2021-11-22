@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ycha <ycha@gmail.com>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 17:03:08 by echung            #+#    #+#             */
-/*   Updated: 2021/10/21 17:04:32 by echung           ###   ########.fr       */
+/*   Updated: 2021/11/22 21:32:53 by ycha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,9 @@ void	ft_error_msg_multi_line(void);
 void	ft_error_msg_syntax(void);
 void	ft_error_msg_no_file(char *file);
 void	ft_error_msg_not_command(char *command);
+
+void	error_message_for_env(char *key);
+void	error_message_for_unset(char *key, char *value);
+void	error_message_for_export(char *argv);
 
 #endif

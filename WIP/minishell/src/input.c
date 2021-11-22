@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ycha <ycha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: ycha <ycha@gmail.com>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 22:21:41 by ycha              #+#    #+#             */
-/*   Updated: 2021/11/20 22:21:42 by ycha             ###   ########.fr       */
+/*   Updated: 2021/11/22 22:07:05 by ycha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	input(char **line)
 {
 	char	*str;
 
-	str = readline("euimini$ ");
+	str = readline("🍑euimini🍑$ ");
 	if (str)
 		*line = str;
 	else

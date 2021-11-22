@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ycha <ycha@gmail.com>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 16:26:55 by echung            #+#    #+#             */
-/*   Updated: 2021/10/26 17:31:08 by echung           ###   ########.fr       */
+/*   Updated: 2021/11/22 21:34:52 by ycha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core/builtin.h"
 #include "core/env/env.h"
+#include "core/error.h"
 
 /**
  *
@@ -63,12 +64,6 @@ static int	is_invalid_id(char *arg, char *key, char *value)
 	return (0);
 }
 
-void	error_message_for_export(char **argv)
-{
-	ft_putstr_fd("minishell: export: \`", 2);
-	ft_putstr_fd(*argv, 2);
-	ft_putstr_fd("\': not a valid identifier\n", 2);
-}
 
 int	_builtin_export(int argc, char **argv, t_env *env)
 {
@@ -83,7 +78,7 @@ int	_builtin_export(int argc, char **argv, t_env *env)
 		ft_get_key_value(argv[i], &key_and_value[0], &key_and_value[1]);
 		if (is_invalid_id(argv[i], key_and_value[0], key_and_value[1]))
 		{
-			error_message_for_export(&argv[i]);
+			error_message_for_export(argv[i]);
 			flag = 1;
 		}
 		else

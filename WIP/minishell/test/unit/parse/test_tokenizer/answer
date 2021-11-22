@@ -1,108 +1,108 @@
 ----- normal_1 -----
 [
-    echo
-    hello
+    `echo`
+    `hello`
 ]
 ->
 1
 ----- normal_2 -----
 [
-    echo
-    hello
-    world
+    `echo`
+    `hello`
+    `world`
 ]
 ->
 1
 ----- normal_3 -----
 [
-    echo
-    -n
-    $USER
+    `echo`
+    `-n`
+    `$USER`
 ]
 ->
 1
 ----- quote_1 -----
 [
-    echo
-    "$USER"
+    `echo`
+    `"$USER"`
 ]
 ->
 1
 ----- quote_2 -----
 [
-    "echo"
-    hello
+    `"echo"`
+    `hello`
 ]
 ->
 1
 ----- quote_3 -----
 [
-    "e"c'h'o
-    hello
+    `"e"c'h'o`
+    `hello`
 ]
 ->
 1
 ----- quote_4 -----
 [
-    "e"'ch'o
-    hello
+    `"e"'ch'o`
+    `hello`
 ]
 ->
 1
 ----- quote_5 -----
 [
-    ""''o
-    hello
+    `""''o`
+    `hello`
 ]
 ->
 1
 ----- quote_6 -----
 [
-    echo
-    "hello"
-    world
+    `echo`
+    `"hello"`
+    `world`
 ]
 ->
 1
 ----- quote_7 -----
 [
-    echo
-    "hello world"
+    `echo`
+    `"hello world"`
 ]
 ->
 1
 ----- quote_8 -----
 [
-    echo
-    "hello world"hello
+    `echo`
+    `"hello world"hello`
 ]
 ->
 1
 ----- quote_9 -----
 [
-    echo
-    ""hello
+    `echo`
+    `""hello`
 ]
 ->
 1
 ----- quote_10 -----
 [
-    echo
-    ""
+    `echo`
+    `""`
 ]
 ->
 1
 ----- quote_11 -----
 [
-    echo
-    abc""
+    `echo`
+    `abc""`
 ]
 ->
 1
 ----- quote_mix_1 -----
 [
-    echo
-    "aa'bb'cc"
+    `echo`
+    `"aa'bb'cc"`
 ]
 ->
 1
@@ -113,8 +113,8 @@ minishell: multi line not allowed
 errno 42
 ----- quote_mix_3 -----
 [
-    echo
-    "aa'bb"cc'dd'
+    `echo`
+    `"aa'bb"cc'dd'`
 ]
 ->
 1
@@ -125,15 +125,15 @@ minishell: multi line not allowed
 errno 42
 ----- quote_mix_5 -----
 [
-    echo
-    'aa"bb'c'c"dd'
+    `echo`
+    `'aa"bb'c'c"dd'`
 ]
 ->
 1
 ----- quote_mix_6 -----
 [
-    echo
-    aa'aa"bb'c'c"dd'ee
+    `echo`
+    `aa'aa"bb'c'c"dd'ee`
 ]
 ->
 1
@@ -169,51 +169,51 @@ minishell: multi line not allowed
 errno 42
 ----- complicate_1 -----
 [
-    echo
-    hello
-    >
-    a
-    |
-    cat
-    a
-    |
-    cat
-    <
-    a
-    >
-    b
+    `echo`
+    `hello`
+    `>`
+    `a`
+    `|`
+    `cat`
+    `a`
+    `|`
+    `cat`
+    `<`
+    `a`
+    `>`
+    `b`
 ]
 ->
 1
 ----- complicate_2 -----
 [
-    echo
-    hello
-    >
-    a
-    |
-    cat
-    a
-    |
-    cat
-    <
-    a
-    >
-    b
+    `echo`
+    `hello`
+    `>`
+    `a`
+    `|`
+    `cat`
+    `a`
+    `|`
+    `cat`
+    `<`
+    `a`
+    `>`
+    `b`
 ]
 ->
 1
 ----- complicate_3 -----
 [
-    echo
-    hel'lo>a|c'at
-    a
-    |
-    cat
-    <
-    a
-    >
-    b
+    `echo`
+    `hel'lo>a|c'at`
+    `a`
+    `|`
+    `cat`
+    `<`
+    `a`
+    `>`
+    `b`
 ]
 ->
 1

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_echo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ycha <ycha@gmail.com>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 15:20:19 by echung            #+#    #+#             */
-/*   Updated: 2021/11/16 18:17:03 by echung           ###   ########.fr       */
+/*   Updated: 2021/11/22 22:30:29 by ycha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static int	valid_key(t_env *env, char *key)
 		return (0);
 }
 
-/*
+
 static void	_builtin_echo(int argc, char **argv, t_env *env, int fd)
 {
 	int	s;
@@ -81,7 +81,8 @@ static void	_builtin_echo(int argc, char **argv, t_env *env, int fd)
 		s++;
 	}
 }
-*/
+
+/*
 static void	_builtin_echo(int argc, char **argv, t_env *env, int fd)
 {
 	int	s;
@@ -110,6 +111,7 @@ static void	_builtin_echo(int argc, char **argv, t_env *env, int fd)
 		s++;
 	}
 }
+*/
 int	builtin_echo(int argc, char **argv, t_env *env, int fd)
 {
 	int	n_option;

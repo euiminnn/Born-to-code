@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ycha <ycha@student.42.fr>                  +#+  +:+       +#+         #
+#    By: ycha <ycha@gmail.com>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/02 00:01:37 by ycha              #+#    #+#              #
-#    Updated: 2021/11/10 18:16:58 by echung           ###   ########.fr        #
+#    Updated: 2021/11/22 21:29:05 by ycha             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,8 @@ FILE		=	\
 				core/env/env_data.c \
 				core/env/env1.c \
 				core/env/env2.c \
-				core/error/error_msg.c \
+				core/error/error_msg1.c \
+				core/error/error_msg2.c \
 				core/error/error.c \
 				core/execute/execute1.c \
 				core/execute/execute2.c \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ycha <ycha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: ycha <ycha@gmail.com>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 22:21:29 by ycha              #+#    #+#             */
-/*   Updated: 2021/11/20 22:21:30 by ycha             ###   ########.fr       */
+/*   Updated: 2021/11/22 22:29:41 by ycha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	print_strings(char **arr, int depth)
 	while (arr[++idx])
 	{
 		print_space(depth + 1);
-		printf("%s\n", arr[idx]);
+		printf("`%s`\n", arr[idx]);
 	}
 	print_space(depth);
 	printf("]\n");

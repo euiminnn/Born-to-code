@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ycha <ycha@gmail.com>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 22:43:46 by echung            #+#    #+#             */
-/*   Updated: 2021/11/17 22:43:49 by echung           ###   ########.fr       */
+/*   Updated: 2021/11/22 22:26:10 by ycha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	parser(t_list *tokens, t_list *cmds)
 			token = dup_token((t_token *)node->data);
 			if (token->type == T_ARG)
 				push_list(cmd->args, (void *)token);
-			else
+			else if (token->type != T_DELETE)
 				push_list(cmd->rd, (void *)token);
 			node = node->next;
 		}

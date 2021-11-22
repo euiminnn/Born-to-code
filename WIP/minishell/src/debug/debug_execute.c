@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug_execute.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ycha <ycha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: ycha <ycha@gmail.com>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 22:21:21 by ycha              #+#    #+#             */
-/*   Updated: 2021/11/20 22:21:22 by ycha             ###   ########.fr       */
+/*   Updated: 2021/11/22 21:37:10 by ycha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,5 @@ int	print_proc_type(int type)
 		printf("P_BUILTIN_PWD\n");
 	if (type == P_BUILTIN_UNSET)
 		printf("P_BUILTIN_UNSET\n");
+	return (OK);
 }

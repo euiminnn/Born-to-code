@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ycha <ycha@gmail.com>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 17:15:40 by echung            #+#    #+#             */
-/*   Updated: 2021/10/21 17:15:42 by echung           ###   ########.fr       */
+/*   Updated: 2021/11/22 22:21:28 by ycha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@
 # define T_RIGHT_REDIR 3
 # define T_LEFT_DOUBLE_REDIR 4
 # define T_RIGHT_DOUBLE_REDIR 5
-# define T_PIPE 6
+# define T_DELETE 6
+# define T_PIPE 7
 
 /**
  * 입력받은 한줄을 파싱하여, 환경변수를 적용하여, 커맨드들을 구합니다.

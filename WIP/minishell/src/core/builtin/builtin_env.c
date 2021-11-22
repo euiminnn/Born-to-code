@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ycha <ycha@gmail.com>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 16:33:40 by echung            #+#    #+#             */
-/*   Updated: 2021/10/26 17:07:13 by echung           ###   ########.fr       */
+/*   Updated: 2021/11/22 21:35:05 by ycha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core/builtin.h"
 #include "core/env/env.h"
+#include "core/error.h"
 
 static char	*to_string(t_env_data *data)
 {
@@ -34,13 +35,6 @@ static void	print_env_list(int argc, char **argv, t_env *env, int fd)
 	}
 }
 
-void	error_message_for_env(char **key_and_value)
-{
-	ft_putstr_fd("env: ", 2);
-	ft_putstr_fd(key_and_value[0], 2);
-	ft_putstr_fd(": No such file or directory\n", 2);
-}
-
 static int	_builtin_env(int argc, char **argv, t_env *env, int fd)
 {
 	char	*key_and_value[2];
@@ -52,7 +46,7 @@ static int	_builtin_env(int argc, char **argv, t_env *env, int fd)
 		ft_get_key_value(argv[i], &key_and_value[0], &key_and_value[1]);
 		if (!key_and_value[1])
 		{
-			error_message_for_env(&key_and_value[0]);
+			error_message_for_env(key_and_value[0]);
 			free(key_and_value[0]);
 			free(key_and_value[1]);
 			return (127);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replace.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ycha <ycha@gmail.com>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 22:43:54 by echung            #+#    #+#             */
-/*   Updated: 2021/11/17 22:43:55 by echung           ###   ########.fr       */
+/*   Updated: 2021/11/22 22:43:34 by ycha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ void	replace_env_in_token(t_token *token, t_env *env)
 		free(value);
 	}
 	*buf_ptr = '\0';
+	if (*buf == '\0' && *token->value != '\0')
+		token->type = T_DELETE;
 	free(token->value);
 	token->value = remove_quote(buf);
 }
