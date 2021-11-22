@@ -36,6 +36,16 @@ $
 100hello
 ----- env_14 -----
 100yeah
+----- env_num_1 -----
+
+----- env_num_2 -----
+
+----- env_num_3 -----
+0
+----- env_num_4 -----
+23
+----- env_num_5 -----
+yeah
 ----- env_quote_1 -----
 yeah
 ----- env_quote_2 -----
@@ -44,6 +54,8 @@ $TEST
 'yeah'
 ----- env_quote_4 -----
 "$TEST"
+----- env_quote_5 -----
+yeah$TEST
 ----- quote_1 -----
 echo hello
 ----- quote_2 -----
@@ -76,7 +88,7 @@ echo aa'bbccdd
 echo aa"bbcc"dd
 ----- quote_mix_5 -----
 echo aaaa"bbcc"ddee
------ tilde_normal -----
+----- tilde_normal_1 -----
 
 ----- tilde_with_char_1 -----
 ~abc
