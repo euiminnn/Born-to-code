@@ -6,7 +6,7 @@
 /*   By: ycha <ycha@gmail.com>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 15:20:19 by echung            #+#    #+#             */
-/*   Updated: 2021/11/22 22:30:29 by ycha             ###   ########.fr       */
+/*   Updated: 2021/11/23 19:20:51 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,6 @@ static void	_builtin_echo(int argc, char **argv, t_env *env, int fd)
 	s = string_start(argc, argv);
 	while (s < argc)
 	{
-		if (!*argv[s])
-		{
-			s++;
-			continue ;
-		}
 		if (s != argc - 1)
 		{
 			ft_putstr_fd(argv[s], fd);

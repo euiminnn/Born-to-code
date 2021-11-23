@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 16:26:55 by echung            #+#    #+#             */
-/*   Updated: 2021/10/26 17:16:05 by echung           ###   ########.fr       */
+/*   Updated: 2021/11/23 19:33:01 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	is_num(char *str)
 int	builtin_exit(int argc, char **argv, t_env *env, int fd)
 {
 	(void)env;
-	ft_putstr_fd("exit\n", fd);
+	ft_putstr_fd("exit\n", 0);
 	if (argc == 1)
 		exit(g_exit_code);
 	if (argc > 1)
