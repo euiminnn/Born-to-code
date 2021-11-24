@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   ft_is_valid_key.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ycha <ycha@gmail.com>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/17 22:30:16 by echung            #+#    #+#             */
-/*   Updated: 2021/11/24 19:38:11 by ycha             ###   ########.fr       */
+/*   Created: 2021/11/18 23:36:57 by echung            #+#    #+#             */
+/*   Updated: 2021/11/24 19:55:25 by ycha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "core/error.h"
+#include "utils/utils.h"
+#include "define.h"
 
-int	ft_error(int type, char *data)
+int	ft_is_valid_key(char *key)
 {
-	g_exit_code = type;
-	if (type == ERR_PARSE_SYNTAX)
-		ft_error_msg_syntax();
-	if (type == ERR_EXECUTE_NO_FILE)
-		ft_error_msg_no_file(data);
-	if (type == ERR_EXECTUE_NOT_COMMAND)
-		ft_error_msg_not_command(data);
-	return (ERROR);
+	if (!key || key[0] == '\0')
+		return (0);
+	if ('0' <= key[0] && key[0] <= '9')
+		return (0);
+	while (*key)
+	{
+		if (!(('a' <= *key && *key <= 'z') || ('A' <= *key && *key <= 'Z')
+				|| ('0' <= *key && *key <= '9') || (*key == '_')))
+			return (0);
+		key++;
+	}
+	return (1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ycha <ycha@gmail.com>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 22:43:25 by echung            #+#    #+#             */
-/*   Updated: 2021/11/17 22:43:26 by echung           ###   ########.fr       */
+/*   Updated: 2021/11/24 19:36:28 by ycha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,11 @@ int	lexer(char **strings, t_list *tokens)
 	{
 		type = get_type(strings[index]);
 		if (type == T_PIPE)
+		{
+			if (index - 1 < 0 || get_type(strings[index - 1]) != T_ARG)
+				return (ft_error(ERR_PARSE_SYNTAX, 0));
 			value = 0;
+		}
 		else if (type == T_ARG)
 			value = ft_strdup(strings[index]);
 		else if (strings[index + 1] && get_type(strings[index + 1]) == T_ARG)

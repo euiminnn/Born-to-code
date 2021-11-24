@@ -6,7 +6,7 @@
 /*   By: ycha <ycha@gmail.com>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 22:21:29 by ycha              #+#    #+#             */
-/*   Updated: 2021/11/22 22:29:41 by ycha             ###   ########.fr       */
+/*   Updated: 2021/11/24 19:20:32 by ycha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,5 @@ int	print_error_type(int errtype)
 {
 	if (errtype == ERR_PARSE_SYNTAX)
 		printf("ERR_PARSE_SYNTAX\n");
-	if (errtype == ERR_PARSE_MULTI_LINE)
-		printf("ERR_PARSE_MULTI_LINE\n");
 	return (OK);
 }

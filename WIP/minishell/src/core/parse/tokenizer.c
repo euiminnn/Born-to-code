@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ycha <ycha@gmail.com>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 22:44:09 by echung            #+#    #+#             */
-/*   Updated: 2021/11/17 22:44:10 by echung           ###   ########.fr       */
+/*   Updated: 2021/11/24 19:18:26 by ycha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 #define BUFFER_SIZE 42000
 #define SPACE 1
 
-static int	convert_quote(char *line);
-static int	convert_symbol(char *line, char *buf);
+static void	convert_quote(char *line);
+static void	convert_symbol(char *line, char *buf);
 static void	revert_quote(char *str);
 
 /**
@@ -30,23 +30,20 @@ static void	revert_quote(char *str);
  * @example strings : ['echo', 'hello', '>', 'abc', '|', 'cat', '<<' ,'abc']
  */
 
-int	tokenizer(char *line, char ***strings)
+void	tokenizer(char *line, char ***strings)
 {
 	char	buf[BUFFER_SIZE];
 	int		idx;
 
-	if (!convert_quote(line))
-		return (ft_error(ERR_PARSE_MULTI_LINE, 0));
-	if (!convert_symbol(line, buf))
-		return (ft_error(ERR_PARSE_SYNTAX, 0));
+	convert_quote(line);
+	convert_symbol(line, buf);
 	idx = -1;
 	*strings = ft_split(buf, ' ');
 	while ((*strings)[++idx])
 		revert_quote((*strings)[idx]);
-	return (OK);
 }
 
-static int	convert_quote(char *str)
+static void	convert_quote(char *str)
 {
 	char	quote;
 
@@ -58,20 +55,15 @@ static int	convert_quote(char *str)
 			str++;
 			while (*str && *str != quote)
 				*str++ *= -1;
-			if (!*str)
-				return (ERROR);
 		}
 		str++;
 	}
-	return (OK);
 }
 
-static int	convert_symbol(char *line, char *buf)
+static void	convert_symbol(char *line, char *buf)
 {
 	while (*line)
 	{
-		if (ft_strchr("();\\", *line))
-			return (ERROR);
 		if (ft_strchr("<>|", *line))
 		{
 			*buf++ = ' ';
@@ -86,7 +78,6 @@ static int	convert_symbol(char *line, char *buf)
 		++line;
 	}
 	*buf = '\0';
-	return (OK);
 }
 
 static void	revert_quote(char *str)

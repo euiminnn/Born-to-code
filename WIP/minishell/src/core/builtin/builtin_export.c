@@ -6,13 +6,14 @@
 /*   By: ycha <ycha@gmail.com>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 16:26:55 by echung            #+#    #+#             */
-/*   Updated: 2021/11/22 21:34:52 by ycha             ###   ########.fr       */
+/*   Updated: 2021/11/24 19:35:55 by ycha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core/builtin.h"
 #include "core/env/env.h"
 #include "core/error.h"
+#include "utils/utils.h"
 
 /**
  *
@@ -47,27 +48,10 @@ void	builtin_export_only(int argc, char **argv, t_env *env, int fd)
 	}
 }
 
-static int	is_invalid_id(char *arg, char *key, char *value)
-{
-	(void) arg;
-	if (!key || key[0] == '\0')
-		return (1);
-	if ('0' <= key[0] && key[0] <= '9')
-		return (1);
-	while (*key)
-	{
-		if (!(('a' <= *key && *key <= 'z') || ('A' <= *key && *key <= 'Z')
-				|| ('0' <= *key && *key <= '9')))
-			return (1);
-		key++;
-	}
-	return (0);
-}
-
-
 int	_builtin_export(int argc, char **argv, t_env *env)
 {
-	char	*key_and_value[2];
+	char	*key;
+	char	*value;
 	int		i;
 	int		flag;
 
@@ -75,19 +59,19 @@ int	_builtin_export(int argc, char **argv, t_env *env)
 	flag = 0;
 	while (argv[i])
 	{
-		ft_get_key_value(argv[i], &key_and_value[0], &key_and_value[1]);
-		if (is_invalid_id(argv[i], key_and_value[0], key_and_value[1]))
+		ft_get_key_and_value(argv[i], &key, &value);
+		if (ft_is_valid_key(key))
+		{
+			remove_env(env, key);
+			insert_env(env, key, value);
+		}
+		else
 		{
 			error_message_for_export(argv[i]);
 			flag = 1;
 		}
-		else
-		{
-			remove_env(env, key_and_value[0]);
-			insert_env(env, key_and_value[0], key_and_value[1]);
-		}
-		free(key_and_value[0]);
-		free(key_and_value[1]);
+		free(key);
+		free(value);
 		i++;
 	}
 	return (flag);

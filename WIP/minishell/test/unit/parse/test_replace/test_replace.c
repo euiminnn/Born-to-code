@@ -66,7 +66,7 @@ int main(int ac, char **av, char **en)
     test("quote_9", "echo \"\"hello");
     test("quote_10", "echo\"\"");
     test("quote_11", "echo abc\"\"");
-
+    
     test("quote_mix_1", "\"\'\"\'hello\'");
     test("quote_mix_2", "echo \"aa\'bb\'cc\"");
     test("quote_mix_3", "echo \"aa\'bb\"cc\'dd\'");
@@ -79,6 +79,12 @@ int main(int ac, char **av, char **en)
     test("tilde_path_1", "~/abc");
     test("tilde_path_2", "abc/~");
     test("tilde_path_3", "~///");
+
+    test("unclosed_quote_1", "echo \"hello");
+    test("unclosed_quote_2", "echo hello\"");
+    test("unclosed_quote_3", "echo hello\"hello");
+    test("unclosed_quote_4", "echo \"hello\"\'");
+    test("unclosed_quote_5", "echo \'hello\'\"");
 
     return (0);
 }

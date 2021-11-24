@@ -43,7 +43,7 @@ static int	_builtin_env(int argc, char **argv, t_env *env, int fd)
 	i = 0;
 	while (argv[++i])
 	{
-		ft_get_key_value(argv[i], &key_and_value[0], &key_and_value[1]);
+		ft_get_key_and_value(argv[i], &key_and_value[0], &key_and_value[1]);
 		if (!key_and_value[1])
 		{
 			error_message_for_env(key_and_value[0]);

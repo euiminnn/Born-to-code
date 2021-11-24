@@ -6,7 +6,7 @@
 #    By: ycha <ycha@gmail.com>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/02 00:01:37 by ycha              #+#    #+#              #
-#    Updated: 2021/11/24 16:32:23 by ycha             ###   ########.fr        #
+#    Updated: 2021/11/24 19:36:06 by ycha             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,7 @@ FILE		=	\
 				utils/ft_dup.c \
 				utils/ft_exit.c \
 				utils/ft_get_key_value.c \
+				utils/ft_is_valid_key.c \
 				utils/ft_free_strings.c \
 				utils/ft_strjoins.c \
 				utils/list1.c \
@@ -111,9 +112,9 @@ fclean			: clean
 	rm -f $(NAME)
 	$(MAKE) -C ./src/lib fclean
 	@$(MAKE) -s -C ./test/unit fclean
-	rm ./test/minishell_tester/minishell
-	rm ./test/minishell_tester/test
-	rm ./test/minishell_tester/tofix/*
+	rm -f ./test/minishell_tester/minishell
+	rm -f ./test/minishell_tester/test
+	rm -f ./test/minishell_tester/tofix/tofix_tests.txt
 
 re				: fclean all
 

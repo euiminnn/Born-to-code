@@ -107,10 +107,12 @@
 ->
 1
 ----- quote_mix_2 -----
-minishell: multi line not allowed
+[
+    `echo`
+    `"aa'bb"cc'`
+]
 ->
-0
-errno 42
+1
 ----- quote_mix_3 -----
 [
     `echo`
@@ -119,10 +121,12 @@ errno 42
 ->
 1
 ----- quote_mix_4 -----
-minishell: multi line not allowed
+[
+    `echo`
+    `'aa"bb'cc"dd'`
+]
 ->
-0
-errno 42
+1
 ----- quote_mix_5 -----
 [
     `echo`
@@ -138,35 +142,46 @@ errno 42
 ->
 1
 ----- error_1 -----
-minishell: multi line not allowed
+[
+    `echo`
+    `"hello`
+]
 ->
-0
-errno 42
+1
 ----- error_1_1 -----
-minishell: multi line not allowed
+[
+    `echo`
+    `'hello`
+]
 ->
-0
-errno 42
+1
 ----- error_2 -----
-minishell: syntax error
+[
+    `echo`
+    `hello;`
+]
 ->
-0
-errno 258
+1
 ----- error_2_1 -----
-minishell: syntax error
+[
+    `echo`
+    `hello\`
+]
 ->
-0
-errno 258
+1
 ----- error_2_2 -----
-minishell: syntax error
+[
+    `;echo`
+    `hello\`
+]
 ->
-0
-errno 258
+1
 ----- error_2_3 -----
-minishell: multi line not allowed
+[
+    `;ec'ho hello\`
+]
 ->
-0
-errno 42
+1
 ----- complicate_1 -----
 [
     `echo`

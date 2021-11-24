@@ -6,7 +6,7 @@
 /*   By: ycha <ycha@gmail.com>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 22:43:54 by echung            #+#    #+#             */
-/*   Updated: 2021/11/22 22:43:34 by ycha             ###   ########.fr       */
+/*   Updated: 2021/11/24 19:07:16 by ycha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ static char	*find_key_from_env(char *key_start, char *key_end, t_env *env)
 static char	*remove_quote(char *str)
 {
 	char	buf[BUFFER_SIZE];
-	char	quote;
+	char	*quote_start;
 	int		idx;
 
 	idx = 0;
@@ -157,10 +157,14 @@ static char	*remove_quote(char *str)
 	{
 		if (*str == '\'' || *str == '\"')
 		{
-			quote = *str;
+			quote_start = str;
 			str++;
-			while (*str && *str != quote)
-				buf[idx++] = *str++;
+			while (*str && *str != *quote_start)
+				str++;
+			if (*str == *quote_start)
+				quote_start++;
+			ft_memcpy(buf + idx, quote_start, str - (quote_start));
+			idx += (str - (quote_start));
 			if (*str)
 				str++;
 		}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ycha <ycha@gmail.com>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 17:32:39 by echung            #+#    #+#             */
-/*   Updated: 2021/10/21 17:38:27 by echung           ###   ########.fr       */
+/*   Updated: 2021/11/24 19:37:39 by ycha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,15 @@ void	ft_free_strings(char **arr);
  * @param key key 문자열 포인터 (free 필요)
  * @param value value 문자열 포인터 (없을경우 NULL, free 필요)
  */
-void	ft_get_key_value(char *str, char **key, char **value);
+void	ft_get_key_and_value(char *str, char **key, char **value);
+
+/**
+ * 유효한 key 인지 확인합니다.
+ * 
+ * @param key key 문자열
+ * @return 유효한 key 이면 OK, 유효하지 않으면 ERROR
+ */
+int	ft_is_valid_key(char *key);
 
 /**
  * 문자열 여러개를 합칩니다.

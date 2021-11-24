@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_key_value.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ycha <ycha@gmail.com>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 23:36:57 by echung            #+#    #+#             */
-/*   Updated: 2021/11/18 23:36:58 by echung           ###   ########.fr       */
+/*   Updated: 2021/11/24 19:06:55 by ycha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils/utils.h"
 
-void	ft_get_key_value(char *line, char **key, char **value)
+void	ft_get_key_and_value(char *line, char **key, char **value)
 {
 	char	*equal;
 

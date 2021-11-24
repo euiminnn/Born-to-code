@@ -6,7 +6,7 @@
 /*   By: ycha <ycha@gmail.com>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 17:03:08 by echung            #+#    #+#             */
-/*   Updated: 2021/11/22 21:32:53 by ycha             ###   ########.fr       */
+/*   Updated: 2021/11/24 19:33:04 by ycha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include "define.h"
 
 # define ERR_PARSE_SYNTAX 258
-# define ERR_PARSE_MULTI_LINE 42
 # define ERR_EXECUTE_NO_FILE 1
 # define ERR_EXECTUE_NOT_COMMAND 127
 
@@ -31,7 +30,6 @@
  *
  * @note 에러 종류에 따라 data 에 들어가는 내용은 다음과 같습니다.
  * @e ERR_PARSE_SYNTAX : NULL
- * @e ERR_PARSE_MULTI_LINE : NULL
  * @e ERR_EXECUTE_NO_FILE : 파일/디렉토리 이름
  * @e ERR_EXECTUE_NOT_COMMAND : 명령어
  *
@@ -44,7 +42,6 @@ int		ft_error(int type, char *data);
  *
  * @note ft_error 호출함
  */
-void	ft_error_msg_multi_line(void);
 void	ft_error_msg_syntax(void);
 void	ft_error_msg_no_file(char *file);
 void	ft_error_msg_not_command(char *command);

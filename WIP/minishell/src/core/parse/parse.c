@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ycha <ycha@gmail.com>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 22:43:34 by echung            #+#    #+#             */
-/*   Updated: 2021/11/17 22:43:35 by echung           ###   ########.fr       */
+/*   Updated: 2021/11/24 19:24:52 by ycha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,7 @@ int	parse(char *line, t_env *env, t_list *cmds)
 	char	**strings;
 
 	tokens = init_list();
-	if (!tokenizer(line, &strings))
-		return (ERROR);
+	tokenizer(line, &strings);
 	DEBUG && printf("-------tokenizer-------\n");
 	DEBUG && print_strings(strings, 0);
 	if (!lexer(strings, tokens))

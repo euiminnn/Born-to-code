@@ -100,4 +100,13 @@ abc~
 abc/~
 ----- tilde_path_3 -----
 
-
+----- unclosed_quote_1 -----
+echo "hello
+----- unclosed_quote_2 -----
+echo hello"
+----- unclosed_quote_3 -----
+echo hello"hello
+----- unclosed_quote_4 -----
+echo hello'
+----- unclosed_quote_5 -----
+echo hello"

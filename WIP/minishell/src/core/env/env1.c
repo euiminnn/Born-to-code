@@ -27,7 +27,7 @@ t_env	*init_env(char **envp)
 	idx = -1;
 	while (envp[++idx])
 	{
-		ft_get_key_value(envp[idx], &key, &value);
+		ft_get_key_and_value(envp[idx], &key, &value);
 		insert_env(ret, key, value);
 		free(key);
 		free(value);

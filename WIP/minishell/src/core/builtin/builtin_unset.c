@@ -6,7 +6,7 @@
 /*   By: ycha <ycha@gmail.com>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 16:26:55 by echung            #+#    #+#             */
-/*   Updated: 2021/11/22 21:35:21 by ycha             ###   ########.fr       */
+/*   Updated: 2021/11/24 20:02:11 by ycha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,16 @@ static int	_builtin_unset(int argc, char **argv, t_env *env)
 	flag = 0;
 	while (argv[i])
 	{
-		ft_get_key_value(argv[i], &key, &value);
-		if (value)
+		ft_get_key_and_value(argv[i], &key, &value);
+		if (!ft_is_valid_key(key) || value)
 		{
 			error_message_for_unset(key, value);
 			flag = 1;
 		}
 		else
-		{
 			remove_env(env, key);
-			free(key);
-		}
+		free(key);
+		free(value);
 		i++;
 	}
 	return (flag);

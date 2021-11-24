@@ -6,7 +6,7 @@
 /*   By: ycha <ycha@gmail.com>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 17:15:40 by echung            #+#    #+#             */
-/*   Updated: 2021/11/22 22:21:28 by ycha             ###   ########.fr       */
+/*   Updated: 2021/11/24 19:20:26 by ycha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@
  * @param cmds 반환할 커맨드 리스트 (init_list 필요)
  * @return 성공하면 OK, 오류가 있으면 ERROR
  *
- * @p ERR_PARSE_MULTI_LINE
  * @p ERR_PARSE_SYNTAX
  */
 int		parse(char *line, t_env *env, t_list *cmds);
@@ -52,15 +51,12 @@ int		parse(char *line, t_env *env, t_list *cmds);
  * @param strings 반환 받을 문자열들
  * @return 성공하면 OK, 실패하면 ERROR
  *
- * @p ERR_PARSE_MULTI_LINE 따움표가 쌍이 맞지 않는 경우
- * @p ERR_PARSE_SYNTAX 허락되지 않은 문자가 있는 경우
- *
  * @example line : "echo hello > abc | cat << abc"
  * @example strings : ["echo", "hello", ">", "abc", "|", "cat", "<<" ,"abc"]
  *
  * @test parse/test_tokenizer
  */
-int		tokenizer(char *line, char ***strings);
+void	tokenizer(char *line, char ***strings);
 
 /**
  * 문자열들의 타입을 결정하고, 토큰 리스트에 추가합니다.

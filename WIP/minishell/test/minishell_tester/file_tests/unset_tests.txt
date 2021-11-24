@@ -9,14 +9,12 @@ unset PATH
 unset PATH 
 unset PATH 
 unset TES\\\\T
-unset TES;T
 unset TES.T
 unset TES+T
 unset TES=T
 unset TES}T
 unset TES{T
 unset TES-T
-unset -TEST
 unset _TEST
 unset TES_T
 unset TEST_

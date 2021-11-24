@@ -1,22 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_msg.c                                        :+:      :+:    :+:   */
+/*   error_msg1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ycha <ycha@gmail.com>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 22:30:30 by echung            #+#    #+#             */
-/*   Updated: 2021/11/22 21:28:46 by ycha             ###   ########.fr       */
+/*   Updated: 2021/11/24 19:20:44 by ycha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core/error.h"
 #include "lib/libft.h"
-
-void	ft_error_msg_multi_line(void)
-{
-	ft_putstr_fd("minishell: multi line not allowed\n", 2);
-}
 
 void	ft_error_msg_syntax(void)
 {
