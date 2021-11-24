@@ -6,7 +6,7 @@
 #    By: thallard <thallard@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/13 20:16:23 by thallard          #+#    #+#              #
-#    Updated: 2021/11/10 18:44:30 by echung           ###   ########.fr        #
+#    Updated: 2021/11/24 16:42:55 by ycha             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,8 @@ YELLOW='\033[0;33m'
 
 # ----------------------- MODIFY THESE VARIABLES ----------------------------
 # Please modify this variable if your Makefile or your minishell executable is not found
-PATH_Makefile=../../../
-PATH_executable=../../../
+PATH_Makefile=../../
+PATH_executable=../../
 
 # Variables
 i=1

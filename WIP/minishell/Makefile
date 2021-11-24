@@ -6,7 +6,7 @@
 #    By: ycha <ycha@gmail.com>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/02 00:01:37 by ycha              #+#    #+#              #
-#    Updated: 2021/11/22 21:29:05 by ycha             ###   ########.fr        #
+#    Updated: 2021/11/24 16:32:23 by ycha             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -96,8 +96,8 @@ debug			:
 	@$(MAKE) re DEBUG=1
 
 test			:
-	@$(MAKE) -s -C ./test/unit
-	@$(MAKE) -s -C ./test/integration
+	@$(MAKE) -s -C ./test/unit 0> /dev/null
+	cd ./test/minishell_tester && bash test.sh
 
 show			:
 	@printf "SRCS : $(SRCS)"
@@ -111,7 +111,9 @@ fclean			: clean
 	rm -f $(NAME)
 	$(MAKE) -C ./src/lib fclean
 	@$(MAKE) -s -C ./test/unit fclean
-	@$(MAKE) -s -C ./test/integration fclean
+	rm ./test/minishell_tester/minishell
+	rm ./test/minishell_tester/test
+	rm ./test/minishell_tester/tofix/*
 
 re				: fclean all
 
