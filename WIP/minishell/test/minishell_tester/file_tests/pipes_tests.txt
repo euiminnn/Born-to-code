@@ -1,5 +1,4 @@
 - Pipes part : For next tests, you will need : \\\033[0;33mall built-in, redirections (normal and stderror) and semicolons (;).
-env | grep "_="
 env | grep "SHLVL"
 echo oui | cat -e
 echo oui | echo non | echo something | grep oui

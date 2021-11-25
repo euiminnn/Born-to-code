@@ -6,7 +6,7 @@
 /*   By: ycha <ycha@gmail.com>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 02:51:17 by ycha              #+#    #+#             */
-/*   Updated: 2021/11/25 21:27:33 by ycha             ###   ########.fr       */
+/*   Updated: 2021/11/26 01:56:52 by ycha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,8 @@ void	insert_env(t_env *env, char *key, char *value);
  * @param env 환경 변수 구조체
  * @param key 변경할 key 값
  * @param value 변경될 value 값
- * @return key를 못찾으면 ERROR, 성공시 OK
- *
- * @test env/test_change
  */
-int		change_env(t_env *env, char *key, char *value);
+void	replace_env(t_env *env, char *key, char *value);
 
 /**
  * 환경 변수에서 key값을 삭제합니다.

@@ -3,17 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ycha <ycha@student.42seoul.kr>             +#+  +:+       +#+         #
+#    By: ycha <ycha@gmail.com>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/02 00:01:37 by ycha              #+#    #+#              #
-#    Updated: 2021/10/24 19:13:48 by ycha             ###   ########.fr        #
+#    Updated: 2021/11/26 01:57:14 by ycha             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 TESTS		=	\
 				parse/test_replace \
 				parse/test_tokenizer \
-				env/test_change \
 				env/test_insert \
 				env/test_remove \
 				env/test_search \

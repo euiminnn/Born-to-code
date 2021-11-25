@@ -3,19 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ycha <ycha@gmail.com>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 15:54:20 by echung            #+#    #+#             */
-/*   Updated: 2021/10/26 17:43:17 by echung           ###   ########.fr       */
+/*   Updated: 2021/11/26 01:55:19 by ycha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core/builtin.h"
+#define PATH_MAX 1000
 
 static int	move_to_home(char **argv, t_env *env)
 {
 	int		cd_ret;
 	char	*search_ret;
+	char	cwd[PATH_MAX];
 
 	search_ret = search_env(env, "HOME");
 	if (!search_ret)
@@ -23,6 +25,8 @@ static int	move_to_home(char **argv, t_env *env)
 		ft_putstr_fd("minishell: cd: HOME not set\n", 2);
 		return (1);
 	}
+	if (getcwd(cwd, sizeof(cwd)) != NULL)
+		replace_env(env, "OLDPWD", cwd);
 	cd_ret = chdir(search_ret);
 	if (cd_ret == -1)
 	{
@@ -31,6 +35,8 @@ static int	move_to_home(char **argv, t_env *env)
 		ft_putstr_fd("No such file or directory\n", 2);
 		return (1);
 	}
+	if (getcwd(cwd, sizeof(cwd)) != NULL)
+		replace_env(env, "PWD", cwd);
 	return (0);
 }
 
@@ -38,10 +44,14 @@ int	builtin_cd(int argc, char **argv, t_env *env, int fd)
 {
 	int		cd_ret;
 	char	*search_ret;
+	char	cwd[PATH_MAX];
+
 
 	(void)fd;
 	if (argc == 1)
 		return (move_to_home(argv, env));
+	if (getcwd(cwd, sizeof(cwd)) != NULL)
+		replace_env(env, "OLDPWD", cwd);
 	cd_ret = chdir(argv[1]);
 	if (cd_ret == -1)
 	{
@@ -50,5 +60,7 @@ int	builtin_cd(int argc, char **argv, t_env *env, int fd)
 		ft_putstr_fd(": No such file or directory\n", 2);
 		return (1);
 	}
+	if (getcwd(cwd, sizeof(cwd)) != NULL)
+		replace_env(env, "PWD", cwd);
 	return (0);
 }

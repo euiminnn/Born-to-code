@@ -6,7 +6,7 @@
 /*   By: ycha <ycha@gmail.com>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 16:26:55 by echung            #+#    #+#             */
-/*   Updated: 2021/11/24 19:35:55 by ycha             ###   ########.fr       */
+/*   Updated: 2021/11/26 01:54:31 by ycha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,7 @@ int	_builtin_export(int argc, char **argv, t_env *env)
 	{
 		ft_get_key_and_value(argv[i], &key, &value);
 		if (ft_is_valid_key(key))
-		{
-			remove_env(env, key);
-			insert_env(env, key, value);
-		}
+			replace_env(env, key, value);
 		else
 		{
 			error_message_for_export(argv[i]);

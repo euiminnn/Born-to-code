@@ -6,7 +6,7 @@
 /*   By: ycha <ycha@gmail.com>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 17:49:09 by echung            #+#    #+#             */
-/*   Updated: 2021/11/25 21:21:15 by ycha             ###   ########.fr       */
+/*   Updated: 2021/11/26 02:03:22 by ycha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_env	*init_env(char **envp)
 	char	*key;
 	char	*value;
 	int		idx;
-	int		shlvl;
+	char	*shlvl;
 
 	ret = init_list();
 	idx = -1;
@@ -33,9 +33,10 @@ t_env	*init_env(char **envp)
 		free(key);
 		free(value);
 	}
-	shlvl = ft_atoi(search_env(ret, "SHLVL")) + 1;
-	remove_env(ret, "SHLVL");
-	insert_env(ret, "SHLVL", ft_itoa(shlvl));
+	replace_env(ret, "OLDPWD", 0);
+	shlvl = ft_itoa(ft_atoi(search_env(ret, "SHLVL")) + 1);
+	replace_env(ret, "SHLVL", shlvl);
+	free(shlvl);
 	return (ret);
 }
 
@@ -67,16 +68,8 @@ char	*search_env(t_env *env, char *key)
 	return (data->value);
 }
 
-int	change_env(t_env *env, char *key, char *value)
+void	replace_env(t_env *env, char *key, char *value)
 {
-	t_env		*node;
-	t_env_data	*data;
-
-	node = search_env_node(env, key);
-	if (!node)
-		return (ERROR);
-	data = node->data;
-	free(data->value);
-	data->value = ft_strdup(value);
-	return (OK);
+	remove_env(env, key);
+	insert_env(env, key, value);
 }
