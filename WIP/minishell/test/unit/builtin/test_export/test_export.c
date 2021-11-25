@@ -39,10 +39,10 @@ void test(char *test_name, char *line)
 int main(int ac, char **av, char **en)
 {
     char **envp = ft_split(
-        "A=10\n" 
+        "A=10\n"
         "B=20",
         '\n');
-    env = init_env(envp);
+    env = init_mock_env(envp);
 
     test("print", "export");
 
@@ -50,13 +50,13 @@ int main(int ac, char **av, char **en)
     test("add_2", "export test=yoyo=yaya");
 
     test("override_1", "export TEST=20");
-    
+
     free_env(env);
-    env = init_env(envp);
+    env = init_mock_env(envp);
     test("add_multi_1", "export TEST2=10 TEST3=10"); // 해도 되고 안해도 되고.. ->했어요
 
     free_env(env);
-    env = init_env(envp);
+    env = init_mock_env(envp);
     test("novalue_1", "export TEST4");
     test("novalue_2", "export TEST5=");
 	test("novalue_print", "export");

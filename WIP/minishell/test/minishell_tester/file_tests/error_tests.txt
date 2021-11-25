@@ -19,7 +19,6 @@ cat wouaf wouaf
 <<
 /Users
  
-.
 ..
 /
 \\\

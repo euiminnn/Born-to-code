@@ -1,5 +1,6 @@
 #include "core/builtin.h"
 #include "debug/debug_utils.h"
+#include "debug/debug_env.h"
 
 t_env *env;
 
@@ -35,10 +36,10 @@ void test(char *test_name, char *line)
 
 int main(int ac, char **av, char **en)
 {
-    env = init_env(en);
-    
+    env = init_mock_env(en);
+
     //test("no path", "cd");
-    
+
     test("invalid path", "cd nonopath");
 
 	remove_env(env, "HOME");

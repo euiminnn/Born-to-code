@@ -7,7 +7,7 @@ t_env *env;
 void test(char *test_name, char *key)
 {
     int ret;
-    
+
     printf("----- %s -----\n", test_name);
 
     ret = remove_env(env, key);
@@ -28,7 +28,7 @@ int main(int ac, char **av, char **en)
         "aaa\n"
         "bbb=10\n"
         , '\n');
-    env = init_env(envp);
+    env = init_mock_env(envp);
 
     test("del CCC", "CCC");
 

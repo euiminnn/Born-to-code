@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug_utils.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ycha <ycha@gmail.com>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 17:19:22 by echung            #+#    #+#             */
-/*   Updated: 2021/10/21 17:19:23 by echung           ###   ########.fr       */
+/*   Updated: 2021/11/25 20:45:22 by ycha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,5 @@ void	print_space(int depth);
  *
  */
 int		print_strings(char **arr, int depth);
-
-/**
- * 에러 종류 이름을 출력합니다.
- *
- * @param errtype 에러 종류
- */
-int		print_error_type(int errtype);
 
 #endif

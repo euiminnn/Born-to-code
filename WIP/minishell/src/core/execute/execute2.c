@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   execute2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ycha <ycha@gmail.com>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 22:33:51 by echung            #+#    #+#             */
-/*   Updated: 2021/11/17 22:33:56 by echung           ###   ########.fr       */
+/*   Updated: 2021/11/25 21:02:07 by ycha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include <dirent.h>
 
 #include "minishell.h"
 #include "core/signal.h"
@@ -20,7 +21,7 @@
 #include "core/error.h"
 #include "debug/debug_execute.h"
 
-static void	_execute_extern_proc(t_proc *proc);
+static int	_execute_extern_proc(t_proc *proc);
 static void	wait_process(t_proc *proc);
 
 void	execute_builtin_proc(t_proc *pc)
@@ -56,36 +57,43 @@ void	execute_extern_proc(t_proc *proc)
 		signal(SIGQUIT, sig_handler()->sigquit);
 		ft_dup(proc->fd_in, STDIN_FILENO);
 		ft_dup(proc->fd_out, STDOUT_FILENO);
-		_execute_extern_proc(proc);
-		exit(ERR_EXECTUE_NOT_COMMAND);
+		exit(_execute_extern_proc(proc));
 	}
 	wait_process(proc);
 }
 
-static void	_execute_extern_proc(t_proc *proc)
+static int	_execute_extern_proc(t_proc *proc)
 {
 	char	**envp;
 	char	*command;
 	char	**path;
 	int		idx;
+	DIR		*dirp;
 
 	envp = to_string_env(proc->env, to_string_env_data);
 	if (proc->argc == 0)
 		exit(0);
 	if (ft_strchr(proc->argv[0], '/'))
-		execve(proc->argv[0], proc->argv, envp);
-	else
 	{
-		idx = -1;
-		path = ft_split(search_env(proc->env, "PATH"), ':');
-		while (path && path[++idx])
+		dirp = opendir(proc->argv[0]);
+		if (dirp)
 		{
-			command = ft_strjoins((char *[3]) \
-			{path[idx], "/", proc->argv[0]}, 3);
-			execve(command, proc->argv, envp);
-			free(command);
+			closedir(dirp);
+			return (ERR_EXECTUE_COMMAND_IS_DIRECTORY);
 		}
+		execve(proc->argv[0], proc->argv, envp);
+		return (ERR_EXECTUE_COMMAND_NO_FILE);
 	}
+	idx = -1;
+	path = ft_split(search_env(proc->env, "PATH"), ':');
+	while (path && path[++idx])
+	{
+		command = ft_strjoins((char *[3]) \
+		{path[idx], "/", proc->argv[0]}, 3);
+		execve(command, proc->argv, envp);
+		free(command);
+	}
+	return (ERR_EXECTUE_COMMAND_NOT_FOUND);
 }
 
 static void	wait_process(t_proc *proc)
@@ -94,8 +102,10 @@ static void	wait_process(t_proc *proc)
 
 	wait(&status);
 	g_exit_code = WEXITSTATUS(status);
-	if (g_exit_code == ERR_EXECTUE_NOT_COMMAND)
-		ft_error(ERR_EXECTUE_NOT_COMMAND, proc->argv[0]);
+	if (g_exit_code == ERR_EXECTUE_COMMAND_IS_DIRECTORY \
+		|| g_exit_code == ERR_EXECTUE_COMMAND_NOT_FOUND \
+		|| g_exit_code == ERR_EXECTUE_COMMAND_NO_FILE)
+		ft_error(g_exit_code, proc->argv[0]);
 	if (WIFSIGNALED(status))
 		g_exit_code = 128 + WTERMSIG(status);
 }

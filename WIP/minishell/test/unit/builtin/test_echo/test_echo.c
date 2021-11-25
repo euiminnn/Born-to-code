@@ -1,5 +1,6 @@
 #include "core/builtin.h"
 #include "debug/debug_utils.h"
+#include "debug/debug_env.h"
 
 t_env *env;
 
@@ -35,7 +36,7 @@ void test(char *test_name, char *line)
 
 int main(int ac, char **av, char **en)
 {
-    env = init_env(en);
+    env = init_mock_env(en);
 
     test("normal_0", "echo");
     test("normal_0_1", "echo -n");

@@ -1,5 +1,6 @@
 #include "core/builtin.h"
 #include "debug/debug_utils.h"
+#include "debug/debug_env.h"
 
 t_env *env;
 
@@ -40,14 +41,14 @@ int main(int ac, char **av, char **en)
 			"TEST_B=20\n"
 			"TEST_C=30",
 			'\n');
-	env = init_env(envp);
+	env = init_mock_env(envp);
 
     test("env only", "env");
-    
+
     test("key only", "env A");
-    
+
 	test("env with 1 set(key+value)", "env A=3");
-	
+
 	test("env with 2 sets", "env A=3 B=4");
 
 	//test("env with spaces", "env "C = 5"");

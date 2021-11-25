@@ -9,7 +9,7 @@ void test(char *test_name, char *key, char *value)
     printf("----- %s -----\n", test_name);
 
     insert_env(env, key, value);
-    
+
     print_env(env);
 }
 
@@ -18,7 +18,7 @@ int main(int ac, char **av, char **en)
     char **envp;
 
     envp = ft_split("", '\n');
-    env = init_env(envp);
+    env = init_mock_env(envp);
 
     test("normal", "BBB", "1");
     test("normal", "ddd", "2");

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   proc1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ycha <ycha@gmail.com>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 22:34:28 by echung            #+#    #+#             */
-/*   Updated: 2021/11/17 22:34:29 by echung           ###   ########.fr       */
+/*   Updated: 2021/11/25 20:45:45 by ycha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ static int	get_redir_fd(t_list *tokens, int fds[2])
 		else if (token->type == T_RIGHT_DOUBLE_REDIR)
 			fds[fd_type] = right_double_redir(token->value);
 		if (fds[fd_type] == -1)
-			return (ft_error(ERR_EXECUTE_NO_FILE, token->value));
+			return (ft_error(ERR_EXECUTE_REDIR_NO_FILE, token->value));
 		node = node->next;
 	}
 	return (OK);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env1.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ycha <ycha@gmail.com>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 17:49:09 by echung            #+#    #+#             */
-/*   Updated: 2021/11/16 17:49:47 by echung           ###   ########.fr       */
+/*   Updated: 2021/11/25 21:21:15 by ycha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_env	*init_env(char **envp)
 	char	*key;
 	char	*value;
 	int		idx;
+	int		shlvl;
 
 	ret = init_list();
 	idx = -1;
@@ -32,6 +33,9 @@ t_env	*init_env(char **envp)
 		free(key);
 		free(value);
 	}
+	shlvl = ft_atoi(search_env(ret, "SHLVL")) + 1;
+	remove_env(ret, "SHLVL");
+	insert_env(ret, "SHLVL", ft_itoa(shlvl));
 	return (ret);
 }
 

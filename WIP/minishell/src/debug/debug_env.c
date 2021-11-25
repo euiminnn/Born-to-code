@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ycha <ycha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: ycha <ycha@gmail.com>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 22:21:15 by ycha              #+#    #+#             */
-/*   Updated: 2021/11/20 22:21:16 by ycha             ###   ########.fr       */
+/*   Updated: 2021/11/25 21:25:10 by ycha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,24 @@ int	print_env(t_env *env)
 		printf("%s\n", envp[idx]);
 	ft_free_strings(envp);
 	return (OK);
+}
+
+t_env	*init_mock_env(char **envp)
+{
+	t_env	*ret;
+	char	*key;
+	char	*value;
+	int		idx;
+	int		shlvl;
+
+	ret = init_list();
+	idx = -1;
+	while (envp[++idx])
+	{
+		ft_get_key_and_value(envp[idx], &key, &value);
+		insert_env(ret, key, value);
+		free(key);
+		free(value);
+	}
+	return (ret);
 }

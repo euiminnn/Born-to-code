@@ -16,6 +16,10 @@ command not found
 no file
 syntax error
 
+asdf -> command not found
+./asdf -> No such file or directory
+./include -> is a directory
+
 https://www.gnu.org/software/bash/manual/html_node/Exit-Status.html
 
 $? 는 가장 마지막 프로그램만 해당

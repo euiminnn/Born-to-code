@@ -1,5 +1,6 @@
 #include "core/parse/parse.h"
 #include "debug/debug_utils.h"
+#include "debug/debug_env.h"
 
 t_env *env;
 t_token *token;
@@ -18,7 +19,7 @@ void test(char *test_name, char *str)
 int main(int ac, char **av, char **en)
 {
     g_exit_code = 100;
-    env = init_env(en);
+    env = init_mock_env(en);
     token = init_token(T_ARG, 0);
     insert_env(env, "TEST", "yeah");
 
@@ -42,7 +43,7 @@ int main(int ac, char **av, char **en)
     test("env_12", "$??");
     test("env_13", "$?hello");
     test("env_14", "$?$TEST");
-    
+
     test("env_num_1", "$1");
     test("env_num_2", "$9");
     test("env_num_3", "$10");
@@ -67,7 +68,7 @@ int main(int ac, char **av, char **en)
     test("quote_9", "echo \"\"hello");
     test("quote_10", "echo\"\"");
     test("quote_11", "echo abc\"\"");
-    
+
     test("quote_mix_1", "\"\'\"\'hello\'");
     test("quote_mix_2", "echo \"aa\'bb\'cc\"");
     test("quote_mix_3", "echo \"aa\'bb\"cc\'dd\'");

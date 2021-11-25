@@ -7,7 +7,7 @@ t_env *env;
 void test(char *test_name, char *key, char *value)
 {
     int ret;
-    
+
     printf("----- %s -----\n", test_name);
 
     ret = change_env(env, key, value);
@@ -28,14 +28,14 @@ int main(int ac, char **av, char **en)
         "aaa\n"
         "bbb=10\n"
         , '\n');
-    env = init_env(envp);
+    env = init_mock_env(envp);
 
     test("change CCC", "CCC", "30");
 
     test("change aaa", "aaa", "40");
-    
+
     test("change bbb", "bbb", 0);
-    
+
     test("change AAA", "AAA", "");
 
     test("change DDD", "DDD", "50");
