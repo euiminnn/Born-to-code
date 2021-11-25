@@ -6,7 +6,7 @@
 #    By: ycha <ycha@gmail.com>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/02 00:01:37 by ycha              #+#    #+#              #
-#    Updated: 2021/11/25 20:26:52 by ycha             ###   ########.fr        #
+#    Updated: 2021/11/26 04:11:50 by ycha             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,7 +63,7 @@ FILE		=	\
 # Options =================================================
 
 CC			=	gcc
-CFLAGS		=	-Iinclude -I/Users/$(USER)/.brew/opt/readline/include -I/opt/homebrew/opt/readline/include #-Wall -Wextra -Werror -g 
+CFLAGS		=	-Iinclude -I/Users/$(USER)/.brew/opt/readline/include -I/opt/homebrew/opt/readline/include -Wall -Wextra -Werror -g
 CLIB		=	-Lsrc/lib -lft -lreadline -L/Users/$(USER)/.brew/opt/readline/lib -Lsrc/lib -lft -lreadline -L/opt/homebrew/opt/readline/lib
 SRC_DIR		=	./src
 SRCS		=	$(addprefix $(SRC_DIR)/, $(FILE))

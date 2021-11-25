@@ -6,7 +6,7 @@
 /*   By: ycha <ycha@gmail.com>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 15:54:20 by echung            #+#    #+#             */
-/*   Updated: 2021/11/26 01:55:19 by ycha             ###   ########.fr       */
+/*   Updated: 2021/11/26 03:18:05 by ycha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ int	builtin_cd(int argc, char **argv, t_env *env, int fd)
 	int		cd_ret;
 	char	*search_ret;
 	char	cwd[PATH_MAX];
-
 
 	(void)fd;
 	if (argc == 1)

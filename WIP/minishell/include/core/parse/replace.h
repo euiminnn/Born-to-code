@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replace.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ycha <ycha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: ycha <ycha@gmail.com>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 20:24:42 by ycha              #+#    #+#             */
-/*   Updated: 2021/11/25 20:24:43 by ycha             ###   ########.fr       */
+/*   Updated: 2021/11/26 04:05:26 by ycha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,9 @@ char	*find_key_from_env(char *key_start, char *key_end, t_env *env);
  * DOLLAR 로 변경되어있는 $를 다시 $로 돌려놓습니다.
  * 
  * @param str 변경할 문자열
+ * @return 변경된 문자열
  */
-void	restore_dollar(char *str);
+char	*restore_dollar(char *str);
 
 /**
  * 짝이 맞는 quote 를 지웁니다.

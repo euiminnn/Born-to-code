@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replace2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ycha <ycha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: ycha <ycha@gmail.com>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 20:25:36 by ycha              #+#    #+#             */
-/*   Updated: 2021/11/25 20:25:36 by ycha             ###   ########.fr       */
+/*   Updated: 2021/11/26 04:07:17 by ycha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,14 +93,18 @@ char	*find_key_from_env(char *key_start, char *key_end, t_env *env)
 	return (ret);
 }
 
-void	restore_dollar(char *str)
+char	*restore_dollar(char *str)
 {
+	char	*org;
+
+	org = str;
 	while (*str)
 	{
 		if (*str == DOLLAR)
 			*str = '$';
 		str++;
 	}
+	return (org);
 }
 
 char	*remove_quote(char *str)

@@ -6,7 +6,7 @@
 /*   By: ycha <ycha@gmail.com>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 22:21:15 by ycha              #+#    #+#             */
-/*   Updated: 2021/11/25 21:25:10 by ycha             ###   ########.fr       */
+/*   Updated: 2021/11/26 04:11:35 by ycha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ t_env	*init_mock_env(char **envp)
 	char	*key;
 	char	*value;
 	int		idx;
-	int		shlvl;
 
 	ret = init_list();
 	idx = -1;

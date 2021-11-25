@@ -6,7 +6,7 @@
 /*   By: ycha <ycha@gmail.com>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 22:33:51 by echung            #+#    #+#             */
-/*   Updated: 2021/11/25 21:02:07 by ycha             ###   ########.fr       */
+/*   Updated: 2021/11/26 03:23:13 by ycha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 #include "debug/debug_execute.h"
 
 static int	_execute_extern_proc(t_proc *proc);
+static int	_execute_extern_proc_path(t_proc *proc);
 static void	wait_process(t_proc *proc);
 
 void	execute_builtin_proc(t_proc *pc)
@@ -68,24 +69,14 @@ static int	_execute_extern_proc(t_proc *proc)
 	char	*command;
 	char	**path;
 	int		idx;
-	DIR		*dirp;
 
-	envp = to_string_env(proc->env, to_string_env_data);
 	if (proc->argc == 0)
 		exit(0);
 	if (ft_strchr(proc->argv[0], '/'))
-	{
-		dirp = opendir(proc->argv[0]);
-		if (dirp)
-		{
-			closedir(dirp);
-			return (ERR_EXECTUE_COMMAND_IS_DIRECTORY);
-		}
-		execve(proc->argv[0], proc->argv, envp);
-		return (ERR_EXECTUE_COMMAND_NO_FILE);
-	}
+		return (_execute_extern_proc_path(proc));
 	idx = -1;
 	path = ft_split(search_env(proc->env, "PATH"), ':');
+	envp = to_string_env(proc->env, to_string_env_data);
 	while (path && path[++idx])
 	{
 		command = ft_strjoins((char *[3]) \
@@ -93,7 +84,25 @@ static int	_execute_extern_proc(t_proc *proc)
 		execve(command, proc->argv, envp);
 		free(command);
 	}
+	free(envp);
 	return (ERR_EXECTUE_COMMAND_NOT_FOUND);
+}
+
+static int	_execute_extern_proc_path(t_proc *proc)
+{
+	char	**envp;
+	DIR		*dirp;
+
+	dirp = opendir(proc->argv[0]);
+	if (dirp)
+	{
+		closedir(dirp);
+		return (ERR_EXECTUE_COMMAND_IS_DIRECTORY);
+	}
+	envp = to_string_env(proc->env, to_string_env_data);
+	execve(proc->argv[0], proc->argv, envp);
+	free(envp);
+	return (ERR_EXECTUE_COMMAND_NO_FILE);
 }
 
 static void	wait_process(t_proc *proc)

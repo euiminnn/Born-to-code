@@ -6,7 +6,7 @@
 /*   By: ycha <ycha@gmail.com>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 17:03:08 by echung            #+#    #+#             */
-/*   Updated: 2021/11/25 21:12:04 by ycha             ###   ########.fr       */
+/*   Updated: 2021/11/26 03:11:54 by ycha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,6 @@ void	ft_error_msg_command_is_directory(char *command);
 void	error_message_for_env(char *key);
 void	error_message_for_unset(char *key, char *value);
 void	error_message_for_export(char *argv);
+void	error_message_for_exit(char *argv);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: ycha <ycha@gmail.com>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 22:43:18 by echung            #+#    #+#             */
-/*   Updated: 2021/11/17 22:43:20 by echung           ###   ########.fr       */
+/*   Updated: 2021/11/26 04:11:19 by ycha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,11 @@ static int	input_heredoc(char *limiter)
 				exit(0);
 			write(pipe_fd[PIPE_IN], line, ft_strlen(line));
 			write(pipe_fd[PIPE_IN], "\n", 1);
+			free(line);
 		}
 	}
 	ft_close(pipe_fd[PIPE_IN]);
-	wait(&status);
-	signal(SIGINT, sigint_handler);
+	wait(&status) && signal(SIGINT, sigint_handler);
 	if (WEXITSTATUS(status) == ERR_SIGNAL)
 		return (-1);
 	return (pipe_fd[PIPE_OUT]);
@@ -102,6 +102,7 @@ static int	input_heredoc(char *limiter)
  */
 static void	sigint_handler_in_heredoc(int sig)
 {
+	(void)sig;
 	printf("\b\b  \b\b\n");
 	exit(ERR_SIGNAL);
 }

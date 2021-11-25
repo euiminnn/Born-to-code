@@ -6,11 +6,12 @@
 /*   By: ycha <ycha@gmail.com>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 16:26:55 by echung            #+#    #+#             */
-/*   Updated: 2021/11/26 03:03:22 by ycha             ###   ########.fr       */
+/*   Updated: 2021/11/26 03:16:54 by ycha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core/builtin.h"
+#include "core/error.h"
 
 int	is_num(char *str)
 {
@@ -26,16 +27,19 @@ int	is_num(char *str)
 	return (TRUE);
 }
 
-static int	is_over_the_range(char *str) 
+static int	is_over_the_range(char *str)
 {
 	long long	num;
-	
+
 	num = 0;
 	if ('0' <= *str && *str <= '9' || *str == '+')
 	{
 		num = ft_atoi(str);
 		if (num < 0)
+		{
+			error_message_for_exit(str);
 			return (TRUE);
+		}
 		else
 			return (FALSE);
 	}
@@ -69,9 +73,7 @@ int	builtin_exit(int argc, char **argv, t_env *env, int fd)
 		}
 		else
 		{
-			ft_putstr_fd("minishell: exit: ", 2);
-			ft_putstr_fd(argv[1], 2);
-			ft_putstr_fd(": numeric argument required\n", 2);
+			error_message_for_exit(argv[1]);
 			exit(255);
 		}
 	}

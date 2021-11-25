@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ycha <ycha@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: ycha <ycha@gmail.com>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 02:18:24 by ycha              #+#    #+#             */
-/*   Updated: 2021/11/10 17:54:43 by echung           ###   ########.fr       */
+/*   Updated: 2021/11/26 04:08:37 by ycha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	start(t_env *env, char *line)
 {
-	int		ret;
 	t_list	*cmds;
 
 	cmds = init_list();

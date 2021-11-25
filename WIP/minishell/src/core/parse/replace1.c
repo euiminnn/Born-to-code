@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   replace.c                                          :+:      :+:    :+:   */
+/*   replace1.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ycha <ycha@gmail.com>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 22:43:54 by echung            #+#    #+#             */
-/*   Updated: 2021/11/24 19:07:16 by ycha             ###   ########.fr       */
+/*   Updated: 2021/11/26 04:07:22 by ycha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,13 @@
 
 #define DOLLAR 1
 #define BUFFER_SIZE 420000
+
+static int	copy_key_to_buf( \
+	char *buf_ptr, \
+	char *key_start, \
+	char *key_last, \
+	t_env *env\
+);
 
 void	replace_tilde_in_token(t_token *token, t_env *env)
 {
@@ -48,41 +55,53 @@ void	replace_tilde_in_token(t_token *token, t_env *env)
 
 void	replace_env_in_token(t_token *token, t_env *env)
 {
-	char	*token_value;
+	char	*str;
 	char	buf[BUFFER_SIZE];
 	char	*buf_ptr;
 	char	*key_start;
 	char	*key_last;
-	char	*value;
 
 	buf_ptr = buf;
-	token_value = strdup(token->value);
-	while (find_dollar(&token_value, &key_start))
+	str = strdup(token->value);
+	while (find_dollar(&str, &key_start))
 	{
-		ft_memcpy(buf, token_value, key_start - token_value);
-		buf_ptr = buf + (key_start - token_value);
+		ft_memcpy(buf, str, key_start - str);
+		buf_ptr = buf + (key_start - str);
 		key_last = find_key(key_start);
-		if (key_start + 1 == key_last)
-			*buf_ptr++ = DOLLAR;
-		else
-		{
-			value = find_key_from_env(key_start, key_last, env);
-			if (value)
-			{			
-				ft_memcpy(buf_ptr, value, ft_strlen(value));
-				buf_ptr += ft_strlen(value);
-				free(value);
-			}
-		}
+		buf_ptr += copy_key_to_buf(buf_ptr, key_start, key_last, env);
 		ft_memcpy(buf_ptr, key_last, ft_strlen(key_last));
 		buf_ptr += ft_strlen(key_last);
 		*buf_ptr = '\0';
-		free(token_value);
-		token_value = ft_strdup(buf);
+		free(str);
+		str = ft_strdup(buf);
 	}
-	if (*token_value == '\0' && *token->value != '\0')
+	if (*str == '\0' && *token->value != '\0')
 		token->type = T_DELETE;
 	free(token->value);
-	restore_dollar(token_value);
-	token->value = remove_quote(token_value);
+	token->value = remove_quote(restore_dollar(str));
+	free(str);
+}
+
+static int	copy_key_to_buf( \
+	char *buf_ptr, \
+	char *key_start, \
+	char *key_last, \
+	t_env *env\
+)
+{
+	char	*value;
+
+	if (key_start + 1 == key_last)
+	{
+		*buf_ptr = DOLLAR;
+		return (1);
+	}
+	value = find_key_from_env(key_start, key_last, env);
+	if (value)
+	{			
+		ft_memcpy(buf_ptr, value, ft_strlen(value));
+		free(value);
+		return (ft_strlen(value));
+	}
+	return (0);
 }

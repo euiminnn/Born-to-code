@@ -6,7 +6,7 @@
 /*   By: ycha <ycha@gmail.com>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 21:32:03 by echung            #+#    #+#             */
-/*   Updated: 2021/11/22 21:36:13 by ycha             ###   ########.fr       */
+/*   Updated: 2021/11/26 03:10:06 by ycha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,11 @@ void	error_message_for_export(char *argv)
 	ft_putstr_fd("minishell: export: `", 2);
 	ft_putstr_fd(argv, 2);
 	ft_putstr_fd("\': not a valid identifier\n", 2);
+}
+
+void	error_message_for_exit(char *argv)
+{
+	ft_putstr_fd("minishell: exit: ", 2);
+	ft_putstr_fd(argv, 2);
+	ft_putstr_fd(": numeric argument required\n", 2);
 }
