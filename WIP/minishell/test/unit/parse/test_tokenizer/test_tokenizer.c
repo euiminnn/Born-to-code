@@ -5,14 +5,14 @@ void test(char *test_name, char *line)
 {
     char *input;
     char **strs = 0;
-    int ret;
+    int ret = 1;
 
     printf("----- %s -----\n", test_name);
 
     fflush(stdout);
     fflush(stderr);
     input = ft_strdup(line);
-    ret = tokenizer(input, &strs);
+    tokenizer(input, &strs);
     free(input);
 
     fflush(stdout);
