@@ -9,6 +9,7 @@ void test(char *test_name, char *str)
     printf("----- %s -----\n", test_name);
 
     token->value = ft_strdup(str);
+    replace_tilde_in_token(token, env);
     replace_env_in_token(token, env);
     printf("%s\n", token->value);
     free(token->value);
@@ -79,6 +80,10 @@ int main(int ac, char **av, char **en)
     test("tilde_path_1", "~/abc");
     test("tilde_path_2", "abc/~");
     test("tilde_path_3", "~///");
+    test("tilde_in_quote_1", "\"~\"");
+    test("tilde_in_quote_2", "\"~/abc\"");
+    test("tilde_in_quote_3", "abc\"~/abc\"");
+    test("tilde_in_quote_4", "~\"/abc\"");
 
     test("unclosed_quote_1", "echo \"hello");
     test("unclosed_quote_2", "echo hello\"");

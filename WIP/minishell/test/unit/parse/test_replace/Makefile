@@ -20,7 +20,7 @@ all			:
 test		:
 	@printf "[UNIT_TEST] $(TEST_NAME)";
 	@gcc $(TEST_FILE).c -I../../../../include -lminishell -lft -L../../../../obj -L../../../../src/lib
-	@sed -e "92s|.*|${HOME}|g" -e "98s|.*|${HOME}/abc|g" -e "203s|.*|${HOME}///|g" answer.original > answer
+	@sed -e "92s|.*|${HOME}|g" -e "98s|.*|${HOME}/abc|g" -e "102s|.*|${HOME}///|g" answer.original > answer
 	@unset TEST; ../../unit_test.sh $(TEST_FILE).c
 
 fclean		:

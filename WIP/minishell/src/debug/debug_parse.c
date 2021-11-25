@@ -59,6 +59,8 @@ int	print_token(t_token *token, int depth)
 		c = "T_LEFT_DOUBLE_REDIR";
 	else if (token->type == T_RIGHT_DOUBLE_REDIR)
 		c = "T_RIGHT_DOUBLE_REDIR";
+	else if (token->type == T_DELETE)
+		c = "T_DELETE";
 	else
 		c = "T_PIPE";
 	print_space(depth);

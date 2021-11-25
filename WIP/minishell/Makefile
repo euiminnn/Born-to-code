@@ -6,7 +6,7 @@
 #    By: ycha <ycha@gmail.com>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/02 00:01:37 by ycha              #+#    #+#              #
-#    Updated: 2021/11/24 19:36:06 by ycha             ###   ########.fr        #
+#    Updated: 2021/11/25 20:26:52 by ycha             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,8 @@ FILE		=	\
 				core/parse/lexer.c \
 				core/parse/parse.c \
 				core/parse/parser.c \
-				core/parse/replace.c \
+				core/parse/replace1.c \
+				core/parse/replace2.c \
 				core/parse/token.c \
 				core/parse/tokenizer.c \
 				debug/debug_env.c \
@@ -98,6 +99,7 @@ debug			:
 
 test			:
 	@$(MAKE) -s -C ./test/unit 0> /dev/null
+	sleep 3
 	cd ./test/minishell_tester && bash test.sh
 
 show			:

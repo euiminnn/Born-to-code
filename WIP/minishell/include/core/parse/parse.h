@@ -80,7 +80,7 @@ void	tokenizer(char *line, char ***strings);
 int		lexer(char **strings, t_list *tokens);
 
 /**
- * 토큰에서 환경변수를 문자열 치환하고, 따옴표를 뺍니다.
+ * 토큰에서 물결과 환경변수를 문자열 치환하고, 따옴표를 뺍니다.
  *
  * @param token 토큰 구조체
  * @param env 환경 변수 구조체
@@ -89,6 +89,7 @@ int		lexer(char **strings, t_list *tokens);
  *
  * @test parse/test_replace
  */
+void	replace_tilde_in_token(t_token *token, t_env *env);
 void	replace_env_in_token(t_token *token, t_env *env);
 
 /**
