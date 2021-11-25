@@ -57,7 +57,6 @@ static int	valid_key(t_env *env, char *key)
 		return (0);
 }
 
-
 static void	_builtin_echo(int argc, char **argv, t_env *env, int fd)
 {
 	int	s;

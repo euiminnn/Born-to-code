@@ -71,7 +71,7 @@ void	ft_get_key_and_value(char *str, char **key, char **value);
  * @param key key 문자열
  * @return 유효한 key 이면 OK, 유효하지 않으면 ERROR
  */
-int	ft_is_valid_key(char *key);
+int		ft_is_valid_key(char *key);
 
 /**
  * 문자열 여러개를 합칩니다.

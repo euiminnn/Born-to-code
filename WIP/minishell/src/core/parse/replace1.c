@@ -13,17 +13,31 @@
 #include "lib/libft.h"
 #include "core/parse/parse.h"
 #include "core/parse/token.h"
+#include "core/parse/replace.h"
 #include "core/env/env.h"
 #include "define.h"
 
 #define DOLLAR 1
 #define BUFFER_SIZE 420000
 
-static int	find_dollar(char **str, char **ptr);
-static char	*find_key(char *str);
-static char	*find_key_from_env(char *key_start, char *key_end, t_env *env);
-static char	*remove_quote(char *str);
-static void	restore_dollar(char *str);
+void	replace_tilde_in_token(t_token *token, t_env *env)
+{
+	char	buf[BUFFER_SIZE];
+	char	*str;
+	char	*home;
+
+	str = token->value;
+	if (str[0] == '~' && (str[1] == '\0' || str[1] == '/'))
+	{
+		home = search_env(env, "HOME");
+		ft_memcpy(buf, home, ft_strlen(home));
+		ft_memcpy(buf + ft_strlen(home), str + 1, ft_strlen(str + 1));
+		buf[ft_strlen(home) + ft_strlen(str + 1)] = '\0';
+		free(token->value);
+		token->value = ft_strdup(buf);
+	}
+}
+
 /**
  * $ 나올때 까지 돌기 ('')
  * $ 나오면, key 찾기, (가능한 key 참고) [a-zA-Z_][a-zA-Z0-9_]*
@@ -69,118 +83,6 @@ void	replace_env_in_token(t_token *token, t_env *env)
 	if (*token_value == '\0' && *token->value != '\0')
 		token->type = T_DELETE;
 	free(token->value);
+	restore_dollar(token_value);
 	token->value = remove_quote(token_value);
-	restore_dollar(token->value);
-}
-
-static int	find_dollar(char **str, char **ptr)
-{
-	*ptr = *str;
-	while (**ptr)
-	{
-		if (**ptr == '$')
-			return (TRUE);
-		else if (**ptr == '\'')
-		{
-			(*ptr)++;
-			while (**ptr && **ptr != '\'')
-				(*ptr)++;
-		}
-		else if (**ptr == '\"')
-		{
-			(*ptr)++;
-			while (**ptr && **ptr != '\"')
-			{
-				if (**ptr == '$')
-					return (TRUE);
-				(*ptr)++;
-			}
-		}
-		if (**ptr)
-			(*ptr)++;
-	}
-	return (FALSE);
-}
-
-static char	*find_key(char *str)
-{
-	int		index;
-	char	*charset;
-
-	index = 1;
-	if (ft_isdigit(str[1]))
-		return (str + 2);
-	if (str[1] == '?')
-		return (str + 2);
-	while (str[index])
-	{
-		charset = CHARSET_WITH_DIGIT;
-		if (index == 1)
-			charset = CHARSET_WITH_Q;
-		if (ft_strchr(charset, str[index]))
-			++index;
-		else
-			break ;
-	}
-	return (&str[index]);
-}
-
-static char	*find_key_from_env(char *key_start, char *key_end, t_env *env)
-{
-	char	key_end_value;
-	char	*value;
-	char	*ret;
-
-	ret = 0;
-	key_end_value = *key_end;
-	*key_end = '\0';
-	if (key_start[1] == '?')
-		ret = ft_itoa(g_exit_code);
-	else
-	{
-		value = search_env(env, &key_start[1]);
-		if (value)
-			ret = ft_strdup(value);
-	}
-	*key_end = key_end_value;
-	return (ret);
-}
-
-static char	*remove_quote(char *str)
-{
-	char	buf[BUFFER_SIZE];
-	char	*quote_start;
-	int		idx;
-
-	idx = 0;
-	while (*str)
-	{
-		if (*str == '\'' || *str == '\"')
-		{
-			quote_start = str;
-			str++;
-			while (*str && *str != *quote_start)
-				str++;
-			if (*str == *quote_start)
-				quote_start++;
-			ft_memcpy(buf + idx, quote_start, str - (quote_start));
-			idx += (str - (quote_start));
-			if (*str)
-				str++;
-		}
-		else
-			buf[idx++] = *str++;
-	}
-	buf[idx] = '\0';
-	return (ft_strdup(buf));
-}
-
-static void	restore_dollar(char *str)
-{
-	while (*str)
-	{
-		if (*str == DOLLAR)
-			*str = '$';
-		str++;
-	}
 }

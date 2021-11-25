@@ -16,6 +16,8 @@
 #include "debug/debug_parse.h"
 #include "debug/debug_utils.h"
 
+#define BUFFER_SIZE 420000
+
 static void	replace(t_list *tokens, t_env *env);
 
 /**
@@ -35,7 +37,7 @@ int	parse(char *line, t_env *env, t_list *cmds)
 
 	tokens = init_list();
 	tokenizer(line, &strings);
-	DEBUG && printf("-------tokenizer-------\n");
+	DEBUG && printf("-------tokeni=er-------\n");
 	DEBUG && print_strings(strings, 0);
 	if (!lexer(strings, tokens))
 		return (ERROR);
@@ -68,6 +70,7 @@ static void	replace(t_list *tokens, t_env *env)
 		node = node->next;
 		if (token->type == T_PIPE)
 			continue ;
+		replace_tilde_in_token(token, env);
 		replace_env_in_token(token, env);
 	}
 }
