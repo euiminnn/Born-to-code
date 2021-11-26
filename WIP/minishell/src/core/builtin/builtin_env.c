@@ -6,7 +6,7 @@
 /*   By: ycha <ycha@gmail.com>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 16:33:40 by echung            #+#    #+#             */
-/*   Updated: 2021/11/22 21:35:05 by ycha             ###   ########.fr       */
+/*   Updated: 2021/11/26 19:57:03 by ycha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static char	*to_string(t_env_data *data)
 	return (ft_strjoins((char *[4]){data->key, "=", data->value, "\n"}, 4));
 }
 
-static void	print_env_list(int argc, char **argv, t_env *env, int fd)
+static void	print_env_list(t_env *env, int fd)
 {
 	char	**envp;
 	int		i;
@@ -35,7 +35,7 @@ static void	print_env_list(int argc, char **argv, t_env *env, int fd)
 	}
 }
 
-static int	_builtin_env(int argc, char **argv, t_env *env, int fd)
+static int	_builtin_env(char **argv, t_env *env, int fd)
 {
 	char	*key_and_value[2];
 	int		i;
@@ -54,7 +54,7 @@ static int	_builtin_env(int argc, char **argv, t_env *env, int fd)
 		free(key_and_value[0]);
 		free(key_and_value[1]);
 	}
-	print_env_list(argc, argv, env, fd);
+	print_env_list(env, fd);
 	i = 0;
 	while (argv[++i])
 	{
@@ -66,16 +66,12 @@ static int	_builtin_env(int argc, char **argv, t_env *env, int fd)
 
 int	builtin_env(int argc, char **argv, t_env *env, int fd)
 {
-	char	*key;
-	char	*value;
-	int		i;
-
 	if (argc == 1)
 	{
-		print_env_list(argc, argv, env, fd);
+		print_env_list(env, fd);
 		return (0);
 	}
 	else if (argc > 1)
-		return (_builtin_env(argc, argv, env, fd));
+		return (_builtin_env(argv, env, fd));
 	return (0);
 }

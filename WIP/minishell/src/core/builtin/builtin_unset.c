@@ -6,7 +6,7 @@
 /*   By: ycha <ycha@gmail.com>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 16:26:55 by echung            #+#    #+#             */
-/*   Updated: 2021/11/24 20:02:11 by ycha             ###   ########.fr       */
+/*   Updated: 2021/11/26 20:06:13 by ycha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "core/env/env.h"
 #include "core/error.h"
 
-static int	_builtin_unset(int argc, char **argv, t_env *env)
+static int	builtin_unset_with_value(char **argv, t_env *env)
 {
 	char	*key;
 	char	*value;
@@ -42,11 +42,11 @@ static int	_builtin_unset(int argc, char **argv, t_env *env)
 
 int	builtin_unset(int argc, char **argv, t_env *env, int fd)
 {
-	int		flag;
+	int		exit_code;
 
 	(void)fd;
 	if (argc == 1)
 		return (0);
-	flag = _builtin_unset(argc, argv, env);
-	return (flag);
+	exit_code = builtin_unset_with_value(argv, env);
+	return (exit_code);
 }

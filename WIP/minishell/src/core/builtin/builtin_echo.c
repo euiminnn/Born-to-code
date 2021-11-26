@@ -6,7 +6,7 @@
 /*   By: ycha <ycha@gmail.com>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 15:20:19 by echung            #+#    #+#             */
-/*   Updated: 2021/11/23 19:20:51 by echung           ###   ########.fr       */
+/*   Updated: 2021/11/26 19:52:54 by ycha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,6 @@ static int	string_start(int argc, char **argv)
 	return (i);
 }
 
-static int	valid_key(t_env *env, char *key)
-{
-	if (search_env(env, key))
-		return (1);
-	else
-		return (0);
-}
-
 static void	_builtin_echo(int argc, char **argv, t_env *env, int fd)
 {
 	int	s;
@@ -76,36 +68,6 @@ static void	_builtin_echo(int argc, char **argv, t_env *env, int fd)
 	}
 }
 
-/*
-static void	_builtin_echo(int argc, char **argv, t_env *env, int fd)
-{
-	int	s;
-
-	(void)env;
-	s = string_start(argc, argv);
-	while (s < argc)
-	{
-		if (!*argv[s])
-		{
-			s++;
-			continue ;
-		}
-		if (s != argc - 1)
-		{
-			if (ft_strlen(argv[s+1]) > 0 || valid_key(env, argv[s+1]))
-			{
-				ft_putstr_fd(argv[s], fd);
-				ft_putstr_fd(" ", fd);
-			}
-			else
-				ft_putstr_fd(argv[s], fd);
-		}
-		else
-			ft_putstr_fd(argv[s], fd);
-		s++;
-	}
-}
-*/
 int	builtin_echo(int argc, char **argv, t_env *env, int fd)
 {
 	int	n_option;

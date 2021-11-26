@@ -6,7 +6,7 @@
 /*   By: ycha <ycha@gmail.com>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 16:26:55 by echung            #+#    #+#             */
-/*   Updated: 2021/11/26 03:16:54 by ycha             ###   ########.fr       */
+/*   Updated: 2021/11/26 20:00:27 by ycha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	is_over_the_range(char *str)
 	long long	num;
 
 	num = 0;
-	if ('0' <= *str && *str <= '9' || *str == '+')
+	if (('0' <= *str && *str <= '9') || *str == '+')
 	{
 		num = ft_atoi(str);
 		if (num < 0)
@@ -43,7 +43,7 @@ static int	is_over_the_range(char *str)
 		else
 			return (FALSE);
 	}
-	else if (*str == '-')
+	else
 	{
 		if (!ft_strncmp(str, "-9223372036854775808", ft_strlen(str)))
 			return (FALSE);
@@ -55,6 +55,7 @@ static int	is_over_the_range(char *str)
 int	builtin_exit(int argc, char **argv, t_env *env, int fd)
 {
 	(void)env;
+	(void)fd;
 	ft_putstr_fd("exit\n", 0);
 	if (argc == 1)
 		exit(g_exit_code);

@@ -30,6 +30,7 @@ FILE		=	\
 				core/env/env2.c \
 				core/error/error_msg1.c \
 				core/error/error_msg2.c \
+				core/error/error_msg3.c \
 				core/error/error.c \
 				core/execute/execute1.c \
 				core/execute/execute2.c \
@@ -64,7 +65,8 @@ FILE		=	\
 
 CC			=	gcc
 CFLAGS		=	-Iinclude -I/Users/$(USER)/.brew/opt/readline/include -I/opt/homebrew/opt/readline/include -Wall -Wextra -Werror -g
-CLIB		=	-Lsrc/lib -lft -lreadline -L/Users/$(USER)/.brew/opt/readline/lib -Lsrc/lib -lft -lreadline -L/opt/homebrew/opt/readline/lib
+#CLIB		=	-Lsrc/lib -lft -lreadline -L/Users/$(USER)/.brew/opt/readline/lib
+CLIB		=	-Lsrc/lib -lft -lreadline -L/opt/homebrew/opt/readline/lib
 SRC_DIR		=	./src
 SRCS		=	$(addprefix $(SRC_DIR)/, $(FILE))
 
@@ -73,6 +75,12 @@ OBJS		=	$(addprefix $(OBJ_DIR)/, $(patsubst %.c,%.o,$(FILE)))
 
 DEBUG		=	0
 
+idx			=	0
+
+BLACK		= 	"\033[0;30m"
+GRAY		= 	"\033[1;30m"
+GREEN		=	"\033[0;32m"
+
 export FILE
 
 # =========================================================
@@ -80,15 +88,23 @@ export FILE
 all				: $(NAME)
 
 $(OBJ_DIR)/%.o	: $(SRC_DIR)/%.c
+	$(eval t_idx_old = $(shell expr $(idx) / 10 + 1))
+	$(eval idx = $(shell expr $(idx) + 1))
+	$(eval t_idx = $(shell expr $(idx) / 10 + 1))
+	@if [ $(idx) = 1 ]; then\
+		printf $(GRAY)"Loading ..."$(BLACK);\
+	fi
+	@if [ $(t_idx_old) != $(t_idx) ]; then\
+		printf $(GRAY)"..."$(BLACK);\
+	fi
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c $< -o $@ -DDEBUG=$(DEBUG)
-
-#	$(CC) $(CFLAGS) $< -o $@ -DDEBUG=$(DEBUG) $(CLIB) $(LDFLAGS)
+	@$(CC) $(CFLAGS) -c $< -o $@ -DDEBUG=$(DEBUG)
 
 $(NAME)			: $(OBJS)
-	@$(MAKE) -C ./src/lib
-	ar rcs ./obj/libminishell.a $(OBJS)
-	gcc $(CFLAGS)  -o $@ $^ $(CLIB)
+	@$(MAKE) -s -C ./src/lib
+	@ar rcs ./obj/libminishell.a $(OBJS)
+	@gcc $(CFLAGS) -o $@ $^ $(CLIB)
+	@printf $(GREEN)" done!"$(BLACK);
 
 norm			:
 	@python3 -m norminette include/*
@@ -99,24 +115,24 @@ debug			:
 
 test			:
 	@$(MAKE) -s -C ./test/unit 0> /dev/null
-	sleep 3
-	cd ./test/minishell_tester && bash test.sh
+	@sleep 3
+	@cd ./test/minishell_tester && bash test.sh
 
 show			:
 	@printf "SRCS : $(SRCS)"
 	@printf "OBJS : $(OBJS)"
 
 clean			:
-	rm -rf $(OBJ_DIR)
-	$(MAKE) -C ./src/lib clean
+	@rm -rf $(OBJ_DIR)
+	@$(MAKE) -s -C ./src/lib clean
 
 fclean			: clean
-	rm -f $(NAME)
-	$(MAKE) -C ./src/lib fclean
+	@rm -f $(NAME)
+	@$(MAKE) -s -C ./src/lib fclean
 	@$(MAKE) -s -C ./test/unit fclean
-	rm -f ./test/minishell_tester/minishell
-	rm -f ./test/minishell_tester/test
-	rm -f ./test/minishell_tester/tofix/tofix_tests.txt
+	@rm -f ./test/minishell_tester/minishell
+	@rm -f ./test/minishell_tester/test
+	@rm -f ./test/minishell_tester/tofix/tofix_tests.txt
 
 re				: fclean all
 

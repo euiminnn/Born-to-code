@@ -6,7 +6,7 @@
 /*   By: ycha <ycha@gmail.com>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 16:26:55 by echung            #+#    #+#             */
-/*   Updated: 2021/11/26 01:54:31 by ycha             ###   ########.fr       */
+/*   Updated: 2021/11/26 20:03:57 by ycha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,6 @@
 #include "core/error.h"
 #include "utils/utils.h"
 
-/**
- *
- * @example argv ['export', 'ABC=10']
- * @example argv ['export', 'ABC']
- * @example argv ['export']
- * @example argv ['export', 'ABC=10=10'] key : ABC, value : 10=10
- * @example argv ['export', 'ABC=10   =    10'] key : ABC, value : 10   =    10
- * @example argv ['export', 'ABC=10', 'BCE=20']
- *
- *
- */
 static char	*to_string(t_env_data *data)
 {
 	if (!data->value)
@@ -34,7 +23,7 @@ static char	*to_string(t_env_data *data)
 				"=", "\"", data->value, "\"\n"}, 6));
 }
 
-void	builtin_export_only(int argc, char **argv, t_env *env, int fd)
+void	builtin_export_only(t_env *env, int fd)
 {
 	char	**envp;
 	int		i;
@@ -48,7 +37,7 @@ void	builtin_export_only(int argc, char **argv, t_env *env, int fd)
 	}
 }
 
-int	_builtin_export(int argc, char **argv, t_env *env)
+int	builtin_export_with_value(char **argv, t_env *env)
 {
 	char	*key;
 	char	*value;
@@ -76,15 +65,13 @@ int	_builtin_export(int argc, char **argv, t_env *env)
 
 int	builtin_export(int argc, char **argv, t_env *env, int fd)
 {
-	char	*key;
-	char	*value;
-	int		flag;
+	int		exit_code;
 
 	if (argc == 1)
 	{
-		builtin_export_only(argc, argv, env, fd);
+		builtin_export_only(env, fd);
 		return (0);
 	}
-	flag = _builtin_export(argc, argv, env);
-	return (flag);
+	exit_code = builtin_export_with_value(argv, env);
+	return (exit_code);
 }

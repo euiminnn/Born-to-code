@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_msg2.c                                       :+:      :+:    :+:   */
+/*   error_msg3.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ycha <ycha@gmail.com>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -14,32 +14,16 @@
 #include "lib/libft.h"
 #include "core/builtin.h"
 
-void	error_message_for_env(char *key)
+void	error_message_for_cd_not_exist(char *argv)
 {
-	ft_putstr_fd("env: ", 2);
-	ft_putstr_fd(key, 2);
+	ft_putstr_fd("minishell: cd: ", 2);
+	ft_putstr_fd(argv, 2);
 	ft_putstr_fd(": No such file or directory\n", 2);
 }
 
-void	error_message_for_unset(char *key, char *value)
+void	error_message_for_cd_is_file(char *argv)
 {
-	ft_putstr_fd("minishell: unset: `", 2);
-	ft_putstr_fd(key, 2);
-	ft_putstr_fd("=", 2);
-	ft_putstr_fd(value, 2);
-	ft_putstr_fd("\': not a valid identifier\n", 2);
-}
-
-void	error_message_for_export(char *argv)
-{
-	ft_putstr_fd("minishell: export: `", 2);
+	ft_putstr_fd("minishell: cd: ", 2);
 	ft_putstr_fd(argv, 2);
-	ft_putstr_fd("\': not a valid identifier\n", 2);
-}
-
-void	error_message_for_exit(char *argv)
-{
-	ft_putstr_fd("minishell: exit: ", 2);
-	ft_putstr_fd(argv, 2);
-	ft_putstr_fd(": numeric argument required\n", 2);
+	ft_putstr_fd(": Not a directory\n", 2);
 }

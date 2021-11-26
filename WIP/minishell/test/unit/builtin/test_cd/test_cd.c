@@ -41,7 +41,7 @@ int main(int ac, char **av, char **en)
     //test("no path", "cd");
 
     test("invalid path", "cd nonopath");
-
+    test("not_a_directory", "cd /bin/ls");
 	remove_env(env, "HOME");
     test("invalid home path", "cd");
 

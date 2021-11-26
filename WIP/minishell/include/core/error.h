@@ -55,5 +55,7 @@ void	error_message_for_env(char *key);
 void	error_message_for_unset(char *key, char *value);
 void	error_message_for_export(char *argv);
 void	error_message_for_exit(char *argv);
+void	error_message_for_cd_not_exist(char *argv);
+void	error_message_for_cd_is_file(char *argv);
 
 #endif
