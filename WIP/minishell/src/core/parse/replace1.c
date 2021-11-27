@@ -90,6 +90,7 @@ static int	copy_key_to_buf( \
 )
 {
 	char	*value;
+	int		len;
 
 	if (key_start + 1 == key_last)
 	{
@@ -98,10 +99,11 @@ static int	copy_key_to_buf( \
 	}
 	value = find_key_from_env(key_start, key_last, env);
 	if (value)
-	{			
-		ft_memcpy(buf_ptr, value, ft_strlen(value));
+	{
+		len = ft_strlen(value);
+		ft_memcpy(buf_ptr, value, len);
 		free(value);
-		return (ft_strlen(value));
+		return (len);
 	}
 	return (0);
 }
