@@ -6,7 +6,7 @@
 /*   By: ycha <ycha@gmail.com>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 22:43:54 by echung            #+#    #+#             */
-/*   Updated: 2021/11/26 04:07:22 by ycha             ###   ########.fr       */
+/*   Updated: 2021/11/27 22:11:15 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	replace_env_in_token(t_token *token, t_env *env)
 	char	*key_last;
 
 	buf_ptr = buf;
-	str = strdup(token->value);
+	str = ft_strdup(token->value);
 	while (find_dollar(&str, &key_start))
 	{
 		ft_memcpy(buf, str, key_start - str);
