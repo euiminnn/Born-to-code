@@ -125,6 +125,7 @@ void	execute(t_list *cmds, t_env *env)
 
 	signal(SIGINT, sigint_handler_in_execute);
 	signal(SIGQUIT, sigquit_handler_in_execute);
+	termios_echoctl_on();
 	count = count_list(cmds);
 	if (count == 1)
 		execute_cmd(cmds->next->data, env, STDIN_FILENO, STDOUT_FILENO);
@@ -132,4 +133,5 @@ void	execute(t_list *cmds, t_env *env)
 		execute_cmds(cmds->next, env, STDIN_FILENO, -1);
 	signal(SIGINT, sigint_handler);
 	signal(SIGQUIT, sigquit_handler);
+	termios_echoctl_off();
 }

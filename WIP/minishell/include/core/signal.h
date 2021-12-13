@@ -74,4 +74,13 @@ void				sigint_handler_in_execute(int sig);
  */
 void				sigquit_handler_in_execute(int sig);
 
+/**
+ * 
+ * 
+ * 
+ * 
+ */
+void				termios_echoctl_on(void);
+void				termios_echoctl_off(void);
+
 #endif

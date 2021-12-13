@@ -39,6 +39,7 @@ int	main(int argc, char **argv, char **envp)
 	t_env	*env;
 
 	env = init_env(envp);
+	termios_echoctl_off();
 	sig_handler()->sigint = signal(SIGINT, sigint_handler);
 	sig_handler()->sigquit = signal(SIGQUIT, sigquit_handler);
 	if (argc == 3 && ft_strncmp(argv[1], "-c", 3) == 0)

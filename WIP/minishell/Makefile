@@ -6,7 +6,7 @@
 #    By: ycha <ycha@gmail.com>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/02 00:01:37 by ycha              #+#    #+#              #
-#    Updated: 2021/12/13 19:39:24 by ycha             ###   ########.fr        #
+#    Updated: 2021/12/13 10:45:09 by ycha             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ NAME		=	minishell
 FILE		=	\
 				main.c \
 				input.c \
-				core/signal.c \
+				core/signal/signal.c \
+				core/signal/termios.c \
 				core/builtin/builtin_cd.c \
 				core/builtin/builtin_echo.c \
 				core/builtin/builtin_env.c \
@@ -69,7 +70,7 @@ CC			=	gcc
 #CFLAGS		=	-Iinclude -I/Users/$(USER)/.brew/opt/readline/include -Wall -Wextra -Werror -g
 #CLIB		=	-Lsrc/lib -lft -lreadline -L/Users/$(USER)/.brew/opt/readline/lib
 #home
-CFLAGS		=	-Iinclude -I/opt/homebrew/opt/readline/include -Wall -Wextra -Werror -g
+CFLAGS		=	-Iinclude -I/opt/homebrew/opt/readline/include
 CLIB		=	-Lsrc/lib -lft -lreadline -L/opt/homebrew/opt/readline/lib
 
 SRC_DIR		=	./src

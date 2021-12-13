@@ -103,6 +103,7 @@ static int	input_heredoc(char *limiter)
 static void	sigint_handler_in_heredoc(int sig)
 {
 	(void)sig;
-	printf("\b\b  \b\b\n");
+	printf("\n");
+	// printf("\b\b  \b\b\n");
 	exit(ERR_SIGNAL);
 }
