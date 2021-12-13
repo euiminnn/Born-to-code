@@ -1,0 +1,147 @@
+----- normal_0 -----
+
+$
+->
+0
+----- normal_0_1 -----
+$
+->
+0
+----- normal_0_2 -----
+-
+$
+->
+0
+----- normal_1 -----
+hello
+$
+->
+0
+----- normal_2 -----
+hello world
+$
+->
+0
+----- normal_3 -----
+hello world world
+$
+->
+0
+----- normal_4 -----
+hello$
+->
+0
+----- normal_5 -----
+hello -n
+$
+->
+0
+----- other_1 -----
+-b hello
+$
+->
+0
+----- other_2 -----
+hello -b
+$
+->
+0
+----- several_1 -----
+hello$
+->
+0
+----- several_2 -----
+hello -nnnn
+$
+->
+0
+----- several_other_1 -----
+-nnna hello
+$
+->
+0
+----- several_other_2 -----
+-nann hello
+$
+->
+0
+----- several_other_3 -----
+hello -nnna
+$
+->
+0
+----- several_other_4 -----
+hello -nann
+$
+->
+0
+----- multi_1 -----
+hello$
+->
+0
+----- multi_2 -----
+hello$
+->
+0
+----- multi_3 -----
+hello -n -n
+$
+->
+0
+----- multi_4 -----
+hello -n -n$
+->
+0
+----- multi_other_1 -----
+-b -n -n hello
+$
+->
+0
+----- multi_other_2 -----
+-b -n hello$
+->
+0
+----- multi_other_3 -----
+-b hello$
+->
+0
+----- multi_other_4 -----
+hello -n -b -n
+$
+->
+0
+----- multi_other_5 -----
+-b -n hello -n -b -n$
+->
+0
+----- several_multi_1 -----
+hello$
+->
+0
+----- several_multi_2 -----
+hello -nnn -nn
+$
+->
+0
+----- several_multi_3 -----
+hello -nnn -nn$
+->
+0
+----- several_multi_other_1 -----
+-nnb hello$
+->
+0
+----- several_multi_other_2 -----
+-nbn -nnn hello
+$
+->
+0
+----- several_multi_other_3 -----
+-bnn -nnn hello$
+->
+0
+----- several_multi_other_4 -----
+hello -nn -nb -b
+$
+->
+0

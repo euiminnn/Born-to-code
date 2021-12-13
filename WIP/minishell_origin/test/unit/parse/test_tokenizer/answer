@@ -1,0 +1,234 @@
+----- normal_1 -----
+[
+    `echo`
+    `hello`
+]
+->
+1
+----- normal_2 -----
+[
+    `echo`
+    `hello`
+    `world`
+]
+->
+1
+----- normal_3 -----
+[
+    `echo`
+    `-n`
+    `$USER`
+]
+->
+1
+----- quote_1 -----
+[
+    `echo`
+    `"$USER"`
+]
+->
+1
+----- quote_2 -----
+[
+    `"echo"`
+    `hello`
+]
+->
+1
+----- quote_3 -----
+[
+    `"e"c'h'o`
+    `hello`
+]
+->
+1
+----- quote_4 -----
+[
+    `"e"'ch'o`
+    `hello`
+]
+->
+1
+----- quote_5 -----
+[
+    `""''o`
+    `hello`
+]
+->
+1
+----- quote_6 -----
+[
+    `echo`
+    `"hello"`
+    `world`
+]
+->
+1
+----- quote_7 -----
+[
+    `echo`
+    `"hello world"`
+]
+->
+1
+----- quote_8 -----
+[
+    `echo`
+    `"hello world"hello`
+]
+->
+1
+----- quote_9 -----
+[
+    `echo`
+    `""hello`
+]
+->
+1
+----- quote_10 -----
+[
+    `echo`
+    `""`
+]
+->
+1
+----- quote_11 -----
+[
+    `echo`
+    `abc""`
+]
+->
+1
+----- quote_mix_1 -----
+[
+    `echo`
+    `"aa'bb'cc"`
+]
+->
+1
+----- quote_mix_2 -----
+[
+    `echo`
+    `"aa'bb"cc'`
+]
+->
+1
+----- quote_mix_3 -----
+[
+    `echo`
+    `"aa'bb"cc'dd'`
+]
+->
+1
+----- quote_mix_4 -----
+[
+    `echo`
+    `'aa"bb'cc"dd'`
+]
+->
+1
+----- quote_mix_5 -----
+[
+    `echo`
+    `'aa"bb'c'c"dd'`
+]
+->
+1
+----- quote_mix_6 -----
+[
+    `echo`
+    `aa'aa"bb'c'c"dd'ee`
+]
+->
+1
+----- error_1 -----
+[
+    `echo`
+    `"hello`
+]
+->
+1
+----- error_1_1 -----
+[
+    `echo`
+    `'hello`
+]
+->
+1
+----- error_2 -----
+[
+    `echo`
+    `hello;`
+]
+->
+1
+----- error_2_1 -----
+[
+    `echo`
+    `hello\`
+]
+->
+1
+----- error_2_2 -----
+[
+    `;echo`
+    `hello\`
+]
+->
+1
+----- error_2_3 -----
+[
+    `;ec'ho hello\`
+]
+->
+1
+----- complicate_1 -----
+[
+    `echo`
+    `hello`
+    `>`
+    `a`
+    `|`
+    `cat`
+    `a`
+    `|`
+    `cat`
+    `<`
+    `a`
+    `>`
+    `b`
+]
+->
+1
+----- complicate_2 -----
+[
+    `echo`
+    `hello`
+    `>`
+    `a`
+    `|`
+    `cat`
+    `a`
+    `|`
+    `cat`
+    `<`
+    `a`
+    `>`
+    `b`
+]
+->
+1
+----- complicate_3 -----
+[
+    `echo`
+    `hel'lo>a|c'at`
+    `a`
+    `|`
+    `cat`
+    `<`
+    `a`
+    `>`
+    `b`
+]
+->
+1
