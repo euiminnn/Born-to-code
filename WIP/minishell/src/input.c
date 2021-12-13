@@ -6,7 +6,7 @@
 /*   By: ycha <ycha@gmail.com>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 22:21:41 by ycha              #+#    #+#             */
-/*   Updated: 2021/11/26 03:43:09 by ycha             ###   ########.fr       */
+/*   Updated: 2021/12/13 18:48:59 by ycha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	input(char **line)
 {
 	char	*str;
 
-	str = readline("🍑euimini🍑$ ");
+	str = readline("euimini$ ");
 	if (str)
 		*line = str;
 	else

@@ -6,7 +6,7 @@
 #    By: ycha <ycha@gmail.com>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/02 00:01:37 by ycha              #+#    #+#              #
-#    Updated: 2021/11/26 04:11:50 by ycha             ###   ########.fr        #
+#    Updated: 2021/12/13 18:39:36 by ycha             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,8 +65,7 @@ FILE		=	\
 
 CC			=	gcc
 CFLAGS		=	-Iinclude -I/Users/$(USER)/.brew/opt/readline/include -I/opt/homebrew/opt/readline/include -Wall -Wextra -Werror -g
-#CLIB		=	-Lsrc/lib -lft -lreadline -L/Users/$(USER)/.brew/opt/readline/lib
-CLIB		=	-Lsrc/lib -lft -lreadline -L/opt/homebrew/opt/readline/lib
+CLIB		=	-Lsrc/lib -lft -lreadline -L/Users/$(USER)/.brew/opt/readline/lib -L/opt/homebrew/opt/readline/lib
 SRC_DIR		=	./src
 SRCS		=	$(addprefix $(SRC_DIR)/, $(FILE))
 
@@ -115,6 +114,7 @@ debug			:
 
 test			:
 	@$(MAKE) -s -C ./test/unit 0> /dev/null
+	@printf "Unit test done!"
 	@sleep 3
 	@cd ./test/minishell_tester && bash test.sh
 
