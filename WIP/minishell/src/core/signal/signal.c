@@ -22,7 +22,6 @@ t_signal_handler	*sig_handler(void)
 void	sigint_handler(int sig)
 {
 	(void)sig;
-	// printf("\b\b  \b\b\n");
 	printf("\n");
 	rl_replace_line("", 0);
 	rl_on_new_line();
@@ -33,7 +32,6 @@ void	sigint_handler(int sig)
 void	sigquit_handler(int sig)
 {
 	(void)sig;
-	// printf("\b\b  \b\b");
 }
 
 void	sigint_handler_in_execute(int sig)

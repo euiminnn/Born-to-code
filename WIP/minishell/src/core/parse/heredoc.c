@@ -87,7 +87,7 @@ static int	input_heredoc(char *limiter)
 		}
 	}
 	ft_close(pipe_fd[PIPE_IN]);
-	wait(&status) && signal(SIGINT, sigint_handler);
+	(wait(&status) && signal(SIGINT, sigint_handler));
 	if (WEXITSTATUS(status) == ERR_SIGNAL)
 		return (-1);
 	return (pipe_fd[PIPE_OUT]);
@@ -104,6 +104,5 @@ static void	sigint_handler_in_heredoc(int sig)
 {
 	(void)sig;
 	printf("\n");
-	// printf("\b\b  \b\b\n");
 	exit(ERR_SIGNAL);
 }
