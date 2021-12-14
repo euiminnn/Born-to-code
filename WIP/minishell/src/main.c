@@ -41,7 +41,7 @@ int	main(int argc, char **argv, char **envp)
 	env = init_env(envp);
 	termios_echoctl_off();
 	sig_handler()->sigint = signal(SIGINT, sigint_handler);
-	sig_handler()->sigquit = signal(SIGQUIT, sigquit_handler);
+	sig_handler()->sigquit = signal(SIGQUIT, SIG_IGN);
 	if (argc == 3 && ft_strncmp(argv[1], "-c", 3) == 0)
 	{
 		start(env, argv[2]);

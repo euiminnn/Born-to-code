@@ -116,5 +116,11 @@ static void	wait_process(t_proc *proc)
 		|| g_exit_code == ERR_EXECTUE_COMMAND_NO_FILE)
 		ft_error(g_exit_code, proc->argv[0]);
 	if (WIFSIGNALED(status))
+	{
+		if (WTERMSIG(status) == SIGINT)
+			printf("\n");
+		if (WTERMSIG(status) == SIGQUIT)
+			printf("Quit: 3\n");
 		g_exit_code = 128 + WTERMSIG(status);
+	}
 }

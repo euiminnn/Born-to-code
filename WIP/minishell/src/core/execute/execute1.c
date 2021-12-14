@@ -123,8 +123,7 @@ void	execute(t_list *cmds, t_env *env)
 {
 	int	count;
 
-	signal(SIGINT, sigint_handler_in_execute);
-	signal(SIGQUIT, sigquit_handler_in_execute);
+	signal(SIGINT, SIG_IGN);
 	termios_echoctl_on();
 	count = count_list(cmds);
 	if (count == 1)
@@ -132,6 +131,5 @@ void	execute(t_list *cmds, t_env *env)
 	else if (count > 1)
 		execute_cmds(cmds->next, env, STDIN_FILENO, -1);
 	signal(SIGINT, sigint_handler);
-	signal(SIGQUIT, sigquit_handler);
 	termios_echoctl_off();
 }

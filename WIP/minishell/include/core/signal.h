@@ -48,37 +48,7 @@ t_signal_handler	*sig_handler(void);
 void				sigint_handler(int sig);
 
 /**
- * SIGQUIT 에 대해서 쉘이 받는 시그널을 처리합니다.
- *
- * @details ^\을 지우는 행동을 합니다.
- *
- * @param sig 시그널
- */
-void				sigquit_handler(int sig);
-
-/**
- * SIGINT 에 대해서 자식 프로레스가 처리되는 동안의 시그널을 처리합니다.
- *
- * @details 안하도록 합니다.
- *
- * @param sig 시그널
- */
-void				sigint_handler_in_execute(int sig);
-
-/**
- * SIGQUIT 에 대해서 자식 프로세스가 처리되는 동안의 시근러을 처리합니다.
- *
- * @details Quit :3 을 출력하도록 합니다
- *
- * @param sig 시그널
- */
-void				sigquit_handler_in_execute(int sig);
-
-/**
- * 
- * 
- * 
- * 
+ * 터미널의 echoctl 플래그를 끄거나 켭니다.
  */
 void				termios_echoctl_on(void);
 void				termios_echoctl_off(void);

@@ -28,20 +28,3 @@ void	sigint_handler(int sig)
 	rl_redisplay();
 	g_exit_code = 1;
 }
-
-void	sigquit_handler(int sig)
-{
-	(void)sig;
-}
-
-void	sigint_handler_in_execute(int sig)
-{
-	(void)sig;
-	printf("\n");
-}
-
-void	sigquit_handler_in_execute(int sig)
-{
-	(void)sig;
-	printf("Quit: 3\n");
-}
