@@ -6,10 +6,10 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 16:56:52 by echung            #+#    #+#             */
-/*   Updated: 2021/12/16 23:39:42 by echung           ###   ########.fr       */
+/*   Updated: 2022/01/18 21:40:22 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <unistd.h>
+#include "../include/philo.h"
 #include <string.h>
 
 void	save_with_option(char **argv)
@@ -17,7 +17,7 @@ void	save_with_option(char **argv)
 	(void)argv;
 }
 
-void	save(char **argv)
+void	save_without_option(char **argv)
 {
 	(void)argv;
 }
@@ -25,7 +25,7 @@ void	save(char **argv)
 void	init_args(int argc, char **argv)
 {
 	if (argc == 5)
-		save(argv);
+		save_without_option(argv);
 	save_with_option(argv);
 }
 
