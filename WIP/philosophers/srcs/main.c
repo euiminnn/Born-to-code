@@ -6,20 +6,44 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 16:56:52 by echung            #+#    #+#             */
-/*   Updated: 2022/01/19 02:14:29 by echung           ###   ########.fr       */
+/*   Updated: 2022/01/19 04:05:25 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 #include <stdio.h>
 
-void	print_t_args(t_args *input)
+void	init_mutex(void)
 {
-	printf("num: %d\n", input->number_of_philos);
-	printf("die: %d\n", input->time_to_die);
-	printf("eat: %d\n", input->time_to_eat);
-	printf("sleep: %d\n", input->time_to_sleep);
-	printf("min: %d\n", input->minimum_eat);
+	t_global	g;
+	pthread_mutex_init(&(g->mutex_lock), NULL);
+}
+
+void	init_state(t_argx *input)
+{
+	t_state	state[input -> number_of_philos];
+	int	i;
+
+	i = 0;
+	while (i < input -> number_of_philos)
+	{
+		state[i] = THINK;
+		i++;
+	}
+}
+
+void	create_thread(t_args *input)
+{
+	int	i;
+	pthread_t	tid;
+
+	i = 0;
+	while (i < input->number_of_philos)
+	{
+		pthread_create(&tid, NULL, philosopher, (void *)&i);
+		pthread_join(tid, NULL);
+		i++;
+	}
 }
 
 void	init_args(int argc, char **argv, t_args *input)
@@ -30,6 +54,9 @@ void	init_args(int argc, char **argv, t_args *input)
 	input->time_to_sleep = ft_atoi(argv[4]);
 	if (argc == 6)
 		input->minimum_eat = ft_atoi(argv[5]);
+	init_state(input);
+	init_mutex();
+	create_thread(input);
 }
 
 #define ERROR 1
@@ -49,6 +76,5 @@ int	main(int argc, char **argv)
 		init_args(argc, argv, &input);
 	else
 		return (error_msg_args());
-	print_t_args(&input);
 	return (0);
 }
