@@ -6,11 +6,11 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 16:56:52 by echung            #+#    #+#             */
-/*   Updated: 2022/01/18 21:40:22 by echung           ###   ########.fr       */
+/*   Updated: 2022/01/19 00:14:07 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "../include/philo.h"
-#include <string.h>
+
+#include "philo.h"
 
 void	save_with_option(char **argv)
 {
@@ -33,7 +33,7 @@ void	init_args(int argc, char **argv)
 int	error_msg_args(void)
 {
 	char *error = "Check the required arguments.";
-	write(2, error, strlen(error));
+	write(2, error, ft_strlen(error));
 	return (ERROR);
 }
 

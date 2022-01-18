@@ -6,31 +6,39 @@
 #    By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/15 22:13:22 by echung            #+#    #+#              #
-#    Updated: 2022/01/18 21:41:19 by echung           ###   ########.fr        #
+#    Updated: 2022/01/19 00:25:28 by echung           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= philo
+NAME		= philo
 
-CFLAGS	= -Wall -Wextra -Werror -I./include/ -c
-CC		= gcc
+CC			= gcc
+CFLAGS		= -Wall -Wextra -Werror -I./include/
+CLIB		= -Lsrcs/lib -lft
 
-SRCS	= srcs/main.c
+FILE		= main.c
 
-OBJS	= $(SRCS:%.c=%.o)
+SRCS_DIR	= ./srcs
+SRCS		= $(addprefix $(SRCS_DIR)/, $(FILE))
+
+OBJS_DIR 	= ./objs
+OBJS		= $(addprefix $(OBJS_DIR)/, $(patsubst %.c,%.o,$(FILE)))
 
 all: $(NAME)
 
+$(OBJS_DIR)/%.o : $(SRCS_DIR)/%.c
+	mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c $< -o $@
+
 $(NAME): $(OBJS)
 	make -s -C ./srcs/lib
-	ar rcs ./srcs/lib/libft.a $(OBJS)
-	gcc $(CFLAGS) -o $(NAME) $(OBJS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(CLIB)
 
 norm:
 	norminette srcs/*
 
 clean:
-	rm -f $(OBJS)
+	rm -rf $(OBJS_DIR)
 	make -s -C ./srcs/lib clean
 
 fclean: clean
