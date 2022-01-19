@@ -24,12 +24,24 @@ void	init_state(t_argx *input)
 	t_state	state[input -> number_of_philos];
 	int	i;
 
-	i = 0;
-	while (i < input -> number_of_philos)
-	{
-		state[i] = THINK;
-		i++;
-	}
+int		right_of_philo(int id, t_args *input)
+{
+	int	num;
+	int	right_id;
+
+	num = input -> number_of_philos;
+	right_id = (id + 1) % num;
+	return (right_id);
+}
+
+int		left_of_philo(int id, t_args *input)
+{
+	int	num;
+	int	left_id;
+	
+	num = input -> number_of_philos;
+	left_id = (id - 1 + num) % num;
+	return (left_id);
 }
 
 void	create_thread(t_args *input)
