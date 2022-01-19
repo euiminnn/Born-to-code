@@ -77,6 +77,18 @@ void	init_state(t_argx *input)
 	}
 }
 
+void	prepare_simulation(t_args *input)
+{
+	t_philo		philo[input -> number_of_philos];
+	t_global	g;
+	
+	ft_bzero(&philo, sizeof(philo));
+	ft_bzero(&g, sizeof(g));
+	init_state(input, philo);
+	init_mutex(&g);
+	create_thread(input);
+}
+
 void	init_args(int argc, char **argv, t_args *input)
 {
 	input->number_of_philos = ft_atoi(argv[1]);
@@ -85,9 +97,7 @@ void	init_args(int argc, char **argv, t_args *input)
 	input->time_to_sleep = ft_atoi(argv[4]);
 	if (argc == 6)
 		input->minimum_eat = ft_atoi(argv[5]);
-	init_state(input);
-	init_mutex();
-	create_thread(input);
+	prepare_simulation(input);
 }
 
 #define ERROR 1
@@ -101,7 +111,7 @@ int	error_msg_args(void)
 int	main(int argc, char **argv)
 {
 	t_args	input;
-
+	
 	ft_bzero(&input, sizeof(input));
 	if (argc == 5 || argc == 6)
 		init_args(argc, argv, &input);
