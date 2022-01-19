@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 20:41:52 by echung            #+#    #+#             */
-/*   Updated: 2022/01/19 03:54:39 by echung           ###   ########.fr       */
+/*   Updated: 2022/01/19 19:59:05 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define PHILO_H
 
 # include <unistd.h>
+# include <stdio.h>
+# include <pthread.h>
 # include "libft.h"
 
 typedef struct	s_args {
@@ -29,6 +31,10 @@ typedef enum	e_state {
 	THINK,
 	SLEEP
 }	t_state;
+
+typedef struct	s_philo {
+	t_state state;
+}	t_philo;
 
 typedef struct	s_global {
 	pthread_mutex_t	mutex_lock;
