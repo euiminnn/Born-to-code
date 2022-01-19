@@ -46,6 +46,25 @@ void	create_thread(t_args *input)
 	}
 }
 
+void	init_mutex(void)
+{
+	t_global	g;
+	pthread_mutex_init(&(g->mutex_lock), NULL);
+}
+
+void	init_state(t_argx *input)
+{
+	t_state	state[input -> number_of_philos];
+	int	id;
+
+	id = 0;
+	while (id < input -> number_of_philos)
+	{
+		state[id] = THINK;
+		id++;
+	}
+}
+
 void	init_args(int argc, char **argv, t_args *input)
 {
 	input->number_of_philos = ft_atoi(argv[1]);
