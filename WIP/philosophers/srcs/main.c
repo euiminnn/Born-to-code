@@ -19,10 +19,19 @@ void	init_mutex(void)
 	pthread_mutex_init(&(g->mutex_lock), NULL);
 }
 
-void	init_state(t_argx *input)
+void	*philosopher(void *param)
 {
-	t_state	state[input -> number_of_philos];
-	int	i;
+	int	id;
+
+	id = *((int *)param);
+	while (TRUE)
+	{
+		think(id);
+		pickup(id);
+		eat(id);
+		putdown(id);
+	}
+}
 
 int		right_of_philo(int id, t_args *input)
 {
