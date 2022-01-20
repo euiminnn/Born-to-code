@@ -6,17 +6,60 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 16:56:52 by echung            #+#    #+#             */
-/*   Updated: 2022/01/19 04:05:25 by echung           ###   ########.fr       */
+/*   Updated: 2022/01/19 20:43:33 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#define TRUE 1
+#define FALSE 0
 #include "philo.h"
-#include <stdio.h>
 
-void	init_mutex(void)
+void	put_down(int id, t_philo *philo, t_global *g)
 {
-	t_global	g;
-	pthread_mutex_init(&(g->mutex_lock), NULL);
+	pthread_mutex_lock(&(g->mutex_lock));
+	philo[id].state = SLEEP;
+	pthread_mutex_unlock(&(g->mutex_lock));
+}
+
+void	pick_up(int id, t_philo *philo, t_global *g)
+{
+	pthread_mutex_lock(&(g->mutex_lock));
+	while (can_eat(id, philo) == FALSE)
+	{
+		usleep(100);
+	}
+	philo[id].state = EAT;
+	pthread_mutex_unlock(&(g->mutex_lock));
+}
+
+int		can_eat(int id, t_philo *philo)
+{
+	if (philo[id].state == THINK \
+		&& philo[left_of(id)].state != EAT
+		&& philo[right_of(id)].state != EAT)
+	{
+		//philo[id].state = EAT;
+		return (TRUE);
+	}
+	return (FALSE);
+}
+
+void	eat(int id)
+{
+	int	temp_time;
+
+	temp_time = 23456;
+	printf("%d philo%d is eating\n", temp_time, id);
+	usleep(100);
+}
+
+void	think(int id)
+{
+	int	temp_time;
+
+	temp_time = 12345;
+	printf("%d philo%d is thinking\n", temp_time, id);
+	usleep(100);
 }
 
 void	*philosopher(void *param)
@@ -67,21 +110,19 @@ void	create_thread(t_args *input)
 	}
 }
 
-void	init_mutex(void)
+void	init_mutex(t_global *g)
 {
-	t_global	g;
 	pthread_mutex_init(&(g->mutex_lock), NULL);
 }
 
-void	init_state(t_argx *input)
+void	init_state(t_args *input, t_philo *philo)
 {
-	t_state	state[input -> number_of_philos];
 	int	id;
 
 	id = 0;
 	while (id < input -> number_of_philos)
 	{
-		state[id] = THINK;
+		philo[id].state = THINK;
 		id++;
 	}
 }
