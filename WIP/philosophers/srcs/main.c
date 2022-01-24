@@ -6,13 +6,24 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 16:56:52 by echung            #+#    #+#             */
-/*   Updated: 2022/01/19 20:43:33 by echung           ###   ########.fr       */
+/*   Updated: 2022/01/24 23:08:01 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #define TRUE 1
 #define FALSE 0
 #include "philo.h"
+
+void	sleep(int id, t_philo *philo, t_global *g, t_args *input)
+{
+	int	time;
+	int	temp_time;
+
+	time = input -> time_to_sleep;
+	temp_time = 12345;
+	printf("%d philo%d is sleeping\n", temp_time, id);
+	usleep(time * 1000);
+}
 
 void	put_down(int id, t_philo *philo, t_global *g)
 {
@@ -75,6 +86,7 @@ void	*philosopher(void *param)
 		pickup(id);
 		eat(id);
 		putdown(id);
+		sleep(id);
 	}
 }
 
