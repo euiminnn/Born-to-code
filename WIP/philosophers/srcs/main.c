@@ -44,13 +44,15 @@ int		can_eat(int id, t_philo *philo)
 	return (FALSE);
 }
 
-void	eat(int id)
+void	eat(int id, t_args *input)
 {
 	int	temp_time;
+	int	time;
 
+	time = input -> time_to_eat;
 	temp_time = 23456;
 	printf("%d philo%d is eating\n", temp_time, id);
-	usleep(100);
+	usleep(time * 1000);
 }
 
 void	think(int id)
