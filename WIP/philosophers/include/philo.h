@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 20:41:52 by echung            #+#    #+#             */
-/*   Updated: 2022/01/19 19:59:05 by echung           ###   ########.fr       */
+/*   Updated: 2022/01/27 17:54:47 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <pthread.h>
+# include <time.h>
 # include "libft.h"
 
 typedef struct	s_args {
