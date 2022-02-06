@@ -42,13 +42,13 @@ int		can_eat(int id, t_philo *philo)
 	return (FALSE);
 }
 
-void	eat(int id, t_args *input)
+void	eat(int id, t_philo *philo)
 {
-	int	temp_time;
+	int	now;
 	int	time;
 
-	time = input -> time_to_eat;
-	temp_time = 23456;
-	printf("%d philo%d is eating\n", temp_time, id);
+	time = philo->input->time_to_eat;
+	now = get_time_in_ms();
+	printf("%d philo%d is eating\n", now - philo->input->clock, id);
 	usleep(time * 1000);
 }

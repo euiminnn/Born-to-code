@@ -44,6 +44,8 @@ void	init_simulation(t_args *input)
 
 void	init_args(int argc, char **argv, t_args *input)
 {
+	input->clock = get_time_in_ms();
+	printf("time is: %d\n", input->clock);
 	input->number_of_philos = ft_atoi(argv[1]);
 	input->time_to_die = ft_atoi(argv[2]);
 	input->time_to_eat = ft_atoi(argv[3]);

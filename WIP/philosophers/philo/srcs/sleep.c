@@ -15,10 +15,10 @@
 void	do_sleep(int id, t_philo *philo)
 {
 	int	time;
-	int	temp_time;
+	int	now;
 
 	time = philo -> input -> time_to_sleep;
-	temp_time = 12345;
-	printf("%d philo%d is sleeping\n", temp_time, id);
+	now = get_time_in_ms();
+	printf("%d philo%d is sleeping\n", now - philo -> input -> clock, id);
 	usleep(time * 1000);
 }

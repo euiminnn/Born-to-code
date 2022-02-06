@@ -26,6 +26,7 @@
 # define FAILURE 0
 
 typedef struct	s_args {
+	int	clock;
 	int	number_of_philos;
 	int	time_to_die;
 	int	time_to_eat;
@@ -50,7 +51,8 @@ typedef struct	s_philo {
 // 	pthread_mutex_t	mutex_lock;
 // }	t_global;
 
-void	eat(int id, t_args *input);
+int		get_time_in_ms(void);
+void	eat(int id, t_philo *philo);
 int		can_eat(int id, t_philo *philo);
 void	pick_up(int id, t_philo *philo);
 void	put_down(int id, t_philo *philo);
@@ -60,7 +62,7 @@ void	init_state(t_philo *philo);
 void	init_mutex(t_philo *philo);
 int		left_of_philo(int id, t_philo *philo);
 int		right_of_philo(int id, t_philo *philo);
-void	think(int id);
+void	think(int id, t_philo *philo);
 void	do_sleep(int id, t_philo *philo);
 void	create_thread(t_philo *philo);
 void	*philosopher(void *param);

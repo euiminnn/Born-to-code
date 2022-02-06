@@ -12,11 +12,11 @@
 
 #include "philo.h"
 
-void	think(int id)
+void	think(int id, t_philo *philo)
 {
-	int	temp_time;
+	int	now;
 
-	temp_time = 12345;
-	printf("%d philo%d is thinking\n", temp_time, id);
+	now = get_time_in_ms();
+	printf("%d philo%d is thinking\n", now - philo->input->clock, id);
 	usleep(100);
 }
