@@ -12,22 +12,22 @@
 
 #include "philo.h"
 
-int		right_of_philo(int id, t_args *input)
+int		right_of_philo(int id, t_philo *philo)
 {
 	int	num;
 	int	right_id;
 
-	num = input -> number_of_philos;
+	num = philo -> input -> number_of_philos;
 	right_id = (id + 1) % num;
 	return (right_id);
 }
 
-int		left_of_philo(int id, t_args *input)
+int		left_of_philo(int id, t_philo *philo)
 {
 	int	num;
 	int	left_id;
 	
-	num = input -> number_of_philos;
+	num = philo -> input -> number_of_philos;
 	left_id = (id - 1 + num) % num;
 	return (left_id);
 }

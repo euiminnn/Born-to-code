@@ -12,12 +12,12 @@
 
 #include "philo.h"
 
-void	do_sleep(int id, t_philo *philo, t_global *g, t_args *input)
+void	do_sleep(int id, t_philo *philo)
 {
 	int	time;
 	int	temp_time;
 
-	time = input -> time_to_sleep;
+	time = philo -> input -> time_to_sleep;
 	temp_time = 12345;
 	printf("%d philo%d is sleeping\n", temp_time, id);
 	usleep(time * 1000);

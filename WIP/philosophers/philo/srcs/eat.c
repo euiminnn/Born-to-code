@@ -12,14 +12,14 @@
 
 #include "philo.h"
 
-void	put_down(int id, t_philo *philo, t_global *g)
+void	put_down(int id, t_philo *philo)
 {
 	pthread_mutex_lock(&(philo->fork));
 	philo[id].state = SLEEP;
 	pthread_mutex_unlock(&(philo->fork));
 }
 
-void	pick_up(int id, t_philo *philo, t_global *g)
+void	pick_up(int id, t_philo *philo)
 {
 	pthread_mutex_lock(&(philo->fork));
 	while (can_eat(id, philo) == FALSE)
@@ -33,8 +33,8 @@ void	pick_up(int id, t_philo *philo, t_global *g)
 int		can_eat(int id, t_philo *philo)
 {
 	if (philo[id].state == THINK \
-		&& philo[left_of_philo(id)].state != EAT
-		&& philo[right_of_philo(id)].state != EAT)
+		&& philo[left_of_philo(id, philo)].state != EAT
+		&& philo[right_of_philo(id, philo)].state != EAT)
 	{
 		//philo[id].state = EAT;
 		return (TRUE);

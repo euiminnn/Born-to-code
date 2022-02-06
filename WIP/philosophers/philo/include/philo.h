@@ -56,13 +56,13 @@ void	pick_up(int id, t_philo *philo);
 void	put_down(int id, t_philo *philo);
 void	init_args(int argc, char **argv, t_args *input);
 void	init_simulation(t_args *input);
-void	init_state(t_args *input, t_philo *philo);
+void	init_state(t_philo *philo);
 void	init_mutex(t_philo *philo);
-int		left_of_philo(int id, t_args *input);
-int		right_of_philo(int id, t_args *input);
+int		left_of_philo(int id, t_philo *philo);
+int		right_of_philo(int id, t_philo *philo);
 void	think(int id);
-void	do_sleep(int id, t_philo *philo, t_args *input);
-void	create_thread(t_args *input);
+void	do_sleep(int id, t_philo *philo);
+void	create_thread(t_philo *philo);
 void	*philosopher(void *param);
 
 #endif

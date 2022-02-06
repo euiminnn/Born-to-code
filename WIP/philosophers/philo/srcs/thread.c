@@ -20,24 +20,23 @@ void	*philosopher(void *philo_void)
 	while (TRUE)
 	{
 		think(philo->id);
-		pick_up(philo->id);
+		pick_up(philo->id, philo);
 		eat(philo->id, philo->input);
-		put_down(philo->id);
-		do_sleep(philo->id);
+		put_down(philo->id, philo);
+		do_sleep(philo->id, philo);
 	}
 }
 
-void	create_thread(t_args *input, t_philo *philo)
+void	create_thread(t_philo *philo)
 {
 	int	i;
 	pthread_t	tid;
 
 	i = 0;
-	while (i < input->number_of_philos)
+	while (i < philo -> input->number_of_philos)
 	{
         philo[i].id = i;
-        philo[i].input = input;
-        philo[i].philo = philo; 
+        // philo[i].philo = philo; 
 		pthread_create(&tid, NULL, philosopher, (void *)&philo[i]);
 		pthread_join(tid, NULL);
 		i++;
