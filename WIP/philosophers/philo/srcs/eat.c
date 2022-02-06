@@ -14,20 +14,20 @@
 
 void	put_down(int id, t_philo *philo, t_global *g)
 {
-	pthread_mutex_lock(&(g->mutex_lock));
+	pthread_mutex_lock(&(philo->fork));
 	philo[id].state = SLEEP;
-	pthread_mutex_unlock(&(g->mutex_lock));
+	pthread_mutex_unlock(&(philo->fork));
 }
 
 void	pick_up(int id, t_philo *philo, t_global *g)
 {
-	pthread_mutex_lock(&(g->mutex_lock));
+	pthread_mutex_lock(&(philo->fork));
 	while (can_eat(id, philo) == FALSE)
 	{
 		usleep(100);
 	}
 	philo[id].state = EAT;
-	pthread_mutex_unlock(&(g->mutex_lock));
+	pthread_mutex_unlock(&(philo->fork));
 }
 
 int		can_eat(int id, t_philo *philo)

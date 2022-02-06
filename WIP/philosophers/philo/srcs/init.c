@@ -14,7 +14,7 @@
 
 void	init_mutex(t_global *g)
 {
-	pthread_mutex_init(&(g->mutex_lock), NULL);
+	pthread_mutex_init(&(philo->fork), NULL);
 }
 
 void	init_state(t_args *input, t_philo *philo)
