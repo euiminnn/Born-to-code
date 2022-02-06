@@ -16,7 +16,14 @@ CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror -I./include/
 CLIB		= -Lsrcs/lib -lft
 
-FILE		= main.c
+FILE		= main.c \
+				time.c \
+				eat.c \
+				init.c \
+				id.c \
+				think.c \
+				sleep.c \
+				thread.c
 
 SRCS_DIR	= ./srcs
 SRCS		= $(addprefix $(SRCS_DIR)/, $(FILE))

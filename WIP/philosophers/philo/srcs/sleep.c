@@ -1,32 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   sleep.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/16 16:56:52 by echung            #+#    #+#             */
-/*   Updated: 2022/02/06 15:39:50 by echung           ###   ########.fr       */
+/*   Created: 2022/02/06 15:56:26 by echung            #+#    #+#             */
+/*   Updated: 2022/02/06 15:56:31 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	error_msg_args(void)
+void	do_sleep(int id, t_philo *philo, t_global *g, t_args *input)
 {
-	char *error = "Check the required arguments.";
-	write(2, error, ft_strlen(error));
-	return (ERROR);
-}
+	int	time;
+	int	temp_time;
 
-int	main(int argc, char **argv)
-{
-	t_args	input;
-	
-	ft_bzero(&input, sizeof(input));
-	if (argc == 5 || argc == 6)
-		init_args(argc, argv, &input);
-	else
-		return (error_msg_args());
-	return (0);
+	time = input -> time_to_sleep;
+	temp_time = 12345;
+	printf("%d philo%d is sleeping\n", temp_time, id);
+	usleep(time * 1000);
 }

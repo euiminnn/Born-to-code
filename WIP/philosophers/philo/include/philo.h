@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 20:41:52 by echung            #+#    #+#             */
-/*   Updated: 2022/01/27 17:54:47 by echung           ###   ########.fr       */
+/*   Updated: 2022/02/06 15:39:53 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,14 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <pthread.h>
-# include <time.h>
+# include <sys/time.h>
 # include "libft.h"
+
+# define ERROR 0
+# define TRUE 1
+# define FALSE 0
+# define SUCCESS 1
+# define FAILURE 0
 
 typedef struct	s_args {
 	int	number_of_philos;
@@ -34,11 +40,29 @@ typedef enum	e_state {
 }	t_state;
 
 typedef struct	s_philo {
-	t_state state;
+	int				id;
+	t_args			*input;
+	t_state 		state;
+	pthread_mutex_t	fork;
 }	t_philo;
 
-typedef struct	s_global {
-	pthread_mutex_t	mutex_lock;
-}	t_global;
+// typedef struct	s_global {
+// 	pthread_mutex_t	mutex_lock;
+// }	t_global;
+
+void	eat(int id, t_args *input);
+int		can_eat(int id, t_philo *philo);
+void	pick_up(int id, t_philo *philo);
+void	put_down(int id, t_philo *philo);
+void	init_args(int argc, char **argv, t_args *input);
+void	init_simulation(t_args *input);
+void	init_state(t_args *input, t_philo *philo);
+void	init_mutex(t_philo *philo);
+int		left_of_philo(int id, t_args *input);
+int		right_of_philo(int id, t_args *input);
+void	think(int id);
+void	do_sleep(int id, t_philo *philo, t_args *input);
+void	create_thread(t_args *input);
+void	*philosopher(void *param);
 
 #endif

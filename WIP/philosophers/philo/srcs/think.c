@@ -1,32 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   think.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/16 16:56:52 by echung            #+#    #+#             */
-/*   Updated: 2022/02/06 15:39:50 by echung           ###   ########.fr       */
+/*   Created: 2022/02/06 15:56:39 by echung            #+#    #+#             */
+/*   Updated: 2022/02/06 15:56:45 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philo.c"
 
-int	error_msg_args(void)
+void	think(int id)
 {
-	char *error = "Check the required arguments.";
-	write(2, error, ft_strlen(error));
-	return (ERROR);
-}
+	int	temp_time;
 
-int	main(int argc, char **argv)
-{
-	t_args	input;
-	
-	ft_bzero(&input, sizeof(input));
-	if (argc == 5 || argc == 6)
-		init_args(argc, argv, &input);
-	else
-		return (error_msg_args());
-	return (0);
+	temp_time = 12345;
+	printf("%d philo%d is thinking\n", temp_time, id);
+	usleep(100);
 }

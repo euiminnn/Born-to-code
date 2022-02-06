@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   id.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/16 16:56:52 by echung            #+#    #+#             */
-/*   Updated: 2022/02/06 15:39:50 by echung           ###   ########.fr       */
+/*   Created: 2022/02/06 15:54:52 by echung            #+#    #+#             */
+/*   Updated: 2022/02/06 15:54:59 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	error_msg_args(void)
+int		right_of_philo(int id, t_args *input)
 {
-	char *error = "Check the required arguments.";
-	write(2, error, ft_strlen(error));
-	return (ERROR);
+	int	num;
+	int	right_id;
+
+	num = input -> number_of_philos;
+	right_id = (id + 1) % num;
+	return (right_id);
 }
 
-int	main(int argc, char **argv)
+int		left_of_philo(int id, t_args *input)
 {
-	t_args	input;
+	int	num;
+	int	left_id;
 	
-	ft_bzero(&input, sizeof(input));
-	if (argc == 5 || argc == 6)
-		init_args(argc, argv, &input);
-	else
-		return (error_msg_args());
-	return (0);
+	num = input -> number_of_philos;
+	left_id = (id - 1 + num) % num;
+	return (left_id);
 }
