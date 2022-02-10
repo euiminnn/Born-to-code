@@ -32,10 +32,8 @@ void	init_state(t_philo *philo)
 void	init_simulation(t_args *input)
 {
 	t_philo		philo[input -> number_of_philos];
-	// t_global	g;
 	
 	ft_bzero(&philo, sizeof(philo));
-	// ft_bzero(&g, sizeof(g));
 	philo->input = input;
 	init_state(philo);
 	init_mutex(philo);

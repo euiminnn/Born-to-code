@@ -47,10 +47,6 @@ typedef struct	s_philo {
 	pthread_mutex_t	fork;
 }	t_philo;
 
-// typedef struct	s_global {
-// 	pthread_mutex_t	mutex_lock;
-// }	t_global;
-
 int		get_time_in_ms(void);
 void	eat(int id, t_philo *philo);
 int		can_eat(int id, t_philo *philo);
