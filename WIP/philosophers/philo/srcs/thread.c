@@ -36,7 +36,6 @@ void	create_thread(t_philo *philo)
 	while (i < philo -> input->number_of_philos)
 	{
         philo[i].id = i;
-        // philo[i].philo = philo; 
 		pthread_create(&tid, NULL, philosopher, (void *)&philo[i]);
 		pthread_join(tid, NULL);
 		i++;
