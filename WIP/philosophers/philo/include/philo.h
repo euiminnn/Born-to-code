@@ -58,8 +58,10 @@ int		check_input(t_args *input, int argc);
 void	init_simulation(t_args *input);
 void	init_state(t_philo *philo);
 void	init_mutex(t_philo *philo);
-int		left_of_philo(int id, t_philo *philo);
-int		right_of_philo(int id, t_philo *philo);
+
+int		left_id(t_philo *philo);
+int		right_id(t_philo *philo);
+
 void	think(int id, t_philo *philo);
 void	do_sleep(int id, t_philo *philo);
 void	create_thread(t_philo *philo);
