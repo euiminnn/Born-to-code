@@ -14,7 +14,7 @@
 
 int	error_msg_args(void)
 {
-	char *error = "Check the required arguments.";
+	char *error = "Check the input arguments.\n";
 	write(2, error, ft_strlen(error));
 	return (ERROR);
 }
@@ -25,8 +25,11 @@ int	main(int argc, char **argv)
 	
 	ft_bzero(&input, sizeof(input));
 	if (argc == 5 || argc == 6)
-		init_args(argc, argv, &input);
+	{
+		if (init_args(argc, argv, &input) == ERROR)
+			return (error_msg_args());
+		return (0);
+	}
 	else
 		return (error_msg_args());
-	return (0);
 }

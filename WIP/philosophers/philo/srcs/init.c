@@ -42,15 +42,32 @@ void	init_simulation(t_args *input)
 	create_thread(philo);
 }
 
-void	init_args(int argc, char **argv, t_args *input)
+int	check_input(t_args *input, int argc)
+{
+	if (input->number_of_philos <= 0)
+		return (ERROR);
+	if (input->time_to_die <= 0)
+		return (ERROR);
+	if (input->time_to_eat <= 0)
+		return (ERROR);
+	if (input->time_to_sleep <= 0)
+		return (ERROR);
+	if (argc == 6 && input->minimum_eat <= 0)
+			return (ERROR);
+	return (TRUE);
+}
+
+int	init_args(int argc, char **argv, t_args *input)
 {
 	input->clock = get_time_in_ms();
-	printf("time is: %d\n", input->clock);
 	input->number_of_philos = ft_atoi(argv[1]);
 	input->time_to_die = ft_atoi(argv[2]);
 	input->time_to_eat = ft_atoi(argv[3]);
 	input->time_to_sleep = ft_atoi(argv[4]);
 	if (argc == 6)
 		input->minimum_eat = ft_atoi(argv[5]);
+	if (check_input(input, argc) == ERROR)
+		return (ERROR);
 	init_simulation(input);
+	return (TRUE);
 }
