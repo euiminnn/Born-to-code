@@ -23,8 +23,8 @@
 # define ERROR 0
 # define TRUE 1
 # define FALSE 0
-# define AVAILABLE 1
-# define UNAVAILABLE 0
+# define INUSE 1
+# define NOTINUSE 0
 
 typedef struct	s_args {
 	int	clock;
@@ -46,13 +46,14 @@ typedef struct	s_philo {
 	t_args			*input;
 	t_state 		state;
 	pthread_mutex_t	fork;
+	int				fork_on_table;
 }	t_philo;
 
 int		get_time_in_ms(void);
-void	eat(int id, t_philo *philo);
-int		can_eat(int id, t_philo *philo);
-void	pick_up(int id, t_philo *philo);
-void	put_down(int id, t_philo *philo);
+void	eat(t_philo *philo);
+int		can_eat(t_philo *philo);
+void	pick_up(t_philo *philo);
+void	put_down(t_philo *philo);
 int		init_args(int argc, char **argv, t_args *input);
 int		check_input(t_args *input, int argc);
 void	init_simulation(t_args *input);

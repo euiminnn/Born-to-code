@@ -19,10 +19,12 @@ void	*philosopher(void *philo_void)
 	philo = (t_philo *)philo_void;
 	while (TRUE)
 	{
-		eat(philo->id, philo);
+		eat(philo);
 		do_sleep(philo->id, philo);
 		think(philo->id, philo);
+		usleep(200);
 	}
+
 }
 
 void	create_thread(t_philo *philo)
@@ -34,6 +36,7 @@ void	create_thread(t_philo *philo)
 	while (i < philo -> input->number_of_philos)
 	{
         philo[i].id = i;
+		printf("id: %d\n", i);
 		pthread_create(&tid, NULL, philosopher, (void *)&philo[i]);
 		pthread_join(tid, NULL);
 		i++;
