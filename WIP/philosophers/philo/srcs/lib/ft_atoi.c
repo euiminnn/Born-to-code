@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ycha <ycha@gmail.com>                      +#+  +:+       +#+        */
+/*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/24 16:02:08 by echung            #+#    #+#             */
-/*   Updated: 2021/11/26 02:36:34 by ycha             ###   ########.fr       */
+/*   Created: 2022/02/10 22:22:34 by echung            #+#    #+#             */
+/*   Updated: 2022/02/10 22:22:44 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
+#define ERROR 0
 long long	ft_atoi(char *str)
 {
 	int			sign;
@@ -26,7 +26,7 @@ long long	ft_atoi(char *str)
 			sign = sign * -1;
 		str++;
 		if (*str == '-' || *str == '+')
-			return (0);
+			return (ERROR);
 	}
 	result = 0;
 	while ('0' <= *str && *str <= '9')
