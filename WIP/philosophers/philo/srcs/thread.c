@@ -19,11 +19,9 @@ void	*philosopher(void *philo_void)
 	philo = (t_philo *)philo_void;
 	while (TRUE)
 	{
-		think(philo->id, philo);
-		pick_up(philo->id, philo);
 		eat(philo->id, philo);
-		put_down(philo->id, philo);
 		do_sleep(philo->id, philo);
+		think(philo->id, philo);
 	}
 }
 

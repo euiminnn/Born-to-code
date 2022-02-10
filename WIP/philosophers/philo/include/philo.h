@@ -19,11 +19,12 @@
 # include <sys/time.h>
 # include "libft.h"
 
+//error -1로 바꾸기
 # define ERROR 0
 # define TRUE 1
 # define FALSE 0
-# define SUCCESS 1
-# define FAILURE 0
+# define AVAILABLE 1
+# define UNAVAILABLE 0
 
 typedef struct	s_args {
 	int	clock;
