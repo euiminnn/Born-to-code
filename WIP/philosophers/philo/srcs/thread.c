@@ -30,15 +30,19 @@ void	*philosopher(void *philo_void)
 void	create_thread(t_philo *philo)
 {
 	int	i;
-	pthread_t	tid;
 
 	i = 0;
-	while (i < philo -> input->number_of_philos)
+	while (i < philo->input->number_of_philos)
 	{
-        philo[i].id = i;
-		printf("id: %d\n", i);
-		pthread_create(&tid, NULL, philosopher, (void *)&philo[i]);
-		pthread_join(tid, NULL);
+        // philo[i].id = i;
+		// printf("id: %d\n", i);
+		pthread_create(&(philo[i].tid), NULL, philosopher, (void *)(&philo[i]));
+		i++;
+	}
+	i = 0;
+	while (i < philo->input->number_of_philos)
+	{
+		pthread_join(philo[i].tid, NULL);
 		i++;
 	}
 }
