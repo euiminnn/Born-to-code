@@ -17,6 +17,6 @@ void	think(int id, t_philo *philo)
 	int	now;
 
 	now = get_time_in_ms();
-	printf("%d philo%d is thinking\n", now - philo->input->clock, id);
+	printf("%d %d is thinking\n", now - philo->input->clock, id+1);
 	usleep(100);
 }

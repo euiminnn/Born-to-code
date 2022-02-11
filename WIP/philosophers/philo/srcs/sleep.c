@@ -20,6 +20,6 @@ void	do_sleep(int id, t_philo *philo)
 	philo[id].state = SLEEP;
 	time = philo -> input -> time_to_sleep;
 	now = get_time_in_ms();
-	printf("%d philo%d is sleeping\n", now - philo -> input -> clock, id);
+	printf("%d %d is sleeping\n", now - philo -> input -> clock, id+1);
 	usleep(time * 1000);
 }
