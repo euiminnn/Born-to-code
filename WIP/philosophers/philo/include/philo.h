@@ -42,11 +42,12 @@ typedef enum	e_state {
 }	t_state;
 
 typedef struct	s_philo {
-	int				id;
 	t_args			*input;
+	int				id;
 	t_state 		state;
-	pthread_mutex_t	fork;
-	int				fork_on_table;
+	pthread_mutex_t	*fork;
+	// int				*fork_on_table;
+	pthread_t		tid;
 }	t_philo;
 
 int		get_time_in_ms(void);
