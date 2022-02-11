@@ -29,6 +29,30 @@ void	init_state(t_philo *philo)
 	}
 }
 
+void	init_id(t_philo *philo)
+{
+	int i;
+
+	i = 0;
+	while (i < philo->input->number_of_philos)
+	{
+		philo[i].id = i;
+		i++;
+	}
+}
+
+void	init_input(t_philo *philo, t_args *input)
+{
+	int i;
+
+	i = 0;
+	while (i < input->number_of_philos)
+	{
+		philo[i].input = input;
+		i++;
+	}
+}
+
 void	init_simulation(t_args *input)
 {
 	t_philo		philo[input -> number_of_philos];
