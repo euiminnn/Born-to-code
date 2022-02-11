@@ -12,14 +12,14 @@
 
 #include "philo.h"
 
-void	init_fork(t_philo *philo, pthread_mutex_t *fork, int *fork_on_table)
+void	init_fork(t_philo *philo, pthread_mutex_t *fork)//, int *fork_on_table)
 {
 	int id;
 
 	id = 0;
 	while (id < philo->input->number_of_philos)
 	{
-		philo[id].fork_on_table = fork_on_table;
+		// philo[id].fork_on_table = fork_on_table;
 		philo[id].fork = fork;
 		pthread_mutex_init(&(philo[id].fork[id]), NULL);
 		id++;
@@ -62,6 +62,18 @@ void	init_input(t_philo *philo, t_args *input)
 	}
 }
 
+void	init_last_eat(t_philo *philo, t_args *input)
+{
+	int i;
+
+	i = 0;
+	while (i < input->number_of_philos)
+	{
+		philo[i].last_eat = 0;
+		i++;
+	}
+}
+
 void	init_simulation(t_args *input)
 {
 	t_philo			philo[input->number_of_philos];
@@ -72,10 +84,11 @@ void	init_simulation(t_args *input)
 	ft_bzero(fork_on_table, sizeof(fork_on_table));
 
 	init_input(philo, input);
+	init_last_eat(philo, input);
 	init_id(philo);
 	init_state(philo);
 
-	init_fork(philo, fork, fork_on_table);
+	init_fork(philo, fork);//, fork_on_table);
 	create_thread(philo);
 }
 

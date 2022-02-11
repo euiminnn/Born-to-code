@@ -48,6 +48,7 @@ typedef struct	s_philo {
 	pthread_mutex_t	*fork;
 	// int				*fork_on_table;
 	pthread_t		tid;
+	int				last_eat;
 }	t_philo;
 
 int		get_time_in_ms(void);
@@ -68,5 +69,8 @@ void	think(int id, t_philo *philo);
 void	do_sleep(int id, t_philo *philo);
 void	create_thread(t_philo *philo);
 void	*philosopher(void *param);
+
+void	*monitor(void *philo_void);
+
 
 #endif

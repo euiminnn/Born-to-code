@@ -61,7 +61,33 @@ void	eat(t_philo *philo)
 	pick_up(philo);
 	time = philo->input->time_to_eat;
 	now = get_time_in_ms();
+	philo->last_eat = now - philo->input->clock;
 	printf("%d %d is eating\n", now - philo->input->clock, philo->id+1);
 	usleep(time * 1000);
 	put_down(philo);
+}
+
+void	*monitor(void *philo_void)
+{
+	t_philo	*philo;
+	int pnow;
+	int i;
+
+	philo = (t_philo *)philo_void;
+	while (TRUE)
+	{
+		i = 0;
+		while (i < philo->input->number_of_philos)
+		{
+			
+			pnow = get_time_in_ms() - philo[i].input->clock;
+			if (pnow - philo[i].last_eat > philo[i].input->time_to_die)
+			{
+				printf("%d %d died.\n", pnow, i+1);
+				exit(0);
+			}
+			i++;
+		}
+	}
+
 }

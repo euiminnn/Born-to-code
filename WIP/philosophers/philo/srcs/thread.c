@@ -30,6 +30,7 @@ void	*philosopher(void *philo_void)
 void	create_thread(t_philo *philo)
 {
 	int	i;
+	pthread_t	tid_m;
 
 	i = 0;
 	while (i < philo->input->number_of_philos)
@@ -39,10 +40,13 @@ void	create_thread(t_philo *philo)
 		pthread_create(&(philo[i].tid), NULL, philosopher, (void *)(&philo[i]));
 		i++;
 	}
+	
+	pthread_create(&tid_m, NULL, monitor, (void *)(philo));
 	i = 0;
 	while (i < philo->input->number_of_philos)
 	{
 		pthread_join(philo[i].tid, NULL);
 		i++;
 	}
+	pthread_join(tid_m, NULL);
 }
