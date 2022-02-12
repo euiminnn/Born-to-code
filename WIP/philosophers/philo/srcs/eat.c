@@ -63,11 +63,10 @@ void	*monitor(void *philo_void)
 			pnow = get_time_in_ms() - philo[i].input->clock;
 			if (pnow - philo[i].last_eat > philo[i].input->time_to_die)
 			{
-				printf("%d %d died.\n", pnow, i+1);
+				printf("%d %d died\n", pnow, i+1);
 				exit(0);
 			}
 			i++;
 		}
 	}
-
 }

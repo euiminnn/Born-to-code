@@ -24,7 +24,6 @@ void	*philosopher(void *philo_void)
 		think(philo->id, philo);
 		usleep(200);
 	}
-
 }
 
 void	create_thread(t_philo *philo)
