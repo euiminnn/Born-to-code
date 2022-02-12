@@ -49,6 +49,7 @@ void	init_philo_elements(t_philo *philo, t_args *input)
 		philo[i].id = i;
 		philo[i].last_eat = 0;
 		philo[i].eat_count = 0;
+		philo[i].end_signal = 0;
 		i++;
 	}
 }
@@ -60,8 +61,12 @@ void	init_simulation(t_args *input)
 	pthread_mutex_t	printer;
 
 	philo = (t_philo *)malloc(sizeof(t_philo) * input->number_of_philos);
+	if (!philo)
+		return ;
 	fork = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t)
 			* input->number_of_philos);
+	if (!fork)
+		return ;
 	ft_bzero(philo, sizeof(philo));
 	init_philo_elements(philo, input);
 	init_fork(philo, fork);

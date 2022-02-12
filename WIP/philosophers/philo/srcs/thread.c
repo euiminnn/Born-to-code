@@ -12,12 +12,36 @@
 
 #include "philo.h"
 
+int		get_end_signal(t_philo *philo)
+{
+	int i;
+	// int	end;
+
+	i = 0;
+	// end = 0;
+	while (i < philo->input->number_of_philos)
+	{
+		if (philo[i].end_signal)
+			return (1);
+		i++;
+	}
+	return (0);
+	// if (end)
+	// 	return (1);
+
+/*
+	if (philo->end_signal)
+		return (1);
+	return (0);
+*/
+}
+
 void	*philosopher(void *philo_void)
 {
 	t_philo	*philo;
 
 	philo = (t_philo *)philo_void;
-	while (TRUE)
+	while (!get_end_signal(philo))
 	{
 		eat(philo);
 		do_sleep(philo);

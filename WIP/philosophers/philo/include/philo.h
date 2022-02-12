@@ -48,6 +48,7 @@ typedef struct s_philo {
 	int				id;
 	int				last_eat;
 	int				eat_count;
+	int				end_signal;
 	pthread_t		tid;
 	pthread_mutex_t	*fork;
 	pthread_mutex_t	*printer;

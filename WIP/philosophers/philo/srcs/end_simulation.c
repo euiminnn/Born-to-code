@@ -17,17 +17,20 @@ void	end_simulation(t_philo *philo)
 	int	id;
 
 	id = 0;
-	while (id < philo->input->number_of_philos)
-	{
-		pthread_mutex_destroy(&(philo[id].fork[id]));
-		id++;
-	}
-	free(fork);
+    while (id < philo->input->number_of_philos)
+    {
+        pthread_mutex_destroy(&(philo[id].fork[id]));
+        // free(philo[id].fork);
+        id++;
+    }
+    if (philo->fork)
+        free(philo->fork);
 	id = 0;
 	while (id < philo->input->number_of_philos)
 	{
 		pthread_mutex_destroy(philo[id].printer);
 		id++;
 	}
-	free(philo);
+    if (philo)
+        free(philo);
 }
