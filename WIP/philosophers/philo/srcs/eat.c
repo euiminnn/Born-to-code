@@ -23,12 +23,10 @@ void	pick_up(t_philo *philo)
 	int	now;
 
 	pthread_mutex_lock(&(philo->fork[left_id(philo)]));
+	now = get_time_in_ms();
+	printf("%d %d has taken a fork\n", now - philo->input->clock, philo->id+1);
 	pthread_mutex_lock(&(philo->fork[right_id(philo)]));
 	now = get_time_in_ms();
-
-	printf("%d %d has taken a fork\n", now - philo->input->clock, philo->id+1);
-	now = get_time_in_ms();
-
 	printf("%d %d has taken a fork\n", now - philo->input->clock, philo->id+1);
 	philo->state = EAT;
 }
