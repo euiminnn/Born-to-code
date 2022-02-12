@@ -47,7 +47,6 @@ typedef enum	e_state {
 typedef struct	s_philo {
 	t_args			*input;
 	int				id;
-	// t_state 		state;
 	pthread_mutex_t	*fork;
 	pthread_mutex_t	*printer;
 	pthread_t		tid;
@@ -65,7 +64,6 @@ void	put_down(t_philo *philo);
 int		init_args(int argc, char **argv, t_args *input);
 int		check_input(t_args *input, int argc);
 void	init_simulation(t_args *input);
-void	init_state(t_philo *philo);
 void	init_mutex(t_philo *philo);
 
 int		left_id(t_philo *philo);

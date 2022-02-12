@@ -6,7 +6,7 @@
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 15:51:01 by echung            #+#    #+#             */
-/*   Updated: 2022/02/06 15:51:07 by echung           ###   ########.fr       */
+/*   Updated: 2022/02/13 03:31:55 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	init_fork(t_philo *philo, pthread_mutex_t *fork)
 {
-	int id;
+	int	id;
 
 	id = 0;
 	while (id < philo->input->number_of_philos)
@@ -38,21 +38,9 @@ void	init_printer(t_philo *philo, pthread_mutex_t *printer)
 	}
 }
 
-void	init_state(t_philo *philo)
-{
-	int	id;
-
-	id = 0;
-	while (id < philo->input->number_of_philos)
-	{
-		// philo[id].state = THINK;
-		id++;
-	}
-}
-
 void	init_id(t_philo *philo)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < philo->input->number_of_philos)
@@ -64,7 +52,7 @@ void	init_id(t_philo *philo)
 
 void	init_input(t_philo *philo, t_args *input)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < input->number_of_philos)
@@ -76,7 +64,7 @@ void	init_input(t_philo *philo, t_args *input)
 
 void	init_last_eat(t_philo *philo, t_args *input)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < input->number_of_philos)
@@ -88,7 +76,7 @@ void	init_last_eat(t_philo *philo, t_args *input)
 
 void	init_eat_count(t_philo *philo, t_args *input)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < input->number_of_philos)
@@ -100,24 +88,21 @@ void	init_eat_count(t_philo *philo, t_args *input)
 
 void	init_simulation(t_args *input)
 {
-	t_philo			philo[input->number_of_philos];
-	pthread_mutex_t	fork[input->number_of_philos];
 	pthread_mutex_t	printer;
-	
-	ft_bzero(philo, sizeof(philo));
 
+	t_philo philo[input->number_of_philos];
+	pthread_mutex_t fork[input->number_of_philos];
+	ft_bzero(philo, sizeof(philo));
 	init_input(philo, input);
 	init_last_eat(philo, input);
 	init_id(philo);
-	init_state(philo);
-
 	init_fork(philo, fork);
 	init_printer(philo, &printer);
 	create_thread(philo);
-	//destroy_mutex();
+	// destroy_mutex();
 }
 
-int	check_input(t_args *input, int argc)
+int		check_input(t_args *input, int argc)
 {
 	if (input->number_of_philos <= 0)
 		return (ERROR);
@@ -128,11 +113,11 @@ int	check_input(t_args *input, int argc)
 	if (input->time_to_sleep <= 0)
 		return (ERROR);
 	if (argc == 6 && input->minimum_eat <= 0)
-			return (ERROR);
+		return (ERROR);
 	return (TRUE);
 }
 
-int	init_args(int argc, char **argv, t_args *input)
+int		init_args(int argc, char **argv, t_args *input)
 {
 	input->clock = get_time_in_ms();
 	input->number_of_philos = ft_atoi(argv[1]);
