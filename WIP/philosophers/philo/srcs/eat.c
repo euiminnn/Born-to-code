@@ -21,7 +21,11 @@ void	put_down(t_philo *philo)
 void	pick_up(t_philo *philo)
 {
 	int	now;
-
+	int	time;
+	
+	time = philo->input->time_to_eat;
+	if ((philo->id + 1) % 2 == 0)
+		usleep(1000 * time);
 	pthread_mutex_lock(&(philo->fork[left_id(philo)]));
 	now = get_time_in_ms();
 	printf("%d %d has taken a fork\n", now - philo->input->clock, philo->id+1);
@@ -66,5 +70,6 @@ void	*monitor(void *philo_void)
 			}
 			i++;
 		}
+		usleep(1000);
 	}
 }

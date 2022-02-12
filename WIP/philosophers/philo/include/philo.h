@@ -46,7 +46,6 @@ typedef struct	s_philo {
 	int				id;
 	t_state 		state;
 	pthread_mutex_t	*fork;
-	// int				*fork_on_table;
 	pthread_t		tid;
 	int				last_eat;
 }	t_philo;
