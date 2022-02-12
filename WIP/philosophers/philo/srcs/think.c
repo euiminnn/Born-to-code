@@ -15,7 +15,4 @@
 void	think(t_philo *philo)
 {
 	process_message(philo, THINK);
-	// int	now;
-	// now = get_time_in_ms();
-	// printf("%d %d is thinking\n", now - philo->input->clock, id+1);
 }

@@ -69,19 +69,3 @@ void	init_simulation(t_args *input)
 	create_thread(philo);
 	// destroy_mutex();
 }
-
-/*
-void	init_simulation(t_args *input)
-{
-	t_philo			philo[input->number_of_philos];
-	pthread_mutex_t	fork[input->number_of_philos];
-	pthread_mutex_t	printer;
-
-	ft_bzero(philo, sizeof(philo));
-	init_philo_elements(philo, input);
-	init_fork(philo, fork);
-	init_printer(philo, &printer);
-	create_thread(philo);
-	// destroy_mutex();
-}
-*/

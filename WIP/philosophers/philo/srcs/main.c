@@ -18,7 +18,7 @@ int	error_msg_args(void)
 
 	error = "Check the input arguments.\n";
 	write(2, error, ft_strlen(error));
-	return (ERROR);
+	return (-1);
 }
 
 int	main(int argc, char **argv)

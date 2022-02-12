@@ -11,18 +11,6 @@
 /* ************************************************************************** */
 
 #include "philo.h"
-/*
-void	print_t_args(t_args *input)
-{
-	printf("num: %d\n", input->number_of_philos);
-	printf("die: %d\n", input->time_to_die);
-	printf("eat: %d\n", input->time_to_eat);
-	printf("sleep: %d\n", input->time_to_sleep);
-	printf("min: %d\n", input->minimum_eat);
-}
-*/
-
-//printf("%d %d has taken a fork\n", now - philo->input->clock, philo->id+1);
 
 static char	*print_message(t_state state)
 {

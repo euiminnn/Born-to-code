@@ -19,7 +19,6 @@
 # include <sys/time.h>
 # include "libft.h"
 
-//error -1로 바꾸기
 # define ERROR 0
 # define TRUE 1
 # define FALSE 0
@@ -79,5 +78,7 @@ int		is_time_to_die(t_philo *philo);
 int		meet_minimum_eat(t_philo *philo);
 
 void	process_message(t_philo *philo, t_state state);
+
+void	end_simulation(t_philo *philo);
 
 #endif
