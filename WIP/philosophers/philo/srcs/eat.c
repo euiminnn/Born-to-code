@@ -49,6 +49,7 @@ void	eat(t_philo *philo)
 	printf("%d %d is eating\n", now - philo->input->clock, philo->id+1);
 	wait_until(get_time_in_ms() + time);
 	put_down(philo);
+	philo->eat_count++;
 }
 
 void	*monitor(void *philo_void)
@@ -56,6 +57,7 @@ void	*monitor(void *philo_void)
 	t_philo	*philo;
 	int pnow;
 	int i;
+	int	count;
 
 	philo = (t_philo *)philo_void;
 	while (TRUE)
@@ -63,14 +65,29 @@ void	*monitor(void *philo_void)
 		i = 0;
 		while (i < philo->input->number_of_philos)
 		{
-			
 			pnow = get_time_in_ms() - philo[i].input->clock;
 			if (pnow - philo[i].last_eat > philo[i].input->time_to_die)
 			{
-				printf("%d %d died\n", pnow, i+1);
+				printf("%d %d died\n", pnow, i + 1);
 				exit(0);
 			}
 			i++;
+		}
+		count = 0;
+		if (philo->input->minimum_eat)
+		{
+			i = 0;
+			while (i < philo->input->number_of_philos)
+			{
+				if (philo[i].eat_count >= philo->input->minimum_eat)
+					count++;
+				i++;
+			}
+			if (count == philo->input->number_of_philos)
+			{
+				printf("Simulation ended\n");
+				exit(0);
+			}
 		}
 		usleep(200);
 	}

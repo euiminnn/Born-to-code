@@ -73,6 +73,18 @@ void	init_last_eat(t_philo *philo, t_args *input)
 	}
 }
 
+void	init_eat_count(t_philo *philo, t_args *input)
+{
+	int i;
+
+	i = 0;
+	while (i < input->number_of_philos)
+	{
+		philo[i].eat_count = 0;
+		i++;
+	}
+}
+
 void	init_simulation(t_args *input)
 {
 	t_philo			philo[input->number_of_philos];
