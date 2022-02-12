@@ -24,7 +24,8 @@ FILE		= main.c \
 				think.c \
 				sleep.c \
 				thread.c \
-				print.c
+				print.c \
+				monitor.c
 
 SRCS_DIR	= ./srcs
 SRCS		= $(addprefix $(SRCS_DIR)/, $(FILE))

@@ -77,6 +77,8 @@ void	create_thread(t_philo *philo);
 void	*philosopher(void *param);
 
 void	*monitor(void *philo_void);
+int		is_time_to_die(t_philo *philo);
+int		meet_minimum_eat(t_philo *philo);
 
 void	process_message(t_philo *philo, t_state state);
 
