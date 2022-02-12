@@ -35,8 +35,6 @@ void	create_thread(t_philo *philo)
 	i = 0;
 	while (i < philo->input->number_of_philos)
 	{
-        // philo[i].id = i;
-		// printf("id: %d\n", i);
 		pthread_create(&(philo[i].tid), NULL, philosopher, (void *)(&philo[i]));
 		i++;
 	}
