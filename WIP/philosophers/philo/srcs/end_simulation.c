@@ -1,38 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   end_simulation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/16 16:56:52 by echung            #+#    #+#             */
-/*   Updated: 2022/02/06 15:39:50 by echung           ###   ########.fr       */
+/*   Created: 2022/02/13 05:16:22 by echung            #+#    #+#             */
+/*   Updated: 2022/02/13 05:16:26 by echung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	error_msg_args(void)
+void	end_simulation(t_philo *philo)
 {
-	char	*error;
+	int	id;
 
-	error = "Check the input arguments.\n";
-	write(2, error, ft_strlen(error));
-	return (-1);
-}
-
-int	main(int argc, char **argv)
-{
-	t_args	input;
-
-	ft_bzero(&input, sizeof(input));
-	if (argc == 5 || argc == 6)
+	id = 0;
+	while (id < philo->input->number_of_philos)
 	{
-		if (init_args(argc, argv, &input) == ERROR)
-			return (error_msg_args());
-		init_simulation(&input);
-		return (0);
+		pthread_mutex_destroy(&(philo[id].fork[id]));
+		id++;
 	}
-	else
-		return (error_msg_args());
+	free(fork);
+	id = 0;
+	while (id < philo->input->number_of_philos)
+	{
+		pthread_mutex_destroy(philo[id].printer);
+		id++;
+	}
+	free(philo);
 }

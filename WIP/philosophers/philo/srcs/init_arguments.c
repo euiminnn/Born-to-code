@@ -38,6 +38,5 @@ int	init_args(int argc, char **argv, t_args *input)
 		input->minimum_eat = ft_atoi(argv[5]);
 	if (check_input(input, argc) == ERROR)
 		return (ERROR);
-	init_simulation(input);
 	return (TRUE);
 }

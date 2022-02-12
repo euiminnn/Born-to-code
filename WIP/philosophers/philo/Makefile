@@ -21,6 +21,7 @@ FILE		= main.c \
 				eat.c \
 				init_arguments.c \
 				init_simulation.c \
+				end_simulation.c \
 				id.c \
 				think.c \
 				sleep.c \

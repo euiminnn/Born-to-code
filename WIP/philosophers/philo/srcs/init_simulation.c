@@ -67,5 +67,5 @@ void	init_simulation(t_args *input)
 	init_fork(philo, fork);
 	init_printer(philo, &printer);
 	create_thread(philo);
-	// destroy_mutex();
+	end_simulation(philo);
 }
