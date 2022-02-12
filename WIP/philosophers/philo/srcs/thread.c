@@ -14,7 +14,7 @@
 
 void	*philosopher(void *philo_void)
 {
-	t_philo *philo;
+	t_philo	*philo;
 
 	philo = (t_philo *)philo_void;
 	while (TRUE)
@@ -29,7 +29,7 @@ void	*philosopher(void *philo_void)
 
 void	create_thread(t_philo *philo)
 {
-	int	i;
+	int			i;
 	pthread_t	tid_m;
 
 	i = 0;
@@ -38,7 +38,6 @@ void	create_thread(t_philo *philo)
 		pthread_create(&(philo[i].tid), NULL, philosopher, (void *)(&philo[i]));
 		i++;
 	}
-	
 	pthread_create(&tid_m, NULL, monitor, (void *)(philo));
 	i = 0;
 	while (i < philo->input->number_of_philos)

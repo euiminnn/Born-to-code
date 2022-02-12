@@ -6,7 +6,7 @@
 #    By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/15 22:13:22 by echung            #+#    #+#              #
-#    Updated: 2022/01/19 00:25:28 by echung           ###   ########.fr        #
+#    Updated: 2022/02/13 03:46:21 by echung           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ CLIB		= -Lsrcs/lib -lft
 FILE		= main.c \
 				time.c \
 				eat.c \
-				init.c \
+				init_arguments.c \
+				init_simulation.c \
 				id.c \
 				think.c \
 				sleep.c \
@@ -45,6 +46,7 @@ $(NAME): $(OBJS)
 
 norm:
 	norminette srcs/*
+	norminette include/*
 
 clean:
 	rm -rf $(OBJS_DIR)

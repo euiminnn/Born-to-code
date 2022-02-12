@@ -14,7 +14,9 @@
 
 int	error_msg_args(void)
 {
-	char *error = "Check the input arguments.\n";
+	char	*error;
+
+	error = "Check the input arguments.\n";
 	write(2, error, ft_strlen(error));
 	return (ERROR);
 }
@@ -22,7 +24,7 @@ int	error_msg_args(void)
 int	main(int argc, char **argv)
 {
 	t_args	input;
-	
+
 	ft_bzero(&input, sizeof(input));
 	if (argc == 5 || argc == 6)
 	{

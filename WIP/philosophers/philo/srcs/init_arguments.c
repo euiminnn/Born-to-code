@@ -12,97 +12,7 @@
 
 #include "philo.h"
 
-void	init_fork(t_philo *philo, pthread_mutex_t *fork)
-{
-	int	id;
-
-	id = 0;
-	while (id < philo->input->number_of_philos)
-	{
-		philo[id].fork = fork;
-		pthread_mutex_init(&(philo[id].fork[id]), NULL);
-		id++;
-	}
-}
-
-void	init_printer(t_philo *philo, pthread_mutex_t *printer)
-{
-	int	id;
-
-	id = 0;
-	while (id < philo->input->number_of_philos)
-	{
-		philo[id].printer = printer;
-		pthread_mutex_init(philo[id].printer, NULL);
-		id++;
-	}
-}
-
-void	init_id(t_philo *philo)
-{
-	int	i;
-
-	i = 0;
-	while (i < philo->input->number_of_philos)
-	{
-		philo[i].id = i;
-		i++;
-	}
-}
-
-void	init_input(t_philo *philo, t_args *input)
-{
-	int	i;
-
-	i = 0;
-	while (i < input->number_of_philos)
-	{
-		philo[i].input = input;
-		i++;
-	}
-}
-
-void	init_last_eat(t_philo *philo, t_args *input)
-{
-	int	i;
-
-	i = 0;
-	while (i < input->number_of_philos)
-	{
-		philo[i].last_eat = 0;
-		i++;
-	}
-}
-
-void	init_eat_count(t_philo *philo, t_args *input)
-{
-	int	i;
-
-	i = 0;
-	while (i < input->number_of_philos)
-	{
-		philo[i].eat_count = 0;
-		i++;
-	}
-}
-
-void	init_simulation(t_args *input)
-{
-	pthread_mutex_t	printer;
-
-	t_philo philo[input->number_of_philos];
-	pthread_mutex_t fork[input->number_of_philos];
-	ft_bzero(philo, sizeof(philo));
-	init_input(philo, input);
-	init_last_eat(philo, input);
-	init_id(philo);
-	init_fork(philo, fork);
-	init_printer(philo, &printer);
-	create_thread(philo);
-	// destroy_mutex();
-}
-
-int		check_input(t_args *input, int argc)
+int	check_input(t_args *input, int argc)
 {
 	if (input->number_of_philos <= 0)
 		return (ERROR);
@@ -117,7 +27,7 @@ int		check_input(t_args *input, int argc)
 	return (TRUE);
 }
 
-int		init_args(int argc, char **argv, t_args *input)
+int	init_args(int argc, char **argv, t_args *input)
 {
 	input->clock = get_time_in_ms();
 	input->number_of_philos = ft_atoi(argv[1]);

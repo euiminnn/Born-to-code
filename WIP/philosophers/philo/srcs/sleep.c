@@ -16,7 +16,6 @@ void	do_sleep(t_philo *philo)
 {
 	int	time;
 	// int	now;
-
 	// philo[id].state = SLEEP;
 	time = philo -> input -> time_to_sleep;
 	// now = get_time_in_ms();

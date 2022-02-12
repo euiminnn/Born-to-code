@@ -26,7 +26,7 @@
 # define INUSE 1
 # define NOTINUSE 0
 
-typedef struct	s_args {
+typedef struct s_args {
 	int	clock;
 	int	number_of_philos;
 	int	time_to_die;
@@ -35,7 +35,7 @@ typedef struct	s_args {
 	int	minimum_eat;
 }	t_args;
 
-typedef enum	e_state {
+typedef enum e_state {
 	FORK = 0,
 	EAT,
 	THINK,
@@ -44,14 +44,14 @@ typedef enum	e_state {
 	END
 }	t_state;
 
-typedef struct	s_philo {
+typedef struct s_philo {
 	t_args			*input;
 	int				id;
-	pthread_mutex_t	*fork;
-	pthread_mutex_t	*printer;
-	pthread_t		tid;
 	int				last_eat;
 	int				eat_count;
+	pthread_t		tid;
+	pthread_mutex_t	*fork;
+	pthread_mutex_t	*printer;
 }	t_philo;
 
 int		get_time_in_ms(void);
@@ -79,7 +79,5 @@ int		is_time_to_die(t_philo *philo);
 int		meet_minimum_eat(t_philo *philo);
 
 void	process_message(t_philo *philo, t_state state);
-
-
 
 #endif
