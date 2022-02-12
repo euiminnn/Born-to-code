@@ -63,11 +63,13 @@ void	*monitor(void *philo_void)
 	{
 		if (is_time_to_die(philo))
 		{
-			exit(0);
+			// exit(0);
+			end_simulation(philo);
 		}
 		if (meet_minimum_eat(philo))
 		{
-			exit(0); //대신에 return 0 하고, main에서 monitor가 0이면 join 후 리턴해서 프로그램 종료
+			// exit(0); //대신에 return 0 하고, main에서 monitor가 0이면 join 후 리턴해서 프로그램 종료
+			end_simulation(philo);
 		}
 		usleep(200);
 	}
