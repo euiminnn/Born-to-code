@@ -21,3 +21,11 @@ int	get_time_in_ms(void)
 	time_in_ms = tv.tv_sec * 1000 + tv.tv_usec / 1000;
 	return (time_in_ms);
 }
+
+void	wait_until(int	time)
+{
+	while (get_time_in_ms() < time)
+	{
+		usleep(200);
+	}
+}

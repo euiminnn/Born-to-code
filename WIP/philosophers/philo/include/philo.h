@@ -51,6 +51,8 @@ typedef struct	s_philo {
 }	t_philo;
 
 int		get_time_in_ms(void);
+void	wait_until(int	time);
+
 void	eat(t_philo *philo);
 int		can_eat(t_philo *philo);
 void	pick_up(t_philo *philo);

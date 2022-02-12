@@ -21,5 +21,5 @@ void	do_sleep(int id, t_philo *philo)
 	time = philo -> input -> time_to_sleep;
 	now = get_time_in_ms();
 	printf("%d %d is sleeping\n", now - philo -> input -> clock, id+1);
-	usleep(time * 1000);
+	wait_until(get_time_in_ms() + time);
 }

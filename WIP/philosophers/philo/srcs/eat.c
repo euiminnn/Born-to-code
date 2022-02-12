@@ -25,7 +25,7 @@ void	pick_up(t_philo *philo)
 	
 	time = philo->input->time_to_eat;
 	if ((philo->id + 1) % 2 == 0)
-		usleep(1000 * time);
+		wait_until(get_time_in_ms() + time);
 	pthread_mutex_lock(&(philo->fork[left_id(philo)]));
 	now = get_time_in_ms();
 	printf("%d %d has taken a fork\n", now - philo->input->clock, philo->id+1);
@@ -45,7 +45,7 @@ void	eat(t_philo *philo)
 	now = get_time_in_ms();
 	philo->last_eat = now - philo->input->clock;
 	printf("%d %d is eating\n", now - philo->input->clock, philo->id+1);
-	usleep(time * 1000);
+	wait_until(get_time_in_ms() + time);
 	put_down(philo);
 }
 
@@ -70,6 +70,6 @@ void	*monitor(void *philo_void)
 			}
 			i++;
 		}
-		usleep(1000);
+		usleep(200);
 	}
 }
