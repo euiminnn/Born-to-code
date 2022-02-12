@@ -55,6 +55,24 @@ void	init_philo_elements(t_philo *philo, t_args *input)
 
 void	init_simulation(t_args *input)
 {
+	t_philo			*philo;
+	pthread_mutex_t	*fork;
+	pthread_mutex_t	printer;
+
+	philo = (t_philo *)malloc(sizeof(t_philo) * input->number_of_philos);
+	fork = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t)
+			* input->number_of_philos);
+	ft_bzero(philo, sizeof(philo));
+	init_philo_elements(philo, input);
+	init_fork(philo, fork);
+	init_printer(philo, &printer);
+	create_thread(philo);
+	// destroy_mutex();
+}
+
+/*
+void	init_simulation(t_args *input)
+{
 	t_philo			philo[input->number_of_philos];
 	pthread_mutex_t	fork[input->number_of_philos];
 	pthread_mutex_t	printer;
@@ -66,3 +84,4 @@ void	init_simulation(t_args *input)
 	create_thread(philo);
 	// destroy_mutex();
 }
+*/
