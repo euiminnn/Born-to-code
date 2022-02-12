@@ -20,7 +20,7 @@ void	put_down(t_philo *philo)
 
 void	pick_up(t_philo *philo)
 {
-	int	now;
+	// int	now;
 	int	time;
 	int	first_round;
 	
@@ -29,12 +29,14 @@ void	pick_up(t_philo *philo)
 	if (first_round < 10 && (philo->id + 1) % 2 == 0)
 		wait_until(get_time_in_ms() + time);
 	pthread_mutex_lock(&(philo->fork[left_id(philo)]));
-	now = get_time_in_ms();
-	printf("%d %d has taken a fork\n", now - philo->input->clock, philo->id+1);
+	// now = get_time_in_ms();
+	process_message(philo, FORK);
+	// printf("%d %d has taken a fork\n", now - philo->input->clock, philo->id+1);
 	pthread_mutex_lock(&(philo->fork[right_id(philo)]));
-	now = get_time_in_ms();
-	printf("%d %d has taken a fork\n", now - philo->input->clock, philo->id+1);
-	philo->state = EAT;
+	// now = get_time_in_ms();
+	process_message(philo, FORK);
+	// printf("%d %d has taken a fork\n", now - philo->input->clock, philo->id+1);
+	// philo->state = EAT;
 }
 
 void	eat(t_philo *philo)
@@ -46,7 +48,8 @@ void	eat(t_philo *philo)
 	time = philo->input->time_to_eat;
 	now = get_time_in_ms();
 	philo->last_eat = now - philo->input->clock;
-	printf("%d %d is eating\n", now - philo->input->clock, philo->id+1);
+	process_message(philo, EAT);
+	// printf("%d %d is eating\n", now - philo->input->clock, philo->id+1);
 	wait_until(get_time_in_ms() + time);
 	put_down(philo);
 	philo->eat_count++;
@@ -68,7 +71,8 @@ void	*monitor(void *philo_void)
 			pnow = get_time_in_ms() - philo[i].input->clock;
 			if (pnow - philo[i].last_eat > philo[i].input->time_to_die)
 			{
-				printf("%d %d died\n", pnow, i + 1);
+				process_message(philo, DIE);
+				// printf("%d %d died\n", pnow, i + 1);
 				exit(0);
 			}
 			i++;
@@ -85,8 +89,9 @@ void	*monitor(void *philo_void)
 			}
 			if (count == philo->input->number_of_philos)
 			{
-				printf("Simulation ended\n");
-				exit(0);
+				process_message(philo, END);
+				// printf("Simulation ended\n");
+				exit(0); //대신에 return 0 하고, main에서 monitor가 0이면 join 후 리턴해서 프로그램 종료
 			}
 		}
 		usleep(200);

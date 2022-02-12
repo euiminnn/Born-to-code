@@ -20,10 +20,11 @@ void	*philosopher(void *philo_void)
 	while (TRUE)
 	{
 		eat(philo);
-		do_sleep(philo->id, philo);
-		think(philo->id, philo);
+		do_sleep(philo);
+		think(philo);
 		usleep(200);
 	}
+	// return (0);
 }
 
 void	create_thread(t_philo *philo)

@@ -36,16 +36,20 @@ typedef struct	s_args {
 }	t_args;
 
 typedef enum	e_state {
-	EAT = 0,
+	FORK = 0,
+	EAT,
 	THINK,
-	SLEEP
+	SLEEP,
+	DIE,
+	END
 }	t_state;
 
 typedef struct	s_philo {
 	t_args			*input;
 	int				id;
-	t_state 		state;
+	// t_state 		state;
 	pthread_mutex_t	*fork;
+	pthread_mutex_t	*printer;
 	pthread_t		tid;
 	int				last_eat;
 	int				eat_count;
@@ -67,12 +71,15 @@ void	init_mutex(t_philo *philo);
 int		left_id(t_philo *philo);
 int		right_id(t_philo *philo);
 
-void	think(int id, t_philo *philo);
-void	do_sleep(int id, t_philo *philo);
+void	think(t_philo *philo);
+void	do_sleep(t_philo *philo);
 void	create_thread(t_philo *philo);
 void	*philosopher(void *param);
 
 void	*monitor(void *philo_void);
+
+void	process_message(t_philo *philo, t_state state);
+
 
 
 #endif

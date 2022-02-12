@@ -12,14 +12,15 @@
 
 #include "philo.h"
 
-void	do_sleep(int id, t_philo *philo)
+void	do_sleep(t_philo *philo)
 {
 	int	time;
-	int	now;
+	// int	now;
 
-	philo[id].state = SLEEP;
+	// philo[id].state = SLEEP;
 	time = philo -> input -> time_to_sleep;
-	now = get_time_in_ms();
-	printf("%d %d is sleeping\n", now - philo -> input -> clock, id+1);
+	// now = get_time_in_ms();
+	// printf("%d %d is sleeping\n", now - philo -> input -> clock, id+1);
+	process_message(philo, SLEEP);
 	wait_until(get_time_in_ms() + time);
 }
