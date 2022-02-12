@@ -22,9 +22,11 @@ void	pick_up(t_philo *philo)
 {
 	int	now;
 	int	time;
+	int	first_round;
 	
 	time = philo->input->time_to_eat;
-	if ((philo->id + 1) % 2 == 0)
+	first_round = get_time_in_ms() - philo->input->clock;
+	if (first_round < 10 && (philo->id + 1) % 2 == 0)
 		wait_until(get_time_in_ms() + time);
 	pthread_mutex_lock(&(philo->fork[left_id(philo)]));
 	now = get_time_in_ms();
