@@ -21,8 +21,11 @@ int		get_end_signal(t_philo *philo)
 	// end = 0;
 	while (i < philo->input->number_of_philos)
 	{
-		if (philo[i].end_signal)
+		if (philo[0].end_signal)
+		{
+			printf("philo%d I GOT END SIGNAL %d\n", i, philo[i].end_signal);
 			return (1);
+		}
 		i++;
 	}
 	return (0);
