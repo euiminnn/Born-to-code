@@ -28,7 +28,7 @@
 typedef struct s_args {
 	int	clock;
 	int	number_of_philos;
-	int	time_to_die;
+	int	time_to_die; 
 	int	time_to_eat;
 	int	time_to_sleep;
 	int	minimum_eat;
@@ -80,6 +80,6 @@ int		meet_minimum_eat(t_philo *philo);
 
 void	process_message(t_philo *philo, t_state state);
 
-void	end_simulation(t_philo *philo);
+void	end_simulation(t_philo *philo, pthread_mutex_t *printer);
 
 #endif
