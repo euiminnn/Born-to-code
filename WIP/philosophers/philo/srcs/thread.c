@@ -15,28 +15,13 @@
 int		get_end_signal(t_philo *philo)
 {
 	int i;
-	// int	end;
 
 	i = 0;
-	// end = 0;
-	while (i < philo->input->number_of_philos)
+	if (philo->end_signal)
 	{
-		if (philo[0].end_signal)
-		{
-			printf("philo%d I GOT END SIGNAL %d\n", i, philo[i].end_signal);
-			return (1);
-		}
-		i++;
+		return (1);
 	}
 	return (0);
-	// if (end)
-	// 	return (1);
-
-/*
-	if (philo->end_signal)
-		return (1);
-	return (0);
-*/
 }
 
 void	*philosopher(void *philo_void)

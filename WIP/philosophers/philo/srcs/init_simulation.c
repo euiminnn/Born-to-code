@@ -33,7 +33,6 @@ void	init_printer(t_philo *philo, pthread_mutex_t *printer)
 	while (id < philo->input->number_of_philos)
 	{
 		philo[id].printer = printer;
-		pthread_mutex_init(philo[id].printer, NULL);
 		id++;
 	}
 }
@@ -60,6 +59,7 @@ void	init_simulation(t_args *input)
 	pthread_mutex_t	*fork;
 	pthread_mutex_t	printer;
 
+	pthread_mutex_init(&printer, NULL);
 	philo = (t_philo *)malloc(sizeof(t_philo) * input->number_of_philos);
 	if (!philo)
 		return ;
@@ -72,5 +72,5 @@ void	init_simulation(t_args *input)
 	init_fork(philo, fork);
 	init_printer(philo, &printer);
 	create_thread(philo);
-	end_simulation(philo);
+	end_simulation(philo, &printer);
 }
