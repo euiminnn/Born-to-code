@@ -12,7 +12,7 @@
 
 #include "philo.h"
 
-void	send_end_signal(t_philo *philo)
+static void	send_end_signal(t_philo *philo)
 {
 	int	i;
 
@@ -24,7 +24,7 @@ void	send_end_signal(t_philo *philo)
 	}
 }
 
-int	meet_minimum_eat(t_philo *philo)
+static int	meet_minimum_eat(t_philo *philo)
 {
 	int		count;
 	int		i;
@@ -48,7 +48,7 @@ int	meet_minimum_eat(t_philo *philo)
 	return (0);
 }
 
-int	is_time_to_die(t_philo *philo)
+static int	is_time_to_die(t_philo *philo)
 {
 	int		pnow;
 	int		i;

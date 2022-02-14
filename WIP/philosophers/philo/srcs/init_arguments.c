@@ -12,7 +12,7 @@
 
 #include "philo.h"
 
-int	check_input(t_args *input, int argc)
+static int	check_input(t_args *input, int argc)
 {
 	if (input->number_of_philos <= 0)
 		return (ERROR);

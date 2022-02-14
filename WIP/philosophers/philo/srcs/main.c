@@ -12,7 +12,7 @@
 
 #include "philo.h"
 
-int	error_msg_args(void)
+static int	error_msg_args(void)
 {
 	char	*error;
 

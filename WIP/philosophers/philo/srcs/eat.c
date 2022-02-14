@@ -12,13 +12,13 @@
 
 #include "philo.h"
 
-void	put_down(t_philo *philo)
+static void	put_down(t_philo *philo)
 {
 	pthread_mutex_unlock(&(philo->fork[left_id(philo)]));
 	pthread_mutex_unlock(&(philo->fork[right_id(philo)]));
 }
 
-void	pick_up(t_philo *philo)
+static void	pick_up(t_philo *philo)
 {
 	int	time;
 	int	first_round;

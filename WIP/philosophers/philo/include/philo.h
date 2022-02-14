@@ -57,29 +57,20 @@ typedef struct s_philo {
 int		get_time_in_ms(void);
 void	wait_until(int	time);
 
-void	eat(t_philo *philo);
-int		can_eat(t_philo *philo);
-void	pick_up(t_philo *philo);
-void	put_down(t_philo *philo);
 int		init_args(int argc, char **argv, t_args *input);
-int		check_input(t_args *input, int argc);
 void	init_simulation(t_args *input);
-void	init_mutex(t_philo *philo);
+void	end_simulation(t_philo *philo, pthread_mutex_t *printer);
 
 int		left_id(t_philo *philo);
 int		right_id(t_philo *philo);
 
+void	eat(t_philo *philo);
 void	think(t_philo *philo);
 void	do_sleep(t_philo *philo);
-void	create_thread(t_philo *philo);
-void	*philosopher(void *param);
 
+void	create_thread(t_philo *philo);
 void	*monitor(void *philo_void);
-int		is_time_to_die(t_philo *philo);
-int		meet_minimum_eat(t_philo *philo);
 
 void	process_message(t_philo *philo, t_state state);
-
-void	end_simulation(t_philo *philo, pthread_mutex_t *printer);
 
 #endif

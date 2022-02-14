@@ -12,7 +12,7 @@
 
 #include "philo.h"
 
-int	get_end_signal(t_philo *philo)
+static int	get_end_signal(t_philo *philo)
 {
 	if (philo->end_signal)
 	{
@@ -21,7 +21,7 @@ int	get_end_signal(t_philo *philo)
 	return (0);
 }
 
-void	*philosopher(void *philo_void)
+static void	*philosopher(void *philo_void)
 {
 	t_philo	*philo;
 

@@ -12,7 +12,7 @@
 
 #include "philo.h"
 
-void	init_fork(t_philo *philo, pthread_mutex_t *fork)
+static void	init_fork(t_philo *philo, pthread_mutex_t *fork)
 {
 	int	id;
 
@@ -25,7 +25,7 @@ void	init_fork(t_philo *philo, pthread_mutex_t *fork)
 	}
 }
 
-void	init_printer(t_philo *philo, pthread_mutex_t *printer)
+static void	init_printer(t_philo *philo, pthread_mutex_t *printer)
 {
 	int	id;
 
@@ -37,7 +37,7 @@ void	init_printer(t_philo *philo, pthread_mutex_t *printer)
 	}
 }
 
-void	init_philo_elements(t_philo *philo, t_args *input)
+static void	init_philo_elements(t_philo *philo, t_args *input)
 {
 	int	i;
 
