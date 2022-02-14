@@ -12,9 +12,9 @@
 
 #include "philo.h"
 
-int		get_end_signal(t_philo *philo)
+int	get_end_signal(t_philo *philo)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (philo->end_signal)

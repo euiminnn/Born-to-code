@@ -15,7 +15,7 @@
 void	send_end_signal(t_philo *philo)
 {
 	int	i;
-	
+
 	i = 0;
 	while (i < philo->input->number_of_philos)
 	{
@@ -67,6 +67,7 @@ int	is_time_to_die(t_philo *philo)
 	}
 	return (0);
 }
+
 void	*monitor(void *philo_void)
 {
 	t_philo	*philo;
