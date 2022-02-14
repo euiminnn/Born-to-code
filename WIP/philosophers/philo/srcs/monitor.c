@@ -30,7 +30,7 @@ int	meet_minimum_eat(t_philo *philo)
 	int		i;
 
 	if (!philo->input->minimum_eat)
-		return (0); //minimum_eat이라는 5번째 인자가 존재하지 않는 경우
+		return (0);
 	i = 0;
 	count = 0;
 	while (i < philo->input->number_of_philos)
@@ -43,9 +43,9 @@ int	meet_minimum_eat(t_philo *philo)
 	{
 		process_message(&philo[0], END);
 		send_end_signal(philo);
-		return (1); //minimum_eat이 존재하고, 조건을 충족한 경우
+		return (1);
 	}
-	return (0); //minimum_eat이 존재하나, 조건을 충족하지 않은 경우
+	return (0);
 }
 
 int	is_time_to_die(t_philo *philo)
