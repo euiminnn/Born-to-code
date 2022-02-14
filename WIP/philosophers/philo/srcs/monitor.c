@@ -41,7 +41,7 @@ int	meet_minimum_eat(t_philo *philo)
 	}
 	if (count == philo->input->number_of_philos)
 	{
-		process_message(philo, END);
+		process_message(&philo[0], END);
 		send_end_signal(philo);
 		return (1); //minimum_eat이 존재하고, 조건을 충족한 경우
 	}
@@ -59,7 +59,7 @@ int	is_time_to_die(t_philo *philo)
 		pnow = get_time_in_ms() - philo[i].input->clock;
 		if (pnow - philo[i].last_eat > philo[i].input->time_to_die)
 		{
-			process_message(philo, DIE);
+			process_message(&philo[i], DIE);
 			send_end_signal(philo);
 			return (1);
 		}
