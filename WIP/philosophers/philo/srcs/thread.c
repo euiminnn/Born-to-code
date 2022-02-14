@@ -14,9 +14,6 @@
 
 int	get_end_signal(t_philo *philo)
 {
-	int	i;
-
-	i = 0;
 	if (philo->end_signal)
 	{
 		return (1);
@@ -51,11 +48,16 @@ void	create_thread(t_philo *philo)
 		i++;
 	}
 	pthread_create(&tid_m, NULL, monitor, (void *)(philo));
-	i = 0;
-	while (i < philo->input->number_of_philos)
+	if (philo->input->number_of_philos == 1)
+		pthread_detach(philo[0].tid);
+	else
 	{
-		pthread_join(philo[i].tid, NULL);
-		i++;
+		i = 0;
+		while (i < philo->input->number_of_philos)
+		{
+			pthread_join(philo[i].tid, NULL);
+			i++;
+		}
 	}
 	pthread_join(tid_m, NULL);
 }
