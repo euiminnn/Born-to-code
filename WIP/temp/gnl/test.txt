@@ -1,4 +1,0 @@
-gnl
-test
-fsanitize
-how to use
