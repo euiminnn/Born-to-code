@@ -11,6 +11,6 @@
 | 2 | [minitalk](https://github.com/euiminnn/Born-to-code/tree/master/minitalk) | Create a communication program between server and client |
 | 2 | [so_long](https://github.com/euiminnn/Born-to-code/tree/master/so_long) | Create a 2D game and a map that the game could be played on |
 | 3 | [minishell](https://github.com/euiminnn/Born-to-code/tree/master/minishell) | Write a shell in C, just like a bash |
-| 3 | [Philosophers]() | content |
+| 3 | [philosophers](https://github.com/euiminnn/Born-to-code/tree/master/philosophers) | Solve the dining philosophers problem using threads and mutexes |
 | 4 | [miniRT]() | content |
 | 4 | [CPP Module]() | content |
