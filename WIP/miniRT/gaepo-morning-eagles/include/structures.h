@@ -7,6 +7,7 @@ typedef struct s_vec3 t_color3;
 typedef struct s_ray t_ray;
 typedef struct s_camera t_camera;
 typedef struct s_canvas t_canvas;
+typedef struct s_sphere t_sphere;
 
 struct s_vec3
 {
@@ -38,5 +39,16 @@ struct	s_canvas
 	int		height;
 	double	aspect_ratio;
 };
+
+struct s_sphere
+{
+	t_point3	center;
+	double		radius;
+	double		radius2;
+};
+
+typedef int		t_bool;
+# define FALSE 0
+# define TRUE 1
 
 #endif

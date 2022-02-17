@@ -19,7 +19,9 @@ SRCS	= src/main.c \
 			src/print/print.c \
 			src/scene/canvas.c \
 			src/scene/scene.c \
-			src/trace/ray.c \
+			src/scene/object_create.c \
+			src/trace/hit/hit_sphere.c \
+			src/trace/ray/ray.c \
 			src/utils/vec3_utils.c
 
 OBJS	= $(SRCS:%.c=%.o)
