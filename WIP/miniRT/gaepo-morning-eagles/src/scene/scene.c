@@ -1,6 +1,6 @@
 #include "scene.h"
 
-t_camera	camer(t_canvas *canvas, t_point3 orig)
+t_camera	camera(t_canvas *canvas, t_point3 orig)
 {
 	t_camera	cam;
 	double		focal_len;
