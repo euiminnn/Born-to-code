@@ -1,0 +1,43 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: echung <echung@student.42seoul.kr>         +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/02/17 19:49:59 by echung            #+#    #+#              #
+#    Updated: 2022/02/17 19:50:01 by echung           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+NAME	= miniRT
+
+CC		= gcc
+
+CFLAGS	= -Wall -Wextra -Werror -I./include/
+SRCS	= src/main.c \
+			src/print/print.c \
+			src/scene/canvas.c \
+			src/scene/scene.c \
+			src/trace/ray.c \
+			src/utils/vec3_utils.c
+
+OBJS	= $(SRCS:%.c=%.o)
+
+all: $(NAME)
+	./miniRT > rgb.ppm
+	open rgb.ppm
+
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
+
+clean:
+	rm -f $(OBJS)
+
+fclean: clean
+	rm -f $(NAME)
+	rm -f rgb.ppm
+
+re: fclean all
+
+.PHONY: clean fclean all re
