@@ -21,6 +21,7 @@ SRCS	= src/main.c \
 			src/scene/scene.c \
 			src/scene/object_create.c \
 			src/trace/hit/hit_sphere.c \
+			src/trace/hit/normal.c \
 			src/trace/ray/ray.c \
 			src/utils/vec3_utils.c
 
