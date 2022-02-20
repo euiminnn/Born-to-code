@@ -26,7 +26,7 @@ t_ray		ray_primary(t_camera *cam, double u, double v)
 	return (ray);
 }
 
-t_color3	ray_color(t_ray *ray, t_sphere *sphere)
+t_color3	ray_color(t_ray *ray, t_object *world)
 {
 	double			t;
 	t_hit_record	rec;
@@ -34,7 +34,7 @@ t_color3	ray_color(t_ray *ray, t_sphere *sphere)
 	rec.tmin = 0;
 	rec.tmax = INFINITY;
 
-	if (hit_sphere(sphere, ray, &rec))
+	if (hit(world, ray, &rec))
         return (vmult(vplus(rec.normal, color3(1, 1, 1)), 0.5));
 	else
 	{
