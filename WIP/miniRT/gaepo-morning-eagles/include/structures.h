@@ -9,7 +9,10 @@ typedef struct s_camera t_camera;
 typedef struct s_canvas t_canvas;
 typedef struct s_sphere t_sphere;
 typedef struct s_hit_record t_hit_record;
+typedef struct s_object t_object;
+
 typedef int		t_bool;
+typedef int		t_object_type;
 
 struct s_vec3
 {
@@ -59,7 +62,15 @@ struct s_hit_record
 	t_bool		front_face;
 };
 
+struct s_object
+{
+	t_object_type	type;
+	void			*element;
+	void			*next;
+}
+
 # define FALSE 0
 # define TRUE 1
+# define SP 0
 
 #endif
