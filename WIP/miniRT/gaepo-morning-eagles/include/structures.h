@@ -67,7 +67,7 @@ struct s_object
 	t_object_type	type;
 	void			*element;
 	void			*next;
-}
+};
 
 # define FALSE 0
 # define TRUE 1
