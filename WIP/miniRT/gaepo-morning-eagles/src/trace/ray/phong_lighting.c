@@ -1,15 +1,35 @@
 #include "trace.h"
 
+t_vec3      reflect(t_vec3 v, t_vec3 n)
+{
+    return (vminus(v, vmult(n, vdot(v, n) * 2)));
+}
+
 t_color3    point_light_get(t_scene *scene, t_light *light)
 {
     t_color3    diffuse;
     t_vec3      light_dir;
     double      kd;
+    
+    t_color3    specular;
+    t_vec3      view_dir;
+    t_vec3      reflect_dir;
+    double      spec;
+    double      ksn;
+    double      ks;
 
     light_dir = vunit(vminus(light->origin, scene->rec.p));
     kd = fmax(vdot(scene->rec.normal, light_dir), 0.0);
     diffuse = vmult(light->light_color, kd);
-    return (diffuse);
+    
+    view_dir = vunit(vmult(scene->ray.dir, -1));
+    reflect_dir = reflect(vmult(light_dir, -1), scene->rec.normal);
+    ksn = 64;
+    ks = 0.5;
+    spec = pow(fmax(vdot(view_dir, reflect_dir), 0.0), ksn);
+    specular = vmult(vmult(light->light_color, ks), spec);
+
+    return (vplus(diffuse, specular));
 }
 
 t_color3    phong_lighting(t_scene *scene)
