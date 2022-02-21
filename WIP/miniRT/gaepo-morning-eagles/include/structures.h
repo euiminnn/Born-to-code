@@ -61,6 +61,7 @@ struct s_hit_record
 	double		tmax;
 	double		t;
 	t_bool		front_face;
+	t_color3	albedo;
 };
 
 struct s_object
@@ -68,6 +69,7 @@ struct s_object
 	t_object_type	type;
 	void			*element;
 	void			*next;
+	t_color3		albedo;
 };
 
 struct s_light
