@@ -16,10 +16,10 @@ t_bool	hit_sphere(t_object *sp_obj, t_ray *ray, t_hit_record *rec)
 
 	sp = sp_obj->element;
 	// sphere = (t_sphere *)sp_obj->element;
-	oc = vminus(ray->orig, sphere->center);
+	oc = vminus(ray->orig, sp->center);
 	a = vlength2(ray->dir);
 	half_b = vdot(oc, ray->dir);
-	c = vlength2(oc) - sphere->radius2;
+	c = vlength2(oc) - sp->radius2;
 	discriminant = half_b * half_b - a * c;
 	if (discriminant < 0)
 		return (FALSE);
@@ -33,7 +33,7 @@ t_bool	hit_sphere(t_object *sp_obj, t_ray *ray, t_hit_record *rec)
 	}
 	rec->t = root;
 	rec->p = ray_at(ray, root);
-	rec->normal = vdivide(vminus(rec->p, sphere->center), sphere->radius);
+	rec->normal = vdivide(vminus(rec->p, sp->center), sp->radius);
 	set_face_normal(ray, rec);
 	rec->albedo = sp_obj->albedo;
 	return (TRUE);
