@@ -10,6 +10,7 @@ t_ray		ray_primary(t_camera *cam, double u, double v);
 t_color3	ray_color(t_scene *scene);
 void        set_face_normal(t_ray *r, t_hit_record *rec);
 t_color3    phong_lighting(t_scene *scene);
+t_color3    point_light_get(t_scene *scene, t_light *light);
 
 t_bool      hit(t_object *obj, t_ray *ray, t_hit_record *rec);
 t_bool      hit_obj(t_object *obj, t_ray *ray, t_hit_record *rec);
