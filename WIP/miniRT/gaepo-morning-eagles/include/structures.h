@@ -95,5 +95,6 @@ struct s_scene
 # define TRUE 1
 # define SP 0
 # define LIGHT_POINT 1
+# define EPSILON 1e-6
 
 #endif
