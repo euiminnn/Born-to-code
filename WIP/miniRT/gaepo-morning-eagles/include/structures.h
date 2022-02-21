@@ -11,6 +11,7 @@ typedef struct s_sphere t_sphere;
 typedef struct s_hit_record t_hit_record;
 typedef struct s_object t_object;
 typedef struct s_light t_light;
+typedef struct s_scene t_scene;
 
 typedef int		t_bool;
 typedef int		t_object_type;
@@ -77,6 +78,17 @@ struct s_light
 	t_point3	origin;
 	t_color3	light_color;
 	double		bright_ratio;
+};
+
+struct s_scene
+{
+	t_canvas		canvas;
+	t_camera		camera;
+	t_object		*world;
+	t_object		*light;
+	t_color3		ambient;
+	t_ray			ray;
+	t_hit_record	rec;
 };
 
 # define FALSE 0
