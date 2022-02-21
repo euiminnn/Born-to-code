@@ -18,6 +18,8 @@ t_color3    point_light_get(t_scene *scene, t_light *light)
     double      ksn;
     double      ks;
 
+    double      brightness;
+
     light_dir = vunit(vminus(light->origin, scene->rec.p));
     kd = fmax(vdot(scene->rec.normal, light_dir), 0.0);
     diffuse = vmult(light->light_color, kd);
@@ -29,7 +31,8 @@ t_color3    point_light_get(t_scene *scene, t_light *light)
     spec = pow(fmax(vdot(view_dir, reflect_dir), 0.0), ksn);
     specular = vmult(vmult(light->light_color, ks), spec);
 
-    return (vplus(diffuse, specular));
+    brightness = light->bright_ratio * LUMEN;
+    return (vmult(vplus(vplus(scene->ambient, diffuse), specular), brightness));
 }
 
 t_color3    phong_lighting(t_scene *scene)
