@@ -38,7 +38,6 @@ t_hit_record	record_init(void)
 t_color3	ray_color(t_scene *scene)
 {
 	double	t;
-	// t_vec3	n;
 
 	scene->rec = record_init();
 	if (hit(scene->world, &scene->ray, &scene->rec))

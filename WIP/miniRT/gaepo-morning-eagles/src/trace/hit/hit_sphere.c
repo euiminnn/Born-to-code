@@ -11,11 +11,9 @@ t_bool	hit_sphere(t_object *sp_obj, t_ray *ray, t_hit_record *rec)
 	double		discriminant;
 	double		sqrtd;
 	double		root;
-	// t_sphere	*sphere;
 	t_sphere	*sp;
 
 	sp = sp_obj->element;
-	// sphere = (t_sphere *)sp_obj->element;
 	oc = vminus(ray->orig, sp->center);
 	a = vlength2(ray->dir);
 	half_b = vdot(oc, ray->dir);

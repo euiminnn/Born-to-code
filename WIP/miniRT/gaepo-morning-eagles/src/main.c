@@ -10,7 +10,6 @@ t_scene	*scene_init(void)
 	t_scene		*scene;
 	t_object	*world;
 	t_object	*lights;
-	double		ka;
 
 	if (!(scene = (t_scene *)malloc(sizeof(t_scene))))
 		return (NULL);
@@ -22,8 +21,6 @@ t_scene	*scene_init(void)
     scene->world = world;
     lights = object(LIGHT_POINT, light_point(point3(0, 20, 0), color3(1, 1, 1), 0.5), color3(0, 0, 0));
     scene->light = lights;
-    ka = 0.1;
-    // scene->ambient = vmult(color3(1,1,1), ka);
     return (scene);
 }
 
