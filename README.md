@@ -12,5 +12,5 @@
 | 2 | [so_long](https://github.com/euiminnn/Born-to-code/tree/master/so_long) | Create a 2D game and a map that the game could be played on |
 | 3 | [minishell](https://github.com/euiminnn/Born-to-code/tree/master/minishell) | Write a shell in C, just like a bash |
 | 3 | [philosophers](https://github.com/euiminnn/Born-to-code/tree/master/philosophers) | Solve the dining philosophers problem using threads and mutexes |
-| 4 | [miniRT]() | content |
+| 4 | [miniRT](https://github.com/euiminnn/Born-to-code/tree/master/minirt) | miniRayTracing: Find out how Ray Tracing works |
 | 4 | [CPP Module]() | content |
